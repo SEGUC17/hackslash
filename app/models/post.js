@@ -1,9 +1,18 @@
 var mongoose = require('mongoose');
+Schema = mongoose.Schema,
 require('mongoose-double')(mongoose);
+autoIncrement = require('mongoose-auto-increment');
 
 var SchemaTypes = mongoose.Schema.Types;
 
+var connection = mongoose.createConnection("mongodb://localhost:27017/pets");
+autoIncrement.initialize(connection);
+
 var postSchema = new mongoose.Schema({
+    id:{
+	type: Number,
+	
+    }
     ownerEmail: {
         type: String,
         required: true
@@ -45,6 +54,7 @@ var postSchema = new mongoose.Schema({
     }
 });
 
-var Post = mongoose.model("post", postSchema);
+postSchema.plugin(autoIncrement.plugin, 'Post');
+var Post = connection.model('Post', postSchema);
 
 module.exports = Post;

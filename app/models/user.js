@@ -49,7 +49,8 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    ratedItems: [Number]
+    ratedPosts: [Number],
+    ratedUsers: [String]
 });
 
 var User = mongoose.model("user", userSchema);
