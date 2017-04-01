@@ -11,8 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 //Conecting to the Database.
-mongoose.connect(DB_URI, function(err, db)
-{
+mongoose.connect(DB_URI, function(err, db) {
     if (!err) {
         console.log("We're Connected");
     } else {
@@ -22,7 +21,6 @@ mongoose.connect(DB_URI, function(err, db)
 app.use(router);
 
 //Starting the server on port 8080
-app.listen(8080, function()
-{
+app.listen(8080, function() {
     console.log('Server started in 8080');
 });

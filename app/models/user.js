@@ -20,7 +20,7 @@ var userSchema = new mongoose.Schema({
     },
     firstName: {
         type: String,
-        required:true
+        required: true
     },
     middleName: {
         type: String
@@ -44,12 +44,13 @@ var userSchema = new mongoose.Schema({
     rate: {
         type: SchemaTypes.Double
     },
-    rates : [Number],
+    rates: [Number],
     verified: {
         type: Boolean,
         default: false
     },
-    ratedItems: [Number]
+    ratedPosts: [Number],
+    ratedUsers: [String]
 });
 
 var User = mongoose.model("user", userSchema);
