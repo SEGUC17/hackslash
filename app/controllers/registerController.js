@@ -82,7 +82,7 @@ var registerController = {
                   phoneNumber1: req.body.phoneNumber1,
                   phoneNumber2: req.body.phoneNumber2,
                   homeNumber: req.body.homeNumber,
-                  profilePicture: req.file.filename,
+                  //profilePicture: req.file.filename,
                   verified: false
                 });
                 User.addUser(newUser, function(err, user){
