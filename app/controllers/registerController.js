@@ -72,25 +72,32 @@ var registerController = {
               if(foundUser){
                 res.json({success: false, message: "username already exists"})
               } else {
-                var newUser = new User({
-                  username: username,
-                  email: email,
-                  password: password,
-                  firstName: req.body.firstName,
-                  middleName: req.body.middleName,
-                  lastName: req.body.lastName,
-                  phoneNumber1: req.body.phoneNumber1,
-                  phoneNumber2: req.body.phoneNumber2,
-                  homeNumber: req.body.homeNumber,
-                  profilePicture: req.file.filename,
-                  verified: false
+                User.findOne({email: email}, function(err, foundUser2){
+                  if(err) throw err;
+                  if(foundUser2){
+                    res.json({success: false, message: "email already exists"})
+                  } else {
+                      var newUser = new User({
+                        username: username,
+                        email: email,
+                        password: password,
+                        firstName: req.body.firstName,
+                        middleName: req.body.middleName,
+                        lastName: req.body.lastName,
+                        phoneNumber1: req.body.phoneNumber1,
+                        phoneNumber2: req.body.phoneNumber2,
+                        homeNumber: req.body.homeNumber,
+                        //profilePicture: req.file.filename,
+                        verified: false
+                      });
+                      User.addUser(newUser, function(err, user){
+                        res.json({success: true, message: "Registered unverified user"});
+                      });
+                  }
                 });
-                User.addUser(newUser, function(err, user){
-                  res.json({success: true, message: "Registered unverified user"});
-                })
               }
             }
-          })
+          });
         }
     }
 }
