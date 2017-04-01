@@ -1,6 +1,9 @@
-var User = require('../models/user.js');
 var bcrypt = require('bcrypt'); // BCRYPT FOR PASSWORD ENCRYPTION
 
+// REQUIRE USER MODEL
+var User = require('../models/user.js');
+
+// HELPER FUNCTIONS
 // FUNCTION TO VERIFY EMAIL
 function validateEmail(email) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -56,11 +59,24 @@ var registerController = {
         var email = req.body.email;
         var password = req.body.password;
 
-        var check = true;
-        // CHECK IF USERNAME IS ENTERED
+        var validatedInput = validateInput(username, email, password);
 
-        if(check){
+        if(validatedInput.success == false){
+          res.json(validatedInput);
+        } else {
+          User.findOne({username: username}, function(err, foundUser){
+            if(err){
+              throw err;
+            } else {
+              if(foundUser){
+                res.json({success: false, message: "username already exists"})
+              } else {
+                var newUser = new User({
 
+                })
+              }
+            }
+          })
         }
     }
 }
