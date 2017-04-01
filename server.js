@@ -9,6 +9,7 @@ var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
 
 //Conecting to the Database.
 mongoose.connect(DB_URI, function(err, db)
