@@ -29,10 +29,10 @@ var userSchema = new mongoose.Schema({
     phoneNumber2: String,
     homeNumber: String,
     profilePicture: String,
-    rate: SchemaTypes.Double,
+    //rate: SchemaTypes.Double, // feh error hna
     rates : [Number],
     verified: {
-        type: Boolean
+        type: Boolean,
         default: false
     },
     ratedItems: [Number]
@@ -42,16 +42,12 @@ var User = mongoose.model("user", userSchema);
 module.exports = User;
 
 module.exports.addUser = function(newUser, callback){
-  bcrypt.genSalt(10, function(err, salt)){
-    if(err){
-      throw err;
-    }
+  bcrypt.genSalt(10,function(err, salt){
+    if(err) throw err;
     bcrypt.hash(newUser.password, salt, function(err, hash){
-      if(err){
-        throw err;
-      }
+      if(err) throw err;
       newUser.password = hash;
       newUser.save(callback);
     });
-  }
+  });
 }
