@@ -3,13 +3,14 @@ var bcrypt = require('bcrypt'); // BCRYPT FOR PASSWORD ENCRYPTION
 // REQUIRE USER MODEL
 var User = require('../models/user.js');
 
-// HELPER FUNCTIONS
-// FUNCTION TO VERIFY EMAIL
+// a helper method to validate the format of an email
 function validateEmail(email) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 
+/* function to validate the format of the entered username, email, password of
+the user before registration */
 function validateInput(username, email, password){
 
   var output = {
@@ -72,7 +73,20 @@ var registerController = {
                 res.json({success: false, message: "username already exists"})
               } else {
                 var newUser = new User({
-
+                  username: username,
+                  email: email,
+                  password: password,
+                  firstName: req.body.firstName,
+                  middleName: req.body.middleName,
+                  lastName: req.body.lastName,
+                  phoneNumber1: req.body.phoneNumber1,
+                  phoneNumber2: req.body.phoneNumber2,
+                  homeNumber: req.body.homeNumber,
+                  profilePicture: req.file.filename,
+                  verified: false
+                });
+                User.addUser(newUser, function(err, user){
+                  res.json({success: true, message: "Registered unverified user"});
                 })
               }
             }
