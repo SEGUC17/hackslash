@@ -11,7 +11,7 @@ var resetPasswordController = {
         if(foundUser){
           // IF FOUND : UPDATE HIS PASSWORD WITH THE PASSWORD SENT IN THE BODY
           var curData = new Date();
-          User.update({username:foundUser.username, 'resetToken.expires' : {$lt : curData}}, {$set: {password: req.body.password}}, function(err){});
+          User.update({username:foundUser.username, 'resetToken.expires' : {$gt : curData}}, {$set: {password: req.body.password}}, function(err){});
         } else {
           res.json({success: false, message: "Wrong Email"})
         }
