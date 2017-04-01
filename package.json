@@ -1,0 +1,27 @@
+{
+  "name": "hackslash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SEGUC17/hackslash.git"
+  },
+  "author": "hackslash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SEGUC17/hackslash/issues"
+  },
+  "homepage": "https://github.com/SEGUC17/hackslash#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.9.2"
+  }
+}

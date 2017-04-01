@@ -18,12 +18,10 @@ var userSchema = new mongoose.Schema({
     },
     firstName: {
         type: String,
-        required:true
     },
     middleName: String,
     lastName: {
         type: String,
-        required: true
     },
     phoneNumber1: String,
     phoneNumber2: String,
