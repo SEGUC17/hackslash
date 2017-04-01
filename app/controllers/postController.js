@@ -3,7 +3,7 @@ let postController = {
 
 
     searchPosts:function(req, res){
-        var keyword = req.body.searchKeyword ;
+        var keyword = req.header("searchKeyword");
         Post.find({kind:{$regex:keyword}},function(err, posts){
 
             if(err)
@@ -16,7 +16,7 @@ let postController = {
     },
     filterPosts:function(req, res){
         var filterType ;
-        switch(req.body.filter) {
+        switch(req.header("filter")) {
             case "sell":
                 filterType = 1
             break;
@@ -50,8 +50,8 @@ let postController = {
     },
     searchAndFilterPosts:function(req, res){
         var filterType ;
-        var keyword = req.body.searchKeyword ;
-        switch(req.body.filter) {
+        var keyword = req.header("searchKeyword") ;
+        switch(req.header("filter")) {
             case "sell":
                 filterType = 1
             break;
