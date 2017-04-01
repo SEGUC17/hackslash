@@ -2,10 +2,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var DB_URI = "mongodb://localhost:27017/petsx";
+var DB_URI = "mongodb://localhost:27017/pets";
 var path = require('path');
 var router = require('./app/routes');
-
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));

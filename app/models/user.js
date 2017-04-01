@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 require('mongoose-double')(mongoose);
 
+var SchemaTypes = mongoose.Schema.Types;
+
 var userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -20,23 +22,36 @@ var userSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    middleName: String,
+    middleName: {
+        type: String
+    },
     lastName: {
         type: String,
         required: true
     },
-    phoneNumber1: String,
-    phoneNumber2: String,
-    homeNumber: String,
-    profilePicture: String,
-    rate: SchemaTypes.Double,
+    phoneNumber1: {
+        type: String
+    },
+    phoneNumber2: {
+        type: String
+    },
+    homeNumber: {
+        type: String
+    },
+    profilePicture: {
+        type: String
+    },
+    rate: {
+        type: SchemaTypes.Double
+    },
     rates : [Number],
     verified: {
-        type: Boolean
+        type: Boolean,
         default: false
     },
     ratedItems: [Number]
 });
 
 var User = mongoose.model("user", userSchema);
+
 module.exports = User;
