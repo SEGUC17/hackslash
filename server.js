@@ -31,12 +31,17 @@ app.use(express.static(__dirname + '/public'));
 // REQUIRING ROUTES
 var routes = require('./app/routes/routes.js');
 var registerRoutes = require('./app/routes/register.js');
+var forgetPassword = require('./app/routes/forgetPassword.js');
+var resetPassword = require('./app/routes/resetPassword.js');
 
+// USING ROUTES
 app.use(routes);
 app.use(registerRoutes);
+app.use(forgetPassword);
+app.use(resetPassword);
 
 //Starting the server on port 8080
 app.listen(8080, function()
 {
-    console.log('Server started in 8080');
+  console.log('Server started in 8080');
 });

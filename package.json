@@ -23,6 +23,7 @@
     "express": "^4.15.2",
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.9.2",
-    "mongoose-double": "0.0.1"
+    "mongoose-double": "0.0.1",
+    "sendgrid": "^5.0.0"
   }
 }
