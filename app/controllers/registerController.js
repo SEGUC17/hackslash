@@ -1,4 +1,9 @@
 var bcrypt = require('bcrypt'); // BCRYPT FOR PASSWORD ENCRYPTION
+var mongoose = require('mongoose');
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+var nev = require('email-verification')(mongoose);
+var nodemailer = require('nodemailer');
+var configure = require('../config/config');
 
 // REQUIRE USER MODEL
 var User = require('../models/user.js');
@@ -53,30 +58,139 @@ function validateInput(username, email, password){
 
 }
 
+// =============================================================================
+
+// EMAIL CONFIG
+// hashing password function for encryption
+function myHasher(password, tempUserData, insertTempUser, callback) {
+  bcrypt.genSalt(10, function(err, salt) {
+    if(err)
+      throw err;
+    bcrypt.hash(password, salt, function(err, hash) {
+      return insertTempUser(hash, tempUserData, callback);
+    });
+  });
+};
+
+nev.configure({
+
+    verificationURL: 'http://localhost:8080/email-verification/${URL}',
+    URLLength: 48,
+    // mongo-stuff
+    persistentUserModel: User,
+    tempUserCollection: 'temporary_users',
+    emailFieldName: 'email',
+    passwordFieldName: 'password',
+    URLFieldName: 'GENERATED_VERIFYING_URL',
+    expirationTime: 86400, // 24 hours
+
+    // emailing options
+    transportOptions: {
+      service: 'SendGrid',
+  		auth: {
+  			user: 'apikey',
+  			pass: configure.sendGridAPI
+  		}
+    },
+    verifyMailOptions: {
+        from: 'Do Not Reply <mohamed@hussein.com>',
+        subject: 'Confirm your account',
+        html: '<p>Please verify your account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and ' +
+                'paste the following link into your browser:</p><p>${URL}</p>',
+        text: 'Please verify your account by clicking the following link, or by copying and pasting it into your browser: ${URL}'
+    },
+
+    // confirmation mail configurations
+    shouldSendConfirmation: true,
+    confirmMailOptions: {
+    from: 'Do Not Reply <mohamed@hussein.com>',
+    subject: 'Successfully verified!',
+    html: '<p>Your account has been successfully verified.</p>',
+    text: 'Your account has been successfully verified.'
+    },
+
+    // setting hashing password function
+    hashingFunction: myHasher
+},
+  function(err, options){
+    if(err){
+      console.log(err);
+    }
+});
+
+// generation temporary user model
+nev.generateTempUserModel(User, function(err, tempUserModel){
+  if(err){
+    console.log("Error");
+    console.log("================");
+    console.log(err);
+  }
+});
+
+console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
+
+// var sgTransport = require('nodemailer-sendgrid-transport');
+//
+var smtpTransport = nodemailer.createTransport({
+    from: 'replyemail@example.com',
+    options: {
+        host: 'smtp.sendgrid.net',
+        port: 587,
+        auth: {
+            user: 'apikey',
+            pass: configure.sendGridAPI
+        }
+    }
+}, function(err, result){
+  if(err){
+    console.log("errrrrrrrrrrrrrr");
+    console.log("========================");
+    console.log(err);
+  } else {
+    console.log(result);
+  }
+});
+
+// =============================================================================
+
 var registerController = {
 
     register: function(req, res){
+
         var username = req.body.username;
         var email = req.body.email;
         var password = req.body.password;
 
+        // validating the format of username, email, and password
         var validatedInput = validateInput(username, email, password);
 
+        // if the validation respone is false
         if(validatedInput.success == false){
+          // send the validation message specified in the function
           res.json(validatedInput);
         } else {
+          // checking if the entered username/email already exists in the database
           User.findOne({username: username}, function(err, foundUser){
             if(err){
               throw err;
             } else {
+              // if username is already in database
               if(foundUser){
-                res.json({success: false, message: "username already exists"})
+                return res.json({success: false, message: "username already exists"})
               } else {
+                // if email is already in database
                 User.findOne({email: email}, function(err, foundUser2){
-                  if(err) throw err;
+                  if(err){
+                    console.log(err);
+                  }
                   if(foundUser2){
-                    res.json({success: false, message: "email already exists"})
-                  } else {
+                    return res.json({success: false, message: "email already exists"})
+                  }
+
+                  // else username and email are available, register the user
+                  else
+                  {
+                      // initiating new user
                       var newUser = new User({
                         username: username,
                         email: email,
@@ -90,8 +204,35 @@ var registerController = {
                         //profilePicture: req.file.filename,
                         verified: false
                       });
-                      User.addUser(newUser, function(err, user){
-                        res.json({success: true, message: "Registered unverified user"});
+
+                      // creating a temp user until mail verification
+                      nev.createTempUser(newUser, function(err, existingPersistentUser, newTempUser) {
+                        // some sort of error
+                        if (err){
+                          console.log(err)
+                        }
+
+                        // user already exists in persistent collection...
+                        if (existingPersistentUser){
+                          // handle user's existence
+                          return res.json({success: false, message: "user already exists"});
+                        }
+
+                        // a new user created
+                        if (newTempUser) {
+                            var URL = newTempUser[nev.options.URLFieldName];
+                            nev.sendVerificationEmail(email, URL, function(err, info) {
+                                if (err){
+                                  console.log("error!");
+                                  console.log(err);
+                                }
+                                res.json({success: true, message: "Verification mail sent"});
+                            });
+                        // user already exists in temporary collection...
+                        } else {
+                            // flash message of failure...
+                            res.json({success: false, message: "unverified user already exists"});
+                        }
                       });
                   }
                 });
@@ -99,6 +240,31 @@ var registerController = {
             }
           });
         }
+    },
+
+    verifyEmail: function(req, res){
+
+      var url = req.params.url;
+      nev.confirmTempUser(url, function(err, user) {
+        if (err)
+            throw err;
+
+        // user was found!
+        if (user) {
+            // send confirmation email
+            nev.sendConfirmationEmail(user['password'], function(err, info) {
+              if(err)
+                throw err;
+              // success at last!!
+              res.json({success: true, message: "Email verified successfully"});
+            });
+        }
+
+        // user's data probably expired...
+        else{
+          // redirect to sign-up
+        }
+      });
     }
 }
 

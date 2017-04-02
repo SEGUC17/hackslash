@@ -41,13 +41,13 @@ var userSchema = new mongoose.Schema({
 var User = mongoose.model("user", userSchema);
 module.exports = User;
 
-module.exports.addUser = function(newUser, callback){
-  bcrypt.genSalt(10,function(err, salt){
-    if(err) throw err;
-    bcrypt.hash(newUser.password, salt, function(err, hash){
-      if(err) throw err;
-      newUser.password = hash;
-      newUser.save(callback);
-    });
-  });
-}
+// module.exports.addUser = function(newUser, callback){
+//   bcrypt.genSalt(10,function(err, salt){
+//     if(err) throw err;
+//     bcrypt.hash(newUser.password, salt, function(err, hash){
+//       if(err) throw err;
+//       newUser.password = hash;
+//       newUser.save(callback);
+//     });
+//   });
+// }
