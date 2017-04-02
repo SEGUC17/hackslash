@@ -11,5 +11,6 @@ router.get('/post/filter', postController.filterPosts);
 router.get('/post/searchAndfilter', postController.searchAndFilterPosts);
 router.get('/post',postController.viewPostsOnly);
 router.get('/postSign',postController.viewPostsAndInfo);
+router.post('/reviewPost',postController.reviewPost);
 //Export router.
 module.exports = router;

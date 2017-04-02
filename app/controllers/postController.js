@@ -218,8 +218,43 @@ let postController = {
       }
 
       res.json({allPosts,usersInfo});*/
+    },
+
+
+  reviewPost : function(req,res){
+    var body = req.body;
+    var id = body.id;
+    var vote = body.vote;
+    var up =0;
+    var down =0;
+    console.log("id is :"+ id);
+    console.log("vote is :"+vote);
+    Post.findOne({'id':id}, function(err , post){
+      if(err)
+      res.send(err.message);
+      else{
+      up = post.upVote;
+      console.log ("post.upVote" + post.upVote);
+      down = post.downVote;
+      console.log ("post.downVote" + post.downVote);
+
     }
-}
+    });
+    if(vote ==0 ){
+    Post.update({'id':id}, {$set: {downVote:down+1}});
+    res.send("down Updated the current down votes are " + down+1);
+
+  }
+    else {
+    Post.update({'id':id}, {$set: {upVote:up+1}});
+    res.send("up Updated the current up votes are " + up+1);
+
+  }
+
+    }
+
+
+  }
 
 
 
