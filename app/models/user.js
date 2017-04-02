@@ -35,7 +35,9 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    ratedItems: [Number]
+    ratedItems: [Number],
+    resetToken : String,
+    resetTokenExpiryDate : Date
 });
 
 var User = mongoose.model("user", userSchema);

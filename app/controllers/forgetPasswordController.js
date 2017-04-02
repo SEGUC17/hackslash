@@ -38,24 +38,19 @@ var forgetPasswordController = {
     var expires = new Date();
     expires.setHours(expires.getHours() + 6);
 
-    foundUser.resetToken = {
-      token: token,
-      expires: expires
-    };
-
-
+    User.update({username:foundUser.username}, {$set: {resetToken: token, resetTokenExpiryDate : expires}}, function(err){});
         // using SendGrid's v3 Node.js Library
     // https://github.com/sendgrid/sendgrid-nodejs
     var helper = require('sendgrid').mail;
-    
+
     // HERE WE SHOULD PUT OUR COMPANY'S EMAIL
-    from_email = new helper.Email("petsociety@gmail.com");
+    from_email = new helper.Email("oyaraouf@gmail.com");
     to_email = new helper.Email(foundUser.email);
     subject = "Reset Password";
     content = new helper.Content("text/plain", "To reset your password, please go to http://localhost:8080/resetPassword?t=" + token);
     mail = new helper.Mail(from_email, subject, to_email, content);
 
-    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+    var sg = require('sendgrid')("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");
     var request = sg.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
