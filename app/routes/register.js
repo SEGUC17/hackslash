@@ -8,6 +8,6 @@ router.post("/register", registerController.register);
 
 router.get("/email-verification/:url", registerController.verifyEmail);
 
-router.post("/resend-verification-code/:id", registerController.resendVerification);
+router.post("/resend-verification-code", registerController.resendVerification);
 
 module.exports = router;
