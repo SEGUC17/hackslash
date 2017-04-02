@@ -125,28 +125,34 @@ let postController = {
       var vote = req.body.vote;
       console.log("id : "+id);
       console.log("vote : "+vote);
-
        Post.findOne({ _id: id }, function(err, found_post) {
          if (found_post == null)
             res.status(403).json("project not found or not your project");
             else {
               if(vote == 0){
                 found_post.downVote++;
+                found_post.save(function(err, updated_post) {
+                   if (err) res.status(403).json("can't update");
+                   else
+                       res.status(200).json("update succ");
+
+               })
               }
               else if (vote ==1) {
                 found_post.upVote++;
+                found_post.save(function(err, updated_post) {
+                   if (err) res.status(403).json("can't update");
+                   else
+                       res.status(200).json("update succ");
+
+               })
               }
               else {
                 res.send("Not a Valid Vote")
               }
             }
 
-            found_post.save(function(err, updated_post) {
-               if (err) res.status(403).json("can't update");
-               else
-                   res.status(200).json("update succ");
 
-           })
        });
 
 
