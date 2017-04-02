@@ -120,6 +120,8 @@ let postController = {
       });
     },
 
+
+    // Reviewing a Post . check Logged-in
     reviewPost : function(req , res){
       var id = req.body.id;
       var vote = req.body.vote;
