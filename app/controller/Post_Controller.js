@@ -6,7 +6,7 @@ var storage = multer.diskStorage({
         callback(null, './uploads');
     },
     filename: function(req, file, callback) {
-        callback(null, file.originalname + '-' + Date.now());
+        callback(null, file.fieldname + '-' + Date.now());
     }
 });
 var upload = multer({ storage: storage }).array('post_pic', 5);
@@ -16,22 +16,26 @@ var upload = multer({ storage: storage }).array('post_pic', 5);
 
 exports.Exchange_Post = function(req, res) {
 
+    /////check if loggedin and his post too////
+    ////  handle not entered data  ////
+    ////  get images               //// 
+
+
+    ////handle exceptions
     if (!req.body) {
         res.status(400).json("problem with the sent request");
         return;
     }
-    /////check if loggedin and his post too////
-    ////  handle not entered data  ////
-    ////  get images               //// 
     let post = new Post(req.body);
-    if (post.type != 6 || !post.species_B || !post.kind_B) {
-        res.status(403).json("not the same type");
-        return;
-    }
     if (!post.ownerEmail || !post.type || !post.kind || !post.species) {
         res.status(403).json("incomplete request ");
         return;
     }
+    if (post.type != 6 || !post.species_B || !post.kind_B) {
+        res.status(403).json("not the same type");
+        return;
+    }
+    //
     post.save(function(err, Post) {
         if (err) {
             res.status(403).json("problem inserting");
@@ -43,25 +47,46 @@ exports.Exchange_Post = function(req, res) {
 
 exports.edit_post = function(req, res) {
 
-    if (!req.body || !req.query.id) {
-        res.json("error occured");
-        return;
-    }
+   
     /////check if loggedin his post too////
     ////  handle not entered data  ////
     ////  get images               //// 
+
+
+    //handle exceptions
+
+     if (!req.body || !req.query||!req.query.id) {
+        res.status(400).json("error occured");
+        return;
+    }
+
     var post = new Post(req.body);
+
+    if ( !post.type || !post.kind || !post.species) {
+        res.status(403).json("incomplete request ");
+        return;
+    }
     if (post.type == 6 && (!post.species_B || !post.kind_B))
-        res.status(403).json("input problem");
+       { res.status(403).json("input problem with exchange type");
+         return;
+        }
+
+    ///
+
 
     var id = req.query.id;
     //update all except owner_email
     Post.findOne({ _id: id }, function(err, found_post) { //add ownerEmail here
-        console.log(found_post);
         if (err)
             res.status(403).json("project not found or not your project");
         else {
 
+            //no match exception
+            if(found_post==null){
+                res.status(403).json("post does not match with anything");
+                return
+            }
+            
             if (post.type) found_post.type = post.type;
             if (post.kind) found_post.kind = post.kind;
             if (post.species) found_post.species = post.species;
