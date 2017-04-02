@@ -93,7 +93,7 @@ nev.configure({
   		}
     },
     verifyMailOptions: {
-        from: 'Do Not Reply <mohamed@hussein.com>',
+        from: 'Do Not Reply <khaledSharkawy@sharetech.com>',
         subject: 'Confirm your account',
         html: '<p>Please verify your account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and ' +
                 'paste the following link into your browser:</p><p>${URL}</p>',
@@ -103,7 +103,7 @@ nev.configure({
     // confirmation mail configurations
     shouldSendConfirmation: true,
     confirmMailOptions: {
-    from: 'Do Not Reply <mohamed@hussein.com>',
+    from: 'Do Not Reply <khaledSharkawy@sharetech.com>',
     subject: 'Successfully verified!',
     html: '<p>Your account has been successfully verified.</p>',
     text: 'Your account has been successfully verified.'
@@ -121,7 +121,7 @@ nev.configure({
 // generation temporary user model
 nev.generateTempUserModel(User, function(err, tempUserModel){
   if(err){
-    console.log("Error");
+    console.log("error in generating temp user model");
     console.log("================");
     console.log(err);
   }
@@ -143,7 +143,7 @@ var smtpTransport = nodemailer.createTransport({
     }
 }, function(err, result){
   if(err){
-    console.log("errrrrrrrrrrrrrr");
+    console.log("error in nodemailer createTransport");
     console.log("========================");
     console.log(err);
   } else {
@@ -242,29 +242,64 @@ var registerController = {
         }
     },
 
+    // after the user clicks on the verification url sent by email
     verifyEmail: function(req, res){
 
       var url = req.params.url;
       nev.confirmTempUser(url, function(err, user) {
-        if (err)
-            throw err;
-
+        if (err){
+          console.log("Error in confirm temporary user");
+          console.log(err);
+          console.log("************");
+        }
         // user was found!
         if (user) {
             // send confirmation email
-            nev.sendConfirmationEmail(user['password'], function(err, info) {
-              if(err)
-                throw err;
-              // success at last!!
-              res.json({success: true, message: "Email verified successfully"});
+            nev.sendConfirmationEmail(user['email'], function(err, info) {
+              if(err){
+                console.log(err);
+              } else {
+                // success at last!!
+                user.verified = true;
+                user.save();
+                console.log("verified: " + user.verified);
+                res.json({success: true, message: "Email verified successfully"});
+              }
             });
         }
 
         // user's data probably expired...
-        else{
+        else {
           // redirect to sign-up
+          res.json({success: false, message: "Something wrong happended!, please sign up again"});
         }
       });
+    },
+
+    // user requests another verification mail to verify his account
+    resendVerification: function(req, res){
+        var id = req.params.id;
+        User.findById(id, function(err, user){
+          if(err){
+            console.log(err);
+          }
+          // user found
+          else {
+            var email = user.email;
+            nev.resendVerificationEmail(email, function(err, userFound){
+              if(err){
+                console.log("error at resend Verification email");
+                console.log(err);
+              } else if(userFound) {
+                // every thing went well and the email resent successfully
+                res.json({success: true, message: "Verfication email resent successfully"});
+              } else {
+                // failure
+                res.json({success: false, message: "Something went wrong, unable to identify your account"});
+              }
+            })
+          }
+        })
     }
 }
 
