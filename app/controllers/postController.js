@@ -120,43 +120,40 @@ let postController = {
       });
     },
 
+    reviewPost : function(req , res){
+      var id = req.body.id;
+      var vote = req.body.vote;
+      console.log("id : "+id);
+      console.log("vote : "+vote);
 
+       Post.findOne({ _id: id }, function(err, found_post) {
+         if (found_post == null)
+            res.status(403).json("project not found or not your project");
+            else {
+              if(vote == 0){
+                found_post.downVote++;
+              }
+              else if (vote ==1) {
+                found_post.upVote++;
+              }
+              else {
+                res.send("Not a Valid Vote")
+              }
+            }
 
-  reviewPost : function(req,res){
-    var body = req.body;
-    var id = body.id;
-    var vote = body.vote;
-    var up =0;
-    var down =0;
-    console.log("id is :"+ id);
-    console.log("vote is :"+vote);
-    Post.findOne({'_id':id}, function(err , post){
+            found_post.save(function(err, updated_post) {
+               if (err) res.status(403).json("can't update");
+               else
+                   res.status(200).json("update succ");
 
-      if(post != null){
-      up = post.upVote;
-      console.log ("post.upVote" + post.upVote);
-      down = post.downVote;
-      console.log ("post.downVote" + post.downVote);
-
-      if(vote ==0 ){
-      Post.update({'_id':id}, {$set: {downVote:down+1}});
-      res.send("down Updated the current down votes are " + down+1);
-
-    }
-      else {
-      Post.update({'_id':id}, {$set: {upVote:up+1}});
-      res.send("up Updated the current up votes are " + up+1);
-
-    }
-
-    }
-    else {
-       res.send("Error in ID");
-    }
-    });
+           })
+       });
 
 
     }
+
+
+
 
 
   }
