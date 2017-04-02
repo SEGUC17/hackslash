@@ -123,7 +123,7 @@ let postController = {
 
     // Reviewing a Post . check Logged-in
     reviewPost : function(req , res){
-      var id = req.body.id;
+      var id = req.header("id");
       var vote = req.body.vote;
       console.log("id : "+id);
       console.log("vote : "+vote);
@@ -159,11 +159,6 @@ let postController = {
 
 
     }
-
-
-
-
-
   }
 
 
