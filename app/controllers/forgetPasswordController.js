@@ -47,8 +47,9 @@ var forgetPasswordController = {
         // using SendGrid's v3 Node.js Library
     // https://github.com/sendgrid/sendgrid-nodejs
     var helper = require('sendgrid').mail;
-
-    from_email = new helper.Email("ahmad.ayman@student.guc.edu.eg");
+    
+    // HERE WE SHOULD PUT OUR COMPANY'S EMAIL
+    from_email = new helper.Email("petsociety@gmail.com");
     to_email = new helper.Email(foundUser.email);
     subject = "Reset Password";
     content = new helper.Content("text/plain", "To reset your password, please go to http://localhost:8080/resetPassword?t=" + token);
