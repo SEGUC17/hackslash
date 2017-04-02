@@ -9,14 +9,12 @@ var forgetPasswordController = {
   forgetPassword : function (req, res) {
     var email = req.body.email;
     User.findOne({email: email}, function(err, foundUser){
-      if(err){
-        throw err;
-      } else {
+      if(err) throw err;
+       else {
         if(foundUser){
+          // SEND HIM AN EMAIL
           sendForgetPasswordEmail(foundUser);
-        } else {
-          res.json({success: false, message: "Wrong Email"})
-        }
+        } else res.json({success: false, message: "Wrong Email"});
       }
     });
   }
@@ -29,18 +27,24 @@ var forgetPasswordController = {
   - SEND AN EMAIL WITH A LINK CONTAINING THE GENERATED TOKEN TO THE USER USING SendGrid
 */
   var sendForgetPasswordEmail = function (foundUser) {
+    // GENERATING TOKEN
     var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var token = '';
     for (var i = 32; i > 0; --i) {
       token += chars[Math.round(Math.random() * (chars.length - 1))];
     }
-    // create expiration date
+    //////////////////////// TOKEN GENERATED \\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+    // CREATE EXPIRATION DATE (I SET IT TO 6 HOURS AFTER THE CURRENT DATE)
     var expires = new Date();
     expires.setHours(expires.getHours() + 6);
 
+    // SAVE IN THE DATABASE THAT THIS USER HAVE A RESET TOKEN EQUAL TO THE GENERATED ONE
     User.update({username:foundUser.username}, {$set: {resetToken: token, resetTokenExpiryDate : expires}}, function(err){});
-        // using SendGrid's v3 Node.js Library
-    // https://github.com/sendgrid/sendgrid-nodejs
+
+    // NOW I WILL SEND HIM AN EMAIL USING SendGrid
+
     var helper = require('sendgrid').mail;
 
     // HERE WE SHOULD PUT OUR COMPANY'S EMAIL
@@ -56,6 +60,8 @@ var forgetPasswordController = {
       path: '/v3/mail/send',
       body: mail.toJSON()
     });
+    //////////////////////// EMAIL SENT \\\\\\\\\\\\\\\\\\\\\\\\\\
+
 
     sg.API(request, function(error, response) {
       console.log(response.statusCode);
