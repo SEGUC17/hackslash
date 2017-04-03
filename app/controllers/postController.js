@@ -1,19 +1,49 @@
 let Post = require('../models/post.js');
 let postController = {
 
-
+  // Searching posts by kind and species
     searchPosts:function(req, res){
-        var keyword = req.header("searchKeyword");
-        Post.find({kind:{$regex:keyword}},function(err, posts){
+        var Kind = req.header("kind");
+        var Species = req.header("species");
+        if(Kind != undefined && Species != undefined)
+        {
+        Post.find({kind:{$regex:Kind},species:{$regex:Species}},function(err, posts){
 
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.send("No Posts Exists");
+                res.json({"message":"No Posts Exists"});
                 else
                 res.json({posts});
         })
+      }
+      else if(Kind != undefined)
+      {
+        Post.find({kind:{$regex:Kind}},function(err, posts){
+
+            if(err)
+                res.send(err.message);
+            else if(posts.length==0)
+                res.json({"message":"No Posts Exists"});
+                else
+                res.json({posts});
+        })
+      }
+      else if(Species != undefined)
+      {
+        Post.find({species:{$regex:Species}},function(err, posts){
+
+            if(err)
+                res.send(err.message);
+            else if(posts.length==0)
+                res.json({"message":"No Posts Exists"});
+                else
+                res.json({posts});
+        })
+      }
     },
+
+    // Filtering Posts by Type
     filterPosts:function(req, res){
         var filterType ;
         switch(req.header("filter")) {
@@ -26,11 +56,8 @@ let postController = {
             case "mate":
                 filterType = 3;
             break;
-            case "lost":
+            case "lost & Found":
                 filterType = 4;
-            break;
-            case "found":
-                filterType = 5;
             break;
             case "exchange":
                 filterType = 6;
@@ -43,14 +70,17 @@ let postController = {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.send("No Posts Exists");
+                res.json({"message":"No Posts Exists"});
                 else
                 res.json({posts});
         })
     },
+
+    // Filtering and Searching Posts as one method
     searchAndFilterPosts:function(req, res){
         var filterType ;
-        var keyword = req.header("searchKeyword") ;
+        var Kind = req.header("kind");
+        var Species = req.header("species");
         switch(req.header("filter")) {
             case "sell":
                 filterType = 1
@@ -61,27 +91,51 @@ let postController = {
             case "mate":
                 filterType = 3;
             break;
-            case "lost":
+            case "lost & found":
                 filterType = 4;
             break;
-            case "found":
-                filterType = 5;
-            break;
             case "exchange":
-                filterType = 6;
+                filterType = 5;
             break;
             default:
                 filterType =1 ;
             }
-        Post.find({type:filterType,kind:{$regex:keyword}},function(err, posts){
+            if(Kind != undefined && Species != undefined)
+            {
+            Post.find({type:filterType,kind:{$regex:Kind},species:{$regex:Species}},function(err, posts){
 
-            if(err)
-                res.send(err.message);
-            else if(posts.length==0)
-                res.send("No Posts Exists");
-                else
-                res.json({posts});
-        })
+                if(err)
+                    res.send(err.message);
+                else if(posts.length==0)
+                    res.json({"message":"No Posts Exists"});
+                    else
+                    res.json({posts});
+            })
+          }
+          else if(Kind != undefined)
+          {
+            Post.find({type:filterType,kind:{$regex:Kind}},function(err, posts){
+
+                if(err)
+                    res.send(err.message);
+                else if(posts.length==0)
+                    res.json({"message":"No Posts Exists"});
+                    else
+                    res.json({posts});
+            })
+          }
+          else if(Species != undefined)
+          {
+            Post.find({type:filterType,species:{$regex:Species}},function(err, posts){
+
+                if(err)
+                    res.send(err.message);
+                else if(posts.length==0)
+                    res.json({"message":"No Posts Exists"});
+                    else
+                    res.json({posts});
+            })
+          }
     }
 }
 
