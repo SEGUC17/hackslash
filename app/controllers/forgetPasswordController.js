@@ -54,7 +54,7 @@ var forgetPasswordController = {
     content = new helper.Content("text/plain", "To reset your password, please go to http://localhost:8080/resetPassword?t=" + token);
     mail = new helper.Mail(from_email, subject, to_email, content);
 
-    var sg = require('sendgrid')("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");
+    var sg = require('sendgrid')("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");
     var request = sg.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
