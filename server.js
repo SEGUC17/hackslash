@@ -26,14 +26,14 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
-app.set('superSecret', config.superSecret); //Secret of Tokens!
+app.set('superSecret', config.superSecret); // Secret of Tokens!
 
 // Requiring routes
-var index  = require('./app/routes/index');
-var register = require('./app/routes/register.js');
-var auth   = require('./app/routes/auth');
-var client = require('./app/routes/client');
-var user   = require('./app/routes/user');
+var index    = require('./app/routes/index');
+var register = require('./app/routes/register');
+var auth     = require('./app/routes/auth');
+var client   = require('./app/routes/client');
+var user     = require('./app/routes/user');
 
 // Using routes
 app.use(index);
@@ -42,15 +42,7 @@ app.use(auth);
 app.use(client);
 app.use(user);
 
-// INITIALIZING APP
-var app = express();
-
-// USING MIDDLEWARES
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
-
-// Starting the server on port 8080
+//Starting the server on port 8080
 app.listen(8080, function()
 {
     console.log('Server started in 8080');
