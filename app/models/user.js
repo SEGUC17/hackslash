@@ -47,10 +47,6 @@ var userSchema = new mongoose.Schema({
     count: {
         type: Number
     },
-    verified: {
-        type: Boolean,
-        default: false
-    },
     raters: [String]
 });
 
