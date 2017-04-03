@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-// Requiring Config file
+// Requiring the Configuration file
 var config = require('./app/config/config');
 
 // Getting Database URI
@@ -23,19 +23,21 @@ mongoose.connect(DB_URI, function(err, db)
 var app = express();
 
 // Using Middlewares
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.set('superSecret', config.superSecret); //Secret of Tokens!
+app.set('superSecret', config.superSecret); // Secret of Tokens!
 
 // Requiring routes
-var index  = require('./app/routes/index');
-var auth   = require('./app/routes/auth');
-var client = require('./app/routes/client');
-var user   = require('./app/routes/user');
+var index    = require('./app/routes/index');
+var register = require('./app/routes/register');
+var auth     = require('./app/routes/auth');
+var client   = require('./app/routes/client');
+var user     = require('./app/routes/user');
 
 // Using routes
 app.use(index);
+app.use(register);
 app.use(auth);
 app.use(client);
 app.use(user);
