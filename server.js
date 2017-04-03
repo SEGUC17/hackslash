@@ -23,8 +23,8 @@ mongoose.connect(DB_URI, function(err, db)
 var app = express();
 
 // Using Middlewares
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('superSecret', config.superSecret); // Secret of Tokens!
 
