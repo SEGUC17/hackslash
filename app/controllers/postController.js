@@ -56,8 +56,11 @@ let postController = {
             case "mate":
                 filterType = 3;
             break;
-            case "lost & Found":
+            case "lost":
                 filterType = 4;
+            break;
+	    case "found":
+                filterType = 5;
             break;
             case "exchange":
                 filterType = 6;
