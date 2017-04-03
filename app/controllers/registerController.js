@@ -59,6 +59,7 @@ function validateInput(username, email, password){
 }
 
 // =============================================================================
+// Configurations for setting up email verification
 
 // EMAIL CONFIG
 // hashing password function for encryption
@@ -72,6 +73,7 @@ function myHasher(password, tempUserData, insertTempUser, callback) {
   });
 };
 
+// nod-email-verification configurations
 nev.configure({
 
     verificationURL: 'http://localhost:8080/email-verification/${URL}',
@@ -129,8 +131,8 @@ nev.generateTempUserModel(User, function(err, tempUserModel){
 
 console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
 
-// var sgTransport = require('nodemailer-sendgrid-transport');
-//
+// nodemailer configurations, I really don't understand why I need this
+// while I have transportOptions above:S
 var smtpTransport = nodemailer.createTransport({
     from: 'replyemail@example.com',
     options: {
@@ -152,6 +154,8 @@ var smtpTransport = nodemailer.createTransport({
 });
 
 // =============================================================================
+// It's time for the register Controller
+// =============================================================================
 
 var registerController = {
 
@@ -172,7 +176,7 @@ var registerController = {
           // checking if the entered username/email already exists in the database
           User.findOne({username: username}, function(err, foundUser){
             if(err){
-              throw err;
+              console.log(err);
             } else {
               // if username is already in database
               if(foundUser){
@@ -243,7 +247,7 @@ var registerController = {
         }
     },
 
-    // after the user clicks on the verification url sent by email
+    // after the user clicks on the verification url sent through email
     verifyEmail: function(req, res){
 
       var url = req.params.url;
@@ -254,7 +258,7 @@ var registerController = {
           console.log("************");
         }
         // user was found!
-        if (user) {
+        if (user){
             // send confirmation email
             nev.sendConfirmationEmail(user['email'], function(err, info) {
               if(err){

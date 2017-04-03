@@ -3,9 +3,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var nev = require('email-verification')(mongoose);
-//var path = require('path');
+// var path = require('path');
 
-var User = require('./app/models/user');
+// var User = require('./app/models/user');
 
 // REQUIRING CONFIG FILE
 var config = require('./app/config/config.js');
