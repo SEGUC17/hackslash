@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-// Requiring Config file
+// Requiring the Configuration file
 var config = require('./app/config/config');
 
 // Getting Database URI
