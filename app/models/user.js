@@ -44,13 +44,14 @@ var userSchema = new mongoose.Schema({
     rate: {
         type: SchemaTypes.Double
     },
-    rates : [Number],
+    count: {
+        type: Number
+    },
     verified: {
         type: Boolean,
         default: false
     },
-    ratedPosts: [Number],
-    ratedUsers: [String]
+    raters: [String]
 });
 
 var User = mongoose.model("user", userSchema);
