@@ -244,8 +244,6 @@ var registerController = {
               }
             }
           });
-<<<<<<< HEAD
-=======
         }
     },
 
@@ -258,7 +256,6 @@ var registerController = {
           console.log("Error in confirm temporary user");
           console.log(err);
           console.log("************");
->>>>>>> cacd19ccf6dfb53f73a21acb431ec561dacfcbd3
         }
         // user was found!
         if (user){

@@ -206,6 +206,7 @@ edit_post: function(req, res) {
                 filterType = 4;
             break;
 	    case "found":
+	   	   case "found":
                 filterType = 5;
             break;
             case "exchange":
@@ -244,12 +245,12 @@ edit_post: function(req, res) {
                 filterType = 4;
             break;
  	    case "found":
+	   	   case "found":
                 filterType = 5;
             break;
             case "exchange":
                 filterType = 6;
             break;
-
             default:
                 filterType =1 ;
             }

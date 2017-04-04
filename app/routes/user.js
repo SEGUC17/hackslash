@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var middleware = require("../middleware");
+
 var postController = require('../controllers/postController.js');
 
 router.get('/post/search', postController.searchPosts);
