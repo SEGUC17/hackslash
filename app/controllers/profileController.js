@@ -118,6 +118,11 @@ let profileController = {
             var uPassword = req.body.password;
             var uVerify = req.body.verify;
             var newPassword = req.body.newPassword;
+            if(newPassword.length < 5)
+            {
+                res.status(300).json('Password too short');
+                return;
+            }
             if(uPassword == uVerify)
             {
                 //Find user
