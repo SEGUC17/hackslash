@@ -1,4 +1,3 @@
 /node_modules
-/app/config
-sendgrid.env
+/app/config/config.js
 sendgrid.env

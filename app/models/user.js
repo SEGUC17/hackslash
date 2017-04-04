@@ -4,38 +4,50 @@ require('mongoose-double')(mongoose);
 var bcrypt = require("bcrypt");
 
 var userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
+      username: {
+      type: String,
+      required: true,
+      unique: true
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     firstName: {
-        type: String,
+      type: String,
+      required:true
     },
-    middleName: String,
+    middleName: {
+      type: String
+    },
     lastName: {
-        type: String,
-      },
-    phoneNumber1: String,
-    phoneNumber2: String,
-    homeNumber: String,
-    profilePicture: String,
-    //rate: SchemaTypes.Double, // feh error hna
-    rates : [Number],
-    verified: {
-        type: Boolean,
-        default: false
+      type: String,
+      required: true
     },
-    ratedItems: [Number],
+    phoneNumber1: {
+      type: String
+    },
+    phoneNumber2: {
+      type: String
+    },
+    homeNumber: {
+      type: String
+    },
+    profilePicture: {
+      type: String
+    },
+    rate: {
+      type: SchemaTypes.Double
+    },
+    count: {
+      type: Number
+    },
+    raters: [String],
     resetToken : String,
     resetTokenExpiryDate : Date
 });
