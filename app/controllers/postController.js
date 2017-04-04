@@ -117,36 +117,6 @@ edit_post: function(req, res) {
 
 ///rest of the posts methods goes here
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // Searching posts by kind and species
     searchPosts:function(req, res){
         var Kind = req.header("kind");
@@ -205,8 +175,7 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
-	    case "found":
-	   	   case "found":
+	          case "found":
                 filterType = 5;
             break;
             case "exchange":
@@ -244,9 +213,8 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
- 	    case "found":
-	   	   case "found":
-                filterType = 5;
+ 	          case "found":
+	   	         filterType = 5;
             break;
             case "exchange":
                 filterType = 6;

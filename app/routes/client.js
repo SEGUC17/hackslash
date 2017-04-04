@@ -7,4 +7,5 @@ var postController = require('../controllers/postController.js');
 
 router.post('/post/exchange',middleware.isLoggedIn , postController.Exchange_Post);
 router.post('/post/edit',middleware.isLoggedIn, postController.edit_post);
+
 module.exports = router;
