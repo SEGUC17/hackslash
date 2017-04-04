@@ -6,8 +6,8 @@ var middleware = require("../middleware");
 
 var postController = require('../controllers/postController.js');
 
-router.get('post/viewPostsAndInfo',postController.viewPostsAndInfo);
-router.post('post/review',postController.reviewPost);
+router.get('post/viewPostsAndInfo',middleware.isLoggedIn,postController.viewPostsAndInfo);
+router.post('post/review',middleware.isLoggedIn,postController.reviewPost);
 
 
 module.exports = router;
