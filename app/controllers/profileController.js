@@ -75,6 +75,103 @@ let profileController = {
             }
         })
     },
+// This function allows users to rate other users.
+    rateUser:function(req,res){
+
+        var raterEmail = req.body.email;
+        var ratedEmail = req.body.remail;//To set in post method.
+
+        var found = false;
+        
+        if(!req.body)
+        {
+            res.status(400).json('There is a problem with your request.');
+            return;
+        }
+        var token = req.body.token;
+        if(!token)
+        {
+            res.status(400).json('You must be logged in.');
+        }else{
+        user.findOne({email:ratedEmail}, function(err,ratedFound){
+            var alreadyRated = [];
+            if(ratedFound){
+                alreadyRated = ratedFound.raters;
+                for(var i =0; i < alreadyRated.length ;i++)
+                {
+                    if(alreadyRated[i]==raterEmail)
+                    {
+                        found=true;
+                        break;
+                    }
+                }
+                if(found){
+                    res.status(403).json('You have already rated this user.');
+                }else{
+                        user.findOne({email:raterEmail}, function(err,raterFound){
+                            if(raterFound)
+                            {
+                                var sum = 0;
+                                var given = req.body.rate;
+                                var currentRate = ratedFound.rate;
+                                var currentCount = ratedFound.count;
+
+                                sum = currentRate*currentCount;
+                                console.log(sum);
+                                sum += parseFloat(given);
+                                console.log(sum);
+
+                                currentCount++;
+
+                                var newRate = sum/currentCount;
+                                console.log(newRate);
+
+                                alreadyRated.push(raterEmail);
+
+                                let updatedRated = new user({
+                                    raters: alreadyRated,
+                                    rate: newRate,
+                                    count: currentCount,
+                                    email: ratedEmail
+                                })
+
+                                updateController.updateProfile(updatedRated,res);
+                            }else{
+                                res.status(401).json('You must be logged in to rate users.');
+                            }
+                        })
+                    }
+                }else{
+                    res.status(404).json('This user does not exist.');
+                }
+            })
+        }
+    },
+
+    //This function allows the user to delete his/her profile.
+    deleteUser:function(req,res){
+
+        var email = req.body.email;
+        if(!req.body)
+        {
+            res.status(400).json('There is a problem with your request.');
+            return;
+        }
+        var token = req.body.token;
+        if(!token)
+        {
+            res.status(400).json('You must be logged in.');
+        }else{
+            user.findOneAndRemove({email:email}, function(err){
+                if(err){
+                    console.log(err);
+                    res.status(500).json('error');
+             }else{
+                    res.status(200).json('success');
+                }
+            })
+        }
+    },
     changePassword:function(req,res){
         var uEmail = req.body.email;//Logged in user's email
         var uPassword = req.body.password;
@@ -90,6 +187,7 @@ let profileController = {
             res.status(300).json('Passwords don\'t match.');
         }
     }
+
 }
 
 //Export for the rest of the project.

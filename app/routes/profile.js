@@ -10,10 +10,8 @@ var workData = multer({dest:'views/uploads'});
 var type = workData.single('upload');
 var fileStream = require('fs');
 
-profileRouter.get('/profile/view',profileController.viewProfile);
-//Data for profile picture should be added later.
-profileRouter.post('/profile/edit',/*workData.single('file'),*/profileController.editProfile);
-profileRouter.post('/profile/pass',profileController.changePassword);
+router.post('/profile/rate',middleware.isLoggedin,profileController.rateUser);
+router.post('/profile/delete',middleware.isLoggedin,profileController.deleteUser);
 
 //Export router.
 module.exports = profileRouter;
