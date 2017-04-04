@@ -11,13 +11,23 @@
     "type": "git",
     "url": "git+https://github.com/SEGUC17/hackslash.git"
   },
-  "author": "",
+  "author": "hackslash",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SEGUC17/hackslash/issues"
   },
   "homepage": "https://github.com/SEGUC17/hackslash#readme",
   "dependencies": {
-    "body-parser": "^1.17.1"
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "email-verification": "^0.4.6",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "email-verification": "^0.4.6",
+    "mongoose": "^4.9.2",
+    "mongoose-double": "0.0.1",
+    "sendgrid": "^5.0.0",
+    "nodemailer": "^3.1.8",
+    "nodemailer-sendgrid-transport": "^0.2.0"
   }
 }
