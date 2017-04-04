@@ -88,13 +88,13 @@ let profileController = {
                         {//Internal Error
                             console.log('error in viewProfile');
                             res.status(500).json(err.message);
-                        }else if(myPosts){//View User's info and his posts.
+                        }else if(myPosts.length > 0){//View User's info and his posts.
                             var profileData = {userProfileInfo,myPosts};
                             res.status(200).json(profileData);
                         }else{//View User's info.
                             myPosts = "||&This user has no Posts yet.&||";
                             var profileData = {userProfileInfo,myPosts};
-                            res.status(200).json('profileData');
+                            res.status(200).json(profileData);
                         }
                     })
                 }else{//User not found. Send relevant error message.
@@ -133,16 +133,18 @@ let profileController = {
                         return;
                     }
                     if(User)
-                    {
+                    {//User found. Check to see if entered password matches the saved one.
                         bcrypt.compare(uPassword, User.password, function(err, result) {
                             if(result)
-                            {
+                            {//Password matched.
                                 bcrypt.genSalt(10, function(err, salt) {
                                     if(err)
                                     {
                                         throw err;
                                     }
-                                    bcrypt.hash(newPassword, salt, function(err, hash) {
+                                    //Hash the new password.
+                                    bcrypt.hash(newPassword, salt, function(err, hash){
+                                        //Create a new user and update him.
                                         let edited = new user({
                                             email:uEmail,
                                             password:hash
@@ -150,7 +152,7 @@ let profileController = {
                                         updateController.updateProfile(edited,res);
                                     });
                                 });
-                            }else{
+                            }else{//Password didn't match.
                                 res.status(300).json('Wrong Password');
                             }
                         });
@@ -158,7 +160,6 @@ let profileController = {
                         res.status(404).json('User does not exit');
                     }
                 })
-                //updateController.updateProfile(edited,res);
             }else{
                 res.status(300).json('Passwords don\'t match.');
             }
