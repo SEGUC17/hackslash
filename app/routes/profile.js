@@ -2,7 +2,6 @@
 var express = require('express');
 var router = express.Router();
 //Controllers
-var updateController = require('../controllers/updateController');
 var profileController = require('../controllers/profileController');
 //Multer
 var multer = require('multer');

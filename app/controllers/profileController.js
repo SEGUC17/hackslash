@@ -124,7 +124,7 @@ let profileController = {
                 return;
             }
             if(uPassword == uVerify)
-            {
+            {//Passwords match.
                 //Find user
                 user.findOne({email:uEmail},function(err,User){
                     if(err)
@@ -156,11 +156,11 @@ let profileController = {
                                 res.status(300).json('Wrong Password');
                             }
                         });
-                    }else{
+                    }else{//User not found.
                         res.status(404).json('User does not exit');
                     }
                 })
-            }else{
+            }else{//Password do not match.
                 res.status(300).json('Passwords don\'t match.');
             }
         }
