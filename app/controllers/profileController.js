@@ -17,7 +17,7 @@ var updateController = require("./updateController");
 let profileController = {
     //This function takes in the user's new information, and edits it.
     editProfile:function(req,res){
-        var token = req.body.token;
+        var token = req.body.token || req.header("token") || req.query.token;
         if(!token){
             res.json('You must be logged in to edit your profile.')
         }else{
@@ -54,7 +54,7 @@ let profileController = {
     },
     //This function takes in the desired user's email, an views all relevant information.
     viewProfile:function(req,res){
-        var token = req.body.token;
+        var token = req.body.token || req.header("token") || req.query.token;
         if(!token)
         {
             res.json('You must be logged in to view profiles.')
@@ -91,10 +91,10 @@ let profileController = {
         }
     },
     changePassword:function(req,res){
-        var token = req.body.token;
+        var token = req.body.token || req.header("token") || req.query.token;
         if(!token)
         {
-            res.json('You must be logged in to view profiles.')
+            res.json('You must be logged in to change your password.')
         }else{
             var uEmail = req.decoded._doc.email;
             var uPassword = req.body.password;
