@@ -361,7 +361,10 @@ edit_post: function(req, res) {
               });
             }
        }
-    }
+
+    
+}
 
 
 module.exports = postController;
+
