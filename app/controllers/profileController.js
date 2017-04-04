@@ -17,6 +17,11 @@ var updateController = require("./updateController");
 let profileController = {
     //This function takes in the user's new information, and edits it.
     editProfile:function(req,res){
+        if(!req.body)
+        {
+            res.status(400).json('There is a problem with your request.');
+            return;
+        }
         var token = req.body.token || req.header("token") || req.query.token;
         if(!token){
             res.json('You must be logged in to edit your profile.')
@@ -54,6 +59,11 @@ let profileController = {
     },
     //This function takes in the desired user's email, an views all relevant information.
     viewProfile:function(req,res){
+        if(!req.body)
+        {
+            res.status(400).json('There is a problem with your request.');
+            return;
+        }
         var token = req.body.token || req.header("token") || req.query.token;
         if(!token)
         {
@@ -91,6 +101,11 @@ let profileController = {
         }
     },
     changePassword:function(req,res){
+        if(!req.body)
+        {
+            res.status(400).json('There is a problem with your request.');
+            return;
+        }
         var token = req.body.token || req.header("token") || req.query.token;
         if(!token)
         {
@@ -99,9 +114,11 @@ let profileController = {
             var uEmail = req.decoded._doc.email;
             var uPassword = req.body.password;
             var uVerify = req.body.verify;
+            var newPassword = req.body.newPassword;
             if(uPassword == uVerify)
             {
-                let edited = new User({
+                //Find user's hashed password.
+                let edited = new user({
                     email:uEmail,
                     password:newPassword
                 });

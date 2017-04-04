@@ -20,7 +20,8 @@ let updateController = {
                     }
                     if(user.password)
                     {
-                        if(password.length < 5)
+                        var pass = user.password
+                        if(pass > 5)
                         {
                             foundUser.password = user.password;
                         }else{
