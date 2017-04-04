@@ -35,6 +35,7 @@ var register = require('./app/routes/register');
 var auth     = require('./app/routes/auth');
 var client   = require('./app/routes/client');
 var user     = require('./app/routes/user');
+var profile  = require('./app/routes/profile'); 
 
 // Using routes
 app.use(index);
@@ -42,6 +43,7 @@ app.use(register);
 app.use(auth);
 app.use(client);
 app.use(user);
+app.use(profile);
 
 //Starting the server on port 8080
 app.listen(8080, function()
