@@ -28,17 +28,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('superSecret', config.superSecret); // Secret of Tokens!
 
-// REQUIRING ROUTES
-var registerRoutes = require('./app/routes/register.js');
-var forgetPassword = require('./app/routes/forgetPassword.js');
-var resetPassword = require('./app/routes/resetPassword.js');
-
-// USING ROUTES
-app.use(routes);
-app.use(registerRoutes);
-app.use(forgetPassword);
-app.use(resetPassword);
-app.set('superSecret', config.superSecret); // Secret of Tokens!
 
 // Requiring routes
 var index    = require('./app/routes/index');

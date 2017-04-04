@@ -10,7 +10,8 @@ var forgetPasswordController  = require('../controllers/forgetPasswordController
 var resetPasswordController   = require('../controllers/resetPasswordController.js');
 
 
-router.get('/forgetPassword', function(req, res) { // HERE : WE SHOULD RENDER THE PAGE THAT ASKS FOR THE USER FOR HIS EMAIL});
+router.get('/forgetPassword', function(req, res) { // HERE : WE SHOULD RENDER THE PAGE THAT ASKS FOR THE USER FOR HIS EMAIL
+});
 
   // AFTER THE USER ENTERS HIS EMAIL
 router.post('/forgetPassword', forgetPasswordController.forgetPassword);

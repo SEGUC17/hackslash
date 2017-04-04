@@ -59,7 +59,7 @@ let postController = {
             case "lost":
                 filterType = 4;
             break;
-	    case "found":
+	   	   case "found":
                 filterType = 5;
             break;
             case "exchange":
@@ -97,7 +97,7 @@ let postController = {
             case "lost":
                 filterType = 4;
             break;
-	    case "found":
+	   	   case "found":
                 filterType = 5;
             break;
             case "exchange":
