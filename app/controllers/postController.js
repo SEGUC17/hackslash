@@ -240,12 +240,16 @@ edit_post: function(req, res) {
             case "mate":
                 filterType = 3;
             break;
-            case "lost & found":
+            case "lost":
                 filterType = 4;
             break;
-            case "exchange":
+ 	    case "found":
                 filterType = 5;
             break;
+            case "exchange":
+                filterType = 6;
+            break;
+
             default:
                 filterType =1 ;
             }
