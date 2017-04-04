@@ -11,6 +11,9 @@ let post = require('../models/post');
 //Require Middleware
 var middleware = require("../middleware");
 
+//Requiring bcrypt
+var bcrypt = require('bcrypt');
+
 //Require updateController
 var updateController = require("./updateController");
 
@@ -74,7 +77,7 @@ let profileController = {
             //var qUserName = req.query.username;
             var uEmail = req.header("email");
             //First, find this user.
-            user.findOne({email:uEmail/*,password:uPassword*/},function(err,userProfileInfo){
+            user.findOne({email:uEmail},function(err,userProfileInfo){
                 if(err)
                 {//Internal Error
                     console.log('error in viewProfile');
@@ -117,12 +120,40 @@ let profileController = {
             var newPassword = req.body.newPassword;
             if(uPassword == uVerify)
             {
-                //Find user's hashed password.
-                let edited = new user({
-                    email:uEmail,
-                    password:newPassword
-                });
-                updateController.updateProfile(edited,res);
+                //Find user
+                user.findOne({email:uEmail},function(err,User){
+                    if(err)
+                    {
+                        res.status(500).json('internal error');
+                        return;
+                    }
+                    if(User)
+                    {
+                        bcrypt.compare(uPassword, User.password, function(err, result) {
+                            if(result)
+                            {
+                                bcrypt.genSalt(10, function(err, salt) {
+                                    if(err)
+                                    {
+                                        throw err;
+                                    }
+                                    bcrypt.hash(newPassword, salt, function(err, hash) {
+                                        let edited = new user({
+                                            email:uEmail,
+                                            password:hash
+                                        });
+                                        updateController.updateProfile(edited,res);
+                                    });
+                                });
+                            }else{
+                                res.status(300).json('Wrong Password');
+                            }
+                        });
+                    }else{
+                        res.status(404).json('User does not exit');
+                    }
+                })
+                //updateController.updateProfile(edited,res);
             }else{
                 res.status(300).json('Passwords don\'t match.');
             }

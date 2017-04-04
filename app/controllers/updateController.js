@@ -20,13 +20,7 @@ let updateController = {
                     }
                     if(user.password)
                     {
-                        var pass = user.password
-                        if(pass > 5)
-                        {
-                            foundUser.password = user.password;
-                        }else{
-                            res.status(200).json('Password must be longer than 5 characters.');
-                        }
+                        foundUser.password = user.password;
                     }
                     if(user.firstName)
                     {
