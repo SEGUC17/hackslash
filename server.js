@@ -29,7 +29,6 @@ app.use(bodyParser.json());
 app.set('superSecret', config.superSecret); // Secret of Tokens!
 
 // REQUIRING ROUTES
-var routes = require('./app/routes/routes.js');
 var registerRoutes = require('./app/routes/register.js');
 var forgetPassword = require('./app/routes/forgetPassword.js');
 var resetPassword = require('./app/routes/resetPassword.js');
