@@ -4,53 +4,54 @@ require('mongoose-double')(mongoose);
 var SchemaTypes = mongoose.Schema.Types;
 
 var userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
+      username: {
+      type: String,
+      required: true,
+      unique: true
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     firstName: {
-        type: String,
-        required: true
+      type: String,
+      required:true
     },
     middleName: {
-        type: String
+      type: String
     },
     lastName: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     phoneNumber1: {
-        type: String
+      type: String
     },
     phoneNumber2: {
-        type: String
+      type: String
     },
     homeNumber: {
-        type: String
+      type: String
     },
     profilePicture: {
-        type: String
+      type: String
     },
     rate: {
-        type: SchemaTypes.Double
+      type: SchemaTypes.Double,
+      default: 0
     },
-    rates: [Number],
-    verified: {
-        type: Boolean,
-        default: false
+    count: {
+      type: Number,
+      deafault: 0
     },
-    ratedPosts: [Number],
-    ratedUsers: [String]
+    raters: [String],
+    resetToken : String,
+    resetTokenExpiryDate : Date
 });
 
 var User = mongoose.model("user", userSchema);

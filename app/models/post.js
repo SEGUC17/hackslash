@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 Schema = mongoose.Schema,
-    require('mongoose-double')(mongoose);
+require('mongoose-double')(mongoose);
 autoIncrement = require('mongoose-auto-increment');
 
 var SchemaTypes = mongoose.Schema.Types;
@@ -9,10 +9,6 @@ var connection = mongoose.createConnection("mongodb://localhost:27017/pets");
 autoIncrement.initialize(connection);
 
 var postSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-
-    },
     ownerEmail: {
         type: String,
         required: true
@@ -34,12 +30,20 @@ var postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    gender: {
+        type: String,
+        required: true,
+        enum: ['male','female','null']
+    },
     kind_B: {
         type: String
     },
-    // species that the animal belong to ; eg. sherazi cat
     species_B: {
         type: String
+    },
+    gender_B: {
+        type: String,
+        enum: ['male','female','null']
     },
     price: {
         type: SchemaTypes.Double
@@ -51,15 +55,15 @@ var postSchema = new mongoose.Schema({
     note: String,
     date: {
         type: Date,
-        default: Date.now
+        default :Date.now
     },
     upVote: {
         type: Number,
-        default: 0
+        default :0
     },
     downVote: {
         type: Number,
-        default: 0
+        default :0
     }
 });
 
