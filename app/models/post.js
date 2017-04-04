@@ -65,7 +65,7 @@ var postSchema = new mongoose.Schema({
         type: Number,
         default :0
     },
-    raters :[String]
+   raters :[String]
 });
 
 postSchema.plugin(autoIncrement.plugin, 'Post');
