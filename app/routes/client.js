@@ -5,6 +5,10 @@ var router = express.Router();
 var middleware = require("../middleware");
 var postController = require('../controllers/postController.js');
 
+
+
+router.get('post/viewPostsAndInfo',middleware.isLoggedIn,postController.viewPostsAndInfo);
+router.post('post/review',middleware.isLoggedIn,postController.reviewPost);
 router.post('/post/exchange',middleware.isLoggedIn , postController.Exchange_Post);
 router.post('/post/edit',middleware.isLoggedIn, postController.edit_post);
 
