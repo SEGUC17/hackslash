@@ -282,7 +282,7 @@ edit_post: function(req, res) {
                 res.status(400).json("problem with the sent request");
                 return;
             }
-            var token = req.body.token ;
+            var token = req.query.token ;
             if(!token){ //
               res.status(403).json("not loggedin ");  }
       else{
