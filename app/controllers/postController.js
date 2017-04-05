@@ -321,7 +321,7 @@ edit_post: function(req, res) {
               console.log("vote : "+vote);
 
               Post.findOne({_id:id },function(err ,post){
-                if(post != null ){
+                if(post == null ){
                   res.send("Post Doesn't Exixt");
                   return;
                 }
@@ -335,9 +335,9 @@ edit_post: function(req, res) {
                 }
                 else {
                   if(vote == 0){
-                    found_post.downVote++;
-                    found_post.raters.push(userMail);
-                    found_post.save(function(err, updated_post) {
+                    post.downVote++;
+                    post.raters.push(userMail);
+                    post.save(function(err, updated_post) {
                        if (err) res.status(403).json("can't update");
                        else
                            res.status(200).json("update succ downVoted");
