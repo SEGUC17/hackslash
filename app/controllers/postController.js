@@ -1,9 +1,9 @@
 let Post = require('../models/post.js');
 let User = require('../models/user.js');
+
 let postController = {
 
-
-
+	
 /// post type=> exchange
 Exchange_Post: function(req, res) {
     ////  get images               //// 
@@ -124,7 +124,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -136,7 +136,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -148,7 +148,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -171,7 +171,7 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
-	          case "found":
+	    case "found":
                 filterType = 5;
             break;
             case "exchange":
@@ -185,7 +185,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -209,8 +209,8 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
- 	          case "found":
-	   	         filterType = 5;
+ 	    case "found":
+	   	filterType = 5;
             break;
             case "exchange":
                 filterType = 6;
@@ -225,7 +225,7 @@ edit_post: function(req, res) {
                 if(err)
                     res.send(err.message);
                 else if(posts.length==0)
-                    res.json({"message":"No Posts Exists"});
+                    res.json({"message":"No Posts Exist"});
                     else
                     res.json({posts});
             })
@@ -237,7 +237,7 @@ edit_post: function(req, res) {
                 if(err)
                     res.send(err.message);
                 else if(posts.length==0)
-                    res.json({"message":"No Posts Exists"});
+                    res.json({"message":"No Posts Exist"});
                     else
                     res.json({posts});
             })
@@ -249,7 +249,7 @@ edit_post: function(req, res) {
                 if(err)
                     res.send(err.message);
                 else if(posts.length==0)
-                    res.json({"message":"No Posts Exists"});
+                    res.json({"message":"No Posts Exist"});
                     else
                     res.json({posts});
             })
@@ -357,7 +357,6 @@ edit_post: function(req, res) {
             }
        }
 
-    
 }
 
 
