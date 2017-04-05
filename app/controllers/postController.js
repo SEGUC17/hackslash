@@ -87,6 +87,7 @@ edit_post: function(req, res) {
             if (post.type) found_post.type = post.type;
             if (post.kind) found_post.kind = post.kind;
             if (post.species) found_post.species = post.species;
+            if (post.gender) found_post.gender = post.gender;
             if (post.kind_B) found_post.kind_B = post.kind_B;
             if (post.species_B) found_post.species_B = post.species_B;
             if (post.price) found_post.price = post.price;
@@ -129,7 +130,7 @@ edit_post: function(req, res) {
         Post.find({kind:{$regex:Kind},species:{$regex:Species}},function(err, posts){
 
             if(err)
-                res.send(err.message);
+                res.json(err.message);
             else if(posts.length==0)
                 res.json({"message":"No Posts Exists"});
                 else
@@ -141,7 +142,7 @@ edit_post: function(req, res) {
         Post.find({kind:{$regex:Kind}},function(err, posts){
 
             if(err)
-                res.send(err.message);
+                res.json(err.message);
             else if(posts.length==0)
                 res.json({"message":"No Posts Exists"});
                 else
@@ -153,12 +154,14 @@ edit_post: function(req, res) {
         Post.find({species:{$regex:Species}},function(err, posts){
 
             if(err)
-                res.send(err.message);
+                res.json(err.message);
             else if(posts.length==0)
                 res.json({"message":"No Posts Exists"});
                 else
                 res.json({posts});
         })
+      }else{
+          res.json({"message":"Please enter a search parameter."});
       }
     },
 
@@ -185,12 +188,12 @@ edit_post: function(req, res) {
                 filterType = 6;
             break;
             default:
-                filterType =1 ;
+                filterType = 1 ;
             }
         Post.find({type:filterType},function(err, posts){
 
             if(err)
-                res.send(err.message);
+                res.json(err.message);
             else if(posts.length==0)
                 res.json({"message":"No Posts Exists"});
                 else
@@ -223,14 +226,14 @@ edit_post: function(req, res) {
                 filterType = 6;
             break;
             default:
-                filterType =1 ;
+                filterType = 1 ;
             }
             if(Kind != undefined && Species != undefined)
             {
             Post.find({type:filterType,kind:{$regex:Kind},species:{$regex:Species}},function(err, posts){
 
                 if(err)
-                    res.send(err.message);
+                    res.json(err.message);
                 else if(posts.length==0)
                     res.json({"message":"No Posts Exists"});
                     else
@@ -242,7 +245,7 @@ edit_post: function(req, res) {
             Post.find({type:filterType,kind:{$regex:Kind}},function(err, posts){
 
                 if(err)
-                    res.send(err.message);
+                    res.json(err.message);
                 else if(posts.length==0)
                     res.json({"message":"No Posts Exists"});
                     else
@@ -254,12 +257,14 @@ edit_post: function(req, res) {
             Post.find({type:filterType,species:{$regex:Species}},function(err, posts){
 
                 if(err)
-                    res.send(err.message);
+                    res.json(err.message);
                 else if(posts.length==0)
                     res.json({"message":"No Posts Exists"});
                     else
                     res.json({posts});
             })
+          }else{
+              res.json({"message":"Please enter a search parameter."});
           }
     },
 // showing the posts without the contact info of the users
@@ -267,9 +272,9 @@ edit_post: function(req, res) {
 
      Post.find({},function(err,posts){
        if(err)
-         res.send(err.message);
+         res.json(err.message);
          else if (posts.length ==0 )
-           res.send("No posts , Yet ");
+           res.json("No posts , Yet ");
            else
              res.json({posts});
      })
@@ -288,12 +293,12 @@ edit_post: function(req, res) {
       else{
       Post.find({},function(err,allPosts){
         if(err)
-          res.send(err.message);
+          res.json(err.message);
           else if (allPosts.length == 0)
-            res.send("No Posts , Yet");
+            res.json("No Posts , Yet");
             else{
           User.find({},function(err,allUsers){
-            if(err) res.send(err.message);
+            if(err) res.json(err.message);
             else  {
                res.json({allPosts,allUsers});
             }
@@ -323,23 +328,23 @@ edit_post: function(req, res) {
               console.log("vote : "+vote);
 
               Post.findOne({_id:id },function(err ,post){
-                if(post != null ){
-                  res.send("Post Doesn't Exixt");
+                if(post == null ){
+                  res.json("Post Doesn't Exist");
                   return;
                 }
                 else if (post.ownerEmail == userMail) {
-                  res.send("You Own This Post so , You Can't Rate it ");
+                  res.json("You Own This Post so , You Can't Rate it ");
                   return ;
                 }
                 else if (post.raters.includes(userMail)) {
-                  res.send("You Rated This Item Before");
+                  res.json("You Rated This Item Before");
                   return;
                 }
                 else {
                   if(vote == 0){
-                    found_post.downVote++;
-                    found_post.raters.push(userMail);
-                    found_post.save(function(err, updated_post) {
+                    post.downVote++;
+                    post.raters.push(userMail);
+                    post.save(function(err, updated_post) {
                        if (err) res.status(403).json("can't update");
                        else
                            res.status(200).json("update succ downVoted");
@@ -347,9 +352,9 @@ edit_post: function(req, res) {
                    })
                   }
                   else if (vote ==1) {
-                    found_post.upVote++;
-                    found_post.raters.push(userMail);
-                    found_post.save(function(err, updated_post) {
+                    post.upVote++;
+                    post.raters.push(userMail);
+                    post.save(function(err, updated_post) {
                        if (err) res.status(403).json("can't update");
                        else
                            res.status(200).json("update succ upvoted");
@@ -357,7 +362,7 @@ edit_post: function(req, res) {
                    })
                   }
                   else {
-                    res.send("Not a Valid Vote");
+                    res.json("Not a Valid Vote");
                   }
                 }
               });
