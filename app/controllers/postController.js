@@ -113,11 +113,6 @@ edit_post: function(req, res) {
 }
 },
 
-
-
-
-///rest of the posts methods goes here
-
   // Searching posts by kind and species
     searchPosts:function(req, res){
         var Kind = req.header("kind");
@@ -345,9 +340,9 @@ edit_post: function(req, res) {
                    })
                   }
                   else if (vote ==1) {
-                    found_post.upVote++;
-                    found_post.raters.push(userMail);
-                    found_post.save(function(err, updated_post) {
+                    post.upVote++;
+                    post.raters.push(userMail);
+                    post.save(function(err, updated_post) {
                        if (err) res.status(403).json("can't update");
                        else
                            res.status(200).json("update succ upvoted");
