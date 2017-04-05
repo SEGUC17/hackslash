@@ -1,12 +1,7 @@
 let Post = require('../models/post.js');
 let User = require('../models/user.js');
-//<<<<<<< HEAD
 
 
-
-
-//=======
-//>>>>>>> origin/master
 
 let postController = {
 
@@ -370,10 +365,6 @@ edit_post: function(req, res) {
 
 
 
-
-
-
-
 ,
 Shelter_Post: function(req, res) {
 
@@ -494,7 +485,6 @@ lost_Post: function(req, res) {
     })
 }
 }
-
 
 
 
