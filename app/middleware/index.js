@@ -11,7 +11,7 @@ let middleware = {
         if(err){
           console.log("error in middleware isLoggedIn");
           console.log("------------------------------");
-          return console.log(err);
+          console.log(err);
           res.json({success: false,  message: 'You should be logged in to do that!'});
         }
         else{
@@ -20,6 +20,8 @@ let middleware = {
             return next();
         }
       });
+    }else{
+      res.json('You cannot perform this action unless you are logged in');
     }
   }
 };
