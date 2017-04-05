@@ -1,9 +1,14 @@
 let Post = require('../models/post.js');
 let User = require('../models/user.js');
+//<<<<<<< HEAD
 
+
+
+
+//=======
+//>>>>>>> origin/master
 
 let postController = {
-
 
 
 /// post type=> exchange
@@ -115,11 +120,6 @@ edit_post: function(req, res) {
 }
 },
 
-
-
-
-///rest of the posts methods goes here
-
   // Searching posts by kind and species
     searchPosts:function(req, res){
         var Kind = req.header("kind");
@@ -131,7 +131,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -143,7 +143,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -155,7 +155,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -178,7 +178,8 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
-              case "found":
+
+	             case "found":
                 filterType = 5;
             break;
             case "exchange":
@@ -192,7 +193,7 @@ edit_post: function(req, res) {
             if(err)
                 res.send(err.message);
             else if(posts.length==0)
-                res.json({"message":"No Posts Exists"});
+                res.json({"message":"No Posts Exist"});
                 else
                 res.json({posts});
         })
@@ -216,8 +217,10 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
-              case "found":
-                 filterType = 5;
+
+ 	          case "found":
+	   	     filterType = 5;
+
             break;
             case "exchange":
                 filterType = 6;
@@ -232,7 +235,7 @@ edit_post: function(req, res) {
                 if(err)
                     res.send(err.message);
                 else if(posts.length==0)
-                    res.json({"message":"No Posts Exists"});
+                    res.json({"message":"No Posts Exist"});
                     else
                     res.json({posts});
             })
@@ -244,7 +247,7 @@ edit_post: function(req, res) {
                 if(err)
                     res.send(err.message);
                 else if(posts.length==0)
-                    res.json({"message":"No Posts Exists"});
+                    res.json({"message":"No Posts Exist"});
                     else
                     res.json({posts});
             })
@@ -256,7 +259,7 @@ edit_post: function(req, res) {
                 if(err)
                     res.send(err.message);
                 else if(posts.length==0)
-                    res.json({"message":"No Posts Exists"});
+                    res.json({"message":"No Posts Exist"});
                     else
                     res.json({posts});
             })
@@ -282,7 +285,7 @@ edit_post: function(req, res) {
                 res.status(400).json("problem with the sent request");
                 return;
             }
-            var token = req.body.token ;
+            var token = req.query.token ;
             if(!token){ //
               res.status(403).json("not loggedin ");  }
       else{
@@ -323,7 +326,7 @@ edit_post: function(req, res) {
               console.log("vote : "+vote);
 
               Post.findOne({_id:id },function(err ,post){
-                if(post != null ){
+                if(post == null ){
                   res.send("Post Doesn't Exixt");
                   return;
                 }
@@ -337,9 +340,9 @@ edit_post: function(req, res) {
                 }
                 else {
                   if(vote == 0){
-                    found_post.downVote++;
-                    found_post.raters.push(userMail);
-                    found_post.save(function(err, updated_post) {
+                    post.downVote++;
+                    post.raters.push(userMail);
+                    post.save(function(err, updated_post) {
                        if (err) res.status(403).json("can't update");
                        else
                            res.status(200).json("update succ downVoted");
@@ -347,9 +350,9 @@ edit_post: function(req, res) {
                    })
                   }
                   else if (vote ==1) {
-                    found_post.upVote++;
-                    found_post.raters.push(userMail);
-                    found_post.save(function(err, updated_post) {
+                    post.upVote++;
+                    post.raters.push(userMail);
+                    post.save(function(err, updated_post) {
                        if (err) res.status(403).json("can't update");
                        else
                            res.status(200).json("update succ upvoted");
@@ -363,6 +366,7 @@ edit_post: function(req, res) {
               });
             }
        }
+
 
 
 
@@ -407,8 +411,13 @@ Shelter_Post: function(req, res) {
             res.json("SHELTER IS POSTED successfully");
         }
     })
+
 }
 },
+
+
+
+
 
 
 
@@ -489,11 +498,5 @@ lost_Post: function(req, res) {
 
 
 
-
-
-
-
 }
-
-
 module.exports = postController;

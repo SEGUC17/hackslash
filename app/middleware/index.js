@@ -20,6 +20,8 @@ let middleware = {
             return next();
         }
       });
+    }else{
+      res.json('You cannot perform this action unless you are logged in');
     }
   }
 };
