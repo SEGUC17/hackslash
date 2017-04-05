@@ -1,12 +1,19 @@
 let Post = require('../models/post.js');
 let User = require('../models/user.js');
+//<<<<<<< HEAD
+
+
+
+
+//=======
+//>>>>>>> origin/master
 
 let postController = {
 
-	
+
 /// post type=> exchange
 Exchange_Post: function(req, res) {
-    ////  get images               //// 
+    ////  get images               ////
     ////handle exceptions
     if (!req.body) {
         res.status(400).json("problem with the sent request");
@@ -14,11 +21,11 @@ Exchange_Post: function(req, res) {
     }
     var token = req.body.token ;
     if(!token){ //
- res.status(403).json("not loggedin ");     
-     
+ res.status(403).json("not loggedin ");
+
     }else {
         //loggedin
-    var owner_email=req.decoded._doc.email;    
+    var owner_email=req.decoded._doc.email;
     let post = new Post(req.body); //handled the extra attributes are not considered
     console.log(owner_email);
     if (!owner_email || !post.type || !post.kind || !post.species||!post.gender) {
@@ -29,7 +36,7 @@ Exchange_Post: function(req, res) {
         res.status(403).json("not exchange post");
         return;
     }
-    post.ownerEmail=owner_email;//save it with the new email ( from the token ) 
+    post.ownerEmail=owner_email;//save it with the new email ( from the token )
     post.save(function(err, Post) {
         if (err) {
             res.status(403).json("problem inserting");
@@ -43,7 +50,7 @@ Exchange_Post: function(req, res) {
 
 /// edit post
 edit_post: function(req, res) {
-    ////  get images               //// 
+    ////  get images               ////
     //handle exceptions
 
      if (!req.body || !req.query||!req.query.id) {
@@ -52,10 +59,10 @@ edit_post: function(req, res) {
     }
   var token = req.body.token ;
     if(!token){ //
- res.status(403).json("not loggedin ");     
+ res.status(403).json("not loggedin ");
     }else {
      if(!req.decoded){
-         res.status(403).json("not loggedin "); 
+         res.status(403).json("not loggedin ");
          return;
      }
     var owner_email=req.decoded._doc.email;
@@ -81,7 +88,7 @@ edit_post: function(req, res) {
                 res.status(403).json("post does not match with anything");
                 return
             }
-            
+
             if (post.type) found_post.type = post.type;
             if (post.kind) found_post.kind = post.kind;
             if (post.species) found_post.species = post.species;
@@ -171,7 +178,8 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
-	    case "found":
+
+	             case "found":
                 filterType = 5;
             break;
             case "exchange":
@@ -209,8 +217,10 @@ edit_post: function(req, res) {
             case "lost":
                 filterType = 4;
             break;
- 	    case "found":
-	   	filterType = 5;
+
+ 	          case "found":
+	   	     filterType = 5;
+
             break;
             case "exchange":
                 filterType = 6;
@@ -270,7 +280,7 @@ edit_post: function(req, res) {
 
    // showing the posts alongside with the info of the useres made these posts
     viewPostsAndInfo : function(req,res){
-        
+
       if (!req.body) {
                 res.status(400).json("problem with the sent request");
                 return;
@@ -278,7 +288,7 @@ edit_post: function(req, res) {
             var token = req.query.token ;
             if(!token){ //
               res.status(403).json("not loggedin ");  }
-      else{ 
+      else{
       Post.find({},function(err,allPosts){
         if(err)
           res.send(err.message);
@@ -357,8 +367,136 @@ edit_post: function(req, res) {
             }
        }
 
+
+
+
+
+
+
+
+,
+Shelter_Post: function(req, res) {
+
+    if (!req.body) {
+        res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
+        return;
+    }
+     var token = req.body.token ;
+    if(!token){
+ res.status(403).json("USER ISNT LOGGED IN ");
+
+    }
+    else  // USER IS LOGGED IN
+      {  var owner_email=req.decoded._doc.email;
+
+
+    let post = new Post(req.body);
+
+    if (!owner_email || !post.type ||
+      !post.kind || !post.species||!post.gender)
+      {
+        res.status(403).json("REQUEST BODY ISNT COMPLETE ");
+        return;
+    }
+    if (post.type != 2) {
+        res.status(403).json("TYPE ISNT =2 ");
+        return;
+    }
+    //SAVING EMAIL COMING FROM THE TOKEN
+    post.ownerEmail=owner_email;
+    post.save(function(err, Post) {
+        if (err) {
+            res.status(403).json("CANT ADD OWNER MAIL");
+        } else {
+            res.json("SHELTER IS POSTED successfully");
+        }
+    })
+
+}
+},
+
+
+
+
+
+
+
+Found_Post: function(req, res) {
+
+    if (!req.body) {
+        res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
+        return;
+    }
+    var token = req.body.token ;
+    if(!token){
+ res.status(403).json("USER ISNT LOGGED IN ");
+
+    }else {
+
+    var owner_email=req.decoded._doc.email;
+
+    let post = new Post(req.body);
+    if (!owner_email || !post.type || !post.kind || !post.species||!post.gender) {
+        res.status(403).json("REQUEST BODY ISNT COMPLETE ");
+        return;
+    }
+    if (post.type != 5) {
+        res.status(403).json("TYPE ISNT =5 ");
+        return;
+    }
+
+    post.ownerEmail=owner_email;
+
+    post.save(function(err, Post) {
+        if (err) {
+            res.status(403).json("CANT ADD OWNER MAIL");
+        } else {
+            res.json("FOUND POST IS POSTED successfully");
+        }
+    })
+}
+},
+lost_Post: function(req, res) {
+
+    if (!req.body) {
+        res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
+        return;
+
+    }
+
+    var token = req.body.token ;
+    if(!token){
+
+ res.status(403).json("USER ISNT LOGGED IN ");
+
+    }
+    else{
+
+    var owner_email=req.decoded._doc.email;
+
+    let post = new Post(req.body);
+    if (!owner_email || !post.type || !post.kind || !post.species||!post.gender) {
+        res.status(403).json("REQUEST BODY ISNT COMPLETE ");
+        return;
+    }
+    if (post.type != 4) {
+        res.status(403).json("not the same type");
+        return;
+    }
+
+    post.ownerEmail=owner_email;
+    post.save(function(err, Post) {
+        if (err) {
+            res.status(403).json("CANT ADD USER EMAIL");
+        } else {
+            res.json("LOST POST successfully POSTED");
+        }
+    })
+}
 }
 
 
-module.exports = postController;
 
+
+}
+module.exports = postController;

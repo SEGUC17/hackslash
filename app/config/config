@@ -1,0 +1,7 @@
+/* Configuration file for database uri and secrets */
+
+module.exports = {
+  DB_URI: "mongodb://localhost:27017/pets",
+  superSecret:"PETSECRET",
+  sendGridAPI: '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'
+}
