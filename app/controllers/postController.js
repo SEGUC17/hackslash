@@ -323,10 +323,6 @@ edit_post: function(req, res) {
               var id = req.header("id");
               var vote = req.body.vote;
 
-              console.log("id : "+id);
-              console.log("userMail : " + userMail);
-              console.log("vote : "+vote);
-
               Post.findOne({_id:id },function(err ,post){
                 if(post == null ){
                   res.json("Post Doesn't Exist");
