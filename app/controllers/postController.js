@@ -116,11 +116,6 @@ edit_post: function(req, res) {
 }
 },
 
-
-
-
-///rest of the posts methods goes here
-
   // Searching posts by kind and species
     searchPosts:function(req, res){
         var Kind = req.header("kind");
