@@ -24,4 +24,3 @@ router.post('/profile/delete',middleware.isLoggedIn,profileController.deleteUser
 
 //Export router.
 module.exports = router;
-

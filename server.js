@@ -10,11 +10,10 @@ var config = require('./app/config/config');
 var DB_URI = config.DB_URI;
 
 // Conecting to the Database.
-mongoose.connect(DB_URI, function(err, db)
-{
-    if (!err) {
+mongoose.connect(DB_URI, function(err, db){
+    if(!err){
         console.log("We're Connected");
-    } else {
+    }else{
         console.log("There is an Error");
     }
 });
@@ -27,7 +26,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('superSecret', config.superSecret); // Secret of Tokens!
-
 
 // Requiring routes
 var index    = require('./app/routes/index');
@@ -46,7 +44,6 @@ app.use(user);
 app.use(profile);
 
 //Starting the server on port 8080
-app.listen(8080, function()
-{
+app.listen(8080, function(){
   console.log('Server started in 8080');
 });
