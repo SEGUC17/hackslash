@@ -18,9 +18,9 @@ let postController ={
                 res.status(403).json("not loggedin ");
                 return;
             }
-            var owner_email=req.decoded._doc.email;
+            var ownerEmail=req.decoded._doc.email;
             var post = new Post(req.body);
-            post.ownerEmail=owner_email;
+            post.ownerEmail=ownerEmail;
 
             if ( !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("incomplete request ");
@@ -31,7 +31,7 @@ let postController ={
                 return;
             }
             var id = req.query.id;
-            Post.findOne({ _id: id,ownerEmail:owner_email }, function(err, found_post){ //add ownerEmail here
+            Post.findOne({ _id: id,ownerEmail:ownerEmail }, function(err, found_post){ //add ownerEmail here
                 if (err){
                     res.status(403).json("project not found or not your project");
                 }else{
@@ -339,9 +339,9 @@ let postController ={
         if(!token){
             res.status(403).json("not loggedin ");
         }else{ //check if logged    
-            var owner_email=req.decoded._doc.email;
+            var ownerEmail=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!owner_email || !post.type || !post.kind || !post.species||!post.gender||!post.price){
+            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender||!post.price){
                 res.status(403).json("incomplete request ");
                 return;
             }
@@ -355,7 +355,7 @@ let postController ={
                 res.status(403).json("price should be a number");
                 return;
             }
-            post.ownerEmail=owner_email;//save to owner's email
+            post.ownerEmail=ownerEmail;//save to owner's email
             post.save(function(err, Post){
                 if (err){
                     res.status(403).json("problem inserting");
@@ -377,9 +377,9 @@ let postController ={
             res.status(403).json("not loggedin ");
         }else{
             //decoding token
-            var owner_email=req.decoded._doc.email;
+            var ownerEmail=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!owner_email || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("incomplete request ");
                 return;
             }
@@ -387,7 +387,7 @@ let postController ={
                 res.status(403).json("not the same type");
                 return;
             }
-            post.ownerEmail=owner_email;//save to owner's email
+            post.ownerEmail=ownerEmail;//save to owner's email
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("problem inserting");
@@ -407,9 +407,9 @@ let postController ={
         if(!token){
             res.status(403).json("USER ISNT LOGGED IN ");
         }else{ // USER IS LOGGED IN
-            var owner_email=req.decoded._doc.email;
+            var ownerEmail=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!owner_email || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("REQUEST BODY ISNT COMPLETE ");
                 return;
             }
@@ -418,7 +418,7 @@ let postController ={
                 return;
             }
             //SAVING EMAIL COMING FROM THE TOKEN
-            post.ownerEmail=owner_email;
+            post.ownerEmail=ownerEmail;
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("CANT ADD OWNER MAIL");
@@ -438,9 +438,9 @@ let postController ={
         if(!token){
             res.status(403).json("USER ISNT LOGGED IN ");
         }else{
-            var owner_email=req.decoded._doc.email;
+            var ownerEmail=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!owner_email || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("REQUEST BODY ISNT COMPLETE ");
                 return;
             }
@@ -448,7 +448,7 @@ let postController ={
                 res.status(403).json("TYPE ISNT =5 ");
                 return;
             }
-            post.ownerEmail=owner_email;
+            post.ownerEmail=ownerEmail;
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("CANT ADD OWNER MAIL");
@@ -468,9 +468,9 @@ let postController ={
         if(!token){
             res.status(403).json("USER ISNT LOGGED IN ");
         }else{
-            var owner_email=req.decoded._doc.email;
+            var ownerEmail=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!owner_email || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("REQUEST BODY ISNT COMPLETE ");
                 return;
             }
@@ -478,7 +478,7 @@ let postController ={
                 res.status(403).json("not the same type");
                 return;
             }
-            post.ownerEmail=owner_email;
+            post.ownerEmail=ownerEmail;
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("CANT ADD USER EMAIL");
@@ -501,17 +501,17 @@ let postController ={
             res.status(403).json("not loggedin ");
         }else{
             //loggedin
-            var owner_email=req.decoded._doc.email;
+            var ownerEmail=req.decoded._doc.email;
             let post = new Post(req.body); //handled the extra attributes are not considered
-            if (!owner_email || !post.type || !post.kind || !post.species||!post.gender){
+            if (!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("incomplete request ");
                 return;
             }
-            if (post.type != 6 || !post.species_B || !post.kind_B||!post.gender_B){
+            if (post.type != 6 || !post.speciesB || !post.kindB||!post.genderB){
                 res.status(403).json("not exchange post");
                 return;
             }
-            post.ownerEmail=owner_email;//save it with the new email ( from the token )
+            post.ownerEmail=ownerEmail;//save it with the new email ( from the token )
             post.save(function(err, Post){
                 if (err){
                     res.status(403).json("problem inserting");
