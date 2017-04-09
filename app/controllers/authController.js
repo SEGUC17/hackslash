@@ -14,7 +14,6 @@ var authController ={
     // CHECK IF GIVEN IS USERNAME
     var token = req.body.token ;
     if(token){ //
-      console.log(req.decoded);
       res.json({  success: true,  message: 'Logged Out Successfully',  token: null  });
     }else{ // there is no token
       res.json({  success: false ,  message: 'Not Logged in'  });

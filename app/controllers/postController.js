@@ -18,65 +18,65 @@ let postController ={
                 res.status(403).json("not loggedin ");
                 return;
             }
-            var ownerEmail=req.decoded._doc.email;
+            var ownerEmailDecoded=req.decoded._doc.email;
             var post = new Post(req.body);
-            post.ownerEmail=ownerEmail;
+            post.ownerEmail=ownerEmailDecoded;
 
             if ( !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("incomplete request ");
                 return;
             }
-            if (post.type == 6 && (!post.species_B || !post.kind_B||!post.gender_B||post.gender_B=='null')){
+            if (post.type == 6 && (!post.speciesB || !post.kindB||!post.genderB||post.genderB=='null')){
                 res.status(403).json("input problem with exchange type");
                 return;
             }
             var id = req.query.id;
-            Post.findOne({ _id: id,ownerEmail:ownerEmail }, function(err, found_post){ //add ownerEmail here
+            Post.findOne({ _id: id,ownerEmail:ownerEmailDecoded }, function(err, foundPost){ //add ownerEmail here
                 if (err){
                     res.status(403).json("project not found or not your project");
                 }else{
                     //no match exception
-                    if(found_post==null){
+                    if(foundPost==null){
                         res.status(403).json("post does not match with anything");
                         return
                     }
                     if (post.type){
-                        found_post.type = post.type;
+                        foundPost.type = post.type;
                     }
                     if (post.kind){
-                        found_post.kind = post.kind;
+                        foundPost.kind = post.kind;
                     }
                     if (post.species){
-                        found_post.species = post.species;
+                        foundPost.species = post.species;
                     }
                     if (post.gender){
-                        found_post.gender = post.gender;
+                        foundPost.gender = post.gender;
                     }
-                    if (post.kind_B){
-                        found_post.kind_B = post.kind_B;
+                    if (post.kindB){
+                        foundPost.kindB = post.kindB;
                     }
-                    if (post.species_B){
-                        found_post.species_B = post.species_B;
+                    if (post.speciesB){
+                        foundPost.speciesB = post.speciesB;
                     }
                     if (post.price){
-                        found_post.price = post.price;
+                        foundPost.price = post.price;
                     }
                     if (post.description){
-                        found_post.description = post.description;
+                        foundPost.description = post.description;
                     }
                     if (post.note){
-                        found_post.note = post.note;
+                        foundPost.note = post.note;
                     }
-                    if (post.gender_B){
-                        found_post.gender_B=post.gender_B;
+                    if (post.genderB){
+                        foundPost.genderB=post.genderB;
                     }
-                    found_post.Date = Date.now;
+                    foundPost.Date = Date.now;
                     if (post.type != 6){
-                        found_post.species_B = "";
-                        found_post.kind_B = "";
-                        found_post.gender_B="null";
+                        foundPost.speciesB = "";
+                        foundPost.kindB = "";
+                        foundPost.genderB="null";
                     }
-                    found_post.save(function(err, updated_post){
+                    foundPost.save(function(err, updatedPost){
                         if (err){
                             res.status(403).json("can't update");
                         }else{
@@ -89,10 +89,10 @@ let postController ={
     },
     // Searching posts by kind and species
     searchPosts:function(req, res){
-        var Kind = req.header("kind");
-        var Species = req.header("species");
-        if(Kind != undefined && Species != undefined){
-            Post.find({kind:{$regex:Kind},species:{$regex:Species}},function(err, posts){
+        var kindQuery = req.header("kind");
+        var speciesQuery = req.header("species");
+        if(kindQuery != undefined && speciesQuery != undefined){
+            Post.find({kind:{$regex:kindQuery},species:{$regex:speciesQuery}},function(err, posts){
                 if(err){
                     res.json(err.message);
                 }else{
@@ -103,8 +103,8 @@ let postController ={
                     }
                 }
             })
-        }else if(Kind != undefined){
-            Post.find({kind:{$regex:Kind}},function(err, posts){
+        }else if(kindQuery != undefined){
+            Post.find({kind:{$regex:kindQuery}},function(err, posts){
                 if(err){
                     res.json(err.message);
                 }else{
@@ -115,8 +115,8 @@ let postController ={
                     }
                 }
             })
-        }else if(Species != undefined){
-            Post.find({species:{$regex:Species}},function(err, posts){
+        }else if(speciesQuery != undefined){
+            Post.find({species:{$regex:speciesQuery}},function(err, posts){
                 if(err){
                     res.json(err.message);
                 }else{
@@ -171,8 +171,8 @@ let postController ={
     // Filtering and Searching Posts as one method
     searchAndFilterPosts:function(req, res){
         var filterType ;
-        var Kind = req.header("kind");
-        var Species = req.header("species");
+        var kindQuery = req.header("kind");
+        var speciesQuery = req.header("species");
         switch(req.header("filter")){
             case "sell":
                 filterType = 1
@@ -195,8 +195,8 @@ let postController ={
             default:
                 filterType = 1 ;
         }
-        if(Kind != undefined && Species != undefined){
-            Post.find({type:filterType,kind:{$regex:Kind},species:{$regex:Species}},function(err, posts){
+        if(kindQuery != undefined && speciesQuery != undefined){
+            Post.find({type:filterType,kind:{$regex:kindQuery},species:{$regex:speciesQuery}},function(err, posts){
                 if(err){
                     res.json(err.message);
                 }else{
@@ -207,8 +207,8 @@ let postController ={
                     }
                 }
             })
-        }else if(Kind != undefined){
-            Post.find({type:filterType,kind:{$regex:Kind}},function(err, posts){
+        }else if(kindQuery != undefined){
+            Post.find({type:filterType,kind:{$regex:kindQuery}},function(err, posts){
                 if(err){
                     res.json(err.message);
                 }else{
@@ -219,8 +219,8 @@ let postController ={
                     }
                 }
             })
-        }else if(Species != undefined){
-            Post.find({type:filterType,species:{$regex:Species}},function(err, posts){
+        }else if(speciesQuery != undefined){
+            Post.find({type:filterType,species:{$regex:speciesQuery}},function(err, posts){
                 if(err){
                     res.json(err.message);
                 }else{
@@ -304,7 +304,7 @@ let postController ={
                     if(vote == 0){
                         post.downVote++;
                         post.raters.push(userMail);
-                        post.save(function(err, updated_post){
+                        post.save(function(err, updatedPost){
                             if (err){
                                 res.status(403).json("can't update");
                             }else{
@@ -314,7 +314,7 @@ let postController ={
                     }else if (vote ==1){
                         post.upVote++;
                         post.raters.push(userMail);
-                        post.save(function(err, updated_post){
+                        post.save(function(err, updatedPost){
                             if (err){
                                 res.status(403).json("can't update");
                             }else{
@@ -339,9 +339,9 @@ let postController ={
         if(!token){
             res.status(403).json("not loggedin ");
         }else{ //check if logged    
-            var ownerEmail=req.decoded._doc.email;
+            var ownerEmailDecoded=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender||!post.price){
+            if(!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender||!post.price){
                 res.status(403).json("incomplete request ");
                 return;
             }
@@ -355,7 +355,7 @@ let postController ={
                 res.status(403).json("price should be a number");
                 return;
             }
-            post.ownerEmail=ownerEmail;//save to owner's email
+            post.ownerEmail=ownerEmailDecoded;//save to owner's email
             post.save(function(err, Post){
                 if (err){
                     res.status(403).json("problem inserting");
@@ -377,9 +377,9 @@ let postController ={
             res.status(403).json("not loggedin ");
         }else{
             //decoding token
-            var ownerEmail=req.decoded._doc.email;
+            var ownerEmailDecoded=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("incomplete request ");
                 return;
             }
@@ -387,7 +387,7 @@ let postController ={
                 res.status(403).json("not the same type");
                 return;
             }
-            post.ownerEmail=ownerEmail;//save to owner's email
+            post.ownerEmail=ownerEmailDecoded;//save to owner's email
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("problem inserting");
@@ -407,9 +407,9 @@ let postController ={
         if(!token){
             res.status(403).json("USER ISNT LOGGED IN ");
         }else{ // USER IS LOGGED IN
-            var ownerEmail=req.decoded._doc.email;
+            var ownerEmailDecoded=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("REQUEST BODY ISNT COMPLETE ");
                 return;
             }
@@ -418,7 +418,7 @@ let postController ={
                 return;
             }
             //SAVING EMAIL COMING FROM THE TOKEN
-            post.ownerEmail=ownerEmail;
+            post.ownerEmail=ownerEmailDecoded;
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("CANT ADD OWNER MAIL");
@@ -438,9 +438,9 @@ let postController ={
         if(!token){
             res.status(403).json("USER ISNT LOGGED IN ");
         }else{
-            var ownerEmail=req.decoded._doc.email;
+            var ownerEmailDecoded=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("REQUEST BODY ISNT COMPLETE ");
                 return;
             }
@@ -448,7 +448,7 @@ let postController ={
                 res.status(403).json("TYPE ISNT =5 ");
                 return;
             }
-            post.ownerEmail=ownerEmail;
+            post.ownerEmail=ownerEmailDecoded;
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("CANT ADD OWNER MAIL");
@@ -468,9 +468,9 @@ let postController ={
         if(!token){
             res.status(403).json("USER ISNT LOGGED IN ");
         }else{
-            var ownerEmail=req.decoded._doc.email;
+            var ownerEmailDecoded=req.decoded._doc.email;
             let post = new Post(req.body);
-            if(!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
+            if(!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("REQUEST BODY ISNT COMPLETE ");
                 return;
             }
@@ -478,7 +478,7 @@ let postController ={
                 res.status(403).json("not the same type");
                 return;
             }
-            post.ownerEmail=ownerEmail;
+            post.ownerEmail=ownerEmailDecoded;
             post.save(function(err, Post){
                 if(err){
                     res.status(403).json("CANT ADD USER EMAIL");
@@ -501,9 +501,9 @@ let postController ={
             res.status(403).json("not loggedin ");
         }else{
             //loggedin
-            var ownerEmail=req.decoded._doc.email;
+            var ownerEmailDecoded=req.decoded._doc.email;
             let post = new Post(req.body); //handled the extra attributes are not considered
-            if (!ownerEmail || !post.type || !post.kind || !post.species||!post.gender){
+            if (!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender){
                 res.status(403).json("incomplete request ");
                 return;
             }
@@ -511,7 +511,7 @@ let postController ={
                 res.status(403).json("not exchange post");
                 return;
             }
-            post.ownerEmail=ownerEmail;//save it with the new email ( from the token )
+            post.ownerEmail=ownerEmailDecoded;//save it with the new email ( from the token )
             post.save(function(err, Post){
                 if (err){
                     res.status(403).json("problem inserting");
