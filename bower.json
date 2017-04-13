@@ -1,9 +1,18 @@
 {
-	"name": "angular",
-	"version": "1.0.0",
-	"dependencies": {
-		"bootstrap": "latest",
-		"angular": "latest",
-		"angular-route": "latest"	
-	}
+  "name": "hackslash",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "hackslash"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/SEGUC17/hackslash",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
