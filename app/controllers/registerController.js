@@ -16,11 +16,21 @@ function validateEmail(email) {
 
 /* function to validate the format of the entered username, email, password of
 the user before registration */
-function validateInput(username, email, password){
+function validateInput(username, email, password, firstName, lastName){
 
   var output = {
     success: true
   };
+
+  if(!firstName){
+    output.success = false;
+    output.firstNameMessage = "First name in not entered"
+  }
+
+  if(!lastName){
+    output.success = false;
+    output.lastNameMessage = "Last name in not entered"
+  }
 
   if(!username){
     output.success = false;
@@ -164,9 +174,11 @@ var registerController = {
         var username = req.body.username;
         var email = req.body.email;
         var password = req.body.password;
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
 
         // validating the format of username, email, and password
-        var validatedInput = validateInput(username, email, password);
+        var validatedInput = validateInput(username, email, password, firstName, lastName);
 
         // if the validation respone is false
         if(validatedInput.success == false){

@@ -17,11 +17,10 @@ var bcrypt = require('bcrypt');
 //Require updateController
 var updateController = require("./updateController");
 
-let profileController = {
+let profileController ={
     //This function takes in the user's new information, and edits it.
     editProfile:function(req,res){
-        if(!req.body)
-        {
+        if(!req.body){
             res.status(400).json('There is a problem with your request.');
             return;
         }
@@ -42,8 +41,7 @@ let profileController = {
             });
             //For profile picture only
             var targetPath = "";
-            if(!req.file)
-            {
+            if(!req.file){
                 targetPath = "views/uploads/default.jpg";
             }else{
                 targetPath = 'views/uploads/' + req.file.originalname;
@@ -52,8 +50,7 @@ let profileController = {
                 file.pipe(final);
                 fileStream.unlink(req.file.path);
             }
-            if(targetPath != "views/uploads/default.jpg")
-            {
+            if(targetPath != "views/uploads/default.jpg"){
                 edited.profilePicture = targetPath;
             }
             //Updating the user.
@@ -62,14 +59,12 @@ let profileController = {
     },
     //This function takes in the desired user's email, an views all relevant information.
     viewProfile:function(req,res){
-        if(!req.body)
-        {
+        if(!req.body){
             res.status(400).json('There is a problem with your request.');
             return;
         }
         var token = req.body.token || req.header("token") || req.query.token;
-        if(!token)
-        {
+        if(!token){
             res.json('You must be logged in to view profiles.')
         }else{
             //To add: if this is my profile, show edit button.
@@ -78,15 +73,11 @@ let profileController = {
             var uEmail = req.header("email");
             //First, find this user.
             user.findOne({email:uEmail},function(err,userProfileInfo){
-                if(err)
-                {//Internal Error
-                    console.log('error in viewProfile');
+                if(err){//Internal Error
                     res.status(500).json(err.message);
                 }else if(userProfileInfo){//User found.
                     post.find({ownerEmail:uEmail},function(err,myPosts){//Find his posts as well.
-                        if(err)
-                        {//Internal Error
-                            console.log('error in viewProfile');
+                        if(err){//Internal Error
                             res.status(500).json(err.message);
                         }else if(myPosts.length > 0){//View User's info and his posts.
                             var profileData = {userProfileInfo,myPosts};
@@ -105,61 +96,53 @@ let profileController = {
     },
 // This function allows users to rate other users.
     rateUser:function(req,res){
-
-        var raterEmail = req.body.email;
-        var ratedEmail = req.body.remail;//To set in post method.
-
-        var found = false;
-        
-        if(!req.body)
-        {
+        if(!req.body){
             res.status(400).json('There is a problem with your request.');
             return;
         }
         var token = req.body.token;
-        if(!token)
-        {
+        if(!token){
             res.status(400).json('You must be logged in.');
         }else{
-        user.findOne({email:ratedEmail}, function(err,ratedFound){
-            var alreadyRated = [];
-            if(ratedFound){
-                alreadyRated = ratedFound.raters;
-                for(var i =0; i < alreadyRated.length ;i++)
-                {
-                    if(alreadyRated[i]==raterEmail)
-                    {
-                        found=true;
-                        break;
+            var raterEmail = req.decoded._doc.email;
+            var ratedEmail = req.body.remail;
+            if (ratedEmail==raterEmail){
+                res.status(300).json('You Cannot rate yourself!');
+                return;
+            }
+            var found = false;
+            user.findOne({email:ratedEmail}, function(err,ratedFound){
+                var alreadyRated = [];
+                if(ratedFound){
+                    if(ratedFound.raters){
+                        alreadyRated = ratedFound.raters;
                     }
-                }
-                if(found){
-                    res.status(403).json('You have already rated this user.');
-                }else{
+                    for(var i =0; i < alreadyRated.length ;i++){
+                        if(alreadyRated[i]==raterEmail){
+                            found=true;
+                            break;
+                        }
+                    }
+                    if(found){
+                        res.status(403).json('You have already rated this user.');
+                    }else{
                         user.findOne({email:raterEmail}, function(err,raterFound){
-                            if(raterFound)
-                            {
+                            if(raterFound){
                                 var sum = 0;
                                 var given = req.body.rate;
+                                if(given>5 || given<1 || !given){
+                                    res.status(300).json('Invalid rate input, please try again');
+                                    return;
+                                }
                                 var currentRate = ratedFound.rate;
-                                var currentCount = ratedFound.count;
-
-                                sum = currentRate*currentCount;
-                                console.log(sum);
+                                sum = currentRate * alreadyRated.length;
                                 sum += parseFloat(given);
-                                console.log(sum);
-
-                                currentCount++;
-
-                                var newRate = sum/currentCount;
-                                console.log(newRate);
-
                                 alreadyRated.push(raterEmail);
+                                var newRate = sum/alreadyRated.length;
 
                                 let updatedRated = new user({
                                     raters: alreadyRated,
                                     rate: newRate,
-                                    count: currentCount,
                                     email: ratedEmail
                                 })
 
@@ -175,90 +158,108 @@ let profileController = {
             })
         }
     },
-
     //This function allows the user to delete his/her profile.
     deleteUser:function(req,res){
-
-        var email = req.body.email;
-        if(!req.body)
-        {
+        if(!req.body){
             res.status(400).json('There is a problem with your request.');
             return;
         }
         var token = req.body.token;
-        if(!token)
-        {
+        if(!token){
             res.status(400).json('You must be logged in.');
         }else{
-            user.findOneAndRemove({email:email}, function(err){
-                if(err){
-                    console.log(err);
-                    res.status(500).json('error');
-             }else{
-                    res.status(200).json('success');
-                }
-            })
+            var uEmail = req.decoded._doc.email;
+            var uPassword = req.body.password;
+            var uVerify = req.body.verify;
+            
+            if(uPassword == uVerify){//Passwords match.
+                //Find user
+                user.findOne({email:uEmail},function(err,User){
+                    if(err){
+                        res.status(500).json('internal error');
+                        return;
+                    }
+                    if(User){//User found. Check to see if entered password matches the saved one.
+                        bcrypt.compare(uPassword, User.password, function(err, result){
+                            if(result){//Password matched.
+                                user.findOneAndRemove({email:uEmail}, function(err){
+                                    if(err){
+                                        res.status(500).json('error');
+                                    }else{
+                                        res.status(200).json({  success: true,  message: 'Your profile has been deleted! D:',  token: null  });
+                                    }
+                                })
+                            }else{//Password didn't match.
+                                res.status(300).json('Wrong Password');
+                                return;
+                            }
+                        });
+                    }else{//User not found.
+                        res.status(404).json('User does not exit');
+                        return;
+                    }
+                })
+            }else{//Password do not match.
+                res.status(300).json('Passwords don\'t match.');
+                return;
+            }
         }
     },
     changePassword:function(req,res){
-        if(!req.body)
-        {
+        if(!req.body){
             res.status(400).json('There is a problem with your request.');
             return;
         }
-        var token = req.body.token || req.header("token") || req.query.token;
-        if(!token)
-        {
+        var token = req.body.token;
+        if(!token){
             res.json('You must be logged in to change your password.')
         }else{
             var uEmail = req.decoded._doc.email;
             var uPassword = req.body.password;
             var uVerify = req.body.verify;
             var newPassword = req.body.newPassword;
-            if(newPassword.length < 5)
-            {
-                res.status(300).json('Password too short');
-                return;
-            }
-            if(uPassword == uVerify)
-            {//Passwords match.
-                //Find user
-                user.findOne({email:uEmail},function(err,User){
-                    if(err)
-                    {
-                        res.status(500).json('internal error');
-                        return;
-                    }
-                    if(User)
-                    {//User found. Check to see if entered password matches the saved one.
-                        bcrypt.compare(uPassword, User.password, function(err, result) {
-                            if(result)
-                            {//Password matched.
-                                bcrypt.genSalt(10, function(err, salt) {
-                                    if(err)
-                                    {
-                                        throw err;
-                                    }
-                                    //Hash the new password.
-                                    bcrypt.hash(newPassword, salt, function(err, hash){
-                                        //Create a new user and update him.
-                                        let edited = new user({
-                                            email:uEmail,
-                                            password:hash
+            if(newPassword){
+                if(newPassword.length < 5){
+                    res.status(300).json('Password too short');
+                    return;
+                }
+                if(uPassword == uVerify){//Passwords match.
+                    //Find user
+                    user.findOne({email:uEmail},function(err,User){
+                        if(err){
+                            res.status(500).json('internal error');
+                            return;
+                        }
+                        if(User){//User found. Check to see if entered password matches the saved one.
+                            bcrypt.compare(uPassword, User.password, function(err, result){
+                                if(result){//Password matched.
+                                    bcrypt.genSalt(10, function(err, salt){
+                                        if(err){
+                                            throw err;
+                                        }
+                                        //Hash the new password.
+                                        bcrypt.hash(newPassword, salt, function(err, hash){
+                                            //Create a new user and update him.
+                                            let edited = new user({
+                                                email:uEmail,
+                                                password:hash
+                                            });
+                                            updateController.updateProfile(edited,res);
                                         });
-                                        updateController.updateProfile(edited,res);
                                     });
-                                });
-                            }else{//Password didn't match.
-                                res.status(300).json('Wrong Password');
-                            }
-                        });
-                    }else{//User not found.
-                        res.status(404).json('User does not exit');
-                    }
-                })
-            }else{//Password do not match.
-                res.status(300).json('Passwords don\'t match.');
+                                }else{//Password didn't match.
+                                    res.status(300).json('Wrong Password');
+                                }
+                            });
+                        }else{//User not found.
+                            res.status(404).json('User does not exit');
+                        }
+                    })
+                }else{//Password do not match.
+                    res.status(300).json('Passwords don\'t match.');
+                }
+            }else{
+                res.status(300).json('Please enter a new password and try again.');
             }
         }
     }

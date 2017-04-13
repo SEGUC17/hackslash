@@ -45,10 +45,6 @@ var userSchema = new mongoose.Schema({
       type: SchemaTypes.Double,
       default: 0
     },
-    count: {
-      type: Number,
-      deafault: 0
-    },
     raters: [String],
     resetToken : String,
     resetTokenExpiryDate : Date

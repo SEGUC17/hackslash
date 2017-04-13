@@ -35,13 +35,13 @@ var postSchema = new mongoose.Schema({
         required: true,
         enum: ['male','female','null']
     },
-    kind_B: {
+    kindB: {
         type: String
     },
-    species_B: {
+    speciesB: {
         type: String
     },
-    gender_B: {
+    genderB: {
         type: String,
         enum: ['male','female','null']
     },
