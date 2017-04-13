@@ -2,12 +2,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
 	$routeProvider
 
-		// home page
+		// posts page
 		.when('/', {
 			templateUrl: 'views/index.html',
-			controller: 'indexController'
+			controller: 'indexCtrl'
 		})
-
 
 	$locationProvider.html5Mode(true);
 
