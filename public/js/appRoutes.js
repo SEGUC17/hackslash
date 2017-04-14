@@ -1,4 +1,4 @@
-angular.module('appRoutes', [])
+angular.module('pettts')
 
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
