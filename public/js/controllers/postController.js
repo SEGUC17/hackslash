@@ -7,9 +7,10 @@ angular.module('postController', [])
         $scope.addPost = function() {
             Post.add($scope.formData)
                 .success(function(response) {
-                     $scope.formData = {}; // clear the form so our user is ready to enter another
+                     $scope.formData = {}; 
                      $scope.tagline = response;
                 }).error(function(error) {
+                    $scope.formData = {};
                     $scope.tagline = error;
                 });
         };
@@ -44,9 +45,10 @@ angular.module('postController', [])
             {
             Post.edit($scope.formData,type)
                 .success(function(response) {
-                     $scope.formData = {}; // clear the form so our user is ready to enter another
+                     $scope.formData = {}; 
                      $scope.tagline = response;
                 }).error(function(error) {
+                    $scope.formData = {};
                     $scope.tagline = error;
                 });
 
