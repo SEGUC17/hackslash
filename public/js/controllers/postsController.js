@@ -6,8 +6,7 @@ angular.module('pettts')
       $scope.posts = posts
     });
      //$scope.posts = postsService.get();
-    console.log($scope.posts);
-
+     
     if(!$scope.posts)
       $scope.notFound = true;
     else

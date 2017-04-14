@@ -1,7 +1,7 @@
 html {
   position: relative;
   min-height: 100%;
-  width: 100%;
+  min-width: 100%;
 }
 
 body {
@@ -37,5 +37,5 @@ body {
   background-color: #2e91f7;
   border: none;
   float: right;
-  bottom: -15px;
+  /*bottom: -15px;*/
 }
