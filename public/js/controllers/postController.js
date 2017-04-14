@@ -6,8 +6,11 @@ angular.module('postController', [])
         // addPost ===========================
         $scope.addPost = function() {
             Post.add($scope.formData)
-                .success(function() {
+                .success(function(response) {
                      $scope.formData = {}; // clear the form so our user is ready to enter another
+                     $scope.tagline = response;
+                }).error(function(error) {
+                    $scope.tagline = error;
                 });
         };
         
@@ -40,8 +43,11 @@ angular.module('postController', [])
             if(type != "error")
             {
             Post.edit($scope.formData,type)
-                .success(function() {
+                .success(function(response) {
                      $scope.formData = {}; // clear the form so our user is ready to enter another
+                     $scope.tagline = response;
+                }).error(function(error) {
+                    $scope.tagline = error;
                 });
 
                 }; 
