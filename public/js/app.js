@@ -1,1 +1,1 @@
-angular.module('pettts',[]);
+angular.module('pettts',['ngRoute']);
