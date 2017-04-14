@@ -19,22 +19,24 @@
             <div class="panel-body">
               <div class="media">
                 <div class="media-left">
+                  <!-- post image -->
                   <a href="#">
                     <img class="media-object" src="http://placehold.it/150x150" alt="...">
                   </a>
                 </div>
                 <div class="media-body">
-                  <h4 class="media-heading">Post title</h4>
-                  <span class="label label-success">Buy</span>
-                  <p><small><em>location, 1/1/2018</em></small></p>
-                  <p>
-                    {{ post.description.slice(0,150) }}
-                  </p>
+                  <!-- displaying post type as the title as there is no title! -->
+                  <h4 class="media-heading label label-success">{{ post.type | stringifyType }}</h4>
+                  <!-- display post date -->
+                  <p><small><em>{{ post.date.toDateString() }}</em></small></p>
+                  <!-- fixing description length to display by 200 chars -->
+                  <p>{{ post.description.slice(0,250) }}...</p>
+                  <!-- link to show post page -->
                   <a href="#" class="btn btn-primary">View more</a>
                 </div> <!-- End of media-body -->
               </div> <!-- End of media -->
             </div> <!-- End of panel-body -->
           </div> <!-- End of panel -->
         </div> <!-- End of row -->
-
-</div>
+      </div> <!-- End of container -->
+</div> <!-- End of main -->
