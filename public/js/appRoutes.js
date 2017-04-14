@@ -1,13 +1,15 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appRoutes', [])
 
-	$routeProvider
+	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
-		// posts page
-		.when('/', {
-			templateUrl: 'views/index.html',
-			controller: 'indexCtrl'
-		})
+		$routeProvider
 
-	$locationProvider.html5Mode(true);
+			// posts page
+			.when('/posts', {
+				templateUrl: 'views/posts.html',
+				controller: 'postsController'
+			})
+
+		$locationProvider.html5Mode(true);
 
 }]);
