@@ -25,6 +25,11 @@ body {
   border-bottom-left-radius: 0px;
 }
 
+.media-body h4 {
+  display: inline;
+  float: right;
+}
+
 .media-body .btn-primary {
   position: relative;
   background-color: #2e91f7;
