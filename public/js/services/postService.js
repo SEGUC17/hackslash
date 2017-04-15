@@ -52,38 +52,32 @@ angular.module('pettts')
                 case "sell":
                     {
                         post.type = 1;
-                        return $http.post('/post/sell', post);
                     }
                     break;
                 case "shelter":
                     {
                         post.type = 2;
-                        return $http.post('/post/shelter', post);
                     }
                     break;
                 case "mate":
                     {
                         post.type = 3;
-                        return $http.post('/post/mate', post);
                     }
 
                     break;
                 case "lost":
                     {
                         post.type = 4;
-                        return $http.post('/post/lost', post);
                     }
                     break;
                 case "found":
                     {
                         post.type = 5;
-                        return $http.post('/post/found', post);
                     }
                     break;
                 case "exchange":
                     {
                         post.type = 6;
-                        return $http.post('/post/exchange', post);
                     }
                     break;
 

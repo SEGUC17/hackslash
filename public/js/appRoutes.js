@@ -17,7 +17,7 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
-            .when('/post/edit', {
+	    .when('/post/edit', {
                 templateUrl: 'views/editPost.html',
                 controller: 'postController'
             })
