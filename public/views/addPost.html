@@ -1,60 +1,53 @@
-<div class="jumbotron text-center">
-    <h1>Nerds and Proud</h1>
+	<form class="jumbotron text-left">
+    <div class="form-group">
+        <h3>Add Post</h3>
+        <label for="type">Post Type</label> <br>
+        <input type="radio" name="type" ng-model="type" value="sell"> Sell
+        <input type="radio" name="type" ng-model="type" value="exchange"> Exchange
+        <input type="radio" name="type" ng-model="type" value="mate"> Mate
+        <input type="radio" name="type" ng-model="type" value="lost"> Lost
+        <input type="radio" name="type" ng-model="type" value="found"> Found
+        <input type="radio" name="type" ng-model="type" value="found"> Shelter <br>
 
-    <p>{{ tagline }}</p>
+        <label for="kind">Animal kind</label> <br>
+        <input type="text" name="kind" ng-model="kind" placeholder="Animal Kind"> <br>
 
+        <label for="species">species</label> <br>
+        <input type="text" name="species" ng-model="species" placeholder="Animal species"> <br>
 
-    <form class="jumbotron text-left">
-        <div class="form-group">
-            <h3>Add Post</h3>
-            <label for="type">Post Type</label> <br>
-            <input type="radio" name="type" ng-model="type" value="sell"> Sell
-            <input type="radio" name="type" ng-model="type" value="exchange"> Exchange
-            <input type="radio" name="type" ng-model="type" value="mate"> Mate
-            <input type="radio" name="type" ng-model="type" value="lost"> Lost
-            <input type="radio" name="type" ng-model="type" value="found"> Found
-            <input type="radio" name="type" ng-model="type" value="found"> Shelter <br>
-
-            <label for="kind">Animal kind</label> <br>
-            <input type="text" name="kind" ng-model="kind" placeholder="Animal Kind"> <br>
-
-            <label for="species">species</label> <br>
-            <input type="text" name="species" ng-model="species" placeholder="Animal species"> <br>
-
-            <label for="gender">Animal gender</label> <br>
-            <input type="radio" name="gender" ng-model="gender" value="male"> Male
-            <input type="radio" name="gender" ng-model="gender" value="female"> Female <br>
+        <label for="gender">Animal gender</label> <br>
+        <input type="radio" name="gender" ng-model="gender" value="male"> Male
+        <input type="radio" name="gender" ng-model="gender" value="female"> Female <br>
 
 
-            <!--check to be visible type exchange only -->
-            <div ng-switch="type">
-                <div ng-switch-when="exchange">
-                    <label for="kind_B"> Other Animal kind</label> <br>
-                    <input type="text" name="kind_B" ng-model="kind_B" placeholder=" Other Animal Kind"> <br>
+        <!--check to be visible type exchange only -->
+				<div ng-switch="type">
+					<div ng-switch-when="exchange">
+        		<label for="kind_B"> Other Animal kind</label> <br>
+        		<input type="text" name="kind_B" ng-model="kind_B" placeholder=" Other Animal Kind"> <br>
 
-                    <label for="species_B">Other Animal species </label> <br>
-                    <input type="text" name="species_B" ng-model="species_B" placeholder="Other Animal species"> <br>
+        		<label for="species_B">Other Animal species </label> <br>
+        		<input type="text" name="species_B" ng-model="species_B" placeholder="Other Animal species"> <br>
 
-                    <label for="gender_B">Other Animal gender</label> <br>
-                    <input type="radio" name="gender_B" ng-model="gender_B" value="male"> Male
-                    <input type="radio" name="gender_B" ng-model="gender_B" value="female"> Female <br>
-                </div>
-            </div>
-            <!--check to be visible type exchange only -->
+        		<label for="gender_B">Other Animal gender</label> <br>
+        		<input type="radio" name="gender_B" ng-model="gender_B" value="male"> Male
+        		<input type="radio" name="gender_B" ng-model="gender_B" value="female"> Female <br>
+					</div>
+				</div>
+				<!--check to be visible type exchange only -->
 
-            <label for="description">Description</label> <br>
-            <input type="text" name="description" ng-model="description" placeholder="description"> <br>
+        <label for="description">Description</label> <br>
+        <input type="text" name="description" ng-model="description" placeholder="description"> <br>
 
-            <label for="note">Notes</label> <br>
-            <input type="text" name="note" ng-model="note" placeholder="Notes"> <br>
+        <label for="note">Notes</label> <br>
+        <input type="text" name="note" ng-model="note" placeholder="Notes"> <br>
 
-            <label for="price">price</label> <br>
-            <input type="number" name="price" ng-model="price" placeholder="price" <br>
-        </div>
+        <label for="price">price</label> <br>
+        <input type="number" name="price" ng-model="price" placeholder="price" <br>
+    </div>
 
 
-        <!--remainig  upload -->
-        <button type="submit" class="btn btn-default">Submit</button>
+    <!--remainig  upload -->
+    <button type="submit" class="btn btn-default">Submit</button>
 
-    </form>
-</div>
+</form>
