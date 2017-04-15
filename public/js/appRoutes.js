@@ -1,30 +1,18 @@
 angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
-	$routeProvider
+    $routeProvider
 
-		// posts page
-		.when('/', {
-			templateUrl: 'views/index.html',
-			controller: 'indexCtrl'
-		})
-		.when('/login', {
-			templateUrl: 'views/login.html',
-			controller: 'loginCtrl'
-		})
+    // posts page
 
-	$locationProvider.html5Mode(true);
-angular.module('pettts')
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'loginCtrl'
+        })
+        .when('/posts', {
+            templateUrl: 'views/posts.html',
+            controller: 'postsController'
+        })
 
-	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-
-		$routeProvider
-
-			// posts page
-			.when('/posts', {
-				templateUrl: 'views/posts.html',
-				controller: 'postsController'
-			})
-
-		$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 
 }]);
