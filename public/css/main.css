@@ -13,6 +13,18 @@ body {
   margin-bottom: 60px;
 }
 
+#main h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#main .label {
+  position: relative;
+  top: -25px;
+  border-radius: 0;
+  float: right;
+  padding: 5px;
+}
 #main .row h3 {
   font-size: 23px;
   margin-bottom: 20px;
@@ -30,5 +42,6 @@ body {
   background-color: #2e91f7;
   border: none;
   float: right;
+  bottom: -15px;
   /*bottom: -15px;*/
 }
