@@ -1,6 +1,7 @@
 html {
   position: relative;
   min-height: 100%;
+  min-width: 100%;
 }
 
 body {
@@ -12,18 +13,11 @@ body {
   margin-bottom: 60px;
 }
 
-#main h3 {
-  font-size: 24px;
+#main .row h3 {
+  font-size: 23px;
   margin-bottom: 20px;
 }
 
-#main .label {
-  position: relative;
-  top: -25px;
-  border-radius: 0;
-  float: right;
-  padding: 5px;
-}
 
 .panel {
   border-left: 3px solid #2e91f7;
@@ -36,5 +30,5 @@ body {
   background-color: #2e91f7;
   border: none;
   float: right;
-  bottom: -15px;
+  /*bottom: -15px;*/
 }
