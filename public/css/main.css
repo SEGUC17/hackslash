@@ -32,3 +32,17 @@ body {
   float: right;
   /*bottom: -15px;*/
 }
+
+.media-body .btn-primary:hover {
+  background-color: #1975d4;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination > .active > a {
+  background-color: #2e91f7;
+  border-color: #2e91f7;
+}

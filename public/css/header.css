@@ -30,9 +30,9 @@
 	border-color:#ccc;
 }
 
-/*#search-input{
-  max-width: 400px;
-}*/
+#search-input{
+  width: 350px;
+}
 
 .stylish-input-group button{
     border:0;
