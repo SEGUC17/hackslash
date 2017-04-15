@@ -1,4 +1,4 @@
-angular.module('pettts').controller('indexCtrl',function($scope,index){
+/*angular.module('pettts').controller('indexCtrl',function($scope,index){
 //$scope.hao = "hoahoa";
    $scope.posts = index.get();
    this.whatever = index.hao;
@@ -9,3 +9,4 @@ angular.module('pettts').controller('indexCtrl',function($scope,index){
 		  $scope.notFound = false;
 });
 
+*/
