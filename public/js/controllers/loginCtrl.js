@@ -23,8 +23,4 @@ app.controller('loginCtrl',function($scope, $http ,$location ,  $window) {
 		 });
 
 	}
-
-	$scope.forgot = function () {
-
-	}
 });
