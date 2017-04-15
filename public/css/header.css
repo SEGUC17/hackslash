@@ -1,0 +1,70 @@
+.navbar {
+  background-color: white;
+  height: 75px;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.navbar-nav li a:hover {
+  background-color: #2e91f7 !important;
+  color: white !important;
+  border-radius: 5px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.75em;
+  color: #2e91f7 !important;
+}
+
+.navbar-content {
+  margin-top: 10px;
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+}
+
+/*#search-input{
+  max-width: 400px;
+}*/
+
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.categories-container {
+  background-color: #E8EBEE;
+  box-sizing: border-box;
+}
+
+#categories {
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+#categories li a {
+  /*float: left;*/
+  display:inline-block;
+  color: black;
+  font-weight: 700;
+  height: 100%;
+  /*max-width: 160px;*/
+  text-align: center;
+  /*margin: 0 20px;*/
+}
+
+#categories li a:hover {
+  text-decoration: none;
+  background-color: #2e91f7;
+  color: white;
+  border-radius: 0;
+}
