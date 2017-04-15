@@ -33,6 +33,9 @@
 #search-input{
   width: 400px;
 }
+/*#search-input{
+  max-width: 400px;
+}*/
 
 .stylish-input-group button{
     border:0;
@@ -56,6 +59,19 @@
   font-weight: 700;
   border-top: 2px solid #E8EBEE;
   width: 160px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+#categories li a {
+  /*float: left;*/
+  display:inline-block;
+  color: black;
+  font-weight: 700;
+  height: 100%;
+  /*max-width: 160px;*/
   text-align: center;
   /*margin: 0 20px;*/
 }
@@ -64,5 +80,7 @@
   text-decoration: none;
   background-color: #fAfAfA;
   border-top: 2px solid #2e91f7;
+  background-color: #2e91f7;
+  color: white;
   border-radius: 0;
 }
