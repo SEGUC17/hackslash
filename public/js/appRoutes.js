@@ -17,6 +17,10 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
+            .when('/post/edit', {
+                templateUrl: 'views/editPost.html',
+                controller: 'postController'
+            })
         $locationProvider.html5Mode(true);
 
     }]);
