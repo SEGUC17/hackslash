@@ -28,20 +28,20 @@ app.use(bodyParser.json());
 app.set('superSecret', config.superSecret); // Secret of Tokens!
 
 // Requiring routes
-var index    = require('./app/routes/index');
 var register = require('./app/routes/register');
 var auth     = require('./app/routes/auth');
 var client   = require('./app/routes/client');
 var user     = require('./app/routes/user');
-var profile  = require('./app/routes/profile'); 
+var profile  = require('./app/routes/profile');
+var index    = require('./app/routes/index');
 
 // Using routes
-app.use(index);
 app.use(register);
 app.use(auth);
 app.use(client);
 app.use(user);
 app.use(profile);
+app.use(index);
 
 //Starting the server on port 8080
 app.listen(8080, function(){

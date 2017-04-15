@@ -9,3 +9,6 @@
 /app/config/config.js
 sendgrid.env
 >>>>>>> 7eb83eb251468e9486db3f634c9397b5183e8e11
+=======
+/public/libs
+

@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt'); // BCRYPT FOR PASSWORD ENCRYPTION
 var jwt    = require('jsonwebtoken'); // CREATE , SIGN IN AND VERIFY TOKEN
@@ -20,6 +21,8 @@ var authController ={
     }
   },
   login: function(req, res){
+    
+    console.log(req.body.username);
     // CHECK IF GIVEN IS USERNAME
     User.findOne({ username: req.body.username }, function(err, user){
       if(user){ // this correct a username
