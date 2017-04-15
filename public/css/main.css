@@ -37,6 +37,10 @@ body {
   background-color: #1975d4;
 }
 
+.date {
+  color: #7e7c7c;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
