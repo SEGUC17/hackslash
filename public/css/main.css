@@ -1,6 +1,7 @@
 html {
   position: relative;
   min-height: 100%;
+  min-width: 100%;
 }
 
 body {
@@ -24,6 +25,11 @@ body {
   float: right;
   padding: 5px;
 }
+#main .row h3 {
+  font-size: 23px;
+  margin-bottom: 20px;
+}
+
 
 .panel {
   border-left: 3px solid #2e91f7;
@@ -37,4 +43,5 @@ body {
   border: none;
   float: right;
   bottom: -15px;
+  /*bottom: -15px;*/
 }
