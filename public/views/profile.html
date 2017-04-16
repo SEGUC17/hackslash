@@ -1,3 +1,58 @@
-<div ng-controller="profileController">
-    {{nice}}
+<div>
+    <style>
+   
+table th, table td, table tr {
+ 
+    vertical-align: top;
+}
+</style>
+
+
+    <table style=" width:90%; margin:auto">
+            <td>
+            <table width="175">
+                <tr style="width:150px;height:150px">
+                    <td>
+                      My profile Picture
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        user
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <div ng-repeat="post in posts">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left">
+                                <!-- post image -->
+                                <a href="#">
+                                    <img class="media-object" src="http://placehold.it/150x150" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <!-- displaying post type as the title as there is no title! -->
+                                <h4 class="media-heading label label-success">{{ post.type | stringifyType }}</h4>
+                                <!-- display post date -->
+                                <p><small><em>{{ post.date | date }}</em></small></p>
+                                <!-- fixing description length to display by 250 chars -->
+                                <p>{{ post.description.slice(0,250) }}...</p>
+                                <!-- link to show post page -->
+                                <a href="#" class="btn btn-primary">View more</a>
+                            </div> <!-- End of media-body -->
+                        </div> <!-- End of media -->
+                    </div> <!-- End of panel-body -->
+                </div> <!-- End of panel -->
+            </div> <!-- End of row -->
+        </td>
+    </table>
 </div>
