@@ -19,7 +19,7 @@ angular.module('pettts')
                         headers: {
                         'x-access-token': token
                         },
-                        data: { postData: post }
+                        data: post
                         }
                         return $http(req).then(function successCallback(response) {
                             return success ;
@@ -37,7 +37,7 @@ angular.module('pettts')
                         headers: {
                         'x-access-token': token
                         },
-                        data: { postData: post }
+                        data: post
                         }
                         return $http(req).then(function successCallback(response) {
                             return success ;
@@ -55,7 +55,7 @@ angular.module('pettts')
                         headers: {
                         'x-access-token': token
                         },
-                        data: { postData: post }
+                        data: post
                         }
                         return $http(req).then(function successCallback(response) {
                             return success ;
@@ -74,7 +74,7 @@ angular.module('pettts')
                         headers: {
                         'x-access-token': token
                         },
-                        data: { postData: post }
+                        data: post
                         }
                         return $http(req).then(function successCallback(response) {
                             return success ;
@@ -92,7 +92,7 @@ angular.module('pettts')
                         headers: {
                         'x-access-token': token
                         },
-                        data: { postData: post }
+                        data: post
                         }
                         return $http(req).then(function successCallback(response) {
                             return success ;
@@ -163,12 +163,8 @@ angular.module('pettts')
                         headers: {
                         'x-access-token': token
                         },
-                        data: { postData: post }
+                        data: post
                         }
-
-
-
-
 
                         return $http(req).then(function successCallback(response) {
                             return success ;
