@@ -32,5 +32,8 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "path": "^0.12.7",
     "sendgrid": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

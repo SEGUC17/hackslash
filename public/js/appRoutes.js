@@ -9,6 +9,11 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/login.html',
                 controller: 'loginCtrl'
             })
+            .when('/forgot_password', {
+                templateUrl: 'views/forgot_password.html',
+                controller: 'pass_ctrl'
+            })
+
             .when('/posts', {
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
