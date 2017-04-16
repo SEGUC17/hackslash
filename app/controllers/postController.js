@@ -341,19 +341,11 @@ let postController = {
 
         if (!token) {
             res.status(403).json("not loggedin ");
-<<<<<<< HEAD
-        }else{ //check if logged
-            var ownerEmailDecoded=req.decoded._doc.email;
-            let post = new Post(req.body);
-            if(!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender||!post.price){
-                res.status(403).json("incomplete request ");
-=======
         } else { //check if logged
             var ownerEmailDecoded = req.decoded._doc.email;
             let post = new Post(req.body.post);
             if (!ownerEmailDecoded || !post.type || !post.kind || !post.species || !post.gender || !post.price) {
                 res.status(400).json("incomplete request ");
->>>>>>> 5453b844c5e446f8ae591d5b547aac6ae027eca2
                 return;
             }
             if (post.type != 1) {
@@ -382,13 +374,8 @@ let postController = {
             res.status(400).json("problem with the sent request");
             return;
         }
-<<<<<<< HEAD
-        var token = req.body.token ;
-        if(!token){
-=======
         var token = req.headers['x-access-token'];
         if (!token) {
->>>>>>> 5453b844c5e446f8ae591d5b547aac6ae027eca2
             res.status(403).json("not loggedin ");
         } else {
             //decoding token
