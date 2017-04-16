@@ -1,5 +1,9 @@
-var app = angular.module('registerService', []);
+var app = angular.module('pettts');
 
     app.factory('User', function($http) {
-      return $http.post('/register', user);
+      return {
+        add: function(user) {
+          return $http.post('/register', user);
+        }
+      }
     })
