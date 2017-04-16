@@ -25,6 +25,10 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })
+            .when('/editProfile', {
+                templateUrl: 'views/editProfile.html',
+                controller: 'profileController'
+            })
         $locationProvider.html5Mode(true);
 
     }]);
