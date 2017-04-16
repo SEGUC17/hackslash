@@ -5,9 +5,8 @@ var path = require('path');
 // REQUIRE MIDDLEWARE
 var middleware = require("../middleware");
 
-router.get('*',function(req,res){
-  res.sendFile(path.resolve('./public/index.html'));
-
+router.get('*', function(req, res) {
+    res.sendFile(path.resolve('./public/index.html'));
 });
 
 module.exports = router;

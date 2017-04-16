@@ -34,6 +34,7 @@
   width: 350px;
 }
 
+
 .stylish-input-group button{
     border:0;
     background:transparent;
@@ -45,6 +46,17 @@
 }
 
 #categories {
+  display: flex;
+  position: relative;
+  margin-bottom: 0;
+  left: 10%;
+}
+
+#categories li a {
+  color: black;
+  font-weight: 700;
+  border-top: 2px solid #E8EBEE;
+  width: 160px;
   margin: auto;
   text-align: center;
   display: flex;
@@ -64,6 +76,8 @@
 
 #categories li a:hover {
   text-decoration: none;
+  background-color: #fAfAfA;
+  border-top: 2px solid #2e91f7;
   background-color: #2e91f7;
   color: white;
   border-radius: 0;
