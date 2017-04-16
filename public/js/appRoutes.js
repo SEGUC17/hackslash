@@ -12,7 +12,7 @@ angular.module('pettts')
 
 			// filter posts router
 			.when('/posts/:type', {
-				templateUrl: 'views/filterPosts.html',
+				templateUrl: 'views/filter.html',
 				controller: 'filterController'
 			})
 
