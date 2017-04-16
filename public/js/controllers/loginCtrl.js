@@ -9,7 +9,7 @@ app.controller('loginCtrl', function($scope, $http, $location, $window) {
                 $window.sessionStorage.accessToken = response.data.token;
                 $window.sessionStorage.email = response.data.email;
                 $scope.errorMessage = false; // dont show an error (if it was there before)
-                $window.location = '/index.html';
+                $window.location = '/profile';
                 // change the location to profile.html (where the profile is shown)
                 // or to the home page
             } else {

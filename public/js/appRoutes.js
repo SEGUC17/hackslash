@@ -21,11 +21,11 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/editPost.html',
                 controller: 'postController'
             })
-            .when('/profile/view', {
+            .when('/profile', {
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })
-            .when('profile/edit',{
+            .when('/editProfile',{
                 templateUrl: 'views/profileEdit.html',
                 controller: 'profileController'
             })
