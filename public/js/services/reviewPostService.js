@@ -20,10 +20,9 @@ angular.module('pettts')
         url: '/post/review',
         headers: {
             'x-access-token': token,
-            '_id':'58e019e6a6e4f742502ab492'
+            '_id':'58e01a52a5584e42dce8292a'
         },
         body: {'vote':value}
-
       }
       return $http(req).then(function successCallback(response){
         $scope.message = "Your vote was submitted Successfully";
