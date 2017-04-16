@@ -133,8 +133,9 @@ let postController ={
     },
     // Filtering Posts by Type
     filterPosts:function(req, res){
+        var filterParam = req.params.type;
         var filterType ;
-        switch(req.header("filter")){
+        switch(filterParam){
             case "sell":
                 filterType = 1
                 break;
@@ -338,7 +339,7 @@ let postController ={
         var token = req.body.token ;
         if(!token){
             res.status(403).json("not loggedin ");
-        }else{ //check if logged    
+        }else{ //check if logged
             var ownerEmailDecoded=req.decoded._doc.email;
             let post = new Post(req.body);
             if(!ownerEmailDecoded || !post.type || !post.kind || !post.species||!post.gender||!post.price){
@@ -373,7 +374,7 @@ let postController ={
             return;
         }
         var token = req.body.token ;
-        if(!token){ 
+        if(!token){
             res.status(403).json("not loggedin ");
         }else{
             //decoding token

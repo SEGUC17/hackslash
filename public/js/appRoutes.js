@@ -10,6 +10,12 @@ angular.module('pettts')
 				controller: 'postsController'
 			})
 
+			// filter posts router
+			.when('/posts/:type', {
+				templateUrl: 'views/filterPosts.html',
+				controller: 'filterController'
+			})
+
 		$locationProvider.html5Mode(true);
 
 }]);
