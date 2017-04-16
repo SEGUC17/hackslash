@@ -343,8 +343,6 @@ let postController = {
         } else { //check if logged    
             var ownerEmailDecoded = req.decoded._doc.email;
             let post = new Post(req.body.post);
-            console.log(req.body);
-            console.log(post);
             if (!ownerEmailDecoded || !post.type || !post.kind || !post.species || !post.gender || !post.price) {
                 res.status(400).json("incomplete request ");
                 return;

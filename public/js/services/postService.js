@@ -1,12 +1,12 @@
-aangular.module('pettts')
+angular.module('pettts')
 
 // connecting frontend postcontroller with the api .
-.factory('Post', function($http, $window, $scope) {
+.factory('Post', function($http, $window) {
     var token = $window.sessionStorage.accessToken;
     return {
 
         ///add callbacks for success and failure TODO
-        add: function(post, type) {
+        add: function(post, type, $scope) {
             switch (type) {
                 case "sell":
                     {
@@ -40,7 +40,7 @@ aangular.module('pettts')
                             data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                          $scope.message = "Post Added Successfully";
+                            $scope.message = "Post Added Successfully";
                             return response;
                         }, function errorCallback(response) {
                             $scope.message = "There is an Error";
@@ -131,9 +131,9 @@ aangular.module('pettts')
                     break;
 
             }
-            
+
         },
-        edit: function(post, type) {
+        edit: function(post, type, $scope) {
             switch (type) {
                 case "sell":
                     {
@@ -179,7 +179,7 @@ aangular.module('pettts')
                 data: { post }
             }
             return $http(req).then(function successCallback(response) {
-                $scope.message = "Post Added Successfully";
+                $scope.message = "Post edited Successfully";
                 return response;
             }, function errorCallback(response) {
                 $scope.message = "There is an Error";
