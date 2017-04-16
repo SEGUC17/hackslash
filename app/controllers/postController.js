@@ -136,7 +136,7 @@ let postController ={
         var filterParam = req.params.type;
         var filterType ;
         switch(filterParam){
-            case "sell":
+            case "buy":
                 filterType = 1
                 break;
             case "shelter":
