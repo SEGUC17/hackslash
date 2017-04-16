@@ -56,17 +56,19 @@ angular.module('pettts')
 
 
 
-	//$scope.message  to appear after add or edit 
+    //$scope.message  to appear after add or edit 
     $scope.submitAdd = function() {
 
         var post = $scope.post;
         $scope.message = Post.add(post, post.type);
+        console.log($scope.message);
 
     };
     $scope.submitEdit = function() {
 
         var post = $scope.post;
         $scope.message = Post.edit(post, post.type);
+
 
     }
 });
