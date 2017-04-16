@@ -17,9 +17,17 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
-	    .when('/post/edit', {
+	        .when('/post/edit', {
                 templateUrl: 'views/editPost.html',
                 controller: 'postController'
+            })
+            .when('/profile/view', {
+                templateUrl: 'views/profile.html',
+                controller: 'profileController'
+            })
+            .when('profile/edit',{
+                templateUrl: 'views/profileEdit.html',
+                controller: 'profileController'
             })
         $locationProvider.html5Mode(true);
 
