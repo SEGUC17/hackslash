@@ -1,9 +1,9 @@
 angular.module('pettts')
 
 // connecting frontend postcontroller with the api .
-.factory('Post', function($http , $window) {
-    var token = $window.sessionStorage.accessToken ;
-    var error = "Wrong information" ;
+.factory('Post', function($http, $window) {
+    var token = $window.sessionStorage.accessToken;
+    var error = "Wrong information";
     var success = "Successfull";
     return {
 
@@ -14,54 +14,60 @@ angular.module('pettts')
                     {
                         post.type = 1;
                         var req = {
-                        method: 'POST',
-                        url: '/post/sell',
-                        headers: {
-                        'x-access-token': token
-                        },
-                        data: post
+                            method: 'POST',
+                            url: '/post/sell',
+                            headers: {
+                                'x-access-token': token
+                            },
+                            data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            return success ;
+                            console.log(response);
+                            return response;
                         }, function errorCallback(response) {
-                            return error ;
-                            });;
+                            console.log(response);
+                            return response;
+                        });
                     }
                     break;
                 case "shelter":
                     {
                         post.type = 2;
                         var req = {
-                        method: 'POST',
-                        url: '/post/shelter',
-                        headers: {
-                        'x-access-token': token
-                        },
-                        data: post
+                            method: 'POST',
+                            url: '/post/shelter',
+                            headers: {
+                                'x-access-token': token
+                            },
+                            data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            return success ;
+                            console.log(response);
+                            return response;
                         }, function errorCallback(response) {
-                            return error ;
-                        });;
+                            console.log(response);
+                            return response;
+                        });
                     }
                     break;
                 case "mate":
                     {
                         post.type = 3;
                         var req = {
-                        method: 'POST',
-                        url: '/post/mate',
-                        headers: {
-                        'x-access-token': token
-                        },
-                        data: post
+                            method: 'POST',
+                            url: '/post/mate',
+                            headers: {
+                                'x-access-token': token
+                            },
+                            data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            return success ;
+                            console.log(response);
+                            return response;
                         }, function errorCallback(response) {
-                            return error ;
-                        });;
+                            console.log(response);
+                            return response;
+                        });
                     }
 
                     break;
@@ -69,54 +75,60 @@ angular.module('pettts')
                     {
                         post.type = 4;
                         var req = {
-                        method: 'POST',
-                        url: '/post/lost',
-                        headers: {
-                        'x-access-token': token
-                        },
-                        data: post
+                            method: 'POST',
+                            url: '/post/lost',
+                            headers: {
+                                'x-access-token': token
+                            },
+                            data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            return success ;
+                            console.log(response);
+                            return response;
                         }, function errorCallback(response) {
-                            return error ;
-                        });;
+                            console.log(response);
+                            return response;
+                        });
                     }
                     break;
                 case "found":
                     {
                         post.type = 5;
                         var req = {
-                        method: 'POST',
-                        url: '/post/found',
-                        headers: {
-                        'x-access-token': token
-                        },
-                        data: post
+                            method: 'POST',
+                            url: '/post/found',
+                            headers: {
+                                'x-access-token': token
+                            },
+                            data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            return success ;
+                            console.log(response);
+                            return response;
                         }, function errorCallback(response) {
-                            return error ;
-                        });;
+                            console.log(response);
+                            return response;
+                        });
                     }
                     break;
                 case "exchange":
                     {
                         post.type = 6;
                         var req = {
-                        method: 'POST',
-                        url: '/post/exchange',
-                        headers: {
-                        'x-access-token': { postData: post }
-                        },
-                        data: post
+                            method: 'POST',
+                            url: '/post/exchange',
+                            headers: {
+                                'x-access-token': token
+                            },
+                            data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            return success ;
+                            console.log(response);
+                            return response;
                         }, function errorCallback(response) {
-                            return error ;
-                        });;
+                            console.log(response);
+                            return response;
+                        });
                     }
                     break;
 
@@ -157,20 +169,23 @@ angular.module('pettts')
                     break;
 
             }
-            var req = {
-                        method: 'POST',
-                        url: '/post/edit',
-                        headers: {
-                        'x-access-token': token
-                        },
-                        data: post
-                        }
 
-                        return $http(req).then(function successCallback(response) {
-                            return success ;
-                        }, function errorCallback(response) {
-                            return error ;
-                        });;
-                    }
+            ///add id of post to be edited
+            var req = {
+                method: 'POST',
+                url: '/post/edit',
+                headers: {
+                    'x-access-token': token
+                },
+                data: { post }
+            }
+            return $http(req).then(function successCallback(response) {
+                console.log(response);
+                return response;
+            }, function errorCallback(response) {
+                console.log(response);
+                return response;
+            });
+        }
     }
 });
