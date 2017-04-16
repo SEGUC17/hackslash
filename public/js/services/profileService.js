@@ -11,7 +11,7 @@ angular.module('pettts')
                 url: '/profile/view',
                 headers: {
                     'x-access-token': userToken,
-                    'email': userEmail
+                    'email': 'boody@fake.com' //TODO:REDIRECT TO DIFFERENT USERS
                 }
             };
             return $http(request).then(function success(response){
@@ -38,7 +38,8 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response){
-                $window.location = '/profile';
+                //$window.location = '/profile';
+                console.log(rating);
             },function error(response){
                 return {
                     'success':false,

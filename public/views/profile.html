@@ -1,12 +1,10 @@
-<div>
+<div ng-controller="profileController">
     <style>
    
 table th, table td, table tr {
- 
     vertical-align: top;
 }
 </style>
-
 
     <table style=" width:90%; margin:auto">
             <td>
@@ -18,18 +16,46 @@ table th, table td, table tr {
                 </tr>
                 <tr>
                     <td>
-                        user
+                        {{userInfo.userName}}<br/>
+                        rating is {{userInfo.rate}}
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Email
+                        {{userInfo.firstName}} {{userInfo.lastName}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{userInfo.email}}</br>
+                        {{userInfo.phoneNumber1}}</br>
+                        {{userInfo.phoneNumber2}}</br>
+                        {{userInfo.homeNumber}}</br></br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div ng-if="myEmail==userInfo.email">
+                            <form>
+                                <a  href="/editProfile" class="btn btn-primary">Profile settings</a>    
+                            </form>
+                        </div>
+                        <div ng-if="myEmail!=userInfo.email">
+                            <form name="rateForm">
+                                <input type="text" ng-model="rate.given" name="rate" ng-pattern="/^[1-5]$/" required>
+                                <span ng-show="rateForm.rate.$error.pattern">The number must be between 1-5</span>
+                                <span ng-show="rateForm.rate.$error.number">No characters allowed</span>
+                                <span ng-show="rateForm.rate.$error.required && !rateForm.rate.$error.number">The field is required</span>
+  
+                                <button type="button" ng-click="submitRate()">Rate {{userInfo.userName}}</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             </table>
         </td>
         <td>
-            <div ng-repeat="post in posts">
+            <div ng-repeat="post in Posts">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="media">
