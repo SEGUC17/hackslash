@@ -3,8 +3,7 @@ aangular.module('pettts')
 // connecting frontend postcontroller with the api .
 .factory('Post', function($http, $window) {
     var token = $window.sessionStorage.accessToken;
-    var error = "Wrong information";
-    var success = "Successfull";
+    var message = "" ;
     return {
 
         ///add callbacks for success and failure TODO
@@ -22,10 +21,10 @@ aangular.module('pettts')
                             data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            console.log(response);
+                            message = "Post Added Successfully";
                             return response;
                         }, function errorCallback(response) {
-                            console.log(response);
+                            message = "There is an Error";
                             return response;
                         });
                     }
@@ -42,10 +41,10 @@ aangular.module('pettts')
                             data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            console.log(response);
+                            message = "Post Added Successfully";
                             return response;
                         }, function errorCallback(response) {
-                            console.log(response);
+                            message = "There is an Error";
                             return response;
                         });
                     }
@@ -62,10 +61,10 @@ aangular.module('pettts')
                             data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            console.log(response);
+                            message = "Post Added Successfully";
                             return response;
                         }, function errorCallback(response) {
-                            console.log(response);
+                            message = "There is an Error";
                             return response;
                         });
                     }
@@ -83,10 +82,10 @@ aangular.module('pettts')
                             data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            console.log(response);
+                            message = "Post Added Successfully";
                             return response;
                         }, function errorCallback(response) {
-                            console.log(response);
+                            message = "There is an Error";
                             return response;
                         });
                     }
@@ -103,10 +102,10 @@ aangular.module('pettts')
                             data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            console.log(response);
+                            message = "Post Added Successfully";
                             return response;
                         }, function errorCallback(response) {
-                            console.log(response);
+                            message = "There is an Error";
                             return response;
                         });
                     }
@@ -123,16 +122,17 @@ aangular.module('pettts')
                             data: { post }
                         }
                         return $http(req).then(function successCallback(response) {
-                            console.log(response);
+                            message = "Post Added Successfully";
                             return response;
                         }, function errorCallback(response) {
-                            console.log(response);
+                            message = "There is an Error";
                             return response;
                         });
                     }
                     break;
 
             }
+            return message ;
         },
         edit: function(post, type) {
             switch (type) {
@@ -180,12 +180,13 @@ aangular.module('pettts')
                 data: { post }
             }
             return $http(req).then(function successCallback(response) {
-                console.log(response);
+                message = "Post Added Successfully";
                 return response;
             }, function errorCallback(response) {
-                console.log(response);
+                message = "There is an Error";
                 return response;
             });
+            return message ;
         }
     }
 });
