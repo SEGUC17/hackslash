@@ -57,13 +57,13 @@ angular.module('pettts')
     $scope.submitAdd = function() {
 
         var post = $scope.post;
-        Post.add(post, post.type);
+        $scope.message = Post.add(post, post.type);
 
     };
     $scope.submitEdit = function() {
 
         var post = $scope.post;
-        Post.edit(post, post.type);
+        $scope.message = Post.edit(post, post.type);
 
     }
 });
