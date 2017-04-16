@@ -25,8 +25,8 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })
-            .when('/editProfile', {
-                templateUrl: 'views/editProfile.html',
+            .when('/editProfile',{
+                templateUrl: 'views/profileEdit.html',
                 controller: 'profileController'
             })
         $locationProvider.html5Mode(true);
