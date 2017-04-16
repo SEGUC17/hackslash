@@ -14,6 +14,11 @@ angular.module('appRoutes', [])
                 controller: 'pass_ctrl'
             })
 
+            .when('/resetPassword', {
+                templateUrl: 'views/reset_password.html',
+                controller: 'pass_ctrl'
+            })
+
             .when('/posts', {
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
