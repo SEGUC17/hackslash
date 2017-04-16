@@ -54,6 +54,9 @@ angular.module('pettts')
      }*/
 
 
+
+
+	//$scope.message  to appear after add or edit 
     $scope.submitAdd = function() {
 
         var post = $scope.post;
