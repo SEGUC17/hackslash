@@ -6,7 +6,7 @@ angular.module('pettts')
     var error = "Wrong information" ;
     var success = "Successfull";
     return {
-        
+
         ///add callbacks for success and failure TODO
         add: function(post, type) {
             switch (type) {
@@ -17,11 +17,11 @@ angular.module('pettts')
                         method: 'POST',
                         url: '/post/sell',
                         headers: {
-                        'token': token 
+                        'x-access-token': token
                         },
                         data: { postData: post }
                         }
-                        return $http.post(req).then(function successCallback(response) {
+                        return $http(req).then(function successCallback(response) {
                             return success ;
                         }, function errorCallback(response) {
                             return error ;
@@ -35,11 +35,11 @@ angular.module('pettts')
                         method: 'POST',
                         url: '/post/shelter',
                         headers: {
-                        'token': token 
+                        'x-access-token': token
                         },
                         data: { postData: post }
                         }
-                        return $http.post(req).then(function successCallback(response) {
+                        return $http(req).then(function successCallback(response) {
                             return success ;
                         }, function errorCallback(response) {
                             return error ;
@@ -53,17 +53,17 @@ angular.module('pettts')
                         method: 'POST',
                         url: '/post/mate',
                         headers: {
-                        'token': token 
+                        'x-access-token': token
                         },
                         data: { postData: post }
                         }
-                        return $http.post(req).then(function successCallback(response) {
+                        return $http(req).then(function successCallback(response) {
                             return success ;
                         }, function errorCallback(response) {
                             return error ;
                         });;
                     }
-                    
+
                     break;
                 case "lost":
                     {
@@ -72,11 +72,11 @@ angular.module('pettts')
                         method: 'POST',
                         url: '/post/lost',
                         headers: {
-                        'token': token 
+                        'x-access-token': token
                         },
                         data: { postData: post }
                         }
-                        return $http.post(req).then(function successCallback(response) {
+                        return $http(req).then(function successCallback(response) {
                             return success ;
                         }, function errorCallback(response) {
                             return error ;
@@ -90,16 +90,16 @@ angular.module('pettts')
                         method: 'POST',
                         url: '/post/found',
                         headers: {
-                        'token': token 
+                        'x-access-token': token
                         },
                         data: { postData: post }
                         }
-                        return $http.post(req).then(function successCallback(response) {
+                        return $http(req).then(function successCallback(response) {
                             return success ;
                         }, function errorCallback(response) {
                             return error ;
                         });;
-                    }   
+                    }
                     break;
                 case "exchange":
                     {
@@ -108,11 +108,11 @@ angular.module('pettts')
                         method: 'POST',
                         url: '/post/exchange',
                         headers: {
-                        'token': token 
+                        'x-access-token': { postData: post }
                         },
-                        data: { postData: post }
+                        data: post
                         }
-                        return $http.post(req).then(function successCallback(response) {
+                        return $http(req).then(function successCallback(response) {
                             return success ;
                         }, function errorCallback(response) {
                             return error ;
@@ -161,11 +161,16 @@ angular.module('pettts')
                         method: 'POST',
                         url: '/post/edit',
                         headers: {
-                        'token': token 
+                        'x-access-token': token
                         },
                         data: { postData: post }
                         }
-            return $http.post(req).then(function successCallback(response) {
+
+
+
+
+
+                        return $http(req).then(function successCallback(response) {
                             return success ;
                         }, function errorCallback(response) {
                             return error ;
