@@ -2,12 +2,10 @@ angular.module('pettts')
 
 .controller('postsController', function($scope, postsService) {
 
-    $scope.posts = [];
-
     postsService.get().then(function(posts){
       $scope.posts = posts
 
-      if($scope.posts.length == 0) {
+      if(!$scope.posts) {
         $scope.notFound = true;
       } else {
         $scope.notFound = false;

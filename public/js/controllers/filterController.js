@@ -4,12 +4,15 @@ angular.module('pettts')
 
     // getting the route parameter
     $scope.type = $routeParams.type
-    $scope.posts = [];
+
+    if($scope.type !== "buy" || $scope.type !== "exchange" || $scope.type !== "shelter" || $scope.type !== "mate" || $scope.type !== "lost" || $scope.type !== "found"){
+      $scope.notFound = true;
+    }
 
     filterService.get($scope.type).then(function(posts){
       $scope.posts = posts
 
-      if($scope.posts.length == 0) {
+      if(!$scope.posts) {
         $scope.notFound = true;
       } else {
         $scope.notFound = false;

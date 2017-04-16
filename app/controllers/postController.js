@@ -155,14 +155,14 @@ let postController = {
                 filterType = 6;
                 break;
             default:
-                filterType = 1;
+                break;
         }
         Post.find({ type: filterType }, function(err, posts) {
             if (err) {
                 res.json(err.message);
             } else {
                 if (posts.length == 0) {
-                    res.json({ "message": "No Posts Exists" });
+                    res.json({ message: "No Posts Exists" });
                 } else {
                     res.json({ posts });
                 }
@@ -243,7 +243,7 @@ let postController = {
                 res.json(err.message);
             } else {
                 if (posts.length == 0) {
-                    res.json("No posts , Yet ");
+                    res.json("No posts , Yet");
                 } else {
                     res.json({ posts });
                 }
