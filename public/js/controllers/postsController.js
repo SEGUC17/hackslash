@@ -2,19 +2,27 @@ angular.module('pettts')
 
 .controller('postsController', function($scope, postsService) {
 
-    postsService.get().then(function(posts) {
-        $scope.posts = posts
-    });
-    //$scope.posts = postsService.get();
+    postsService.get().then(function(posts){
+      $scope.posts = posts
 
-    if (!$scope.posts)
+      if(!$scope.posts) {
         $scope.notFound = true;
-    else
+      } else {
         $scope.notFound = false;
+        // Sorting posts according to date descendingly
+        $scope.posts.sort(function(a, b){
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+        $scope.pageSize = 7;
+        $scope.currentPage = 1;
+        $scope.maxSize = 5;
+      }
+
+    });
 
 });
 
-// custom filter
+// custom filters
 angular.module('pettts')
 
 // switch numbers stored in the database to strings to display
@@ -37,4 +45,10 @@ angular.module('pettts')
                 return "";
         }
     }
-});
+  })
+
+  .filter('startFrom', function(){
+    return function(data, start){
+      return data.slice(start);
+    }
+  })
