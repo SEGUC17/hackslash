@@ -14,8 +14,12 @@ router.get('/forgetPassword', function(req, res){
 });
 // After the user enters his email
 router.post('/forgetPassword', forgetPasswordController.forgetPassword);
+
 router.get('/resetPassword', function(req, res){
-   // Here : we should render the page that asks for a new password
+    res.sendFile(path.resolve('/home/khatib/Desktop/before new master/hackslash/public/views/reset.html'));
+  
+
+
 });
 router.post('/resetPassword', resetPasswordController.resetPassword);
 /* function to validate the format of the entered username (or email) and password of

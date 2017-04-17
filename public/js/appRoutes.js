@@ -9,13 +9,8 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/login.html',
                 controller: 'loginCtrl'
             })
-            .when('/forgot_password', {
-                templateUrl: 'views/forgot_password.html',
-                controller: 'pass_ctrl'
-            })
-
-            .when('/resetPassword', {
-                templateUrl: 'views/reset_password.html',
+            .when('/forgotPassword', {
+                templateUrl: 'views/forgotPassword.html',
                 controller: 'pass_ctrl'
             })
 
@@ -31,6 +26,13 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/editPost.html',
                 controller: 'postController'
             })
+
+            .when('/reset', {
+                templateUrl: 'views/reset.html',
+                controller: 'pass_ctrl'
+            })
+
+
         $locationProvider.html5Mode(true);
 
     }]);

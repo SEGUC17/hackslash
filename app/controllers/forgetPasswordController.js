@@ -8,6 +8,7 @@ var forgetPasswordController ={
   */
   forgetPassword : function (req, res){
     var email = req.body.email;
+  console.log(email);
     User.findOne({email: email}, function(err, foundUser){
       if(err){
         throw err;
