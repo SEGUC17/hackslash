@@ -1,9 +1,7 @@
-angular.module('appRoutes', [])
+angular.module('pettts')
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         $routeProvider
-
-        // posts page
 
             .when('/login', {
                 templateUrl: 'views/login.html',
@@ -17,10 +15,6 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
-	        .when('/post/edit', {
-                templateUrl: 'views/editPost.html',
-                controller: 'postController'
-            })
             .when('/profile', {
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
@@ -29,6 +23,16 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/editProfile.html',
                 controller: 'profileController'
             })
-        $locationProvider.html5Mode(true);
+				    .when('/post/edit', {
+			          templateUrl: 'views/editPost.html',
+			          controller: 'postController'
+			      })
 
-    }]);
+						// filter posts router
+						.when('/posts/:type', {
+							templateUrl: 'views/filter.html',
+							controller: 'filterController'
+						})
+
+		$locationProvider.html5Mode(true);
+}]);
