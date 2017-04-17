@@ -26,6 +26,11 @@ angular.module('pettts')
 							controller: 'filterController'
 						})
 
+            .when('/posts/search', {
+              templateUrl: 'views/search.html',
+              controller: 'searchController'
+            })
+
 		$locationProvider.html5Mode(true);
 
 }]);
