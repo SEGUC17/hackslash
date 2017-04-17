@@ -41,13 +41,9 @@ table th, table td, table tr {
                             </form>
                         </div>
                         <div ng-if="myEmail!=userInfo.email">
-                            <form name="rateForm">
-                                <input type="text" ng-model="rate.given" name="rate" ng-pattern="/^[1-5]$/" required>
-                                <span ng-show="rateForm.rate.$error.pattern">The number must be between 1-5</span>
-                                <span ng-show="rateForm.rate.$error.number">No characters allowed</span>
-                                <span ng-show="rateForm.rate.$error.required && !rateForm.rate.$error.number">The field is required</span>
-  
-                                <button type="button" ng-click="submitRate()">Rate {{userInfo.userName}}</button>
+                            <form name="rateForm" ng-controller="profileController" ng-submit="submitRate()">
+                                <input type="text" name="rate" ng-model="rate" placeholder="A number from 1-5"> <br>
+                                <button type="submit" class="btn btn-default">Rate {{userInfo.userName}}</button>
                             </form>
                         </div>
                     </td>
