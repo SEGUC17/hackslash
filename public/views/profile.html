@@ -1,0 +1,80 @@
+<div ng-controller="profileController">
+    <style>
+   
+table th, table td, table tr {
+    vertical-align: top;
+}
+</style>
+
+    <table style=" width:90%; margin:auto">
+            <td>
+            <table width="175">
+                <tr style="width:150px;height:150px">
+                    <td>
+                      My profile Picture
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{userInfo.userName}}<br/>
+                        rating is {{userInfo.rate}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{userInfo.firstName}} {{userInfo.lastName}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{userInfo.email}}</br>
+                        {{userInfo.phoneNumber1}}</br>
+                        {{userInfo.phoneNumber2}}</br>
+                        {{userInfo.homeNumber}}</br></br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div ng-if="myEmail==userInfo.email">
+                            <form>
+                                <a  href="/editProfile" class="btn btn-primary">Profile settings</a>    
+                            </form>
+                        </div>
+                        <div ng-if="myEmail!=userInfo.email">
+                            <form name="rateForm" ng-controller="profileController" ng-submit="submitRate()">
+                                <input type="text" name="rate" ng-model="rate" placeholder="A number from 1-5"> <br>
+                                <button type="submit" class="btn btn-default">Rate {{userInfo.userName}}</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <div ng-repeat="post in Posts">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left">
+                                <!-- post image -->
+                                <a href="#">
+                                    <img class="media-object" src="http://placehold.it/150x150" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <!-- displaying post type as the title as there is no title! -->
+                                <h4 class="media-heading label label-success">{{ post.type | stringifyType }}</h4>
+                                <!-- display post date -->
+                                <p><small><em>{{ post.date | date }}</em></small></p>
+                                <!-- fixing description length to display by 250 chars -->
+                                <p>{{ post.description.slice(0,250) }}...</p>
+                                <!-- link to show post page -->
+                                <a href="#" class="btn btn-primary">View more</a>
+                            </div> <!-- End of media-body -->
+                        </div> <!-- End of media -->
+                    </div> <!-- End of panel-body -->
+                </div> <!-- End of panel -->
+            </div> <!-- End of row -->
+        </td>
+    </table>
+</div>

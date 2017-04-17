@@ -15,10 +15,18 @@ angular.module('pettts')
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
+            .when('/profile', {
+                templateUrl: 'views/profile.html',
+                controller: 'profileController'
+            })
+            .when('/editProfile',{
+                templateUrl: 'views/editProfile.html',
+                controller: 'profileController'
+            })
 				    .when('/post/edit', {
-			                templateUrl: 'views/editPost.html',
-			                controller: 'postController'
-			            })
+			          templateUrl: 'views/editPost.html',
+			          controller: 'postController'
+			      })
 
 						// filter posts router
 						.when('/posts/:type', {
@@ -27,5 +35,4 @@ angular.module('pettts')
 						})
 
 		$locationProvider.html5Mode(true);
-
 }]);
