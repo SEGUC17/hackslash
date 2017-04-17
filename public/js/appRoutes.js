@@ -25,7 +25,7 @@ angular.module('appRoutes', [])
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })
-            .when('/editProfile', {
+            .when('/editProfile',{
                 templateUrl: 'views/editProfile.html',
                 controller: 'profileController'
             })
