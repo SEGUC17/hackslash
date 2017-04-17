@@ -18,6 +18,13 @@ angular.module('pettts')
         if(password){
             if(password == verify){
                 profileService.delete(password,$scope);
+                }else{
+                console.log('error');
+            }
+        }else{
+            console.log('Big error');
+        }
+    };
 
     $scope.passChange = function() {
         var password = $scope.password;
