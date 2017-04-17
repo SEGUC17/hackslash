@@ -1,16 +1,24 @@
 angular.module('pettts')
 
-  .controller('filterController', function($scope, $routeParams, filterService){
+.controller('searchController', function($scope, searchService) {
 
-    // getting the route parameter
-    $scope.type = $routeParams.type
+  $scope.searchKey = "";
+  console.log("mohamed");
+  console.log($scope.searchKey);
 
+  $scope.submitSearch = function(){
 
-    if($scope.type !== "buy" || $scope.type !== "exchange" || $scope.type !== "shelter" || $scope.type !== "mate" || $scope.type !== "lost" || $scope.type !== "found"){
-      $scope.notFound = true;
+    console.log("mohamed");
+    console.log($scope.searchKey);
+
+    if($scope.searchKey){
+      console.log($scope.searchKey);
+    } else {
+      console.log("mahmoud");
     }
 
-    filterService.get($scope.type).then(function(posts){
+    searchService.search($scope.searchKey).then(function(posts){
+
       $scope.posts = posts
 
       if(!$scope.posts) {
@@ -26,6 +34,9 @@ angular.module('pettts')
         $scope.maxSize = 5;
       }
 
+
     });
+  }
+
 
 });
