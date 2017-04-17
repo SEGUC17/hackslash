@@ -1,37 +1,56 @@
 angular.module('pettts')
 
-.controller('searchController', function($scope, searchService) {
+.controller('searchController', function($scope,$window, searchService) {
 
-  $scope.searchKey = "";
-  console.log("mohamed");
+  console.log("entered the search controller");
 
   $scope.submitSearch = function(){
-    console.log("searchKey is :- "+$scope.searchKey);
     if($scope.searchKey){
-      console.log($scope.searchKey);
-    } else {
-      console.log("mahmoud");
+        console.log("searchKey is :- "+$scope.searchKey);
     }
+    else {
+      console.log("No Search Key Found");
+    }
+}
 
-    searchService.search($scope.searchKey).then(function(posts){
 
-    //  $scope.posts = posts
-      if(!$scope.posts) {
-        $scope.notFound = true;
-      } else {
-        $scope.notFound = false;
-        // Sorting posts according to date descendingly
-        $scope.posts.sort(function(a, b){
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
-        $scope.pageSize = 7;
-        $scope.currentPage = 1;
-        $scope.maxSize = 5;
-      }
+    searchService.search().then(function(posts){
 
+        if(posts){
+          console.log("inside the internal if "+response.data.posts);
+          $scope.notFound = false;
+        }
+        else {
+          $scope.notFound = true;
+        }
+      //console.log("Response in controller " );
+      //console.log(response.data.posts);
+      $scope.posts = response.data.posts;
+      //$window.location = '/posts/search';
 
     });
-  }
-
 
 });
+
+
+
+
+/*  $scope.posts = response.data.posts;
+  if(!$scope.posts) {
+    $scope.notFound = true;
+    console.log("posts ::"+$scope.posts);
+    console.log("mfiish haga");
+  }
+
+  else {
+    $scope.notFound = false;
+    // Sorting posts according to date descendingly
+    $scope.posts.sort(function(a, b){
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+    $scope.pageSize = 7;
+    $scope.currentPage = 1;
+    $scope.maxSize = 5;
+    $window.location.href = 'views/posts.html';
+
+  }*/

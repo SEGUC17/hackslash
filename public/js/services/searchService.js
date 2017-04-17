@@ -2,8 +2,9 @@ angular.module('pettts')
 
 // connecting frontend searchController with the api
 .factory('searchService',function($http,$location, $window){
+  var searchKey = $window.key;
     return{
-            search: function(searchKey){
+            search: function(){
               var req = {
                method: 'GET',
                url: '/post/search',
@@ -12,16 +13,19 @@ angular.module('pettts')
                }
              }
               return $http(req).then(function successCallback(response) {
-                          //  $scope.message = "Post Added Successfully";
-                          // $window.location = '/views/posts.html';
+                            console.log("entered the service");
                             console.log(response);
-                          if(!response.data.posts)
+                          if(!response.data.posts){
                           return response.data.message;
+                          console.log("No posts found");}
                           else {
-                            return response.data.posts;
+                         console.log("posts from the servie "+response.data.posts);
+                        return response.data.posts;
+
                           }
                         }, function errorCallback(response) {
                           //  $scope.message = "There is an Error";
+                          console.log("there's an Error");
                             return response;
                         });
             }

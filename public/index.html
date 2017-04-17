@@ -31,6 +31,7 @@
     <script type="text/javascript" src="js/controllers/filterController.js"></script>
     <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
     <script type="text/javascript" src="js/controllers/searchController.js"></script>
+    <script type="text/javascript" src="js/controllers/testController.js"></script>
     <script type="text/javascript" src="js/services/searchService.js"></script>
     <script type="text/javascript" src="js/appRoutes.js"></script>
 
@@ -59,13 +60,13 @@
             <ul class="nav navbar-nav navbar-right">
               <!-- Search bar -->
 
-              <form  class="navbar-form navbar-left"  ng-controller="searchController" ng-submit="submitSearch()" >
+              <form  class="navbar-form navbar-left"  ng-controller="testController" ng-submit="submitSearch()" >
                 <div class="input-group stylish-input-group">
                   <input type="text" class="form-control" id="search-input" placeholder="What are you looking for?"
                   ng-model="searchKey">
 
                   <span class="input-group-addon">
-                      <button type="submit"  ng-submit="submitSearch()">
+                      <button type="submit" >
                           <span class="glyphicon glyphicon-search"></span>
                       </button>
                   </span>
