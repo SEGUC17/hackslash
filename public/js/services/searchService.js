@@ -15,7 +15,11 @@ angular.module('pettts')
                           //  $scope.message = "Post Added Successfully";
                           // $window.location = '/views/posts.html';
                             console.log(response);
+                          if(!response.data.posts)
+                          return response.data.message;
+                          else {
                             return response.data.posts;
+                          }
                         }, function errorCallback(response) {
                           //  $scope.message = "There is an Error";
                             return response;

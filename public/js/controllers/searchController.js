@@ -4,13 +4,9 @@ angular.module('pettts')
 
   $scope.searchKey = "";
   console.log("mohamed");
-  console.log($scope.searchKey);
 
   $scope.submitSearch = function(){
-
-    console.log("mohamed");
-    console.log($scope.searchKey);
-
+    console.log("searchKey is :- "+$scope.searchKey);
     if($scope.searchKey){
       console.log($scope.searchKey);
     } else {
@@ -19,8 +15,7 @@ angular.module('pettts')
 
     searchService.search($scope.searchKey).then(function(posts){
 
-      $scope.posts = posts
-
+    //  $scope.posts = posts
       if(!$scope.posts) {
         $scope.notFound = true;
       } else {

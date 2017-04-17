@@ -59,13 +59,13 @@
             <ul class="nav navbar-nav navbar-right">
               <!-- Search bar -->
 
-              <form  class="navbar-form navbar-left" novalidate ng-controller="searchController" ng-submit="submitSearch()" action="/posts/search">
+              <form  class="navbar-form navbar-left"  ng-controller="searchController" ng-submit="submitSearch()" >
                 <div class="input-group stylish-input-group">
                   <input type="text" class="form-control" id="search-input" placeholder="What are you looking for?"
                   ng-model="searchKey">
 
                   <span class="input-group-addon">
-                      <button type="submit" >
+                      <button type="submit"  ng-submit="submitSearch()">
                           <span class="glyphicon glyphicon-search"></span>
                       </button>
                   </span>
