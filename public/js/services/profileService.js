@@ -5,6 +5,29 @@ angular.module('pettts')
     var userEmail = $window.sessionStorage.email;
     var userToken = $window.sessionStorage.accessToken;
     return{
+              //Service to call viewProfile
+        view : function(){
+            var request = {
+                method: 'GET',
+                url: '/profile/view',
+                headers: {
+                    'x-access-token': userToken,
+                    'email': userEmail //TODO:REDIRECT TO DIFFERENT USERS
+                }
+            };
+            return $http(request).then(function success(response){
+                return {
+                    'success':true,
+                    'data': response.data
+                };
+            },function error(response){
+                return {
+                    'success':false,
+                    'message':'Error in service request'
+                };
+            });
+        },
+          
         //Service to call rateUser
         rate : function(rating,rated,$scope){
             var request = {
@@ -19,13 +42,7 @@ angular.module('pettts')
             console.log(request);
             return $http(request).then(function success(response){
                 $window.location = '/profile';
-            },function error(response){
-                return {
-                    'success':false,
-                    'message':'Error in service request'
-                };
-            });
-        },
+
         //Service to call deleteUser
         delete : function(password,$scope){
            var request = {
@@ -34,6 +51,16 @@ angular.module('pettts')
                 data: {
                     'password': password,
                     'verify': password,
+
+        //Service to call changePassword
+        pass : function(password,newPassword,$scope){
+            var request = {
+                method: 'POST',
+                url: '/profile/pass',
+                data: {
+                    'password': password,
+                    'verify': password,
+                    'newPassword': newPassword,
                     'token': userToken
                 }
             };
@@ -41,6 +68,7 @@ angular.module('pettts')
                 $window.sessionStorage.accessToken = null;
                 $window.sessionStorage.email = null;
                 $window.location = '/posts';
+                $window.location = '/profile';
             },function error(response){
                 return {
                     'success':false,
@@ -75,5 +103,6 @@ angular.module('pettts')
                 });
             }
         },
+        }
     }
 });
