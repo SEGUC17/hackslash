@@ -526,7 +526,7 @@ let postController = {
             })
         }
     }
-    ,
+ //   ,
 //     viewPostInfo: function(req , res)
 //     {
 //       var idQuery = req.header("id");
