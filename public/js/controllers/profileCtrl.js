@@ -1,5 +1,5 @@
 angular.module('pettts')
-.controller('profileController',function($scope,$http,profileService,$window){
+.controller('profileController',function($scope,$http,profileService,$window,$location){
     $scope.messageRated = $window.sessionStorage.messageRated;
     $scope.submitRate = function() {
         var rating = $scope.rate;
@@ -59,6 +59,10 @@ angular.module('pettts')
            $scope.messageEmpty = "Please enter both your old and new passwords.";
         }
     };
+
+    $scope.editPost = function() {
+        $location.path('/post/edit').search({id: $scope.post._id});
+    }
 
   
     profileService.view().then(function(response){
