@@ -18,7 +18,7 @@ angular.module('pettts')
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
-            .when('/profile', {
+            .when('/profile/:username', {
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })

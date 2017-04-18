@@ -7,20 +7,28 @@ angular.module('pettts')
     var userToken = $window.sessionStorage.accessToken;
     return{
               //Service to call viewProfile
-        view : function(){
+        view : function(givenUsername){
             var request = {
                 method: 'GET',
                 url: '/profile/view',
                 headers: {
                     'x-access-token': userToken,
-                    'email': userEmail //TODO:REDIRECT TO DIFFERENT USERS
+                    'username': givenUsername //TODO:REDIRECT TO DIFFERENT USERS
                 }
             };
             return $http(request).then(function success(response){
-                return {
-                    'success':true,
-                    'data': response.data
-                };
+                console.log(response);
+                if(response.data == "The user you're trying to view does not exist!"){
+                    return {
+                        'success':false,
+                        'data':'No User'
+                    }
+                }else{
+                    return {
+                        'success':true,
+                        'data': response.data
+                    };
+                }
             },function error(response){
                 return {
                     'success':false,

@@ -29,7 +29,7 @@ var authController ={
         bcrypt.compare(req.body.password, user.password, function(err, result){
           if(result){
             var token = jwt.sign(user, req.app.get('superSecret'), { expiresIn : 60*60*24 }); // expires in 24 hours
-            res.json({  success: true,  message: 'Enjoy your token!',  token: token , email : user.email });
+            res.json({  success: true,  message: 'Enjoy your token!',  token: token , email : user.email , username : user.username});
           }else{
             res.json({ success: false, message: 'Login failed. Wrong  Password.' }); // right username and wrong password
           }

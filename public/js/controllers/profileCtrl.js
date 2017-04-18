@@ -1,5 +1,7 @@
 angular.module('pettts')
-.controller('profileController',function($scope,$http,profileService,$window,$location){
+.controller('profileController',function($scope,$http,profileService,$window,$location,$routeParams){
+    $scope.givenUsername = $routeParams.username
+
     $scope.messageRated = $window.sessionStorage.messageRated;
     $scope.submitRate = function() {
         var rating = $scope.rate;
@@ -65,8 +67,8 @@ angular.module('pettts')
     }
 
   
-    profileService.view().then(function(response){
-        $scope.teet = "bla";
+    profileService.view($scope.givenUsername).then(function(response){
+        $scope.success = response.success;
         $scope.userInfo = response.data.userProfileInfo;
         $scope.Posts = response.data.myPosts;
         if($scope.Posts == "||&This user has no Posts yet.&||")
