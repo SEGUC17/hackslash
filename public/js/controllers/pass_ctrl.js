@@ -8,23 +8,19 @@ event.stopPropagation(); // removing the username from the the broadcast
 }),*/
 
 //console.log($scope.email);
-
-       $scope.submit=function(){ // submitting the new password
-
+ console.log("entered the controller")
+       $scope.pop=function(){ //User clicked on submit password
+ console.log("entered the controller");
          $http.post('/resetPassword',$scope.formData).then(function successCallback(response) {
+
              // this callback will be called asynchronously
              // when the response is available
-
-
              if(response.data.success==true){
-               console.log("password was changed succesfully");
+               console.log("password was passed succesfully to the api");
            //    $window.alert="please check your email for the  password reset link";
-
-
              }else{
                console.log("couldnt updatepass");
                console.log("frombackend1:"+ response.message);
-
      //  $window.alert="Something Went Wrong  ,, please Try Again";
              }
            }, function errorCallback(response) {

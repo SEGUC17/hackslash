@@ -1,9 +1,7 @@
 <div ng-controller="pass_ctrl">
 	<form action="/" id="pass">
-		your new password: <input type="text" id = "password" ng-model="formData.password"><br>
-
-		<button type="button" ng-click="submit()">Reset</button
-
+	enter your new password: <input type="text" id = "password" ng-model="formData.password"><br>
+		<button type="button" ng-click="pop()">Reset</button>
 	</form>
 
 	<div ng-if="errorMessage" type = "danger">{{ errorMessage }}</div>

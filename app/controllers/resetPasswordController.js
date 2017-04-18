@@ -7,7 +7,7 @@ var resetPasswordController = {
   // NOW THE USER CLICKED ON THE EMAIL SENT TO HIM AND OPENED THE PAGE AND POSTED HIS DESIRED NEW PASSWORD
   resetPassword : function (req, res) {
     // EXTRACTING THE TOKEN FROM THE URL
-    var token = req.query.t;
+    var token = req.params.token;
     // FIND A USERNAME WITH A RESET PASSWORD TOKEN EQUAL THE ONE SENT WITH THE REQUEST
 
     // CHECKING IF THERE IS A USER THAT WAS GIVEN THIS TOKEN AND THAT THE TOKEN IS NOT EXPIRED
@@ -20,7 +20,7 @@ var resetPasswordController = {
           // HASH THE NEW PASSWORD
           bcrypt.genSalt(10,function(err, salt) {
             if(err) throw err;
-            bcrypt.hash(req.body.newPassword, salt, function(err, hash) {
+            bcrypt.hash(req.body.password, salt, function(err, hash) {
               if(err) {
                 // throw err;
               }
