@@ -41,7 +41,6 @@ function validateInput(username, email, password, firstName, lastName){
       output.success = false;
       output.usernameMessage = "Username length must be between 5 and 20 characters";
   }
-
   // CHECK IF EMAIL IS ENTERED
   if(!email){
     output.success = false;
@@ -63,6 +62,8 @@ function validateInput(username, email, password, firstName, lastName){
       output.success = false;
       output.passwordMessage = "Password length must be more than 5 characters";
   }
+  
+  
 
   return output;
 
@@ -176,16 +177,16 @@ var registerController = {
         var password = req.body.password;
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
-
         // validating the format of username, email, and password
         var validatedInput = validateInput(username, email, password, firstName, lastName);
 
         // if the validation respone is false
         if(validatedInput.success == false){
           // send the validation message specified in the function
-          res.json(validatedInput);
+          res.status(400).json(validatedInput);
         } else {
           // checking if the entered username/email already exists in the database
+       
           User.findOne({username: username}, function(err, foundUser){
             if(err){
               console.log(err);
@@ -220,6 +221,7 @@ var registerController = {
                         //profilePicture: req.file.filename,
                         verified: false
                       });
+                        
 
                       // creating a temp user until mail verification
                       nev.createTempUser(newUser, function(err, existingPersistentUser, newTempUser) {

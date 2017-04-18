@@ -2,7 +2,10 @@ angular.module('pettts')
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         $routeProvider
-
+            .when('/register', {
+                templateUrl: 'views/register.html',
+                controller: 'registerController'
+            })
             .when('/login', {
                 templateUrl: 'views/login.html',
                 controller: 'loginCtrl'
