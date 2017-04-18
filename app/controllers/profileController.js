@@ -124,7 +124,7 @@ let profileController ={
                         }
                     }
                     if(found){
-                        res.status(403).json('You have already rated this user.');
+                        res.status(403).json({'message':'You have already rated this user.'});
                     }else{
                         user.findOne({email:raterEmail}, function(err,raterFound){
                             if(raterFound){
