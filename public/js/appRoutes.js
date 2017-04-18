@@ -19,6 +19,10 @@ angular.module('pettts')
 			                templateUrl: 'views/editPost.html',
 			                controller: 'postController'
 			            })
+                  .when('/posts/search', {
+                    templateUrl: 'views/search.html',
+                    controller: 'searchController'
+                  })
 
 						// filter posts router
 						.when('/posts/:type', {
@@ -26,10 +30,7 @@ angular.module('pettts')
 							controller: 'filterController'
 						})
 
-            .when('/posts/search', {
-              templateUrl: 'views/search.html',
-              controller: 'searchController'
-            })
+
 
 		$locationProvider.html5Mode(true);
 

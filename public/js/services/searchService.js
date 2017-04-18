@@ -2,27 +2,39 @@ angular.module('pettts')
 
 // connecting frontend searchController with the api
 .factory('searchService',function($http,$location, $window){
-  var searchKey = $window.key;
+  //var searchKey = $scope.searchKey;
     return{
-            search: function(){
+            search: function($scope){
+              //console.log("in search in service"+$scope.searchKey);
               var req = {
                method: 'GET',
-               url: '/post/search',
+               url: '/post/searchAndFilter',
                headers: {
-                 'kind': searchKey
+                 'kind': $scope.searchKey
+                // 'species':$scope.searchKey
                }
              }
               return $http(req).then(function successCallback(response) {
                             console.log("entered the service");
-                            console.log(response);
-                          if(!response.data.posts){
+                        //    console.log(response);
+                          if(response.data.posts == undefined){
+                            $scope.notFound = true ;
+                            console.log("Error" );
+                            $location.path('/posts/search');
+                            $location.replace();
                           return response.data.message;
-                          console.log("No posts found");}
+                          //console.log(response)
+                          }
                           else {
-                         console.log("posts from the servie "+response.data.posts);
-                        return response.data.posts;
+                         console.log("notfound "+ $scope.notFound);
+                         $scope.posts = response.data.posts ;
+                         $scope.notFound = false ;
+                         $location.path('/posts/search');
+                         $location.replace();
+                         return response.data.posts;
 
                           }
+
                         }, function errorCallback(response) {
                           //  $scope.message = "There is an Error";
                           console.log("there's an Error");

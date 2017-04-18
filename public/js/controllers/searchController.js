@@ -1,23 +1,36 @@
 angular.module('pettts')
 
-.controller('searchController', function($scope,$window, searchService) {
+.controller('searchController', function($scope,$window, searchService, $location , $routeParams) {
 
   console.log("entered the search controller");
+  $scope.searchKey = $routeParams.key;
+  searchService.search($scope);
 
-  $scope.submitSearch = function(){
-    if($scope.searchKey){
-        console.log("searchKey is :- "+$scope.searchKey);
-    }
-    else {
-      console.log("No Search Key Found");
-    }
-}
+//   $scope.submitSearch = function(){
+//     if($scope.searchKey){
+//       //  console.log("searchKey is :- "+$scope.searchKey);
+//
+//       //  $window.location.href = 'posts/search';
+//       $location.path('/posts/search');
+//       $location.replace();
+//       $scope.posts = searchService.search($scope);
+//
+//   //    $location.replace();
+//
+//
+//     }
+//     else {
+//       console.log("No Search Key Found");
+//     //  $window.location.href = 'posts/search';
+//
+//     }
+// }
 
-
+/*
     searchService.search().then(function(posts){
 
         if(posts){
-          console.log("inside the internal if "+response.data.posts);
+          console.log("inside the internal if "+posts);
           $scope.notFound = false;
         }
         else {
@@ -25,10 +38,10 @@ angular.module('pettts')
         }
       //console.log("Response in controller " );
       //console.log(response.data.posts);
-      $scope.posts = response.data.posts;
+        $scope.posts = posts;
       //$window.location = '/posts/search';
 
-    });
+    });*/
 
 });
 
