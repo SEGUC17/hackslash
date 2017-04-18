@@ -525,20 +525,21 @@ let postController = {
                 }
             })
         }
-    },
-    viewPostInfo: function(req , res)
-    {
-      var idQuery = req.header("id");
-      Post.findOne({_id: idQuery }, function(err, post) {
-          if (err) {
-              res.json(err.message);
-
-          } else {
-                  res.json({post});
-          }
-      });
-
     }
+    ,
+//     viewPostInfo: function(req , res)
+//     {
+//       var idQuery = req.header("id");
+//       Post.findOne({_id: idQuery }, function(err, post) {
+//           if (err) {
+//               res.json(err.message);
+
+//           } else {
+//                   res.json({post});
+//           }
+//       });
+
+//     }
 }
 
 module.exports = postController;
