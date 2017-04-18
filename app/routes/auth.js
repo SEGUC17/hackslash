@@ -15,18 +15,18 @@ http://localhost:8080/resetPassword?t=zbeWIkT30TkdAvjh37arekyXif8LQACH
 */
 router.get('/resetPassword/:token', function(req, res){
   console.log("entered at point new reset x12");
-  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-    if (user) {///< DONT FORGET SWITCH BACK TO NOT >>>>>>>>>>>>>>>>>>>>
+  User.findOne({resetToken:req.params.token, resetTokenExpiryDate: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {// if user  token wasnt found redirect to the forgot password page
         console.log("entered if");
-      return res.redirect('/forgotPassword'); // if user wasnt found redirect to the forgot password page
+      return res.redirect('/forgotPassword');
 
-    }else{
+    }else{ // if the user was found redirect to the reset password page
       console.log("enterd the else ");
 
-res.redirect('/reset');
-      // res.render('reset', {
-      //      user: req.user
-      //    });
+      res.render('reset', {
+           user: req.user,
+           token:req.params.token
+         });
 
   }
   });
