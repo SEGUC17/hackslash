@@ -132,10 +132,11 @@ let postController = {
         }
     },
     // Filtering Posts by Type
-    filterPosts: function(req, res) {
-        var filterType;
-        switch (req.header("filter")) {
-            case "sell":
+    filterPosts:function(req, res){
+        var filterParam = req.params.type;
+        var filterType ;
+        switch(filterParam){
+            case "buy":
                 filterType = 1
                 break;
             case "shelter":
@@ -154,14 +155,14 @@ let postController = {
                 filterType = 6;
                 break;
             default:
-                filterType = 1;
+                break;
         }
         Post.find({ type: filterType }, function(err, posts) {
             if (err) {
                 res.json(err.message);
             } else {
                 if (posts.length == 0) {
-                    res.json({ "message": "No Posts Exists" });
+                    res.json({ message: "No Posts Exists" });
                 } else {
                     res.json({ posts });
                 }
@@ -242,7 +243,7 @@ let postController = {
                 res.json(err.message);
             } else {
                 if (posts.length == 0) {
-                    res.json("No posts , Yet ");
+                    res.json("No posts , Yet");
                 } else {
                     res.json({ posts });
                 }
@@ -340,7 +341,7 @@ let postController = {
 
         if (!token) {
             res.status(403).json("not loggedin ");
-        } else { //check if logged    
+        } else { //check if logged
             var ownerEmailDecoded = req.decoded._doc.email;
             let post = new Post(req.body.post);
             if (!ownerEmailDecoded || !post.type || !post.kind || !post.species || !post.gender || !post.price) {
