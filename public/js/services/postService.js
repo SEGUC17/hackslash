@@ -133,7 +133,7 @@ angular.module('pettts')
             }
 
         },
-        edit: function(post, type, $scope) {
+        edit: function(post, type, $scope, id) {
             switch (type) {
                 case "sell":
                     {
@@ -176,7 +176,7 @@ angular.module('pettts')
                 headers: {
                     'x-access-token': token
                 },
-                data: { post }
+                data: { post, id }
             }
             return $http(req).then(function successCallback(response) {
                 $scope.message = "Post edited Successfully";
@@ -187,5 +187,22 @@ angular.module('pettts')
             });
 
         }
+        // ,
+        // getPost : function (id) {
+        //   var req = {
+        //       method: 'get',
+        //       url: '/post/postInfo', // The URL
+        //       headers: {
+        //           'id': id
+        //       }
+        //   }
+        //   return $http(req).then(function successCallback(response) {
+        //       return response;
+        //   }, function errorCallback(response) {
+        //       return response;
+        //   });
+        //
+        //
+        // }
     }
 });

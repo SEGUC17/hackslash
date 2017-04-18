@@ -6,7 +6,7 @@ let postController = {
     editPost: function(req, res) {
         ////  get images               ////
         //handle exceptions
-        if (!req.body || !req.query || !req.query.id) {
+        if (req.body == undefined) {
             res.status(400).json("error occured");
             return;
         }
@@ -22,21 +22,24 @@ let postController = {
             var post = new Post(req.body.post);
             post.ownerEmail = ownerEmailDecoded;
 
-            if (!post.type || !post.kind || !post.species || !post.gender) {
-                res.status(403).json("incomplete request ");
-                return;
-            }
-            if (post.type == 6 && (!post.speciesB || !post.kindB || !post.genderB || post.genderB == 'null')) {
-                res.status(403).json("input problem with exchange type");
-                return;
-            }
-            var id = req.query.id;
+            // if (!post.type || !post.kind || !post.species || !post.gender) {
+            //     res.status(403).json("incomplete request ");
+            //     return;
+            // }
+            // if (post.type == 6 && (!post.speciesB || !post.kindB || !post.genderB || post.genderB == 'null')) {
+            //     res.status(403).json("input problem with exchange type");
+            //     return;
+            // }
+            var id = req.body.id;
+            console.log(id);
+            console.log(ownerEmailDecoded);
             Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) { //add ownerEmail here
                 if (err) {
                     res.status(403).json("project not found or not your project");
                 } else {
                     //no match exception
-                    if (foundPost == null) {
+                    console.log(foundPost);
+                      if (foundPost == null) {
                         res.status(403).json("post does not match with anything");
                         return
                     }
@@ -522,6 +525,19 @@ let postController = {
                 }
             })
         }
+    },
+    viewPostInfo: function(req , res)
+    {
+      var idQuery = req.header("id");
+      Post.findOne({_id: idQuery }, function(err, post) {
+          if (err) {
+              res.json(err.message);
+
+          } else {
+                  res.json({post});
+          }
+      });
+
     }
 }
 
