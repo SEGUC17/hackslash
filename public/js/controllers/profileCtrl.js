@@ -1,10 +1,14 @@
 angular.module('pettts')
 .controller('profileController',function($scope,$http,profileService,$window){
-
+    $scope.messageRated = $window.sessionStorage.messageRated;
     $scope.submitRate = function() {
         var rating = $scope.rate;
         var rated = $scope.userInfo.email;
-        profileService.rate(rating,rated,$scope);
+        if(rating > 5 || rating < 1){
+            $scope.message = "Rating must be between 1 and 5"
+        }else{
+            profileService.rate(rating,rated,$scope);
+        }
     };
     
     $scope.submitEdit = function() {
@@ -13,40 +17,58 @@ angular.module('pettts')
     };
 
     $scope.delete = function() {
+        $scope.messagePass = undefined;
+        $scope.messageNotGiven = undefined;
         var password = $scope.dPassword;
         var verify = $scope.dVerify;
         if(password){
             if(password == verify){
                 profileService.delete(password,$scope);
-                }else{
-                console.log('error');
+            }else{
+                $scope.messagePass = 'Your passwords don\'t match.';
             }
         }else{
-            console.log('Big error');
+            $scope.messageNotGiven = 'You need to enter your password.';
         }
     };
 
     $scope.passChange = function() {
+        $scope.messageEmpty = undefined;
+        $scope.messageError = undefined;
+        $scope.messageNew = undefined;
+        $scope.messageOld = undefined;
         var password = $scope.password;
         var verify = $scope.verify;
         var newPassword = $scope.newPassword;
         var verNewPassword = $scope.verNewPassword;
         if(password && newPassword){
-            if(password == verify && newPassword == verNewPassword && newPassword.length > 5){
-                profileService.pass(password,newPassword,$scope);
-
+            if(newPassword == verNewPassword && newPassword.length > 5 ){
+                if(password == verify){
+                    if(password != newPassword){
+                        profileService.pass(password,newPassword,$scope);
+                    }else{
+                        $scope.messageError = "Your old and new passwords need to be different.";
+                    }
+                }else{
+                    $scope.messageOld = "Your old password doesn't match.";     
+                }
             }else{
-                console.log('error');
+                $scope.messageNew = "Your new password doesn't match.";
             }
         }else{
-            console.log('Big error');
+           $scope.messageEmpty = "Please enter both your old and new passwords.";
         }
     };
 
   
     profileService.view().then(function(response){
+        $scope.teet = "bla";
         $scope.userInfo = response.data.userProfileInfo;
         $scope.Posts = response.data.myPosts;
+        if($scope.Posts == "||&This user has no Posts yet.&||")
+        {
+            $scope.Posts = undefined;
+        }
         $scope.myEmail = $window.sessionStorage.email;
     });
 })

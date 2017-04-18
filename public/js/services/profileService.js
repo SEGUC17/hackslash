@@ -3,6 +3,7 @@ angular.module('pettts')
 //Services to connect with back end routes.
 .factory('profileService',function($http,$window){
     var userEmail = $window.sessionStorage.email;
+    var userUsername = $window.sessionStorage.userUsername;
     var userToken = $window.sessionStorage.accessToken;
     return{
               //Service to call viewProfile
@@ -39,8 +40,12 @@ angular.module('pettts')
                     'token': userToken
                 }
             };
-            console.log(request);
             return $http(request).then(function success(response){
+                if(response.status == 403){
+                    $window.sessionStorage.messageRated = "You have already rated this user!"
+                }else{
+                    $window.sessionStorage.messageRated='bla';
+                }
                 $window.location = '/profile';
             },function error(response){
                 return {
@@ -84,9 +89,6 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response){
-                $window.sessionStorage.accessToken = null;
-                $window.sessionStorage.email = null;
-                $window.location = '/posts';
                 $window.location = '/profile';
             },function error(response){
                 return {
