@@ -1,13 +1,13 @@
 angular.module('pettts')
 
 //Services to connect with back end routes.
-.factory('profileService',function($http,$window){
+.factory('profileService', function($http, $window) {
     var userEmail = $window.sessionStorage.email;
     var userUsername = $window.sessionStorage.userUsername;
     var userToken = $window.sessionStorage.accessToken;
-    return{
-              //Service to call viewProfile
-        view : function(givenUsername){
+    return {
+        //Service to call viewProfile
+        view: function(givenUsername) {
             var request = {
                 method: 'GET',
                 url: '/profile/view',
@@ -16,29 +16,29 @@ angular.module('pettts')
                     'username': givenUsername //TODO:REDIRECT TO DIFFERENT USERS
                 }
             };
-            return $http(request).then(function success(response){
+            return $http(request).then(function success(response) {
                 console.log(response);
-                if(response.data == "The user you're trying to view does not exist!"){
+                if (response.data == "The user you're trying to view does not exist!") {
                     return {
-                        'success':false,
-                        'data':'No User'
+                        'success': false,
+                        'data': 'No User'
                     }
-                }else{
+                } else {
                     return {
-                        'success':true,
+                        'success': true,
                         'data': response.data
                     };
                 }
-            },function error(response){
+            }, function error(response) {
                 return {
-                    'success':false,
-                    'message':'Error in service request'
+                    'success': false,
+                    'message': 'Error in service request'
                 };
             });
         },
-          
+
         //Service to call rateUser
-        rate : function(rating,rated,$scope){
+        rate: function(rating, rated, $scope) {
             var request = {
                 method: 'POST',
                 url: '/profile/rate',
@@ -48,23 +48,23 @@ angular.module('pettts')
                     'token': userToken
                 }
             };
-            return $http(request).then(function success(response){
-                if(response.status == 403){
+            return $http(request).then(function success(response) {
+                if (response.status == 403) {
                     $window.sessionStorage.messageRated = "You have already rated this user!"
-                }else{
-                    $window.sessionStorage.messageRated='bla';
+                } else {
+                    $window.sessionStorage.messageRated = 'bla';
                 }
                 $window.location = '/profile';
-            },function error(response){
+            }, function error(response) {
                 return {
-                    'success':false,
-                    'message':'Error in service request'
+                    'success': false,
+                    'message': 'Error in service request'
                 };
             });
         },
         //Service to call deleteUser
-        delete : function(password,$scope){
-           var request = {
+        delete: function(password, $scope) {
+            var request = {
                 method: 'POST',
                 url: '/profile/delete',
                 data: {
@@ -73,19 +73,19 @@ angular.module('pettts')
                     'token': userToken
                 }
             };
-            return $http(request).then(function success(response){
+            return $http(request).then(function success(response) {
                 $window.sessionStorage.accessToken = null;
                 $window.sessionStorage.email = null;
                 $window.location = '/posts';
-            },function error(response){
+            }, function error(response) {
                 return {
-                    'success':false,
-                    'message':'Error in service request'
+                    'success': false,
+                    'message': 'Error in service request'
                 };
             });
         },
         //Service to call changePassword
-        pass : function(password,newPassword,$scope){
+        pass: function(password, newPassword, $scope) {
             var request = {
                 method: 'POST',
                 url: '/profile/pass',
@@ -96,18 +96,18 @@ angular.module('pettts')
                     'token': userToken
                 }
             };
-            return $http(request).then(function success(response){
+            return $http(request).then(function success(response) {
                 $window.location = '/profile';
-            },function error(response){
+            }, function error(response) {
                 return {
-                    'success':false,
-                    'message':'Error in service request'
+                    'success': false,
+                    'message': 'Error in service request'
                 };
             });
         },
         //Service to call editProfile
-        edit : function(user,$scope){
-            if(user){
+        edit: function(user, $scope) {
+            if (user) {
                 var request = {
                     method: 'POST',
                     url: '/profile/edit',
@@ -122,12 +122,12 @@ angular.module('pettts')
                         'token': userToken
                     }
                 };
-                return $http(request).then(function success(response){
+                return $http(request).then(function success(response) {
                     $window.location = '/profile';
-                },function error(response){
+                }, function error(response) {
                     return {
-                        'success':false,
-                        'message':'Error in service request'
+                        'success': false,
+                        'message': 'Error in service request'
                     };
                 });
             }
