@@ -5,7 +5,7 @@ var app = angular.module('pettts');
       $scope.submitUser = function() {
 
         var user = $scope.user;
-        User.add(user);
+        User.add(user,$scope);
 
       };
     });

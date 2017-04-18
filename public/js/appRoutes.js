@@ -1,22 +1,41 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('pettts')
+    .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
-    $routeProvider
+        $routeProvider
+            .when('/register', {
+                templateUrl: 'views/register.html',
+                controller: 'registerController'
+            })
+            .when('/login', {
+                templateUrl: 'views/login.html',
+                controller: 'loginCtrl'
+            })
+            .when('/posts', {
+                templateUrl: 'views/posts.html',
+                controller: 'postsController'
+            })
+            .when('/post/new', {
+                templateUrl: 'views/addPost.html',
+                controller: 'postController'
+            })
+            .when('/profile', {
+                templateUrl: 'views/profile.html',
+                controller: 'profileController'
+            })
+            .when('/editProfile',{
+                templateUrl: 'views/editProfile.html',
+                controller: 'profileController'
+            })
+				    .when('/post/edit', {
+			          templateUrl: 'views/editPost.html',
+			          controller: 'postController'
+			      })
 
-    // posts page
+						// filter posts router
+						.when('/posts/:type', {
+							templateUrl: 'views/filter.html',
+							controller: 'filterController'
+						})
 
-        .when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'loginCtrl'
-        })
-        .when('/posts', {
-            templateUrl: 'views/posts.html',
-            controller: 'postsController'
-        })
-        .when('/register', {
-            templateUrl: 'views/register.html',
-            controller: 'registerController'
-        })
-
-    $locationProvider.html5Mode(true);
-
+		$locationProvider.html5Mode(true);
 }]);

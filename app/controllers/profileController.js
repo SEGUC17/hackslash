@@ -63,7 +63,7 @@ let profileController ={
             res.status(400).json('There is a problem with your request.');
             return;
         }
-        var token = req.body.token || req.header("token") || req.query.token;
+        var token = req.body.token || req.header("x-access-token") || req.query.token;
         if(!token){
             res.json('You must be logged in to view profiles.')
         }else{
