@@ -31,11 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('superSecret', config.superSecret); // Secret of Tokens!
 
-// view engine setup
 
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-app.set('views', path.join(__dirname, '/public/views'));
 
 // Requiring routes
 var register = require('./app/routes/register');
