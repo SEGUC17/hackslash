@@ -46,16 +46,27 @@ angular.module('pettts')
             })
 
 
-				    .when('/post/edit', {
+				          .when('/post/edit', {
+
+			                templateUrl: 'views/editPost.html',
+			                controller: 'postController'
+			            })
+                  .when('/posts/search', {
+                    templateUrl: 'views/search.html',
+                    controller: 'searchController'
+                  })
+
 			          templateUrl: 'views/editPost.html',
 			          controller: 'postController'
 			      })
+
 
 						// filter posts router
 						.when('/posts/:type', {
 							templateUrl: 'views/filter.html',
 							controller: 'filterController'
 						})
+
 
 
 		$locationProvider.html5Mode(true);

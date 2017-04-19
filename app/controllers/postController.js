@@ -121,8 +121,9 @@ let postController = {
     // Searching posts by kind and species
     searchPosts: function(req, res) {
         var kindQuery = req.header("kind");
+        console.log(kindQuery);
         var speciesQuery = req.header("species");
-        if (kindQuery != undefined && speciesQuery != undefined) {
+        if (kindQuery !== undefined && speciesQuery !== undefined) {
             Post.find({ kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
                     res.json(err.message);
@@ -134,7 +135,7 @@ let postController = {
                     }
                 }
             })
-        } else if (kindQuery != undefined) {
+        } else if (kindQuery !== undefined) {
             Post.find({ kind: { $regex: kindQuery } }, function(err, posts) {
                 if (err) {
                     res.json(err.message);
@@ -146,7 +147,7 @@ let postController = {
                     }
                 }
             })
-        } else if (speciesQuery != undefined) {
+        } else if (speciesQuery !== undefined) {
             Post.find({ species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
                     res.json(err.message);

@@ -27,21 +27,19 @@
     <!-- controllers -->
     <script type="text/javascript" src="js/services/postsService.js"></script>
     <script type="text/javascript" src="js/controllers/postsController.js"></script>
+    <script type="text/javascript" src="js/controllers/searchDirectionController.js"></script>
     <script type="text/javascript" src="js/services/filterService.js"></script>
     <script type="text/javascript" src="js/controllers/filterController.js"></script>
     <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
-    
+    <script type="text/javascript" src="js/controllers/searchController.js"></script>
+    <script type="text/javascript" src="js/services/searchService.js"></script>
     <script type="text/javascript" src="js/services/profileService.js"></script>
     <script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
-
     <script type="text/javascript" src="js/controllers/pass_ctrl.js"></script>
     <script type="text/javascript" src="js/services/postService.js"></script>
     <script type="text/javascript" src="js/controllers/postController.js"></script>
-
     <script type="text/javascript" src="js/controllers/registerController.js"></script>
     <script type="text/javascript" src="js/services/registerService.js"></script>
-
-
     <script type="text/javascript" src="js/appRoutes.js"></script>
 
   </head>
@@ -68,14 +66,17 @@
 
             <ul class="nav navbar-nav navbar-right">
               <!-- Search bar -->
-              <form class="navbar-form navbar-left">
+
+              <form  class="navbar-form navbar-left"  ng-controller="searchDirectionController" ng-submit="submitSearch()" >
                 <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control" id="search-input" placeholder="What are you looking for?" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                  <input type="text" class="form-control" id="search-input" placeholder="What are you looking for?"
+                  ng-model="searchKey">
+
+                  <span class="input-group-addon">
+                      <button type="submit" >
+                          <span class="glyphicon glyphicon-search"></span>
+                      </button>
+                  </span>
                 </div>
               </form>
               <li><a href="/register">Register</a></li>
@@ -104,6 +105,11 @@
 
     </header>
     <!-- End of Header -->
+<<<<<<< HEAD
+
+    <li><a href="/post/new">add post</a></li>
+=======
+>>>>>>> 0e656b3604ffaaaaf7e15d0c09e7b252bfcebe68
     <div ng-view></div>
 
     <!-- Footer -->
