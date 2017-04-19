@@ -7,7 +7,6 @@ angular.module('pettts')
       get: function() {
           return $http.get('/post/view')
             .then(function successCallback(res){
-              console.log(res.data.posts);
               return res.data.posts;
             });
       }

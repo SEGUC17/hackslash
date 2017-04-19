@@ -7,8 +7,8 @@ angular.module('pettts')
 
             .when('/resetPassword/:token', {
 
-               templateUrl: 'views/reset.html',
-               controller: 'pass_ctrl'
+                templateUrl: 'views/reset.html',
+                controller: 'pass_ctrl'
             })
             .when('/register', {
                 templateUrl: 'views/register.html',
@@ -23,7 +23,7 @@ angular.module('pettts')
                 controller: 'pass_ctrl'
             })
 
-            .when('/posts', {
+        .when('/posts', {
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
             })
@@ -35,49 +35,28 @@ angular.module('pettts')
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })
-            .when('/editProfile',{
+            .when('/editProfile', {
                 templateUrl: 'views/editProfile.html',
                 controller: 'profileController'
-            })      .when('/post/viewPost',{
-                templateUrl:'views/viewMore.html',
-                controller :'reviewPostController'
-      })
-				    .when('/post/edit', {
             })
 
-            .when('/reset', {
-                templateUrl: 'views/reset.html',
-                controller: 'pass_ctrl'
-            })
+        .when('/reset', {
+            templateUrl: 'views/reset.html',
+            controller: 'pass_ctrl'
+        })
 
 
-				          .when('/post/edit', {
+        .when('/post/edit', {
+            templateUrl: 'views/editPost.html',
+            controller: 'postController'
+        })
 
-			                templateUrl: 'views/editPost.html',
-			                controller: 'postController'
-			            })
-                  .when('/posts/search', {
-                    templateUrl: 'views/search.html',
-                    controller: 'searchController'
-                  })
-
-
-			          templateUrl: 'views/editPost.html',
-			          controller: 'postController'
-			      })
+        // filter posts router
+        .when('/posts/:type', {
+            templateUrl: 'views/filter.html',
+            controller: 'filterController'
+        })
 
 
-            .when('/posts/viewMore',{
-              templateUrl:'views/viewMore.html',
-              controller : 'reviewPostController'
-            })
-
-
-						// filter posts router
-						.when('/posts/:type', {
-							templateUrl: 'views/filter.html',
-							controller: 'filterController'
-						})
-
-		$locationProvider.html5Mode(true);
-}]);
+        $locationProvider.html5Mode(true);
+    }]);

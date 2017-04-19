@@ -50,8 +50,8 @@ let postController = {
             if (req.file)
             post.image=req.file.path;
 
-           // console.log(id);
-           // console.log(ownerEmailDecoded);
+            console.log(id);
+            console.log(ownerEmailDecoded);
             Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) { //add ownerEmail here
                 if (err) {
                     res.status(403).json("project not found or not your project");
