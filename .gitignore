@@ -1,4 +1,5 @@
 /node_modules
+/views
 /app/config/config.js
 sendgrid.env
 /public/libs

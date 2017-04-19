@@ -1,5 +1,5 @@
 <div ng-controller="postController">
-    <form class="jumbotron text-left" ng-submit="submitAdd()">
+    <form class="jumbotron text-left" ng-submit="submitAdd()" enctype="multipart/form-data">
         <div class="form-group">
             <h3>Add Post</h3>
             <label for="type">Post Type</label> <br>
@@ -19,7 +19,6 @@
             <label for="gender">Animal gender</label> <br>
             <input type="radio" name="gender" ng-model="post.gender" value="male"> Male
             <input type="radio" name="gender" ng-model="post.gender" value="female"> Female <br>
-
 
             <!--check to be visible type exchange only -->
             <div ng-switch="post.type">
@@ -43,6 +42,7 @@
             <label for="note">Notes</label> <br>
             <input type="text" name="note" ng-model="post.note" placeholder="Notes"> <br>
 
+            <input type="file" ng-File-Model="post.postPic" />
             <!--check to be visible type sell only -->
 
             <div ng-switch="post.type">
