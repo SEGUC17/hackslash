@@ -5,6 +5,11 @@ angular.module('appRoutes', [])
 
         // posts page
 
+        .when('/resetPassword/:token', {
+
+            templateUrl: 'views/reset.html',
+            controller: 'pass_ctrl'
+        })
             .when('/login', {
                 templateUrl: 'views/login.html',
                 controller: 'loginCtrl'

@@ -1,17 +1,35 @@
 var app = angular.module('pettts');
 
-app.controller('pass_ctrl', function($scope, $http, $location, $window) {//forgetPassword //post
+app.controller('pass_ctrl', function($scope, $http, $location, $window,$routeParams) {//forgetPassword //post
 /*
 $rootScope.$on("resUserX", function(event,data){ //getting the username from the broadcast on the root scope
   var userEmail=data; //userName from  the root scope
 event.stopPropagation(); // removing the username from the the broadcast
 }),*/
 
+
 //console.log($scope.email);
  console.log("entered the controller")
        $scope.pop=function(){ //User clicked on submit password
- console.log("entered the controller");
-         $http.post('/resetPassword',$scope.formData).then(function successCallback(response) {
+ console.log("entered the controller bel pop");
+ console.log($routeParams);
+// console.log($route.current.params.token);
+
+//handle here finding if the token is valid or not
+ var token=$routeParams;
+var password=$scope.formData;
+
+console.log(token);
+console.log(password);
+//
+// $http.get("/url/to/resource/", {params:{"param1": val1, "param2": val2}})
+//     .then(function (response) { /* */ })...
+
+
+         $http.post('/resetPassword',{ params:{'token':$routeParams,'password':$scope.formData}}).then(function successCallback(response) {
+           console.log('fired post req');
+                    //  console.log($routeParams);
+                    //  console.log($scope.formData);
 
              // this callback will be called asynchronously
              // when the response is available

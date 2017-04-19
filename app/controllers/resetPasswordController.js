@@ -7,6 +7,16 @@ var resetPasswordController = {
   // NOW THE USER CLICKED ON THE EMAIL SENT TO HIM AND OPENED THE PAGE AND POSTED HIS DESIRED NEW PASSWORD
   resetPassword : function (req, res) {
     // EXTRACTING THE TOKEN FROM THE URL
+    console.log("entered the controller successfully");
+     console.log(req.data.params.token);
+    console.log(req.data.params.password);
+
+
+
+
+
+
+
     var token = req.params.token;
     // FIND A USERNAME WITH A RESET PASSWORD TOKEN EQUAL THE ONE SENT WITH THE REQUEST
 
