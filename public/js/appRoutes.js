@@ -38,6 +38,11 @@ angular.module('pettts')
             .when('/editProfile',{
                 templateUrl: 'views/editProfile.html',
                 controller: 'profileController'
+            })      .when('/post/viewPost',{
+                templateUrl:'views/viewMore.html',
+                controller :'reviewPostController'
+      })
+				    .when('/post/edit', {
             })
 
             .when('/reset', {
@@ -56,9 +61,16 @@ angular.module('pettts')
                     controller: 'searchController'
                   })
 
+
 			          templateUrl: 'views/editPost.html',
 			          controller: 'postController'
 			      })
+
+
+            .when('/posts/viewMore',{
+              templateUrl:'views/viewMore.html',
+              controller : 'reviewPostController'
+            })
 
 
 						// filter posts router
@@ -66,8 +78,6 @@ angular.module('pettts')
 							templateUrl: 'views/filter.html',
 							controller: 'filterController'
 						})
-
-
 
 		$locationProvider.html5Mode(true);
 }]);

@@ -270,7 +270,7 @@ let postController = {
     },
     // showing the posts without the contact info of the users
     viewPostsOnly: function(req, res) {
-        Post.find({}, function(err, posts) {
+        Post.find({},function(err, posts) {
             if (err) {
                 res.json(err.message);
             } else {
@@ -278,6 +278,7 @@ let postController = {
                     res.json("No posts , Yet");
                 } else {
                     res.json({ posts });
+                    console.log(posts[0]);
                 }
             }
         })
@@ -311,6 +312,7 @@ let postController = {
     },
     // Reviewing a Post . check Logged-in
     reviewPost: function(req, res) {
+      console.log("In the backend of review");
         if (!req.body) {
             res.status(400).json("problem with the sent request");
             return;
@@ -322,7 +324,7 @@ let postController = {
             var userMail = req.decoded._doc.email;
             var id = req.header("id");
             var vote = req.body.vote;
-
+            console.log(id + " "+vote);
             Post.findOne({ _id: id }, function(err, post) {
                 if (post == null) {
                     res.json("Post Doesn't Exist");
@@ -555,6 +557,120 @@ let postController = {
     /// post type=> lost
 
     lostPost: function(req, res) {
+<<<<<<< HEAD
+        if (!req.body) {
+            res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
+            return;
+        }
+        var token = req.headers['x-access-token'];
+        if (!token) {
+            res.status(403).json("USER ISNT LOGGED IN ");
+        } else {
+            var ownerEmailDecoded = req.decoded._doc.email;
+            let post = new Post(req.body.post);
+            if (!ownerEmailDecoded || !post.type || !post.kind || !post.species || !post.gender) {
+                res.status(403).json("REQUEST BODY ISNT COMPLETE ");
+                return;
+            }
+            if (post.type != 4) {
+                res.status(403).json("not the same type");
+                return;
+            }
+            post.ownerEmail = ownerEmailDecoded;
+            post.save(function(err, Post) {
+                if (err) {
+                    res.status(403).json("CANT ADD USER EMAIL");
+                } else {
+                    res.json("LOST POST successfully POSTED");
+                }
+            })
+        }
+    },
+    /// post type=> exchange
+    exchangePost: function(req, res) {
+        ////  get images               ////
+        ////handle exceptions
+        if (!req.body) {
+            res.status(400).json("problem with the sent request");
+            return;
+        }
+        var token = req.headers['x-access-token'];
+        if (!token) { //
+            res.status(403).json("not loggedin ");
+        } else {
+            //loggedin
+            var ownerEmailDecoded = req.decoded._doc.email;
+            let post = new Post(req.body.post); //handled the extra attributes are not considered
+            if (!ownerEmailDecoded || !post.type || !post.kind || !post.species || !post.gender) {
+                res.status(403).json("incomplete request ");
+                return;
+            }
+            if (post.type != 6 || !post.speciesB || !post.kindB || !post.genderB) {
+                res.status(403).json("not exchange post");
+                return;
+            }
+            post.ownerEmail = ownerEmailDecoded; //save it with the new email ( from the token )
+            post.save(function(err, Post) {
+                if (err) {
+                    res.status(403).json("problem inserting");
+                } else {
+                    res.json("done");
+                }
+            })
+        }
+    },
+
+    findPostbyId:function(req,res){
+      console.log("In the findPostbyId backend");
+      var id = req.header("_id");
+      Post.findOne({ _id: id}, function(err, foundPost) {
+        if(err){
+          res.json("There's an Error finding this post");
+        }
+        else {
+        if(foundPost == null){
+          res.json("There is no post with this ID");
+        }
+        else {
+          res.json(foundPost);
+          console.log(foundPost.ownerEmail);
+        }
+      }
+      });
+    },
+
+    findOwnerByPostID:function(req,res){
+      console.log("In the findOwnerByPostID backend");
+      var neededEmail;
+      var id = req.header("_id");
+      console.log(id);
+      Post.findOne({ _id: id}, function(err, foundPost) {
+        if(err){
+          res.json("There's an Error finding this post");
+          return;
+        }
+        else {
+        if(foundPost == null){
+          res.json("There is no post with this ID");
+          return;
+        }
+        else {
+        neededEmail = foundPost.ownerEmail;
+        }
+      }
+      });
+      User.findOne({email:neededEmail},function(err,foundUser){
+        if(err) res.json("There's an error finding this person");
+        else {
+          if(foundUser == null) res.send("No Owner with this Email");
+          else {
+            res.json(foundUser);
+            console.log("first Name "+foundUser.firstName);
+          }
+        }
+      });
+    }
+=======
        if (!req.body) {
            res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
            if (req.file)
@@ -656,6 +772,7 @@ let postController = {
 //       });
 
 //     }
+>>>>>>> 62c15abc54e442ece2d78d0d9772225b4209b64e
 }
 
 module.exports = postController;
