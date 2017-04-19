@@ -34,11 +34,19 @@ angular.module('pettts')
 			          controller: 'postController'
 			      })
 
+            .when('/posts/viewMore',{
+              templateUrl:'views/viewMore.html',
+              controller : 'reviewPostController'
+            })
+
 						// filter posts router
 						.when('/posts/:type', {
 							templateUrl: 'views/filter.html',
 							controller: 'filterController'
 						})
+
+
+
 
 		$locationProvider.html5Mode(true);
 }]);

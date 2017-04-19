@@ -14,5 +14,7 @@ router.post('/post/lost',middleware.isLoggedIn, postController.lostPost);
 router.post('/post/found',middleware.isLoggedIn, postController.foundPost);
 router.post('/post/sell',middleware.isLoggedIn, postController.sellPost);
 router.post('/post/mate',middleware.isLoggedIn, postController.matePost);
+router.get('/post/specificUser',postController.findOwnerByPostID);
+
 
 module.exports = router;

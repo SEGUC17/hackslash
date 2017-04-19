@@ -2,11 +2,11 @@ angular.module('pettts')
 
 // connecting frontend postcontroller with the api .
 
-.factory('reviewPostService',function($http, $window){
+.factory('reviewPostService',function($http,$window){
   var token = $window.sessionStorage.accessToken;
 
   return{
-    vote:function($scope,vote){
+    vote:function(id,vote){
       var value =0;
       if(vote == "up"){
         value = 1;
@@ -19,22 +19,54 @@ angular.module('pettts')
         method: 'POST',
         url: '/post/review',
         headers: {
-            'x-access-token': token,
-            '_id':'58e01a52a5584e42dce8292a'
+            '_id':id
         },
-        body: {'vote':value}
+        data: {'vote':value,'token':token}
       }
-      return $http(req).then(function successCallback(response){
-        $scope.message = "Your vote was submitted Successfully";
+        $http(req).then(function successCallback(response){
+        console.log("Going to back");
+        console.log(vote + " "+id );
+
         return response;}
         , function errorCallback(response) {
-            $scope.message = "There is an Error submitting your vote";
+          console.log("There's an Error");
             return response;
       });
+    },
 
+      viewPostInfo:function(id){
+        var req ={
+          method:'GET',
+          url   :'/post/specificPost',
+          headers:{
+            '_id':id
+          }
+        }
+      return $http(req).then(function successCallback(response){
+        console.log(response.data);
+        return response.data;},
+        function errorCallback(response){
+          console.log("Error in reviewPostService");
+          return response;
+        }
+      );}
 
+    ,
 
-    }
-  }
+     viewOwnerInfo:function(id){
+       var req ={
+         method:'GET',
+         url   :'/post/specificUser',
+         headers:{
+           '_id':id
+         }
+       }
+        return $http(req).then(function successCallback(response){
+          return response;},
+          function errorCallback(response){
+            return response;
+          }
+        );}
 
+      }
 });
