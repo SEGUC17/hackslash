@@ -557,7 +557,7 @@ let postController = {
     /// post type=> lost
 
     lostPost: function(req, res) {
-<<<<<<< HEAD
+
         if (!req.body) {
             res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
             return;
@@ -670,7 +670,6 @@ let postController = {
         }
       });
     }
-=======
        if (!req.body) {
            res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
            if (req.file)
@@ -772,7 +771,6 @@ let postController = {
 //       });
 
 //     }
->>>>>>> 62c15abc54e442ece2d78d0d9772225b4209b64e
 }
 
 module.exports = postController;
