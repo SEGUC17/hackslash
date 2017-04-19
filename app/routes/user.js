@@ -9,4 +9,6 @@ router.get('/post/searchAndfilter', postController.searchAndFilterPosts);
 router.get('/post/view',postController.viewPostsOnly);
 router.get('/post/specificPost',postController.findPostbyId);
 
+//router.get('/post/postInfo',postController.viewPostInfo);
+
 module.exports = router;

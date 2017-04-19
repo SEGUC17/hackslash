@@ -5,6 +5,7 @@ angular.module('pettts')
     // getting the route parameter
     $scope.type = $routeParams.type
 
+
     if($scope.type !== "buy" || $scope.type !== "exchange" || $scope.type !== "shelter" || $scope.type !== "mate" || $scope.type !== "lost" || $scope.type !== "found"){
       $scope.notFound = true;
     }

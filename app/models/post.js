@@ -51,7 +51,7 @@ var postSchema = new mongoose.Schema({
     description: {
         type: String
     },
-    images: [String],
+    image: String,
     note: String,
     date: {
         type: Date,

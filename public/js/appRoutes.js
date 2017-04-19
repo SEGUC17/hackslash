@@ -2,6 +2,14 @@ angular.module('pettts')
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         $routeProvider
+
+        // posts page
+
+            .when('/resetPassword/:token', {
+
+               templateUrl: 'views/reset.html',
+               controller: 'pass_ctrl'
+            })
             .when('/register', {
                 templateUrl: 'views/register.html',
                 controller: 'registerController'
@@ -10,6 +18,11 @@ angular.module('pettts')
                 templateUrl: 'views/login.html',
                 controller: 'loginCtrl'
             })
+            .when('/forgotPassword', {
+                templateUrl: 'views/forgotPassword.html',
+                controller: 'pass_ctrl'
+            })
+
             .when('/posts', {
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
@@ -18,7 +31,7 @@ angular.module('pettts')
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
-            .when('/profile', {
+            .when('/profile/:username', {
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })
@@ -30,23 +43,41 @@ angular.module('pettts')
                 controller :'reviewPostController'
       })
 				    .when('/post/edit', {
+            })
+
+            .when('/reset', {
+                templateUrl: 'views/reset.html',
+                controller: 'pass_ctrl'
+            })
+
+
+				          .when('/post/edit', {
+
+			                templateUrl: 'views/editPost.html',
+			                controller: 'postController'
+			            })
+                  .when('/posts/search', {
+                    templateUrl: 'views/search.html',
+                    controller: 'searchController'
+                  })
+
+
 			          templateUrl: 'views/editPost.html',
 			          controller: 'postController'
 			      })
+
 
             .when('/posts/viewMore',{
               templateUrl:'views/viewMore.html',
               controller : 'reviewPostController'
             })
 
+
 						// filter posts router
 						.when('/posts/:type', {
 							templateUrl: 'views/filter.html',
 							controller: 'filterController'
 						})
-
-
-
 
 		$locationProvider.html5Mode(true);
 }]);

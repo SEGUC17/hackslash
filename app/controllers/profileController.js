@@ -70,12 +70,14 @@ let profileController ={
             //To add: if this is my profile, show edit button.
             var myEmail = req.decoded._doc.email;
             //var qUserName = req.query.username;
-            var uEmail = req.header("email");
+            //var uEmail = req.header("email");
+            var uUsername = req.header("username");
             //First, find this user.
-            user.findOne({email:uEmail},function(err,userProfileInfo){
+            user.findOne({username:uUsername},function(err,userProfileInfo){
                 if(err){//Internal Error
                     res.status(500).json(err.message);
                 }else if(userProfileInfo){//User found.
+                    var uEmail = userProfileInfo.email;
                     post.find({ownerEmail:uEmail},function(err,myPosts){//Find his posts as well.
                         if(err){//Internal Error
                             res.status(500).json(err.message);

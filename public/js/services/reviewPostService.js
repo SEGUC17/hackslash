@@ -11,7 +11,7 @@ angular.module('pettts')
       if(vote == "up"){
         value = 1;
       }
-      else if (vote="down") {
+      else if (vote=="down") {
         value = 0;
       }
 
@@ -19,15 +19,16 @@ angular.module('pettts')
         method: 'POST',
         url: '/post/review',
         headers: {
-            '_id':id
+            'id':id
         },
         data: {'vote':value,'token':token}
       }
         $http(req).then(function successCallback(response){
         console.log("Going to back");
         console.log(vote + " "+id );
-
-        return response;}
+        console.log(response);
+        return response;
+      }
         , function errorCallback(response) {
           console.log("There's an Error");
             return response;
@@ -43,8 +44,8 @@ angular.module('pettts')
           }
         }
       return $http(req).then(function successCallback(response){
-        console.log(response.data);
-        return response.data;},
+        console.log(response);
+        return response;},
         function errorCallback(response){
           console.log("Error in reviewPostService");
           return response;
