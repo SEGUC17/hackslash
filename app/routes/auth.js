@@ -10,10 +10,7 @@ var authController            = require('../controllers/authController');
 var forgetPasswordController  = require('../controllers/forgetPasswordController.js');
 var resetPasswordController   = require('../controllers/resetPasswordController.js');
 
-router.get('/forgetPassword', function(req, res){
-  // Here : we should render the page that asks the user for his email.
-});
-// After the user enters his email
+
 router.post('/forgetPassword', forgetPasswordController.forgetPassword);
 
 router.post('/resetPassword', resetPasswordController.resetPassword);

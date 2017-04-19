@@ -2,13 +2,13 @@ var User = require('../models/user.js');
 
 var forgetPasswordController ={
   /*
-    forgetPassword description
-    It should ask the user for his email,
-    if it is an email for an already registered user it should send him an email using (sendForgetPasswordEmail) method
+  forgetPassword description
+  It should ask the user for his email,
+  if it is an email for an already registered user it should send him an email using (sendForgetPasswordEmail) method
   */
   forgetPassword : function (req, res){
     var email = req.body.email;
-  console.log(email);
+    console.log(email);
     User.findOne({email: email}, function(err, foundUser){
       if(err){
         throw err;
@@ -25,9 +25,9 @@ var forgetPasswordController ={
   }
 }
 /*
-  sendForgetPasswordEmail description
-  - Generate Token
-  - Send an email with a link containing the generated token to the user using SendGrid.
+sendForgetPasswordEmail description
+- Generate Token
+- Send an email with a link containing the generated token to the user using SendGrid.
 */
 var sendForgetPasswordEmail = function (foundUser){
   // Generating token

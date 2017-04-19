@@ -6,31 +6,28 @@ var resetPasswordController = {
 
   // NOW THE USER CLICKED ON THE EMAIL SENT TO HIM AND OPENED THE PAGE AND POSTED HIS DESIRED NEW PASSWORD
   resetPassword : function (req, res) {
-    // EXTRACTING THE TOKEN FROM THE URL
-    console.log("entered the controller successfully");
-     console.log(req.data.params.token);
-    console.log(req.data.params.password);
+    // EXTRACTING THE TOKEN AND PASSWORD FROM THE INCOMING PARAMETERS
+
+    var tokenSource = req.body.params.token;
+    var tokenToGo=tokenSource.token;// EXTRACTING THE TOKEN VALUE ITSELF
+    
+    var passSource=req.body.params.password;
+    var passToGo=passSource.password; // EXTRACTING THE PASSWORD VALUE ITSELF
 
 
-
-
-
-
-
-    var token = req.params.token;
     // FIND A USERNAME WITH A RESET PASSWORD TOKEN EQUAL THE ONE SENT WITH THE REQUEST
 
     // CHECKING IF THERE IS A USER THAT WAS GIVEN THIS TOKEN AND THAT THE TOKEN IS NOT EXPIRED
-    User.findOne({resetToken: token}, function(err, foundUser) {
+    User.findOne({resetToken: tokenToGo}, function(err, foundUser) {
       if(err) throw err;
-       else {
+      else {
         if(foundUser) {
 
           var curData = new Date();
           // HASH THE NEW PASSWORD
           bcrypt.genSalt(10,function(err, salt) {
             if(err) throw err;
-            bcrypt.hash(req.body.password, salt, function(err, hash) {
+            bcrypt.hash(passToGo, salt, function(err, hash) {
               if(err) {
                 // throw err;
               }

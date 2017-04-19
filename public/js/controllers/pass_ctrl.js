@@ -1,83 +1,45 @@
 var app = angular.module('pettts');
 
-app.controller('pass_ctrl', function($scope, $http, $location, $window,$routeParams) {//forgetPassword //post
-/*
-$rootScope.$on("resUserX", function(event,data){ //getting the username from the broadcast on the root scope
-  var userEmail=data; //userName from  the root scope
-event.stopPropagation(); // removing the username from the the broadcast
-}),*/
+app.controller('pass_ctrl', function($scope, $http, $location, $window,$routeParams) {
 
 
-//console.log($scope.email);
- console.log("entered the controller")
-       $scope.pop=function(){ //User clicked on submit password
- console.log("entered the controller bel pop");
- console.log($routeParams);
-// console.log($route.current.params.token);
+  $scope.pop=function(){ //USER CLICKED ON CHANGE PASSWORD BUTTON IN RESET PASSWORD PAGE
 
-//handle here finding if the token is valid or not
- var token=$routeParams;
-var password=$scope.formData;
+    //FIRING RESET PASSWORD REQUEST TO THE BACK END API
+    $http.post('/resetPassword',{ params:{'token':$routeParams,'password':$scope.formData}}).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      if(response.data.success==true){// IF PASSWORD WAS succesfully changed it will redirect him to the login page
+        $window.alert("Password has been change succesfully,,, Redirecting you to login page");
+        $window.location = '/login';
+      }else{// IF THE PASSWORD WASNT SUCCESSFULLY cHAGNED IT REDIRECTS HIM TO THE FORGOT PASSWORD PAGE
+        $window.alert("Something Went Wrong  ,, please Try Again");
+        $window.location = '/forgotPassword';
+      }
+    }, function errorCallback(response) {
+      console.log(response.message);
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
 
-console.log(token);
-console.log(password);
-//
-// $http.get("/url/to/resource/", {params:{"param1": val1, "param2": val2}})
-//     .then(function (response) { /* */ })...
+  },
 
+  $scope.reset = function() {// USER CLICKED ON RESET PASSWORD BUTTON IN FORGOT PASSWORD PAGE
 
-         $http.post('/resetPassword',{ params:{'token':$routeParams,'password':$scope.formData}}).then(function successCallback(response) {
-           console.log('fired post req');
-                    //  console.log($routeParams);
-                    //  console.log($scope.formData);
-
-             // this callback will be called asynchronously
-             // when the response is available
-             if(response.data.success==true){
-               console.log("password was passed succesfully to the api");
-           //    $window.alert="please check your email for the  password reset link";
-             }else{
-               console.log("couldnt updatepass");
-               console.log("frombackend1:"+ response.message);
-     //  $window.alert="Something Went Wrong  ,, please Try Again";
-             }
-           }, function errorCallback(response) {
-             console.log("frombackend2:"+response.message);
-             // called asynchronously if an error occurs
-             // or server returns response with an error status.
-     //  $window.alert="Something Went Wrong  ,, please Try Again";
-           });
-
-    },
-
-
-
-       $scope.reset = function() {// asking for the reset password form
-      console.log("entered reset");
-       console.log($scope.formData);
-
+    // FIRING FORGET PASSWORD REQUEST TO THE BACK END API
     $http.post('/forgetPassword',$scope.formData).then(function successCallback(response) {
-        // this callback will be called asynchronously
-        // when the response is available
-        if(response.data.success==true){
-          console.log("mail sent successfully");
-      //    $window.alert="please check your email for the  password reset link";
-
-        }else{
-          console.log("coudlnt send mail");
-          console.log("from back end1 :"+ response.message);
-
-//  $window.alert="Something Went Wrong  ,, please Try Again";
-
-
-        }
-      }, function errorCallback(response) {
-        console.log("from back end2 :"+response.message);
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-//  $window.alert="Something Went Wrong  ,, please Try Again";
-      });
-
-
+      // this callback will be called asynchronously
+      // when the response is available
+      if(response.data.success==true){// IF THE PASSWORD RESET LINK WAS SUCCESSFULLY SENT TO USER IT ALERTS HIM
+        $window.alert("Password Reset Link has been sent to your email");
+      }else{// IF THE MAIL MAIL WASNT SENT IT ALERTS THE USER TO TRY AGAIN
+        $window.alert("Something Went Wrong  ,, please Try Again");
+        console.log(response.message);
+      }
+    }, function errorCallback(response) {
+      console.log(+response.message);
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
   }
 });
