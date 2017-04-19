@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html ng-app="pettts">
+ <!DOCTYPE html>
+ <html ng-app="pettts">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="Online pets marketplace">
@@ -33,6 +33,13 @@
     <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
     <script type="text/javascript" src="js/controllers/searchController.js"></script>
     <script type="text/javascript" src="js/services/searchService.js"></script>
+    <script type="text/javascript" src="js/services/profileService.js"></script>
+    <script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/pass_ctrl.js"></script>
+    <script type="text/javascript" src="js/services/postService.js"></script>
+    <script type="text/javascript" src="js/controllers/postController.js"></script>
+    <script type="text/javascript" src="js/controllers/registerController.js"></script>
+    <script type="text/javascript" src="js/services/registerService.js"></script>
     <script type="text/javascript" src="js/appRoutes.js"></script>
 
   </head>
@@ -72,7 +79,7 @@
                   </span>
                 </div>
               </form>
-              <li><a href="#">Register</a></li>
+              <li><a href="/register">Register</a></li>
               <li><a href="/login">Login</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -98,8 +105,11 @@
 
     </header>
     <!-- End of Header -->
+<<<<<<< HEAD
 
     <li><a href="/post/new">add post</a></li>
+=======
+>>>>>>> 0e656b3604ffaaaaf7e15d0c09e7b252bfcebe68
     <div ng-view></div>
 
     <!-- Footer -->

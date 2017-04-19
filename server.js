@@ -2,6 +2,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var path = require('path');
+
+
 
 // Requiring the Configuration file
 var config = require('./app/config/config');
@@ -21,11 +24,18 @@ mongoose.connect(DB_URI, function(err, db){
 // Initializing app
 var app = express();
 
+
 // Using Middlewares
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('superSecret', config.superSecret); // Secret of Tokens!
+
+// view engine setup
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname, '/public/views'));
 
 // Requiring routes
 var register = require('./app/routes/register');

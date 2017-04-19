@@ -20,8 +20,8 @@ angular.module('pettts')
                           if(response.data.posts == undefined){
                             $scope.notFound = true ;
                             console.log("Error" );
-                            $location.path('/posts/search');
-                            $location.replace();
+                            // $location.path('/posts/search');
+                            // $location.replace();
                           return response.data.message;
                           //console.log(response)
                           }
@@ -29,8 +29,8 @@ angular.module('pettts')
                          console.log("notfound "+ $scope.notFound);
                          $scope.posts = response.data.posts ;
                          $scope.notFound = false ;
-                         $location.path('/posts/search');
-                         $location.replace();
+                        //  $location.path('/posts/search');
+                        //  $location.replace();
                          return response.data.posts;
 
                           }
