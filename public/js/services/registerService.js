@@ -37,7 +37,7 @@ app.factory('User', function($http) {
                 headers: { 'Content-Type': undefined }
             }).then(function successCallback(response) {
                 $scope.message = "verification mail sent";
-                $window.location = '/login';
+                 $window.location = '/login';
                 return response;
             }, function errorCallback(response) {
                 $scope.message = "err occcured can't register";

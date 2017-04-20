@@ -27,6 +27,9 @@ angular.module('pettts')
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
             })
+            .when('/charge', {
+                    templateUrl: 'views/charge.html',
+                })
             .when('/post/new', {
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
@@ -68,6 +71,7 @@ angular.module('pettts')
             templateUrl: 'views/filter.html',
             controller: 'filterController'
         })
+  
 
 
         $locationProvider.html5Mode(true);

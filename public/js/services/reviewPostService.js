@@ -4,9 +4,9 @@ angular.module('pettts')
 
 .factory('reviewPostService',function($http,$window){
   var token = $window.sessionStorage.accessToken;
-  if(!token)
-    $window.location = '/login';
-  else
+    if(!token)		
+      $window.location = '/login';
+    else
   return{
     vote:function(id,vote){
       var value =0;
