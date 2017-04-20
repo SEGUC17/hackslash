@@ -46,23 +46,17 @@ p {
 }
 
 .glyphicon-star:before {
-    content: "\e216";
-    font-size: 30px;
     color: gray;
 }
 
 .glyphicon-star-full:before {
-    content: "\e217";
-    font-size:30px;
     color: gold;
 }
 
 .glyphicon-envelope:before {
-  content: "\2709";
   padding-right: 2px;
 }
 
 .glyphicon-phone:before {
-  content: "\e201";
   padding-right: 2px;
 }

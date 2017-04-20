@@ -1,88 +1,118 @@
+<link rel="stylesheet" href="../css/editProfile.css">
+
 <div  ng-controller="profileController">
-    <div class="container">
-        <form class="jumbotron text-left" ng-controller="profileController" ng-submit="submitEdit()">
+    <h2>These are your profile settings.</h2>
+    <form class="text-left" ng-controller="profileController" ng-submit="submitEdit()">
+        <div class="editForm">
+            <p>Please choose which of the below you wish to edit</p>
+
             <div class="form-group">
-                <label for="editChoice">These are your profile settings.<br/>
-                Please choose which of the below you wish to edit</label> <br>
-
-                <label for="username"> Username : </label> <br>
-                <input type="text" name="username" ng-model="edit.username" placeholder="username"> <br>
-
-                <label for="firstName"> First Name : </label> <br>
-                <input type="text" name="firstName" ng-model="edit.firstName" placeholder="First Name"> <br>
-                
-                <label for="middleName"> Middle Name : </label> <br>
-                <input type="text" name="middleName" ng-model="edit.middleName" placeholder="Middle Name"> <br>
-                
-                <label for="lastName"> Last Name : </label> <br>
-                <input type="text" name="lastName" ng-model="edit.lastName" placeholder="Last Name"> <br>
-                
-                <label for="homeNumber"> Home Number : </label> <br>
-                <input type="text" name="homeNumber" ng-model="edit.homeNumber" placeholder="Home Number"> <br>
-                
-                <label for="phoneNumber1"> Phone Number 1 : </label> <br>
-                <input type="text" name="phoneNumber1" ng-model="edit.phoneNumber1" placeholder="Phone Number 1"> <br>
-                
-                <label for="phoneNumber2"> Phone Number 2 : </label> <br>
-                <input type="text" name="phoneNumber2" ng-model="edit.phoneNumber2" placeholder="Phone Number 2 "> <br>
-                
+                <label for="username">Username</label>
+                <input type="text" name="username" ng-model="edit.username" placeholder="username" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-default">Edit yourself!</button>
-        </form>
-
-        <form class="jumbotron text-left" ng-controller="profileController" ng-submit="passChange()">
             <div class="form-group">
-                <label for="passwordChange">If you wish to change your password please fill the below textboxes.</label> <br>
-                
-                <label for="password"> Your current password : </label> <br>
-                <input type="password" name="password" ng-model="password"> <br>
-                <label for="verify"> Confirm your current password : </label> <br>
-                <input type="password" name="verify" ng-model="verify"> <br>
-                
-                <label for="newPassword"> Your new password : </label> <br>
-                <input type="password" name="newPassword" ng-model="newPassword"> <br>
-                <label for="verNewPassword"> Confirm your new password : </label> <br>
-                <input type="password" name="verNewPassword" ng-model="verNewPassword"> <br>
-                
-                <button type="submit" class="btn btn-default">Change password</button>
-                
-                <div ng-if="messageEmpty">
-                    {{messageEmpty}}
-                </div>
-                <div ng-if="messageOld">
-                    {{messageOld}}
-                </div>
-                <div ng-if="messageNew">
-                    {{messageNew}}
-                </div>
-                <div ng-if="messageError">
-                    {{messageError}}
-                </div>
-            
+                <label for="firstName">First name</label>
+                <input type="text" name="firstName" ng-model="edit.firstName" placeholder="First Name" class="form-control">
             </div>
-        </form>
 
-        <form class="jumbotron text-left" ng-controller="profileController" ng-submit="delete()">
             <div class="form-group">
-                <label for="deleteProfile">Are you leaving us? :(</label> <br>
-                
-                <label for="password"> Your current password : </label> <br>
-                <input type="password" name="password" ng-model="dPassword"> <br>
-                <label for="verify"> Confirm your current password : </label> <br>
-                <input type="password" name="verify" ng-model="dVerify"> <br>
-            
-                <button type="submit" class="btn btn-default">Bye bye :(</button>
-            
-                <div ng-if="messagePass">
-                    {{messagePass}}
-                </div>
-                <div ng-if="messageNotGiven">
-                    {{messageNotGiven}}
-                </div>
-
+                <label for="middleName">Middle name</label>
+                <input type="text" name="middleName" ng-model="edit.middleName" placeholder="Middle Name" class="form-control">
             </div>
-        </form>
-    </div>
+
+            <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input type="text" name="lastName" ng-model="edit.lastName" placeholder="Last Name" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="homeNumber">Home number</label>
+                <input type="text" name="homeNumber" ng-model="edit.homeNumber" placeholder="Home Number" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber1">Phone number 1</label>
+                <input type="text" name="phoneNumber1" ng-model="edit.phoneNumber1" placeholder="Phone Number 1" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber2">Phone number 2</label>
+                <input type="text" name="phoneNumber2" ng-model="edit.phoneNumber2" placeholder="Phone Number 2 " class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-block" id="edit-btn">Edit yourself!</button>
+            
+        </div>
+    </form>
+
+    <form class="text-left" ng-controller="profileController" ng-submit="passChange()">
+        <div class="passForm">
+            <p>If you wish to change your password please fill the below textboxes.</p>
+            
+            <div class="form-group">
+                <label for="password">Your current password</label>
+                <input type="password" name="password" ng-model="password" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="verify">Confirm your current password</label>
+                <input type="password" name="verify" ng-model="verify" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">Your new password</label>
+                <input type="password" name="newPassword" ng-model="newPassword" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="verNewPassword">Confirm your new password</label>
+                <input type="password" name="verNewPassword" ng-model="verNewPassword" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-block" id="pass-btn">Change password</button>
+            
+            <div ng-if="messageEmpty">
+                {{messageEmpty}}
+            </div>
+            <div ng-if="messageOld">
+                {{messageOld}}
+            </div>
+            <div ng-if="messageNew">
+                {{messageNew}}
+            </div>
+            <div ng-if="messageError">
+                {{messageError}}
+            </div>
+        
+        </div>
+    </form>
+
+    <form class="text-left" ng-controller="profileController" ng-submit="delete()">
+        <div class="delForm">
+            <p>Are you leaving us? :(</p>
+            <p style="padding-top:0;">You can choose to delete your profile here.</p>
+            
+            <div class="form-group">
+                <label for="password">Your current password</label>
+                <input type="password" name="password" ng-model="dPassword" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="verify"> Confirm your current password : </label>
+                <input type="password" name="verify" ng-model="dVerify" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-block" id="del-btn">Bye bye :(</button>
+        
+            <div ng-if="messagePass">
+                {{messagePass}}
+            </div>
+            <div ng-if="messageNotGiven">
+                {{messageNotGiven}}
+            </div>
+
+        </div>
+    </form>
 
 </div>
