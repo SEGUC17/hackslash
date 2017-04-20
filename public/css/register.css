@@ -9,16 +9,21 @@ body {
   border: 1px solid #dfdede;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.7);
-  width: 50%;
+  width: 45%;
   min-width: 400px;
   margin-top: 50px;
   margin-left: 100px;
-  margin-bottom: 70px;
+  margin-bottom: 80px;
   padding: 0 20px 20px 20px;
 }
 
 .registerForm h2 {
   font-weight: bold;
+}
+
+.registerForm label {
+  font-weight: 200;
+  color: rgb(79, 79, 79);
 }
 
 .subtitle-register {

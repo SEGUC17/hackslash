@@ -1,62 +1,87 @@
-<div ng-controller="postController">
-    <form class="jumbotron text-left" ng-submit="submitEdit()" enctype="multipart/form-data">
+<link rel="stylesheet" href="../css/add-edit-post.css">
+
+<div ng-controller="postController" class="container add-edit-post-form">
+    <form ng-submit="submitEdit()" enctype="multipart/form-data">
         <div class="form-group">
-            <h3>edit Post</h3>
-            <label for="type">Post Type (required)</label> <br>
-            <input type="radio" name="type" ng-model="post.type" value="sell"> Sell
-            <input type="radio" name="type" ng-model="post.type" value="exchange"> Exchange
-            <input type="radio" name="type" ng-model="post.type" value="mate"> Mate
-            <input type="radio" name="type" ng-model="post.type" value="lost"> Lost
-            <input type="radio" name="type" ng-model="post.type" value="found"> Found
-            <input type="radio" name="type" ng-model="post.type" value="shelter"> Shelter <br>
+            <h3>Edit post</h3>
+            <hr>
 
-            <label for="kind">Animal kind (required)</label> <br>
-            <input type="text" name="kind" ng-model="post.kind" required=true placeholder="Animal Kind"> <br>
+            <div class="form-group">
+              <label for="type">Post Type (required)</label> <br>
+              <input type="radio" name="type" ng-model="post.type" value="sell"> Sell
+              <input type="radio" name="type" ng-model="post.type" value="exchange"> Exchange
+              <input type="radio" name="type" ng-model="post.type" value="mate"> Mate
+              <input type="radio" name="type" ng-model="post.type" value="lost"> Lost
+              <input type="radio" name="type" ng-model="post.type" value="found"> Found
+              <input type="radio" name="type" ng-model="post.type" value="shelter"> Shelter
+            </div>
 
-            <label for="species">species (required)</label> <br>
-            <input type="text" name="species" ng-model="post.species" required=true placeholder="Animal species"> <br>
+            <div class="form-group">
+              <label for="kind">Animal kind (required)</label>
+              <input type="text" name="kind" ng-model="post.kind" required=true placeholder="Animal Kind"  class="form-control">
+            </div>
 
-            <label for="gender">Animal gender (required)</label> <br>
-            <input type="radio" name="gender" ng-model="post.gender" value="male"> Male
-            <input type="radio" name="gender" ng-model="post.gender" required=true value="female"> Female <br>
+            <div class="form-group">
+              <label for="species">Species (required)</label>
+              <input type="text" name="species" ng-model="post.species" required=true placeholder="Animal species"  class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="gender">Animal gender (required)</label> <br>
+              <input type="radio" name="gender" ng-model="post.gender" value="male"> Male
+              <input type="radio" name="gender" ng-model="post.gender" required=true value="female"> Female
+            </div>
 
             <!--check to be visible type exchange only -->
             <div ng-switch="post.type">
                 <div ng-switch-when="exchange">
-                    <label for="kindB"> Other Animal kind (required)</label> <br>
-                    <input type="text" name="kindB" ng-model="post.kindB" required=true placeholder=" Other Animal Kind"> <br>
+                  <div class="form-group">
+                    <label for="kindB"> Other Animal kind (required)</label>
+                    <input type="text" name="kindB" ng-model="post.kindB" required=true placeholder=" Other Animal Kind"  class="form-control">
+                  </div>
 
-                    <label for="speciesB">Other Animal species (required) </label> <br>
-                    <input type="text" name="speciesB" ng-model="post.speciesB" required=true placeholder="Other Animal species"> <br>
+                  <div class="form-group">
+                    <label for="speciesB">Other Animal species (required) </label>
+                    <input type="text" name="speciesB" ng-model="post.speciesB" required=true placeholder="Other Animal species">
+                  </div>
 
+                  <div class="form-group">
                     <label for="genderB">Other Animal gender (required)</label> <br>
                     <input type="radio" name="genderB" ng-model="post.genderB" value="male"> Male
-                    <input type="radio" name="genderB" ng-model="post.genderB" required=true value="female"> Female <br>
+                    <input type="radio" name="genderB" ng-model="post.genderB" required=true value="female"> Female
+                  </div>
                 </div>
             </div>
             <!--check to be visible type exchange only -->
 
-            <label for="description">Description</label> <br>
-            <input type="text" name="description" ng-model="post.description" placeholder="description"> <br>
+            <div class="form-group">
+              <label for="description">Description</label> <br>
+              <textarea type="text" rows="3" name="description" ng-model="post.description" placeholder="description" class="form-control"></textarea>
+            </div>
 
-            <label for="note">Notes</label> <br>
-            <input type="text" name="note" ng-model="post.note" placeholder="Notes"> <br>
+            <div class="form-group">
+              <label for="note">Notes</label>
+              <input type="text" name="note" ng-model="post.note" placeholder="Notes"  class="form-control">
+            </div>
 
-            <label for="postPic">post picture</label> <br>
+            <div class="form-group">
+              <label for="postPic">Edit image</label> <br>
+              <input type="file" name="postPic" ng-File-Model="post.postPic" />
+            </div>
 
-            <input type="file" name="postPic" ng-File-Model="post.postPic" />
             <!--check to be visible type sell only -->
-
             <div ng-switch="post.type">
                 <div ng-switch-when="sell">
-                    <label for="price">price (required)</label> <br>
-                    <input type="number" name="price" ng-model="post.price" required=true placeholder="price" <br>
+                  <div class="form-group">
+                    <label for="price">price (required)</label>
+                    <input type="number" name="price" ng-model="post.price" required=true placeholder="price" />
+                  </div>
                 </div>
             </div>
         </div>
 
         <!--remainig  upload -->
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
 
     </form>
 

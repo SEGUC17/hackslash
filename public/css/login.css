@@ -10,3 +10,8 @@
 .login-form h3 {
   margin-bottom: 30px;
 }
+
+.login-form label {
+  font-weight: 200;
+  color: rgb(79, 79, 79);
+}

@@ -6,7 +6,6 @@ angular.module('pettts')
         // posts page
 
             .when('/resetPassword/:token', {
-
                 templateUrl: 'views/reset.html',
                 controller: 'pass_ctrl'
             })
@@ -51,23 +50,20 @@ angular.module('pettts')
               controller: 'pass_ctrl'
             })
 
-
             .when('/post/edit', {
               templateUrl: 'views/editPost.html',
               controller: 'postController'
             })
 
-           .when('/posts/search', {
-                    templateUrl: 'views/search.html',
-                    controller: 'searchController'
-                  })
+            .when('/posts/search', {
+              templateUrl: 'views/search.html',
+              controller: 'searchController'
+            })
 
-	.when('/posts/viewMore',{
+            .when('/posts/viewMore',{
               templateUrl:'views/viewMore.html',
               controller : 'reviewPostController'
             })
-
-
 
             // filter posts router
             .when('/posts/f/:type', {
