@@ -51,6 +51,12 @@ angular.module('pettts')
             controller: 'postController'
         })
 
+	.when('/posts/search', {
+                    templateUrl: 'views/search.html',
+                    controller: 'searchController'
+                  })
+
+
         // filter posts router
         .when('/posts/:type', {
             templateUrl: 'views/filter.html',
