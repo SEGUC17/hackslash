@@ -1,0 +1,47 @@
+body {
+  background-image: linear-gradient(to right, rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
+                    url("../images/edit-profile-pic.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.delForm, .editForm, .passForm {
+  border: 1px solid #dfdede;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 1);
+  width: 50%;
+  min-width: 400px;
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 30px;
+  margin-bottom: 70px;
+  padding: 0 20px 20px 20px;
+}
+
+.delForm{
+  background-color: rgba(186, 186, 186, 1)
+}
+
+p {
+  padding-top: 10px;
+}
+
+h2 {
+  padding-left: 120px;
+}
+
+#edit-btn, #pass-btn {
+  color: rgb(0, 0, 0);
+  font: bold;
+  font-size: 20px;
+  background: rgb(0, 150, 50);
+  border: 1px solid rgb(0, 100, 50);
+}
+
+#del-btn {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 20px;
+  background: rgb(200, 10, 50);
+  border: 1px solid rgb(200, 10, 50);
+}
