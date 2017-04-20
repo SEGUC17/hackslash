@@ -1,1 +1,1 @@
-angular.module('pettts',['ngRoute', 'ngAnimate', 'ui.bootstrap']);
+angular.module('pettts', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);

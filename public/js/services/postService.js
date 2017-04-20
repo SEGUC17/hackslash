@@ -7,6 +7,11 @@ angular.module('pettts')
 
         ///add callbacks for success and failure TODO
         add: function(post, type, $scope) {
+            if (!type) {
+                $scope.message = "you should select the type of the post";
+                return;
+            }
+
             switch (type) {
                 case "sell":
                     {
@@ -125,6 +130,15 @@ angular.module('pettts')
 
         },
         edit: function(post, type, $scope, id) {
+
+                if (!type) {
+                    $scope.message = "you should select the type of the post";
+                    return;
+                }
+                if (!id) {
+                    $scope.message = "invalid post";
+                    return;
+                }
                 switch (type) {
                     case "sell":
                         {

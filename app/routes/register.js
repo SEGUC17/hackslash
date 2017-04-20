@@ -1,10 +1,16 @@
 var express = require("express");
-var router  = express.Router();
+var router = express.Router();
+
+
+//profile picture upload
+var multer = require('multer');
+var upload = multer({ dest: "views/profilePics" });
+var type = upload.single('profilePic');
 
 // REQUIRE REGISTER CONTROLLER
 var registerController = require('../controllers/registerController.js');
 
-router.post("/register", registerController.register);
+router.post("/register", type, registerController.register);
 router.get("/email-verification/:url", registerController.verifyEmail);
 router.post("/resend-verification-code", registerController.resendVerification);
 

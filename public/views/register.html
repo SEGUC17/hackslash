@@ -2,28 +2,28 @@
     <div class="form-group">
         <h3>Register</h3>
         <label for="username">username (required): </label> <br>
-        <input type="text" name="username" ng-model="user.username" placeholder="username"> <br> <br>
+        <input type="text" name="username" ng-model="user.username" required=true placeholder="username"> <br> <br>
         <label for="password">password (required): </label> <br>
-        <input type="password" name="password" ng-model="user.password" placeholder="password"> <br> <br>
+        <input type="password" name="password" ng-model="user.password" required=true placeholder="password"> <br> <br>
         <label for="email">email (required): </label> <br>
-        <input type="text" name="email" ng-model="user.email" placeholder="email"> <br> <br>
+        <input type="text" name="email" ng-model="user.email" required=true placeholder="email"> <br> <br>
         <label for="firstName">firstName (required): </label> <br>
-        <input type="text" name="firstName" ng-model="user.firstName" placeholder="firstName"> <br> <br>
+        <input type="text" name="firstName" ng-model="user.firstName" required=true placeholder="firstName"> <br> <br>
         <label for="middleName">middleName: </label> <br>
         <input type="text" name="middleName" ng-model="user.middleName" placeholder="middleName"> <br> <br>
         <label for="lastName">lastName (required): </label> <br>
-        <input type="text" name="lastName" ng-model="user.lastName" placeholder="lastName"> <br> <br>
+        <input type="text" name="lastName" ng-model="user.lastName" required=true placeholder="lastName"> <br> <br>
         <label for="phoneNumber1">phoneNumber1: </label> <br>
         <input type="text" name="phoneNumber1" ng-model="user.phoneNumber1" placeholder="phoneNumber1"> <br> <br>
         <label for="phoneNumber2">phoneNumber2: </label> <br>
         <input type="text" name="phoneNumber2" ng-model="user.phoneNumber2" placeholder="phoneNumber2"> <br> <br>
         <label for="homeNumber">homeNumber: </label> <br>
         <input type="text" name="homeNumber" ng-model="user.homeNumber" placeholder="homeNumber"> <br> <br>
-        <label for="profilePicture">profilePicture: </label> <br>
-        <input type="text" name="profilePicture" ng-model="user.profilePicture" placeholder="profilePicture"> <br> <br>
+        <label for="profilePic">profilePicture: </label> <br>
+        <input type="file" name="profilePic" ng-File-Model="user.profilePic" />
     </div>
     <button type="submit" class="btn btn-default">Sign Up</button>
-        
+
     <div ng-if="message" type="danger">{{ message }}</div>
 
 </form>
