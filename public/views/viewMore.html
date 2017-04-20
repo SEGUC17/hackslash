@@ -1,0 +1,25 @@
+
+      <!-- up & down vote form -->
+      <form ng-controller="reviewPostController" ng-submit="submitVote()">
+     <label class="radio-inline">
+       <input type="radio" value="up"   ng-model="vote">Up-vote
+     </label>
+     <label class="radio-inline">
+       <input type="radio" value="down" ng-model="vote">Down-vote
+     </label>
+     <br> <br>
+     <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+
+   <!-- info form  -->
+   <hr>
+   <form ng-controller= "reviewPostController">
+  <p><strong>Post Up-Votes :{{upVotes}}</strong></p>
+  <p><strong>Post Down-Votes :{{downVotes}}</strong></p>
+   <p><strong>Owner Name :{{firstName }} {{lastName}}</strong></p>
+   <p><strong>Mobile Number :{{mobile}}</strong></p>
+   <p><strong>Email :{{email}}</strong></p>
+   <p><strong>Related Pictuers :</strong></p>
+   <a href="">Visit Owner's Profile</a>
+   </form>

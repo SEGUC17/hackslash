@@ -56,6 +56,12 @@ angular.module('pettts')
                     controller: 'searchController'
                   })
 
+	.when('/posts/viewMore',{
+              templateUrl:'views/viewMore.html',
+              controller : 'reviewPostController'
+            })
+
+
 
         // filter posts router
         .when('/posts/:type', {
