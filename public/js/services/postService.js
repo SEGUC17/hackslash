@@ -3,9 +3,6 @@ angular.module('pettts')
 // connecting frontend postcontroller with the api .
 .factory('Post', function($http, $window) {
     var token = $window.sessionStorage.accessToken;
-    if(!token)
-      $window.location = '/login';
-    else
     return {
 
         ///add callbacks for success and failure TODO
@@ -30,7 +27,7 @@ angular.module('pettts')
                             headers: { 'Content-Type': undefined, 'x-access-token': token }
                         }).then(function successCallback(response) {
                             $scope.message = "Post Added Successfully";
-                            $window.location = '/profile/'+ $window.sessionStorage.username;
+                            return response;
                         }, function errorCallback(response) {
                             $scope.message = "There is an Error";
                             return response;
@@ -48,7 +45,7 @@ angular.module('pettts')
                             headers: { 'Content-Type': undefined, 'x-access-token': token }
                         }).then(function successCallback(response) {
                             $scope.message = "Post Added Successfully";
-                            $window.location = '/profile/'+ $window.sessionStorage.username;
+                            return response;
                         }, function errorCallback(response) {
                             $scope.message = "There is an Error";
                             return response;
@@ -66,7 +63,7 @@ angular.module('pettts')
                             headers: { 'Content-Type': undefined, 'x-access-token': token }
                         }).then(function successCallback(response) {
                             $scope.message = "Post Added Successfully";
-                            $window.location = '/profile/'+ $window.sessionStorage.username;
+                            return response;
                         }, function errorCallback(response) {
                             $scope.message = "There is an Error";
                             return response;
@@ -85,7 +82,7 @@ angular.module('pettts')
                             headers: { 'Content-Type': undefined, 'x-access-token': token }
                         }).then(function successCallback(response) {
                             $scope.message = "Post Added Successfully";
-                            $window.location = '/profile/'+ $window.sessionStorage.username;
+                            return response;
                         }, function errorCallback(response) {
                             $scope.message = "There is an Error";
                             return response;
@@ -103,7 +100,7 @@ angular.module('pettts')
                             headers: { 'Content-Type': undefined, 'x-access-token': token }
                         }).then(function successCallback(response) {
                             $scope.message = "Post Added Successfully";
-                            $window.location = '/profile/'+ $window.sessionStorage.username;
+                            return response;
                         }, function errorCallback(response) {
                             $scope.message = "There is an Error";
                             return response;
@@ -121,7 +118,7 @@ angular.module('pettts')
                             headers: { 'Content-Type': undefined, 'x-access-token': token }
                         }).then(function successCallback(response) {
                             $scope.message = "Post Added Successfully";
-                            $window.location = '/profile/'+ $window.sessionStorage.username;
+                            return response;
                         }, function errorCallback(response) {
                             $scope.message = "There is an Error";
                             return response;
@@ -202,7 +199,7 @@ angular.module('pettts')
                     headers: { 'Content-Type': undefined, 'x-access-token': token }
                 }).then(function successCallback(response) {
                     $scope.message = "Post edited Successfully";
-                    $window.location = '/profile/'+ $window.sessionStorage.username;
+                    return response;
                 }, function errorCallback(response) {
                     $scope.message = "There is an Error";
                     return response;

@@ -84,7 +84,7 @@
               </form>
               <li><a href="/register">Register</a></li>
               <li><a href="/login">Login</a></li>
-              <li>
+              <li><form action="/charge" method="post">
               <!-- Specify auto in data-locale to display Checkout in the user's preferred language, if available. English will be used by default. -->
                 <script
                   src = "https://checkout.stripe.com/checkout.js"
@@ -95,7 +95,7 @@
                   data-description = "For any Client how wants to put advertisements on our website"
                   data-locale = "auto"
                   data-currency = "gbp"
-                >
+                >  
                 </script>
               </form>
               </li>
