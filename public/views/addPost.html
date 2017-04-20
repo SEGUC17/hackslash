@@ -50,7 +50,7 @@
             <div ng-switch="post.type">
                 <div ng-switch-when="sell">
                     <label for="price">price (required)</label> <br>
-                    <input type="number" name="price" ng-model="post.price" required=true placeholder="price" <br>
+                    <input type="number" min="0" name="price" ng-model="post.price" required=true placeholder="price">
                 </div>
             </div>
         </div>

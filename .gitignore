@@ -3,4 +3,6 @@
 /app/config/config.js
 sendgrid.env
 /public/libs
+/public/images/postsGallery
+/public/images/profilePics
 

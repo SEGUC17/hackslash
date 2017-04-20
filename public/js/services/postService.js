@@ -24,7 +24,10 @@ angular.module('pettts')
                             fd.append(key, post[key]);
                         $http.post('/post/sell', fd, {
                             transformRequest: angular.indentity,
-                            headers: { 'Content-Type': undefined, 'x-access-token': token }
+                            headers: {
+                                'Content-Type': undefined,
+                                'x-access-token': token
+                            }
                         }).then(function successCallback(response) {
                             $scope.message = "Post Added Successfully";
                             return response;

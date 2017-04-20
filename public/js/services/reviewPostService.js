@@ -23,11 +23,11 @@ angular.module('pettts')
         },
         data: {'vote':value,'token':token}
       }
-        $http(req).then(function successCallback(response){
-        console.log("Going to back");
-        console.log(vote + " "+id );
-        console.log(response);
-        return response;
+        return $http(req).then(function successCallback(response){
+        //console.log("Going to back");
+        //console.log(vote + " "+id );
+
+        return response.data;
       }
         , function errorCallback(response) {
           console.log("There's an Error");

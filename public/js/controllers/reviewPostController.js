@@ -17,27 +17,52 @@ angular.module('pettts')
         $scope.id = $routeParams.id;
         $scope.submitVote = function() {
           if($scope.vote){
-        console.log("submitVote Called : "+ $scope.vote);}
-        reviewPostService.vote($routeParams.id,$scope.vote);
-
+        console.log("submitVote Called : "+ $scope.vote);
+      }
+        //var response = reviewPostService.vote($routeParams.id,$scope.vote);
+        reviewPostService.vote($routeParams.id,$scope.vote).then(function(response){
+          $scope.message = response;
+        });
     }
 
      reviewPostService.viewPostInfo($routeParams.id).then(function (response){
+       $scope.exchange = undefined;
+       $scope.sell = undefined;
        $scope.upVotes = response.data.upVote;
        $scope.downVotes = response.data.downVote;
        $scope.email = response.data.ownerEmail;
-       $scope.picture = response.data.images[0];
+       if(response.data.image){
+        $scope.picture = response.data.image.substring(7,response.data.image.length);
+       }
+       $scope.kind = response.data.kind;
+       $scope.gender = response.data.gender;
+       $scope.species = response.data.species;
+       $scope.description = response.data.description;
+       console.log(response.data.type);
+       if(response.data.type == 1)
+       {
+          $scope.sell = 1;
+          $scope.price = response.data.price;
+       }
+       if(response.data.type == 6)
+       {
+         $scope.exchange = 1;
+         $scope.kindB = response.data.kind_B;
+         $scope.genderB = response.data.gender_B;
+         $scope.speciesB = response.data.species_B;
+       }
 
 
-       console.log("Response::  ");
-       console.log(response.data.ownerEmail);
+       //console.log("Response::  ");
+       //console.log(response.data.ownerEmail);
      });
 
      reviewPostService.viewOwnerInfo($routeParams.id).then(function (response){
-       $scope.mobile = response.data.phoneNumber1;
-       console.log(response.data.phoneNumber1);
-       $scope.firstName = response.data.firstName;
-       $scope.lastName = response.data.lastName;
+       //$scope.mobile = response.data.phoneNumber1;
+       //console.log(response.data.phoneNumber1);
+       //$scope.firstName = response.data.firstName;
+       //$scope.lastName = response.data.lastName;
+       $scope.username = response.data;
      });
 
 

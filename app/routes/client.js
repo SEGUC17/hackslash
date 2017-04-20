@@ -4,7 +4,7 @@ var router = express.Router();
 
 
 var multer = require('multer');
-var upload = multer({ dest: "views/postsGallery" });
+var upload = multer({ dest: "public/images/postsGallery" });
 var type = upload.single('postPic');
 
 // REQUIRE MIDDLEWARE

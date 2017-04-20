@@ -3,7 +3,7 @@ let User = require('../models/user.js');
 
 
 var multer = require('multer');
-var upload = multer({ dest: "views/postsGallery" });
+var upload = multer({ dest: "public/images/postsGallery" });
 var type = upload.single('postPic');
 // file system
 var fs = require('fs');
@@ -669,27 +669,25 @@ let postController = {
         if(err){
           res.json("There's an Error finding this post");
           return;
-        }
-        else {
-        if(foundPost == null){
-          res.json("There is no post with this ID");
-          return;
-        }
-        else {
-        neededEmail = foundPost.ownerEmail;
-        }
+        }else{
+            if(foundPost == null){
+            res.json("There is no post with this ID");
+            return;
+            }else{
+                neededEmail = foundPost.ownerEmail;
+                User.findOne({email:neededEmail},function(err,foundUser){
+                    if(err) res.json("There's an error finding this person");
+                    else{
+                        if(foundUser == null) res.send("No Owner with this Email");
+                        else{
+                            res.json(foundUser.username);
+                            console.log("first Name "+foundUser.firstName);
+                        }
+                    }
+                });
+            }
       }
-      });
-      User.findOne({email:neededEmail},function(err,foundUser){
-        if(err) res.json("There's an error finding this person");
-        else {
-          if(foundUser == null) res.send("No Owner with this Email");
-          else {
-            res.json(foundUser);
-            console.log("first Name "+foundUser.firstName);
-          }
-        }
-      });
+    });
     }
         //   ,
         //     viewPostInfo: function(req , res)

@@ -4,7 +4,7 @@ var router = express.Router();
 
 //profile picture upload
 var multer = require('multer');
-var upload = multer({ dest: "views/profilePics" });
+var upload = multer({ dest: "public/images/profilePics" });
 var type = upload.single('profilePic');
 
 // REQUIRE REGISTER CONTROLLER

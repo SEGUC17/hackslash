@@ -1,5 +1,5 @@
 <div  ng-controller="profileController">
-    <form class="jumbotron text-left" ng-controller="profileController" ng-submit="submitEdit()">
+    <form class="jumbotron text-left" ng-controller="profileController" ng-submit="submitEdit()" enctype="multipart/form-data">
         <div class="form-group">
             <label for="editChoice">These are your profile settings.<br/>
             Please choose which of the below you wish to edit</label> <br>
@@ -24,7 +24,10 @@
             
             <label for="phoneNumber2"> Phone Number 2 : </label> <br>
             <input type="text" name="phoneNumber2" ng-model="edit.phoneNumber2" placeholder="Phone Number 2 "> <br>
-            
+
+            <label for="profilePicture">Upload your picture</label> <br>
+            <input type="file" name="profilePicture" ng-File-Model="edit.profilePicture" />
+
         </div>
 
         <button type="submit" class="btn btn-default">Edit yourself!</button>
