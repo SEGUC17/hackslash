@@ -71,6 +71,7 @@ angular.module('pettts')
             templateUrl: 'views/filter.html',
             controller: 'filterController'
         })
+  
 
 
         $locationProvider.html5Mode(true);
