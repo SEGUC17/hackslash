@@ -7,10 +7,10 @@ app.factory('User', function($http) {
             /*  var req = {
                                 method: 'POST',
                                 url: '/register',
-                                
+
                                  data: {
-                            'email':user.email, 
-                            'password':user.password,      
+                            'email':user.email,
+                            'password':user.password,
                             'username': user.username,
                             'firstName': user.firstName,
                             'middleName': user.middleName,
@@ -19,7 +19,7 @@ app.factory('User', function($http) {
                             'phoneNumber2': user.phoneNumber2,
                             'homeNumber': user.homeNumber
                                         }
-                }      
+                }
 
                              return $http(req).then(function successCallback(response) {
                                 $scope.message = "verification mail sent";
@@ -37,6 +37,7 @@ app.factory('User', function($http) {
                 headers: { 'Content-Type': undefined }
             }).then(function successCallback(response) {
                 $scope.message = "verification mail sent";
+                $window.location = '/login';
                 return response;
             }, function errorCallback(response) {
                 $scope.message = "err occcured can't register";
