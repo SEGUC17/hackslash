@@ -26,6 +26,8 @@ angular.module('pettts')
        $scope.upVotes = response.data.upVote;
        $scope.downVotes = response.data.downVote;
        $scope.email = response.data.ownerEmail;
+       $scope.picture = response.data.images[0];
+
 
        console.log("Response::  ");
        console.log(response.data.ownerEmail);
