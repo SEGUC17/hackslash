@@ -27,6 +27,9 @@ angular.module('pettts')
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
             })
+            .when('/charge', {
+                    templateUrl: 'views/charge.html',
+                })
             .when('/post/new', {
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
