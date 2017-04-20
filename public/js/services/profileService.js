@@ -106,21 +106,13 @@ angular.module('pettts')
         //Service to call editProfile
         edit: function(user, $scope) {
             if (user) {
-                var request = {
-                    method: 'POST',
-                    url: '/profile/edit',
-                    data: {
-                        'username': user.username,
-                        'firstName': user.firstName,
-                        'middleName': user.middleName,
-                        'lastName': user.lastName,
-                        'phoneNumber1': user.phoneNumber1,
-                        'phoneNumber2': user.phoneNumber2,
-                        'homeNumber': user.homeNumber,
-                        'token': userToken
-                    }
-                };
-                return $http(request).then(function success(response) {
+                var fd = new FormData();
+                for (var key in user)
+                    fd.append(key, user[key]);
+                $http.post('/profile/edit', fd, {
+                    transformRequest: angular.indentity,
+                    headers: { 'Content-Type': undefined, 'x-access-token': userToken }
+                }).then(function success(response) {
                     $window.location = '/profile/' + userUsername;
                 }, function error(response) {
                     return {
