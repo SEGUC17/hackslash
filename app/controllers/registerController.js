@@ -10,7 +10,7 @@ var User = require('../models/user.js');
 
 //profile picture upload
 var multer = require('multer');
-var upload = multer({ dest: "views/profilePics" });
+var upload = multer({ dest: "public/images/profilePics" });
 var type = upload.single('profilePic');
 // file system
 var fs = require('fs');

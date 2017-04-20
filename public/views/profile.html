@@ -57,7 +57,7 @@
                             </div>
                             <div ng-if="myEmail!=userInfo.email">
                                 <form name="rateForm" ng-controller="profileController" ng-submit="submitRate()">
-                                    <input type="number" name="rate" ng-model="rate" placeholder="A number from 1-5"> <br>
+                                    <input type="number" name="rate" ng-model="rateGiven" placeholder="A number from 1-5"> <br>
                                     <button type="submit" class="btn btn-default">Rate {{userInfo.userName}}</button>
                                     <div ng-if="message" type = "danger">
                                         {{message}}
@@ -100,7 +100,9 @@
                                         <div ng-controller="profileController" ng-click="editPost()">
                                             <button type="button" class="btn btn-primary" id="edit-btn">Edit</button>
                                         </div>
-                                        <a id="view-btn" href="#" class="btn btn-primary">View more</a>
+                                        <div ng-controller="profileController" ng-click="viewPost()">
+                                            <button type="button" class="btn btn-primary" id="edit-btn">View more</button>
+                                        </div>
                                     </div> <!-- End of media-body -->
                                 </div> <!-- End of media -->
                             </div> <!-- End of panel-body -->

@@ -4,12 +4,15 @@ angular.module('pettts')
 
         $scope.messageRated = $window.sessionStorage.messageRated;
         $scope.submitRate = function() {
-            var rating = $scope.rate;
+            var rating = $scope.rateGiven;
             var rated = $scope.userInfo.email;
+            var un = $scope.userInfo.username
             if (rating > 5 || rating < 1) {
                 $scope.message = "Rating must be between 1 and 5"
             } else {
-                profileService.rate(rating, rated, $scope);
+                profileService.rate(rating, rated, un, $scope).then(function (response){
+                    $scope.messageRated = response.message;
+                });
             }
         };
 
@@ -64,6 +67,10 @@ angular.module('pettts')
 
         $scope.editPost = function() {
             $location.path('/post/edit').search({ id: $scope.post._id });
+        }
+
+        $scope.viewPost = function() {
+            $location.path('/posts/viewMore').search({ id: $scope.post._id });
         }
 
 
