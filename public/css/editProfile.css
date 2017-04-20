@@ -1,0 +1,11 @@
+.editProfile-main {
+  margin-top: 50px;
+  margin-bottom: 90px;
+  border: 1px solid #dfdede;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.editProfile-section {
+  padding: 20px;
+}
