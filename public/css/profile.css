@@ -1,0 +1,68 @@
+h2 {
+    margin-bottom: 0;
+}
+
+p {
+    padding-left:2px; 
+    color: gray; 
+    margin-top: 0;
+}
+
+#profile-edit-btn {
+    margin-bottom: 0px;
+}
+
+#profile-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#edit-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#new-btn {
+    width: 95%;
+}
+
+#view-btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 1px solid rgb(0,70,160);
+}
+
+#stars1, #stars2, #stars3, #stars4 {
+    display: inline;
+}
+
+.col-md-3 {
+    margin-bottom: 10px;
+}
+
+.col-md-9 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.glyphicon-star:before {
+    content: "\e216";
+    font-size: 30px;
+    color: gray;
+}
+
+.glyphicon-star-full:before {
+    content: "\e217";
+    font-size:30px;
+    color: gold;
+}
+
+.glyphicon-envelope:before {
+  content: "\2709";
+  padding-right: 2px;
+}
+
+.glyphicon-phone:before {
+  content: "\e201";
+  padding-right: 2px;
+}
