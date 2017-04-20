@@ -3,7 +3,7 @@ angular.module('pettts')
 //Services to connect with back end routes.
 .factory('profileService', function($http, $window) {
     var userEmail = $window.sessionStorage.email;
-    var userUsername = $window.sessionStorage.userUsername;
+    var userUsername = $window.sessionStorage.username;
     var userToken = $window.sessionStorage.accessToken;
     return {
         //Service to call viewProfile
@@ -123,7 +123,12 @@ angular.module('pettts')
                     }
                 };
                 return $http(request).then(function success(response) {
-                    $window.location = '/profile';
+                    if(user.username){
+                        $window.location = '/profile/'+user.username;
+                        $window.sessionStorage.username = user.username;
+                    }else{
+                        $window.location = '/profile/'+userUsername;
+                    }
                 }, function error(response) {
                     return {
                         'success': false,
