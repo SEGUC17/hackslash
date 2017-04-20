@@ -3,8 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var path = require('path');
-
-
+var stripe = require("stripe")('sk_test_FBFpEfdEcG80MjHECONxsfen');
 
 // Requiring the Configuration file
 var config = require('./app/config/config');
@@ -51,6 +50,27 @@ app.use(client);
 app.use(user);
 app.use(profile);
 app.use(index);
+
+
+// STRIPE PART
+app.post('/charge', function (req, res) {
+	var token = req.body.stripeToken;
+	var chargeAmount = 200;
+	var charge = stripe.charges.create ({
+		amount : chargeAmount,
+		currency : "gbp",
+		source : token
+	}, function(err, charge) {
+		if(err) {
+			if(err.type == "StripeCardError") {
+				console.log("Your Card Was Declined");
+			}
+		} else {
+			console.log("Your Payment Was Successful");
+		}
+	});
+	res.sendFile(path.resolve('./public/index.html'));
+});
 
 //Starting the server on port 8080
 app.listen(8080, function(){
