@@ -1,119 +1,126 @@
 <link rel="stylesheet" href="../css/editProfile.css">
 
-<div  ng-controller="profileController">
+<div ng-controller="profileController">
+  <div class="setting-forms">
     <h2>These are your profile settings.</h2>
+    <hr>
+
     <form class="text-left" ng-controller="profileController" ng-submit="submitEdit()">
+
         <div class="editForm">
-            <p>Please choose which of the below you wish to edit</p>
+          <h4>Please choose which of the below you wish to edit</h4>
 
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" ng-model="edit.username" placeholder="username" class="form-control">
-            </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" ng-model="edit.username" class="form-control">
+          </div>
 
-            <div class="form-group">
-                <label for="firstName">First name</label>
-                <input type="text" name="firstName" ng-model="edit.firstName" placeholder="First Name" class="form-control">
-            </div>
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" name="firstName" ng-model="edit.firstName" class="form-control">
+          </div>
 
-            <div class="form-group">
-                <label for="middleName">Middle name</label>
-                <input type="text" name="middleName" ng-model="edit.middleName" placeholder="Middle Name" class="form-control">
-            </div>
+          <div class="form-group">
+            <label for="middleName">Middle name</label>
+            <input type="text" name="middleName" ng-model="edit.middleName" class="form-control">
+          </div>
 
-            <div class="form-group">
-                <label for="lastName">Last name</label>
-                <input type="text" name="lastName" ng-model="edit.lastName" placeholder="Last Name" class="form-control">
-            </div>
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" name="lastName" ng-model="edit.lastName" class="form-control">
+          </div>
 
-            <div class="form-group">
-                <label for="homeNumber">Home number</label>
-                <input type="text" name="homeNumber" ng-model="edit.homeNumber" placeholder="Home Number" class="form-control">
-            </div>
+          <div class="form-group">
+            <label for="homeNumber">Home number</label>
+            <input type="text" name="homeNumber" ng-model="edit.homeNumber" class="form-control">
+          </div>
 
-            <div class="form-group">
-                <label for="phoneNumber1">Phone number 1</label>
-                <input type="text" name="phoneNumber1" ng-model="edit.phoneNumber1" placeholder="Phone Number 1" class="form-control">
-            </div>
+          <div class="form-group">
+            <label for="phoneNumber1">Phone number 1</label>
+            <input type="text" name="phoneNumber1" ng-model="edit.phoneNumber1" class="form-control">
+          </div>
 
-            <div class="form-group">
-                <label for="phoneNumber2">Phone number 2</label>
-                <input type="text" name="phoneNumber2" ng-model="edit.phoneNumber2" placeholder="Phone Number 2 " class="form-control">
-            </div>
+          <div class="form-group">
+            <label for="phoneNumber2">Phone number 2</label>
+            <input type="text" name="phoneNumber2" ng-model="edit.phoneNumber2" class="form-control">
+          </div>
 
-            <button type="submit" class="btn btn-block" id="edit-btn">Edit yourself!</button>
+          <button type="submit" class="btn btn-success btn-block" id="edit-btn">Edit yourself!</button>
 
         </div>
+
     </form>
 
     <form class="text-left" ng-controller="profileController" ng-submit="passChange()">
-        <div class="passForm">
-            <p>If you wish to change your password please fill the below textboxes.</p>
+      <div class="passForm">
+        <h4>If you wish to change your password please fill the below textboxes</h4>
 
-            <div class="form-group">
-                <label for="password">Your current password</label>
-                <input type="password" name="password" ng-model="password" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="verify">Confirm your current password</label>
-                <input type="password" name="verify" ng-model="verify" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="newPassword">Your new password</label>
-                <input type="password" name="newPassword" ng-model="newPassword" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="verNewPassword">Confirm your new password</label>
-                <input type="password" name="verNewPassword" ng-model="verNewPassword" class="form-control">
-            </div>
-
-            <button type="submit" class="btn btn-block" id="pass-btn">Change password</button>
-
-            <div ng-if="messageEmpty">
-                {{messageEmpty}}
-            </div>
-            <div ng-if="messageOld">
-                {{messageOld}}
-            </div>
-            <div ng-if="messageNew">
-                {{messageNew}}
-            </div>
-            <div ng-if="messageError">
-                {{messageError}}
-            </div>
-
+        <div class="form-group">
+          <label for="password">Your current password</label>
+          <input type="password" name="password" ng-model="password" class="form-control">
         </div>
+
+        <div class="form-group">
+          <label for="verify">Confirm your current password</label>
+          <input type="password" name="verify" ng-model="verify" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="newPassword">Your new password</label>
+          <input type="password" name="newPassword" ng-model="newPassword" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="verNewPassword">Confirm your new password</label>
+          <input type="password" name="verNewPassword" ng-model="verNewPassword" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block" id="pass-btn">Change password</button>
+
+        <div ng-if="messageEmpty">
+          {{messageEmpty}}
+        </div>
+        <div ng-if="messageOld">
+          {{messageOld}}
+        </div>
+        <div ng-if="messageNew">
+          {{messageNew}}
+        </div>
+        <div ng-if="messageError">
+          {{messageError}}
+        </div>
+
+      </div>
     </form>
 
     <form class="text-left" ng-controller="profileController" ng-submit="delete()">
-        <div class="delForm">
-            <p>Are you leaving us? :(</p>
-            <p style="padding-top:0;">You can choose to delete your profile here.</p>
+      <div class="delForm">
+        <h4>Are you leaving us? :(</h4>
+        <p style="padding-top:0;">Please enter your password to delete your account</p>
 
-            <div class="form-group">
-                <label for="password">Your current password</label>
-                <input type="password" name="password" ng-model="dPassword" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="verify"> Confirm your current password : </label>
-                <input type="password" name="verify" ng-model="dVerify" class="form-control">
-            </div>
-
-            <button type="submit" class="btn btn-block" id="del-btn">Bye bye :(</button>
-
-            <div ng-if="messagePass">
-                {{messagePass}}
-            </div>
-            <div ng-if="messageNotGiven">
-                {{messageNotGiven}}
-            </div>
-
+        <div class="form-group">
+          <label for="password">Your current password</label>
+          <input type="password" name="password" ng-model="dPassword" class="form-control">
         </div>
+
+        <div class="form-group">
+          <label for="verify"> Confirm your current password</label>
+          <input type="password" name="verify" ng-model="dVerify" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-block" id="del-btn">Bye bye :(</button>
+
+        <div ng-if="messagePass">
+          {{messagePass}}
+        </div>
+        <div ng-if="messageNotGiven">
+          {{messageNotGiven}}
+        </div>
+
+      </div>
     </form>
+
+  </div>
 
               <div ng-if="messageEmpty">
                 {{messageEmpty}}
@@ -128,4 +135,4 @@
                 {{messageError}}
               </div>
 
-        </div>
+</div>
