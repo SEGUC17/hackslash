@@ -6,7 +6,7 @@ angular.module('pettts')
         $scope.submitRate = function() {
             var rating = $scope.rateGiven;
             var rated = $scope.userInfo.email;
-            var un = $scope.userInfo.username
+            var un = $scope.userInfo.username;
             if (rating > 5 || rating < 1) {
                 $scope.message = "Rating must be between 1 and 5"
             } else {
