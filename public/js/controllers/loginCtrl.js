@@ -3,12 +3,12 @@ var app = angular.module('pettts');
 app.controller('loginCtrl', function($scope, $http, $location, $window) {
 
   //if the forgot button was clicked
-$scope.forgot=function(){
-  // try rootScope.$emit if isnt working
-//  $rootScope.$broadcast('resUserX', $scope.formData.username );//getting user on the app scope to pass it later to other ctrlers
-  $location.url('./forgotPassword');// redirecting the user to the forgot password page
-
-},
+// $scope.forgot=function(){
+//   // try rootScope.$emit if isnt working
+// //  $rootScope.$broadcast('resUserX', $scope.formData.username );//getting user on the app scope to pass it later to other ctrlers
+//   $location.url('./forgotPassword');// redirecting the user to the forgot password page
+//
+// },
 // if the submit button was clicked
     $scope.submit = function() {
 

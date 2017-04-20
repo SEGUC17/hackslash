@@ -6,7 +6,7 @@ angular.module('pettts')
     console.log($scope.post._id);
     if($scope.post._id != undefined){
       $location.path('/posts/viewMore').search({id: $scope.post._id});
-      
+
       }
     else {
 
@@ -14,7 +14,5 @@ angular.module('pettts')
 
     }
 }
-
-
 
 });
