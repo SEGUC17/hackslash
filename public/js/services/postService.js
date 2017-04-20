@@ -4,8 +4,8 @@ angular.module('pettts')
 .factory('Post', function($http, $window) {
     var token = $window.sessionStorage.accessToken;
     if(!token)
--      $window.location = '/login';
--    else
+      $window.location = '/login';
+    else
     return {
 
         ///add callbacks for success and failure TODO
