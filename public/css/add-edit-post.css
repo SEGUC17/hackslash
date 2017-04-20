@@ -9,6 +9,7 @@
   padding-bottom: 20px;
 }
 
+/* textarea == input text but with multiple row */
 .add-edit-post-form textarea {
     resize: none;
 }
