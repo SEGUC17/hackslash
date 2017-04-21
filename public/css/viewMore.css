@@ -1,0 +1,16 @@
+.post-details {
+  margin-top: 50px;
+  margin-bottom: 80px;
+  background-color: white;
+  padding: 25px;
+  border: 1px solid #ebebeb;
+  border-radius: 5px
+}
+
+#left-col {
+  border-right: 1px solid #ebebeb;
+}
+
+#email-info {
+  margin-top: 20px;
+}
