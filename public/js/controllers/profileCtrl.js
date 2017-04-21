@@ -10,7 +10,7 @@ angular.module('pettts')
             if (rating > 5 || rating < 1) {
                 $scope.message = "Rating must be between 1 and 5"
             } else {
-                profileService.rate(rating, rated, un, $scope).then(function (response){
+                profileService.rate(rating, rated, un, $scope).then(function(response) {
                     $scope.messageRated = response.message;
                 });
             }
@@ -84,19 +84,19 @@ angular.module('pettts')
             $scope.myEmail = $window.sessionStorage.email;
         });
     })
-	app.directive('ngFileModel', ['$parse', function($parse) {
-            return {
-                restrict: 'A',
-                link: function(scope, element, attrs) {
-                        var model = $parse(attrs.ngFileModel);
-                        var isMultiple = attrs.multiple;
-                        var modelSetter = model.assign;
-                        element.bind('change', function() {
-                            scope.$apply(function() {
-                                modelSetter(scope, element[0].files[0]);
+app.directive('ngFileModel', ['$parse', function($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.ngFileModel);
+            var isMultiple = attrs.multiple;
+            var modelSetter = model.assign;
+            element.bind('change', function() {
+                scope.$apply(function() {
+                    modelSetter(scope, element[0].files[0]);
 
-                            });
-                         });
-                }
-            };
-        }]);
+                });
+            });
+        }
+    };
+}]);

@@ -49,7 +49,7 @@ angular.module('pettts')
             $scope.genderB = response.data.genderB;
             $scope.speciesB = response.data.speciesB;
         }
-        //TODO add post date
+
 
         //console.log("Response::  ");
         //console.log(response.data.ownerEmail);

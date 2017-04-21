@@ -1,8 +1,7 @@
 <div ng-controller="pass_ctrl">
-	<form action="/" id="pass">
-		Enter your new desired password: <input type="text" id = "password" ng-model="formData.password"
-		><br>
-		<button type="button" ng-click="pop()">Change Password</button>
-	</form>
-	<div ng-if="errorMessage" type = "danger">{{ errorMessage }}</div>
+    <form action="/" id="pass">
+        Enter your new desired password: <input type="text" id="password" ng-model="formData.password"><br>
+        <button type="button" ng-click="pop()">Change Password</button>
+    </form>
+    <div ng-if="errorMessage" type="danger">{{ errorMessage }}</div>
 </div>

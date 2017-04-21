@@ -28,8 +28,8 @@ angular.module('pettts')
                 controller: 'postsController'
             })
             .when('/charge', {
-                    templateUrl: 'views/charge.html',
-                })
+                templateUrl: 'views/charge.html',
+            })
             .when('/post/new', {
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
@@ -54,15 +54,15 @@ angular.module('pettts')
             controller: 'postController'
         })
 
-	.when('/posts/search', {
-                    templateUrl: 'views/search.html',
-                    controller: 'searchController'
-                  })
+        .when('/posts/search', {
+            templateUrl: 'views/search.html',
+            controller: 'searchController'
+        })
 
-	.when('/posts/viewMore',{
-              templateUrl:'views/viewMore.html',
-              controller : 'reviewPostController'
-            })
+        .when('/posts/viewMore', {
+            templateUrl: 'views/viewMore.html',
+            controller: 'reviewPostController'
+        })
 
 
 
@@ -71,7 +71,7 @@ angular.module('pettts')
             templateUrl: 'views/filter.html',
             controller: 'filterController'
         })
-  
+
 
 
         $locationProvider.html5Mode(true);

@@ -1,56 +1,56 @@
 <div class="main" ng-controller="filterController">
 
-  <!-- if no posts are found -->
-  <div class="container" ng-if="notFound==true">
-    <div class="row">
-      <h4 style="margin-top: 2em;">No Posts found</h4>
-    </div>
-  </div>
-
-  <!-- if there are posts received through the api -->
-  <div class="container" id="main" ng-if="notFound==false">
+    <!-- if no posts are found -->
+    <div class="container" ng-if="notFound==true">
         <div class="row">
-          <h3>Latest Posts</h3>
+            <h4 style="margin-top: 2em;">No Posts found</h4>
+        </div>
+    </div>
+
+    <!-- if there are posts received through the api -->
+    <div class="container" id="main" ng-if="notFound==false">
+        <div class="row">
+            <h3>Latest Posts</h3>
         </div>
 
         <!-- loop through the posts -->
         <div class="row" ng-repeat="post in posts | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left">
-                  <!-- post image -->
-                  <a href="#">
-                    <img class="media-object" src="http://placehold.it/150x150" alt="...">
-                  </a>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left">
+                            <!-- post image -->
+                            <a href="#">
+                                <img class="media-object" src="http://placehold.it/150x150" alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <!-- displaying post type as the title as there is no title! -->
+                            <h4 class="media-heading label label-success">{{ post.type | stringifyType }}</h4>
+                            <!-- display post date -->
+                            <p><small class="date"><em>{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></small></p>
+                            <!-- fixing description length to display by 250 chars -->
+                            <p>{{ post.description.slice(0,250) }}...</p>
+                            <!-- link to show post page -->
+                            <div ng-controller="profileController" ng-click="viewPost()">
+                                <button type="button" class="btn btn-primary" id="edit-btn">View more</button>
+                            </div>
+                        </div>
+                        <!-- End of media-body -->
+                    </div>
+                    <!-- End of media -->
                 </div>
-                <div class="media-body">
-                  <!-- displaying post type as the title as there is no title! -->
-                  <h4 class="media-heading label label-success">{{ post.type | stringifyType }}</h4>
-                  <!-- display post date -->
-                  <p><small class="date"><em>{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></small></p>
-                  <!-- fixing description length to display by 250 chars -->
-                  <p>{{ post.description.slice(0,250) }}...</p>
-                  <!-- link to show post page -->
-                  <div ng-controller="profileController" ng-click="viewPost()">
-                    <button type="button" class="btn btn-primary" id="edit-btn">View more</button>
-                  </div>
-                </div> <!-- End of media-body -->
-              </div> <!-- End of media -->
-            </div> <!-- End of panel-body -->
-          </div> <!-- End of panel -->
-        </div> <!-- End of row -->
+                <!-- End of panel-body -->
+            </div>
+            <!-- End of panel -->
+        </div>
+        <!-- End of row -->
 
-        <ul uib-pagination
-            boundary-links="true"
-            total-items="posts.length"
-            items-per-page="pageSize"
-            ng-model="currentPage"
-            max-size="maxSize"
-            class="pagination-md pagination"
-            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        <ul uib-pagination boundary-links="true" total-items="posts.length" items-per-page="pageSize" ng-model="currentPage" max-size="maxSize" class="pagination-md pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
         </ul>
 
-      </div> <!-- End of container -->
+    </div>
+    <!-- End of container -->
 
-</div> <!-- End of main -->
+</div>
+<!-- End of main -->
