@@ -1,6 +1,6 @@
 var app = angular.module('pettts');
 
-app.factory('User', function($http) {
+app.factory('User', function($http, $window) {
     return {
         add: function(user, $scope) {
             //  return $http.post('/register', user);

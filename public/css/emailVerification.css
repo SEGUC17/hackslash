@@ -1,0 +1,44 @@
+.oops {
+	color:blue;
+}
+
+body {
+    background-image:url(../images/verificationSentBackground.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+	font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.logo {	
+	margin-top:250px;
+	margin-left:15px;
+}
+
+.logo img {
+	width:180px;
+}
+
+.logo p {
+	color:blue;
+	font-size:40px;	
+}	
+
+.sub {
+	margin-left:250px;;
+}
+
+.jumbotron {
+	width:300 px;
+	margin: 40px 800px 0 40px;
+	border: 1px solid gray;
+	text-align: center;
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.5)
+}

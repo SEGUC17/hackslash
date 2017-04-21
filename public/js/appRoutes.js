@@ -18,12 +18,11 @@ angular.module('pettts')
                 templateUrl: 'views/register.html',
                 controller: 'registerController'
             })
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //Response to email verification route //==TODO==//
+            //Response to email verification route
             .when('/v/:verification', {
-                templateUrl: ''
+                templateUrl: 'views/emailVerification.html',
+                controller: 'verificationController'
             })
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Post routes
             //View all posts route
             .when('/posts', {

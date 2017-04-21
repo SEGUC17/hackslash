@@ -1,0 +1,37 @@
+
+.oops{
+	color:blue;
+}
+
+body{
+    background-image:url(../images/happy-dog.jpg);
+    background-size: cover;
+    background-position-y: 50px;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+	font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.logo{
+	text-align:center;
+	margin-top:250px;
+}
+
+.logo img{
+	width:180px;
+}
+
+.logo p{
+	color:blue;
+	font-size:40px;
+}	
+
+hr{
+	margin-left:180px;
+	margin-right:180px;
+}
