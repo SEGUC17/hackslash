@@ -2,7 +2,7 @@ angular.module('pettts')
     .controller('profileController', function($scope, $http, profileService, $window, $location, $routeParams) {
         $scope.givenUsername = $routeParams.username
         $scope.token = $window.sessionStorage.accessToken;
-        
+        $scope.myUsername = $window.sessionStorage.username;
         $scope.messageRated = $window.sessionStorage.messageRated;
         $scope.submitRate = function() {
             var rating = $scope.rateGiven;
@@ -72,6 +72,10 @@ angular.module('pettts')
 
         $scope.viewPost = function() {
             $location.path('/posts/viewMore').search({ id: $scope.post._id });
+        }
+
+        $scope.logout = function() {
+            $window.sessionStorage.token = undefined;
         }
 
 
