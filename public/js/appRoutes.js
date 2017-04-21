@@ -3,8 +3,6 @@ angular.module('pettts')
 
         $routeProvider
 
-        // posts page
-
             .when('/resetPassword/:token', {
                 templateUrl: 'views/reset.html',
                 controller: 'pass_ctrl'
@@ -28,6 +26,10 @@ angular.module('pettts')
             .when('/posts', {
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
+            })
+
+            .when('/charge', {
+                templateUrl: 'views/charge.html',
             })
 
             .when('/post/new', {
@@ -55,14 +57,15 @@ angular.module('pettts')
               controller: 'postController'
             })
 
+
             .when('/posts/search', {
-              templateUrl: 'views/search.html',
-              controller: 'searchController'
+                templateUrl: 'views/search.html',
+                controller: 'searchController'
             })
 
-            .when('/posts/viewMore',{
-              templateUrl:'views/viewMore.html',
-              controller : 'reviewPostController'
+            .when('/posts/viewMore', {
+                templateUrl: 'views/viewMore.html',
+                controller: 'reviewPostController'
             })
 
             // filter posts router
@@ -70,6 +73,7 @@ angular.module('pettts')
               templateUrl: 'views/filter.html',
               controller: 'filterController'
             })
+
 
 
         $locationProvider.html5Mode(true);

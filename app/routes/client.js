@@ -4,7 +4,7 @@ var router = express.Router();
 
 
 var multer = require('multer');
-var upload = multer({ dest: "views/postsGallery" });
+var upload = multer({ dest: "public/images/postsGallery" });
 var type = upload.single('postPic');
 
 // REQUIRE MIDDLEWARE
@@ -20,7 +20,7 @@ router.post('/post/lost', middleware.isLoggedIn, type, postController.lostPost);
 router.post('/post/found', middleware.isLoggedIn, type, postController.foundPost);
 router.post('/post/sell', middleware.isLoggedIn, type, postController.sellPost);
 router.post('/post/mate', middleware.isLoggedIn, type, postController.matePost);
-router.get('/post/specificUser',postController.findOwnerByPostID);
+router.get('/post/specificUser', postController.findOwnerByPostID);
 
 
 module.exports = router;

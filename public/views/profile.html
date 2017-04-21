@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../css/profile.css">
+
 <div ng-controller="profileController">
     <div ng-if="success">
         <div class="container" id="profile-container">
@@ -45,7 +46,7 @@
                     <hr>
                     <div ng-if="myEmail==userInfo.email">
                         <form>
-                            <a  href="/editProfile" class="btn btn-primary" id="profile-edit-btn">Profile settings</a>    
+                            <a  href="/editProfile" class="btn btn-primary" id="profile-edit-btn">Profile settings</a>
                         </form>
                     </div>
                     <div ng-if="myEmail!=userInfo.email">
@@ -102,6 +103,7 @@
             </div>
         </div>
     </div>
+
     <div ng-if="!success">
         <h3 align="center">
             The user {{givenUsername}} does not exist.

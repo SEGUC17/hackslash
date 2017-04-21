@@ -1,6 +1,7 @@
- <!DOCTYPE html>
- <html ng-app="pettts">
-  <head>
+<!DOCTYPE html>
+<html ng-app="pettts">
+
+<head>
     <meta charset="utf-8">
     <meta name="description" content="Online pets marketplace">
     <meta name="keywords" content="Pets,Sell,Exchange,Mate,Shelter,Buy">
@@ -59,66 +60,75 @@
 
     <script type="text/javascript" src="js/appRoutes.js"></script>
 
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Header -->
     <header>
-      <!-- Navigation bar -->
-      <nav class="navbar navbar-default">
-        <div class="container navbar-content">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-  expanded="false">
+        <!-- Navigation bar -->
+        <nav class="navbar navbar-default">
+            <div class="container navbar-content">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria- expanded="false">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">pettts.com</a>
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <ul class="nav navbar-nav navbar-right">
-              <!-- Search bar -->
-
-              <form  class="navbar-form navbar-left"  ng-controller="searchDirectionController" ng-submit="submitSearch()" >
-                <div class="input-group stylish-input-group">
-                  <input type="text" class="form-control" id="search-input" placeholder="What are you looking for?"
-                  ng-model="searchKey">
-
-                  <span class="input-group-addon">
-                      <button type="submit" >
-                          <span class="glyphicon glyphicon-search"></span>
-                      </button>
-                  </span>
+                    <a class="navbar-brand" href="/posts">pettts.com</a>
                 </div>
-              </form>
-              <li><a href="/register">Register</a></li>
-              <li><a href="/login">Login</a></li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
 
-      <!-- Categories bar -->
-      <div class="categories-container">
-        <div class="container">
-          <div class="row">
-            <ul id="categories" class="nav nav-pills justified">
-              <li><a href="/posts">All Categories</a></li>
-              <li><a href="/posts/f/buy">Buy</a></li>
-              <li><a href="/posts/f/exchange">Exchange</a></li>
-              <li><a href="/posts/f/shelter">Shelter</a></li>
-              <li><a href="/posts/f/mate">Get your pet a date</a></li>
-              <li><a href="/posts/f/lost">Lost</a></li>
-              <li><a href="/posts/f/found">Found</a></li>
-            </ul>
-          </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Search bar -->
+
+                        <form class="navbar-form navbar-left" ng-controller="searchDirectionController" ng-submit="submitSearch()">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" id="search-input" placeholder="What are you looking for?" ng-model="searchKey">
+
+                                <span class="input-group-addon">
+                                  <button type="submit" >
+                                    <span class="glyphicon glyphicon-search"></span>
+                                  </button>
+                                </span>
+                            </div>
+                        </form>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li>
+                            <form action="/charge" method="post">
+                                <!-- Specify auto in data-locale to display Checkout in the user's preferred language, if available. English will be used by default. -->
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_nq90wwD2raOVJ8YN6pLtdgCT" data-amount="200" data-name="Advertisement" data-description="For any Client how wants to put advertisements on our website" data-locale="auto"
+                                    data-currency="gbp">
+                                </script>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!-- Categories bar -->
+        <div class="categories-container">
+            <div class="container">
+                <div class="row">
+                    <ul id="categories" class="nav nav-pills justified">
+                        <li><a href="/posts">All Categories</a></li>
+                        <li><a href="/posts/buy">Buy</a></li>
+                        <li><a href="/posts/exchange">Exchange</a></li>
+                        <li><a href="/posts/shelter">Shelter</a></li>
+                        <li><a href="/posts/mate">Get your pet a date</a></li>
+                        <li><a href="/posts/lost">Lost</a></li>
+                        <li><a href="/posts/found">Found</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
 
     </header>
     <!-- End of Header -->
@@ -127,15 +137,16 @@
 
     <!-- Footer -->
     <footer>
-      <div class="container">
-        <div class="row">
-          <p class="text-center copyright">Copyright &copy 2017 pettts.com</p>
+        <div class="container">
+            <div class="row">
+                <p class="text-center copyright">Copyright &copy 2017 pettts.com</p>
+            </div>
         </div>
-      </div>
     </footer>
     <!-- End of footer -->
 
 
 
-  </body>
+</body>
+
 </html>
