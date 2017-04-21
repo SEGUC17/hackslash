@@ -1,0 +1,31 @@
+.oops {
+	color:blue;
+}
+
+body {
+    background-image:url(../images/notfoundbacground.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+	font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.logo {
+	text-align:center;
+	margin-top:250px;
+}
+
+.logo img {
+	width:180px;
+}
+
+.logo p {
+	color:red;
+	font-size:40px;
+}

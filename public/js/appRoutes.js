@@ -90,5 +90,13 @@ angular.module('pettts')
                 controller: 'profileController'
             })
 
+            //Default route (Page not Found)
+            .when('/notFound', {
+                templateUrl: 'views/pageNotFound.html'
+            })
+            .otherwise({
+                redirectTo:'/notFound'
+            });
+
         $locationProvider.html5Mode(true);
     }]);
