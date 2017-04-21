@@ -4,9 +4,13 @@ angular.module('pettts')
         $routeProvider
             //User routes
             //Static page routes
-            //StarterPage
+            //StarterPage route
             .when('/', {
                 templateUrl: 'views/starterPage.html'
+            })
+            //About route
+            .when('/info', {
+                templateUrl: 'views/about.html'
             })
             //Authentication routes
             //Registration route
@@ -14,77 +18,77 @@ angular.module('pettts')
                 templateUrl: 'views/register.html',
                 controller: 'registerController'
             })
-            //Response to email verification route TODO
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Response to email verification route //==TODO==//
             .when('/v/:verification', {
                 templateUrl: ''
             })
-            .when('/resetPassword/:token', {
-                templateUrl: 'views/reset.html',
-                controller: 'pass_ctrl'
-            })
-
-            .when('/login', {
-                templateUrl: 'views/login.html',
-                controller: 'loginCtrl'
-            })
-
-            .when('/forgotPassword', {
-                templateUrl: 'views/forgotPassword.html',
-                controller: 'pass_ctrl'
-            })
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Post routes
+            //View all posts route
             .when('/posts', {
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
             })
-
-            .when('/charge', {
-                templateUrl: 'views/charge.html',
-            })
-
-            .when('/post/new', {
-                templateUrl: 'views/addPost.html',
-                controller: 'postController'
-            })
-
-            .when('/profile/:username', {
-                templateUrl: 'views/profile.html',
-                controller: 'profileController'
-            })
-
-            .when('/editProfile', {
-                templateUrl: 'views/editProfile.html',
-                controller: 'profileController'
-            })
-
-            .when('/reset', {
-              templateUrl: 'views/reset.html',
-              controller: 'pass_ctrl'
-            })
-
-            .when('/post/edit', {
-              templateUrl: 'views/editPost.html',
-              controller: 'postController'
-            })
-
-
-            .when('/posts/search', {
-                templateUrl: 'views/search.html',
-                controller: 'searchController'
-            })
-
-            .when('/posts/viewMore', {
-                templateUrl: 'views/viewMore.html',
-                controller: 'reviewPostController'
-            })
-
-            // filter posts router
+            //Filter posts route
             .when('/posts/f/:type', {
               templateUrl: 'views/filter.html',
               controller: 'filterController'
             })
-
-
+            //Search posts route
+            .when('/posts/search', {
+                templateUrl: 'views/search.html',
+                controller: 'searchController'
+            })
+            //Payment routes
+            //Stripe route
+            .when('/charge', {
+                templateUrl: 'views/charge.html',
+            })
+            //Client routes
+            //Authentication routes
+            //Login route
+            .when('/login', {
+                templateUrl: 'views/login.html',
+                controller: 'loginCtrl'
+            })
+            //Forgot password route
+            .when('/forgotPassword', {
+                templateUrl: 'views/forgotPassword.html',
+                controller: 'pass_ctrl'
+            })
+            //Reset password route
+            .when('/resetPassword/:token', {
+                templateUrl: 'views/reset.html',
+                controller: 'pass_ctrl'
+            })
+            //Post routes
+            //Add a new post route
+            .when('/post/new', {
+                templateUrl: 'views/addPost.html',
+                controller: 'postController'
+            })
+            //Edit a post route
+            .when('/post/edit', {
+              templateUrl: 'views/editPost.html',
+              controller: 'postController'
+            })
+            //View a single post route
+            .when('/posts/viewMore', {
+                templateUrl: 'views/viewMore.html',
+                controller: 'reviewPostController'
+            })
+            //Profile Routes
+            //View profile route
+            .when('/profile/:username', {
+                templateUrl: 'views/profile.html',
+                controller: 'profileController'
+            })
+            //Edit profile route
+            .when('/editProfile', {
+                templateUrl: 'views/editProfile.html',
+                controller: 'profileController'
+            })
 
         $locationProvider.html5Mode(true);
     }]);
