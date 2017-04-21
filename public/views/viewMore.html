@@ -4,14 +4,29 @@
 <div ng-controller="reviewPostController" class="container post-details">
   <div class="row">
 
-    <div class="col-md-3" id="left-col">
+    <div class="col-md-3">
       <img ng-src="{{picture}}" alt="No Image Available for this Post" class="img-responsive img-thumbnail">
       <p id="email-info"><label><strong>Contact email:</strong> {{email}}</label></p>
-      <a href="/profile/{{username}}" class="btn btn-info">View contact profile</a>
+
+      <!-- up & down vote form -->
+      <form ng-controller="reviewPostController" ng-submit="submitVote()">
+        <label class="radio-inline">
+          <input type="radio" value="up" ng-model="vote">Up-vote
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="down" ng-model="vote">Down-vote
+        </label>
+        <button type="submit" id="vote-btn" class="btn btn-success">Vote</button>
+        <div>{{message}}</div>
+      </form>
+
+      <a href="/profile/{{username}}" id="view-contact-btn" class="btn btn-info btn-block">View contact profile</a>
     </div>
 
-    <div class="col-md-9">
-      <p><label><strong>Description:</strong> {{description}}</label></p>
+    <div class="col-md-9" id="right-col">
+      <p><strong>Description:</strong> {{description}}</p>
+
+      <hr>
 
       <p><strong>Post Up-Votes: </strong> {{upVotes}}</p>
       <p><strong>Post Down-Votes:</strong> {{downVotes}}</p>
@@ -33,27 +48,5 @@
 
   </div>
 
-  <!-- up & down vote form -->
-  <form ng-controller="reviewPostController" ng-submit="submitVote()">
-    <label class="radio-inline">
-      <input type="radio" value="up"   ng-model="vote">Up-vote
-    </label>
-    <label class="radio-inline">
-      <input type="radio" value="down" ng-model="vote">Down-vote
-    </label>
-    <br> <br>
-    <button type="submit" class="btn btn-success">Submit</button>
-    <div>{{message}}</div>
-  </form>
-
-
-  <!-- info form  -->
-  <hr>
-  <form >
-
-
-
-
-  </form>
 
 </div>
