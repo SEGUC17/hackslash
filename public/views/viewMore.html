@@ -1,21 +1,20 @@
-
-      <!-- up & down vote form -->
-      <form ng-controller="reviewPostController" ng-submit="submitVote()">
-     <label class="radio-inline">
+<!-- up & down vote form -->
+<form ng-controller="reviewPostController" ng-submit="submitVote()">
+    <label class="radio-inline">
        <input type="radio" value="up"   ng-model="vote">Up-vote
      </label>
-     <label class="radio-inline">
+    <label class="radio-inline">
        <input type="radio" value="down" ng-model="vote">Down-vote
      </label>
-     <br> <br>
-     <button type="submit" class="btn btn-success">Submit</button>
-     <div>{{message}}</div>
-    </form>
+    <br> <br>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <div>{{message}}</div>
+</form>
 
 
-   <!-- info form  -->
-   <hr>
-   <form ng-controller= "reviewPostController">
+<!-- info form  -->
+<hr>
+<form ng-controller="reviewPostController">
     <p><strong>Post Up-Votes : {{upVotes}}</strong></p>
     <p><strong>Post Down-Votes : {{downVotes}}</strong></p>
     <p><strong>Email : {{email}}</strong></p>
@@ -24,15 +23,15 @@
     <p><strong>Gender : {{gender}}</strong></p>
     <p><strong>Description : {{description}}</strong></p>
     <div ng-if="exchange">
-      <p><strong>SpeciesB : {{speciesB}}</strong></p>
-      <p><strong>KindB : {{kindB}}</strong></p>
-      <p><strong>GenderB : {{genderB}}</strong></p>
+        <p><strong>SpeciesB : {{speciesB}}</strong></p>
+        <p><strong>KindB : {{kindB}}</strong></p>
+        <p><strong>GenderB : {{genderB}}</strong></p>
     </div>
     <div ng-if="sell">
-      <p><strong>Price :{{price}}</strong></p>
+        <p><strong>Price :{{price}}</strong></p>
     </div>
     <p><strong>Post Picture :</strong></p>
     <img ng-src="{{picture}}" alt="No Image Available for this Post" height="42" width="42">
     <hr>
-   <a href="/profile/{{username}}">Visit Owner's Profile</a>
-   </form>
+    <a href="/profile/{{username}}">Visit Owner's Profile</a>
+</form>

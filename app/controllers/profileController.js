@@ -1,8 +1,8 @@
 //Multer
 var multer = require('multer');
-var workData = multer({ dest: "public/images/profilePics" });
+var workData = multer({ dest: 'views/profilePics' });
 var type = workData.single('profilePicture');
-var fs = require('fs');
+var fileStream = require('fs');
 
 //Connecting to JS defined Schema.
 let user = require('../models/user');
@@ -21,18 +21,12 @@ let profileController = {
     //This function takes in the user's new information, and edits it.
     editProfile: function(req, res) {
         if (!req.body) {
-            if (req.file) {
-                fs.unlinkSync(req.file.path);
-            }
             res.status(400).json('There is a problem with your request.');
             return;
         }
-        var token = req.body.token || req.header("x-access-token") || req.query.token;
+        var token = req.body.token || req.header("token") || req.query.token;
         if (!token) {
-            if (req.file) {
-                fs.unlinkSync(req.file.path);
-            }
-            res.status(403).json('You must be logged in to edit your profile.')
+            res.json('You must be logged in to edit your profile.')
         } else {
             //Create a new user with all the new features (The unchanged ones are null)
             let edited = new user({
@@ -46,8 +40,18 @@ let profileController = {
                 homeNumber: req.body.homeNumber
             });
             //For profile picture only
-            if (req.file) {
-                edited.profilePicture = req.file.path;
+            var targetPath = "";
+            if (!req.file) {
+                targetPath = "views/uploads/default.jpg";
+            } else {
+                targetPath = 'views/uploads/' + req.file.originalname;
+                var file = fileStream.createReadStream(req.file.path);
+                var final = fileStream.createWriteStream(targetPath);
+                file.pipe(final);
+                fileStream.unlink(req.file.path);
+            }
+            if (targetPath != "views/uploads/default.jpg") {
+                edited.profilePicture = targetPath;
             }
             //Updating the user.
             updateController.updateProfile(edited, res);
