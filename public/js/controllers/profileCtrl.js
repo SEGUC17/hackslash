@@ -83,6 +83,9 @@ angular.module('pettts')
             $scope.success = response.success;
             $scope.userInfo = response.data.userProfileInfo;
             $scope.posts = response.data.myPosts;
+            if($scope.profilePicture = response.data.userProfileInfo.profilePicture){
+                $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);                
+            }
             if ($scope.Posts == "||&This user has no Posts yet.&||") {
                 $scope.Posts = undefined;
             }else{

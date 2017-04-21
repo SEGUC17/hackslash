@@ -21,7 +21,7 @@
             <div class="container" id="profile-container">
                 <div class="row">
                     <div class="col-md-3"><!-- Start of profile info -->
-                        <img src="../images/default.jpg" alt="" class="img-responsive img-thumbnail"> <br>
+                        <img src="{{profilePicture}}" alt="" class="img-responsive img-thumbnail"> <br>
                         <h2>{{userInfo.firstName}} {{userInfo.lastName}}</h2>
                         <p>{{userInfo.username}}</p>
                         <div ng-if="userInfo.rate==0">
