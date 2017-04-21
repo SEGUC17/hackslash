@@ -1,7 +1,8 @@
 angular.module('pettts')
     .controller('profileController', function($scope, $http, profileService, $window, $location, $routeParams) {
         $scope.givenUsername = $routeParams.username
-
+        $scope.token = $window.sessionStorage.accessToken;
+        
         $scope.messageRated = $window.sessionStorage.messageRated;
         $scope.submitRate = function() {
             var rating = $scope.rate;

@@ -1,9 +1,9 @@
 angular.module('pettts')
 
 
-.controller('reviewPostController', function($scope, $http,$routeParams,reviewPostService){
+.controller('reviewPostController', function($scope, $window, $http,$routeParams,reviewPostService){
         console.log("entered the reviewPostController");
-
+        $scope.token = $window.sessionStorage.accessToken;
       /*  var post = reviewPostService.viewPostInfo($routeParams.id);
         var user = reviewPostService.viewOwnerInfo($routeParams.id);
         console.log("in reviewPostController post : " + post.gender);

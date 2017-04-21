@@ -1,26 +1,43 @@
-<div class="container">
-  <!-- up & down vote form -->
-  <form ng-controller="reviewPostController" ng-submit="submitVote()">
-    <label class="radio-inline">
-      <input type="radio" value="up"   ng-model="vote">Up-vote
-    </label>
-    <label class="radio-inline">
-      <input type="radio" value="down" ng-model="vote">Down-vote
-    </label>
+<div ng-if="!token">
+  <div class="container not-logged-in">
+    <h2>I see you're not logged in.</h2>
+    <hr>
+    <p>Click here to login</p>
+    <a class="btn btn-success btn-block" href="/login">Login</a>
+    <hr>
+    <p>Perhaps you don't have an account?</p>
+    <a class ="btn btn-primary btn-block" href="/register">Register now | It's free!</a>
+    <div style="text-align:center">
+      <img src="../images/login-pic-2.png" width="250px">
+    </div>
+  </div>
+</div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+<div ng-if="token">
+  <div class="container">
+    <!-- up & down vote form -->
+    <form ng-controller="reviewPostController" ng-submit="submitVote()">
+      <label class="radio-inline">
+        <input type="radio" value="up"   ng-model="vote">Up-vote
+      </label>
+      <label class="radio-inline">
+        <input type="radio" value="down" ng-model="vote">Down-vote
+      </label>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
 
 
-  <!-- info form  -->
-  <hr>
-  <form ng-controller= "reviewPostController">
-    <p><strong>Post Up-Votes :{{upVotes}}</strong></p>
-    <p><strong>Post Down-Votes :{{downVotes}}</strong></p>
-    <p><strong>Owner Name :{{firstName }} {{lastName}}</strong></p>
-    <p><strong>Mobile Number :{{mobile}}</strong></p>
-    <p><strong>Email :{{email}}</strong></p>
-    <p><strong>Related Pictures :</strong></p>
-    <a href="">Visit Owner's Profile</a>
-  </form>
+    <!-- info form  -->
+    <hr>
+    <form ng-controller= "reviewPostController">
+      <p><strong>Post Up-Votes :{{upVotes}}</strong></p>
+      <p><strong>Post Down-Votes :{{downVotes}}</strong></p>
+      <p><strong>Owner Name :{{firstName }} {{lastName}}</strong></p>
+      <p><strong>Mobile Number :{{mobile}}</strong></p>
+      <p><strong>Email :{{email}}</strong></p>
+      <p><strong>Related Pictures :</strong></p>
+      <a href="">Visit Owner's Profile</a>
+    </form>
+  </div>
 </div>
