@@ -1,47 +1,47 @@
 angular.module('pettts')
 
-.controller('searchController', function($scope,$window, searchService, $location , $routeParams) {
+.controller('searchController', function($scope, $window, searchService, $location, $routeParams) {
 
-  console.log("entered the search controller");
-  $scope.searchKey = $routeParams.key;
-  searchService.search($scope);
+    console.log("entered the search controller");
+    $scope.searchKey = $routeParams.key;
+    searchService.search($scope);
 
-//   $scope.submitSearch = function(){
-//     if($scope.searchKey){
-//       //  console.log("searchKey is :- "+$scope.searchKey);
-//
-//       //  $window.location.href = 'posts/search';
-//       $location.path('/posts/search');
-//       $location.replace();
-//       $scope.posts = searchService.search($scope);
-//
-//   //    $location.replace();
-//
-//
-//     }
-//     else {
-//       console.log("No Search Key Found");
-//     //  $window.location.href = 'posts/search';
-//
-//     }
-// }
+    //   $scope.submitSearch = function(){
+    //     if($scope.searchKey){
+    //       //  console.log("searchKey is :- "+$scope.searchKey);
 
-/*
-    searchService.search().then(function(posts){
+    //       //  $window.location.href = 'posts/search';
+    //       $location.path('/posts/search');
+    //       $location.replace();
+    //       $scope.posts = searchService.search($scope);
 
-        if(posts){
-          console.log("inside the internal if "+posts);
-          $scope.notFound = false;
-        }
-        else {
-          $scope.notFound = true;
-        }
-      //console.log("Response in controller " );
-      //console.log(response.data.posts);
-        $scope.posts = posts;
-      //$window.location = '/posts/search';
+    //   //    $location.replace();
 
-    });*/
+
+    //     }
+    //     else {
+    //       console.log("No Search Key Found");
+    //     //  $window.location.href = 'posts/search';
+
+    //     }
+    // }
+
+
+    //     searchService.search().then(function(posts){
+
+    //         if(posts){
+    //           console.log("inside the internal if "+posts);
+    //           $scope.notFound = false;
+    //         }
+    //         else {
+    //           $scope.notFound = true;
+    //         }
+    //       //console.log("Response in controller " );
+    //       //console.log(response.data.posts);
+    //         $scope.posts = posts;
+    //       //$window.location = '/posts/search';
+
+    //     });
 
 });
 

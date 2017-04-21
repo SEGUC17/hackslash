@@ -25,9 +25,8 @@
                         <h2>{{userInfo.firstName}} {{userInfo.lastName}}</h2>
                         <p>{{userInfo.username}}</p>
                         <div ng-if="userInfo.rate==0">
-                            <div ng-repeat="i in [1,2,3,4,5]" id="stars1">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </div>
+                            <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                            <p>This user has not been rated, yet!</p>
                         </div>
                         <div ng-if="userInfo.rate!=0">
                             <div ng-repeat="i in [1,2,3,4,5]" id="stars2">
@@ -46,7 +45,7 @@
                         </span><br>
                         <div ng-if="userInfo.phoneNumber1">
                             <span class="glyphicon glyphicon-phone" aria-hidden="true">
-                                1234{{userInfo.phoneNumber1}}
+                                {{userInfo.phoneNumber1}}
                             </span><br>
                         </div>
                         <div ng-if="userInfo.phoneNumber2">
@@ -78,7 +77,7 @@
                             </form>
                         </div>
                     </div><!-- End of profile info -->
-                    <div class="col-md-9"><!-- Start of posts area -->
+                    <div class="col-md-9" style="text-align: left !important;"><!-- Start of posts area -->
                         <div ng-if="!Posts">
                             <h3>
                                 This user has no posts yet.
@@ -108,7 +107,7 @@
                                                 <div ng-controller="profileController" ng-click="editPost()">
                                                     <button type="button" class="btn btn-primary" id="edit-btn">Edit</button>
                                                 </div>
-                                                <a id="view-btn" href="#" class="btn btn-primary">View more</a>
+                                                <button ng-controller="profileController" ng-click="viewPost()" id="view-btn" href="#" class="btn btn-primary">View more</button>
                                             </div> <!-- End of media-body -->
                                         </div> <!-- End of media -->
                                     </div> <!-- End of panel-body -->

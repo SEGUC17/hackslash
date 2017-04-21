@@ -38,7 +38,7 @@ angular.module('pettts')
         },
 
         //Service to call rateUser
-        rate: function(rating, rated, $scope) {
+        rate: function(rating, rated, un, $scope) {
             var request = {
                 method: 'POST',
                 url: '/profile/rate',
@@ -49,16 +49,14 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-                if (response.status == 403) {
-                    $window.sessionStorage.messageRated = "You have already rated this user!"
-                } else {
-                    $window.sessionStorage.messageRated = 'bla';
-                }
-                $window.location = '/profile';
+                console.log('wee');
+                $window.location = '/profile/' + un;
             }, function error(response) {
+                console.log('hah');
+                console.log(response);
                 return {
                     'success': false,
-                    'message': 'Error in service request'
+                    'message': response.data.message
                 };
             });
         },
@@ -97,7 +95,7 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-                $window.location = '/profile';
+                $window.location = '/profile/' + userUsername;
             }, function error(response) {
                 return {
                     'success': false,
@@ -108,27 +106,14 @@ angular.module('pettts')
         //Service to call editProfile
         edit: function(user, $scope) {
             if (user) {
-                var request = {
-                    method: 'POST',
-                    url: '/profile/edit',
-                    data: {
-                        'username': user.username,
-                        'firstName': user.firstName,
-                        'middleName': user.middleName,
-                        'lastName': user.lastName,
-                        'phoneNumber1': user.phoneNumber1,
-                        'phoneNumber2': user.phoneNumber2,
-                        'homeNumber': user.homeNumber,
-                        'token': userToken
-                    }
-                };
-                return $http(request).then(function success(response) {
-                    if(user.username){
-                        $window.location = '/profile/'+user.username;
-                        $window.sessionStorage.username = user.username;
-                    }else{
-                        $window.location = '/profile/'+userUsername;
-                    }
+                var fd = new FormData();
+                for (var key in user)
+                    fd.append(key, user[key]);
+                $http.post('/profile/edit', fd, {
+                    transformRequest: angular.indentity,
+                    headers: { 'Content-Type': undefined, 'x-access-token': userToken }
+                }).then(function success(response) {
+                    $window.location = '/profile/' + userUsername;
                 }, function error(response) {
                     return {
                         'success': false,

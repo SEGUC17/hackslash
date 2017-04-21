@@ -2,21 +2,21 @@ angular.module('pettts')
 
 .controller('postsController', function($scope, postsService) {
 
-    postsService.get().then(function(posts){
-      $scope.posts = posts
+    postsService.get().then(function(posts) {
+        $scope.posts = posts
 
-      if(!$scope.posts) {
-        $scope.notFound = true;
-      } else {
-        $scope.notFound = false;
-        // Sorting posts according to date descendingly
-        $scope.posts.sort(function(a, b){
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
-        $scope.pageSize = 7;
-        $scope.currentPage = 1;
-        $scope.maxSize = 5;
-      }
+        if (!$scope.posts) {
+            $scope.notFound = true;
+        } else {
+            $scope.notFound = false;
+            // Sorting posts according to date descendingly
+            $scope.posts.sort(function(a, b) {
+                return new Date(b.date).getTime() - new Date(a.date).getTime();
+            });
+            $scope.pageSize = 7;
+            $scope.currentPage = 1;
+            $scope.maxSize = 5;
+        }
 
     });
 
@@ -45,10 +45,10 @@ angular.module('pettts')
                 return "";
         }
     }
-  })
+})
 
-  .filter('startFrom', function(){
-    return function(data, start){
-      return data.slice(start);
+.filter('startFrom', function() {
+    return function(data, start) {
+        return data.slice(start);
     }
-  })
+})
