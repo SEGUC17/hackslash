@@ -2,6 +2,7 @@ angular.module('pettts')
 
 .controller('viewMoreDirectionController', function($scope, $window, $location) {
 
+
     $scope.submitViewMore = function() {
         //console.log($scope.post._id);
         if ($scope.post._id != undefined) {
@@ -13,7 +14,6 @@ angular.module('pettts')
 
         }
     }
-
 
 
 });

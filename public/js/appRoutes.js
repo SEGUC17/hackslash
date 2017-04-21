@@ -3,74 +3,76 @@ angular.module('pettts')
 
         $routeProvider
 
-        // posts page
-
             .when('/resetPassword/:token', {
-
                 templateUrl: 'views/reset.html',
                 controller: 'pass_ctrl'
             })
+
             .when('/register', {
                 templateUrl: 'views/register.html',
                 controller: 'registerController'
             })
+
             .when('/login', {
                 templateUrl: 'views/login.html',
                 controller: 'loginCtrl'
             })
+
             .when('/forgotPassword', {
                 templateUrl: 'views/forgotPassword.html',
                 controller: 'pass_ctrl'
             })
 
-        .when('/posts', {
+            .when('/posts', {
                 templateUrl: 'views/posts.html',
                 controller: 'postsController'
             })
+
             .when('/charge', {
                 templateUrl: 'views/charge.html',
             })
+
             .when('/post/new', {
                 templateUrl: 'views/addPost.html',
                 controller: 'postController'
             })
+
             .when('/profile/:username', {
                 templateUrl: 'views/profile.html',
                 controller: 'profileController'
             })
+
             .when('/editProfile', {
                 templateUrl: 'views/editProfile.html',
                 controller: 'profileController'
             })
 
-        .when('/reset', {
-            templateUrl: 'views/reset.html',
-            controller: 'pass_ctrl'
-        })
+            .when('/reset', {
+              templateUrl: 'views/reset.html',
+              controller: 'pass_ctrl'
+            })
+
+            .when('/post/edit', {
+              templateUrl: 'views/editPost.html',
+              controller: 'postController'
+            })
 
 
-        .when('/post/edit', {
-            templateUrl: 'views/editPost.html',
-            controller: 'postController'
-        })
+            .when('/posts/search', {
+                templateUrl: 'views/search.html',
+                controller: 'searchController'
+            })
 
-        .when('/posts/search', {
-            templateUrl: 'views/search.html',
-            controller: 'searchController'
-        })
+            .when('/posts/viewMore', {
+                templateUrl: 'views/viewMore.html',
+                controller: 'reviewPostController'
+            })
 
-        .when('/posts/viewMore', {
-            templateUrl: 'views/viewMore.html',
-            controller: 'reviewPostController'
-        })
-
-
-
-        // filter posts router
-        .when('/posts/:type', {
-            templateUrl: 'views/filter.html',
-            controller: 'filterController'
-        })
+            // filter posts router
+            .when('/posts/f/:type', {
+              templateUrl: 'views/filter.html',
+              controller: 'filterController'
+            })
 
 
 

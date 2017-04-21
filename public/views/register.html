@@ -1,29 +1,76 @@
-<form class="jumbotron text-left" ng-submit="submitUser()" ng-controller="registerController">
-    <div class="form-group">
-        <h3>Register</h3>
-        <label for="username">username (required): </label> <br>
-        <input type="text" name="username" ng-model="user.username" required=true placeholder="username"> <br> <br>
-        <label for="password">password (required): </label> <br>
-        <input type="password" name="password" ng-model="user.password" required=true placeholder="password"> <br> <br>
-        <label for="email">email (required): </label> <br>
-        <input type="text" name="email" ng-model="user.email" required=true placeholder="email"> <br> <br>
-        <label for="firstName">firstName (required): </label> <br>
-        <input type="text" name="firstName" ng-model="user.firstName" required=true placeholder="firstName"> <br> <br>
-        <label for="middleName">middleName: </label> <br>
-        <input type="text" name="middleName" ng-model="user.middleName" placeholder="middleName"> <br> <br>
-        <label for="lastName">lastName (required): </label> <br>
-        <input type="text" name="lastName" ng-model="user.lastName" required=true placeholder="lastName"> <br> <br>
-        <label for="phoneNumber1">phoneNumber1: </label> <br>
-        <input type="text" name="phoneNumber1" ng-model="user.phoneNumber1" placeholder="phoneNumber1"> <br> <br>
-        <label for="phoneNumber2">phoneNumber2: </label> <br>
-        <input type="text" name="phoneNumber2" ng-model="user.phoneNumber2" placeholder="phoneNumber2"> <br> <br>
-        <label for="homeNumber">homeNumber: </label> <br>
-        <input type="text" name="homeNumber" ng-model="user.homeNumber" placeholder="homeNumber"> <br> <br>
-        <label for="profilePic">profilePicture: </label> <br>
+<link rel="stylesheet" href="../css/register.css">
+
+<div class="register-outer"  ng-controller="registerController">
+
+  <div ng-if="message" type="danger">{{ message }}</div>
+
+  <div class="registerForm">
+
+    <h2>Enter the pettts.com marketplace now!</h2>
+    <p class="subtitle-register">Get started now - it's for free</p>
+
+    <hr>
+
+    <form class="text-left" ng-submit="submitUser()">
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" ng-model="user.username" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" ng-model="user.password" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" name="email" ng-model="user.email" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First name</label>
+        <input type="text" name="firstName" ng-model="user.firstName" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="middleName">Middle name</label>
+        <input type="text" name="middleName" ng-model="user.middleName" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input type="text" name="lastName" ng-model="user.lastName" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber1">Phone number 1</label>
+        <input type="text" name="phoneNumber1" ng-model="user.phoneNumber1" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber2">Phone number 2</label>
+        <input type="text" name="phoneNumber2" ng-model="user.phoneNumber2" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="homeNumber">Home number</label>
+        <input type="text" name="homeNumber" ng-model="user.homeNumber" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="profilePic">Profile picture</label> <br>
         <input type="file" name="profilePic" ng-File-Model="user.profilePic" />
-    </div>
-    <button type="submit" class="btn btn-default">Sign Up</button>
+      </div>
 
-    <div ng-if="message" type="danger">{{ message }}</div>
+      <button type="submit" class="btn btn-success btn-block">Join now</button>
 
-</form>
+      <hr>
+
+      <p>Already have an account? <a href="/login">Login now</a></p>
+
+    </form>
+
+  </div>
+
+</div>

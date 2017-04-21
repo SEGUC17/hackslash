@@ -1,0 +1,26 @@
+.post-details {
+  margin-top: 50px;
+  margin-bottom: 80px;
+  background-color: white;
+  padding: 25px;
+  border: 1px solid #ebebeb;
+  border-left: 5px solid #2e91f7;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#right-col {
+  border-left: 2px solid #ebebeb;
+}
+
+#email-info {
+  margin-top: 20px;
+}
+
+#vote-btn {
+  margin-left: 1em;
+}
+
+#view-contact-btn {
+  margin-top: 20px;
+}

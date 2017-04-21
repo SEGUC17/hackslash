@@ -1,37 +1,64 @@
-<!-- up & down vote form -->
-<form ng-controller="reviewPostController" ng-submit="submitVote()">
-    <label class="radio-inline">
-       <input type="radio" value="up"   ng-model="vote">Up-vote
-     </label>
-    <label class="radio-inline">
-       <input type="radio" value="down" ng-model="vote">Down-vote
-     </label>
-    <br> <br>
-    <button type="submit" class="btn btn-success">Submit</button>
-    <div>{{message}}</div>
-</form>
+<link rel="stylesheet" href="../css/viewMore.css">
 
-
-<!-- info form  -->
-<hr>
-<form ng-controller="reviewPostController">
-    <p><strong>Post Up-Votes : {{upVotes}}</strong></p>
-    <p><strong>Post Down-Votes : {{downVotes}}</strong></p>
-    <p><strong>Email : {{email}}</strong></p>
-    <p><strong>Species : {{species}}</strong></p>
-    <p><strong>Kind : {{kind}}</strong></p>
-    <p><strong>Gender : {{gender}}</strong></p>
-    <p><strong>Description : {{description}}</strong></p>
-    <div ng-if="exchange">
-        <p><strong>SpeciesB : {{speciesB}}</strong></p>
-        <p><strong>KindB : {{kindB}}</strong></p>
-        <p><strong>GenderB : {{genderB}}</strong></p>
-    </div>
-    <div ng-if="sell">
-        <p><strong>Price :{{price}}</strong></p>
-    </div>
-    <p><strong>Post Picture :</strong></p>
-    <img ng-src="{{picture}}" alt="No Image Available for this Post" height="42" width="42">
+<div ng-if="!token">
+  <div class="container not-logged-in">
+    <h2>I see you're not logged in.</h2>
     <hr>
-    <a href="/profile/{{username}}">Visit Owner's Profile</a>
-</form>
+    <p>Click here to login</p>
+    <a class="btn btn-success btn-block" href="/login">Login</a>
+    <hr>
+    <p>Perhaps you don't have an account?</p>
+    <a class ="btn btn-primary btn-block" href="/register">Register now | It's free!</a>
+    <div style="text-align:center">
+      <img src="../images/login-pic-2.png" width="250px">
+    </div>
+  </div>
+</div>
+
+<div ng-if="token">
+  <div ng-controller="reviewPostController" class="container post-details">
+    <div class="row">
+
+      <div class="col-md-3">
+        <img ng-src="{{picture}}" alt="No Image Available for this Post" class="img-responsive img-thumbnail">
+        <p id="email-info"><label><strong>Contact email:</strong> {{email}}</label></p>
+
+        <!-- up & down vote form -->
+        <form ng-controller="reviewPostController" ng-submit="submitVote()">
+          <label class="radio-inline">
+            <input type="radio" value="up" ng-model="vote">Up-vote
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="down" ng-model="vote">Down-vote
+          </label>
+          <button type="submit" id="vote-btn" class="btn btn-success">Vote</button>
+          <div>{{message}}</div>
+        </form>
+
+        <a href="/profile/{{username}}" id="view-contact-btn" class="btn btn-info btn-block">View contact profile</a>
+      </div>
+
+      <div class="col-md-9" id="right-col">
+        <p><strong>Description:</strong> {{description}}</p>
+
+        <hr>
+
+        <p><strong>Post Up-Votes: </strong> {{upVotes}}</p>
+        <p><strong>Post Down-Votes:</strong> {{downVotes}}</p>
+        <p><strong>Species:</strong> {{species}}</p>
+        <p><strong>Kind:</strong> {{kind}}</p>
+        <p><strong>Gender:</strong> {{gender}}</p>
+
+        <div ng-if="sell">
+          <p><strong>Price:</strong> {{price}}</p>
+        </div>
+
+        <div ng-if="exchange">
+          <p><strong>SpeciesB : {{speciesB}}</strong></p>
+          <p><strong>KindB : {{kindB}}</strong></p>
+          <p><strong>GenderB : {{genderB}}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

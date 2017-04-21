@@ -1,7 +1,17 @@
-<div ng-controller="pass_ctrl">
-    <form action="/" id="pass">
-        Enter your new desired password: <input type="text" id="password" ng-model="formData.password"><br>
-        <button type="button" ng-click="pop()">Change Password</button>
-    </form>
-    <div ng-if="errorMessage" type="danger">{{ errorMessage }}</div>
+<link rel="stylesheet" href="../css/forgetPassword.css">
+
+<div ng-controller="pass_ctrl" class="container">
+
+	<div ng-if="errorMessage" type = "danger">{{ errorMessage }}</div>
+
+	<div class="forgetPassword-form">
+		<form action="/" id="pass">
+			<div class="form-group">
+				<label>Enter your new desired password</label>
+				<input type="text" id = "password" ng-model="formData.password" />
+			</div>
+			<button type="button" ng-click="pop()" class="btn btn-primary btn-primary">Change Password</button>
+		</form>
+	</div>
+
 </div>

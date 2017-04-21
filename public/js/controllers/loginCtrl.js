@@ -11,7 +11,6 @@ app.controller('loginCtrl', function($scope, $http, $location, $window) {
         },
         // if the submit button was clicked
         $scope.submit = function() {
-
             $http.post('/login', $scope.formData).then(function successCallback(response) {
                 if (response.data.success == true) {
                     // console.log(response.data);

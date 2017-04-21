@@ -1,7 +1,8 @@
 angular.module('pettts')
 
-.controller('postController', function($scope, $http, Post, $routeParams) {
+.controller('postController', function($scope, $http, $window, Post, $routeParams) {
 
+    $scope.token = $window.sessionStorage.accessToken;
     //$scope.post.type = "sell";
     $scope.submitAdd = function() {
 

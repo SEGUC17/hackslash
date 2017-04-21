@@ -1,0 +1,15 @@
+.add-edit-post-form {
+  width: 70%;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  min-width: 400px;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+/* textarea == input text but with multiple row */
+.add-edit-post-form textarea {
+    resize: none;
+}
