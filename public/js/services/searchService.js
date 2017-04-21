@@ -27,6 +27,12 @@ angular.module('pettts')
                 } else {
                     console.log("notfound " + $scope.notFound);
                     $scope.posts = response.data.posts;
+                    $scope.posts.sort(function(a, b) {
+                        return new Date(b.date).getTime() - new Date(a.date).getTime();
+                    });
+                    $scope.pageSize = 7;
+                    $scope.currentPage = 1;
+                    $scope.maxSize = 5;
                     $scope.notFound = false;
                     //  $location.path('/posts/search');
                     //  $location.replace();
