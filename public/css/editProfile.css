@@ -6,7 +6,7 @@ body {
 }
 
 .setting-forms {
-  border: 1px solid #dfdede;
+  /*border: 1px solid #dfdede;*/
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 1);
   width: 50%;
@@ -15,9 +15,11 @@ body {
   margin-left: 100px;
   margin-right: 30px;
   margin-bottom: 70px;
+  box-shadow: 0 0px 3px #b2b4b7;
 }
 
 .setting-forms h2 {
+  padding-top: 20px;
   margin-left: 20px;
 }
 
@@ -26,17 +28,30 @@ body {
 }
 
 .editForm {
-  padding-top: 0;
-  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .passForm {
-  border-top: 1px solid rgb(198, 198, 198);
-  padding-top: 15px;
+  padding-top: 5px;
   margin-bottom: 10px;
 }
 
+#danger-zone {
+  padding-left: 20px;
+  color: white;
+  background-color: #d9534f;
+  border: 2px solid #d43f3a;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
 .delForm{
-  border-top: 3px solid #C9302C;
   padding-top: 15px;
+  border: 3px solid #d43f3a;
+  border-top: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }

@@ -8,7 +8,7 @@
     <form class="text-left" ng-controller="profileController" ng-submit="submitEdit()">
 
         <div class="editForm">
-          <h4>Please choose which of the below you wish to edit</h4>
+          <h4>Please choose which of the following you wish to edit</h4>
 
           <div class="form-group">
             <label for="username">Username</label>
@@ -45,11 +45,13 @@
             <input type="text" name="phoneNumber2" ng-model="edit.phoneNumber2" class="form-control">
           </div>
 
-          <button type="submit" class="btn btn-success btn-block" id="edit-btn">Edit yourself!</button>
+          <button type="submit" class="btn btn-success" id="edit-btn">Edit yourself!</button>
 
         </div>
 
     </form>
+
+    <hr>
 
     <form class="text-left" ng-controller="profileController" ng-submit="passChange()">
       <div class="passForm">
@@ -75,7 +77,7 @@
           <input type="password" name="verNewPassword" ng-model="verNewPassword" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-success btn-block" id="pass-btn">Change password</button>
+        <button type="submit" class="btn btn-success" id="pass-btn">Change password</button>
 
         <div ng-if="messageEmpty">
           {{messageEmpty}}
@@ -93,6 +95,8 @@
       </div>
     </form>
 
+    <p id="danger-zone">Danger Zone</p>
+
     <form class="text-left" ng-controller="profileController" ng-submit="delete()">
       <div class="delForm">
         <h4>Are you leaving us? :(</h4>
@@ -108,7 +112,7 @@
           <input type="password" name="verify" ng-model="dVerify" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-danger btn-block" id="del-btn">Bye bye :(</button>
+        <button type="submit" class="btn btn-danger" id="del-btn">Bye bye :(</button>
 
         <div ng-if="messagePass">
           {{messagePass}}
