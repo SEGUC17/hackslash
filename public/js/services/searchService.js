@@ -10,7 +10,7 @@ angular.module('pettts')
                 method: 'GET',
                 url: '/post/searchAndFilter',
                 headers: {
-                    'kind': $scope.searchKey
+                    'species': $scope.searchKey
                         // 'species':$scope.searchKey
                 }
             }

@@ -2,15 +2,25 @@ angular.module('pettts')
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         $routeProvider
-
-            .when('/resetPassword/:token', {
-                templateUrl: 'views/reset.html',
-                controller: 'pass_ctrl'
+            //User routes
+            //Static page routes
+            //StarterPage
+            .when('/', {
+                templateUrl: 'views/starterPage.html'
             })
-
+            //Authentication routes
+            //Registration route
             .when('/register', {
                 templateUrl: 'views/register.html',
                 controller: 'registerController'
+            })
+            //Response to email verification route TODO
+            .when('/v/:verification', {
+                templateUrl: ''
+            })
+            .when('/resetPassword/:token', {
+                templateUrl: 'views/reset.html',
+                controller: 'pass_ctrl'
             })
 
             .when('/login', {
