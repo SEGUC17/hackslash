@@ -107,7 +107,10 @@ angular.module('pettts')
                     fd.append(key, user[key]);
                 $http.post('/profile/edit', fd, {
                     transformRequest: angular.indentity,
-                    headers: { 'Content-Type': undefined, 'x-access-token': userToken }
+                    headers: {
+                        'Content-Type': undefined,
+                        'x-access-token': userToken
+                    }
                 }).then(function success(response) {
                     $window.location = '/profile/' + userUsername;
                 }, function error(response) {

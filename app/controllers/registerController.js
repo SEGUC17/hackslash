@@ -187,7 +187,7 @@ var registerController = {
         // validating the format of username, email, and password
         var validatedInput = validateInput(username, email, password, firstName, lastName);
         //path for default profile pic or the uploaded pic if exists
-        var profilePicPath = "public/images/profilePics/default.jpg";
+        var profilePicPath = "public/images/default.jpg";
         if (req.file)
             profilePicPath = req.file.path;
         // if the validation respone is false
