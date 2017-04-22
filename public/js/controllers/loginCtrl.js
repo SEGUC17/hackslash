@@ -12,22 +12,20 @@ app.controller('loginCtrl', function($scope, $http, $location, $window) {
         // if the submit button was clicked
         $scope.submit = function() {
             $http.post('/login', $scope.formData).then(function successCallback(response) {
-                if (response.data.success == true) {
-                    // console.log(response.data);
+              console.log($scope.formData);
+              console.log(response);
+                if (response.data.success === true ) {
                     $window.sessionStorage.accessToken = response.data.token;
                     $window.sessionStorage.email = response.data.email;
                     $window.sessionStorage.username = response.data.username;
                     $scope.errorMessage = false; // dont show an error (if it was there before)
-                    $window.location = '/profile/' + $window.sessionStorage.username;
                     // change the location to profile.html (where the profile is shown)
-                    // or to the home page
+                    $window.location = '/profile/' + $window.sessionStorage.username;
                 } else {
-                    // console.log("user doesnt exist") ;
                     $scope.errorMessage = 'Wrong username or password';
                 }
             }, function errorCallback(response) {
-                //  console.log("user doesnt exist") ;
-                $scope.errorMessage = 'Wrong username or password';
+                $scope.errorMessage = 'Internal Error Happened , Please try again';
             });
 
         }
