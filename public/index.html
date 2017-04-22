@@ -85,7 +85,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul ng-controller="profileController" class="nav navbar-nav navbar-right">
                         <!-- Search bar -->
 
                         <form class="navbar-form navbar-left" ng-controller="searchDirectionController" ng-submit="submitSearch()">
@@ -99,8 +99,10 @@
                                 </span>
                             </div>
                         </form>
-                        <li><a href="/register">Register</a></li>
-                        <li><a href="/login">Login</a></li>
+                        <li ng-if="!token"><a href="/register">Register</a></li>
+                        <li ng-if="!token"><a href="/login">Login</a></li>
+                        <li ng-if="token"><a href="/profile/{{myUsername}}">My Profile</a></li>
+                        <li ng-if="token"><button type="button" id="logout" class="btn" ng-click="logout()">Logout</button></li>
                         <li>
                             <form action="/charge" method="post">
                                 <!-- Specify auto in data-locale to display Checkout in the user's preferred language, if available. English will be used by default. -->
@@ -154,7 +156,17 @@
     <!-- End of footer -->
 
 
-
+<style>
+    #logout {
+        padding: 14px 10px 14px 10px;
+        background-color: rgba(100, 100, 100, 0.0);
+        color: gray;
+    }
+    #logout:hover {
+        background-color: #2e91f7;
+        color: white;
+    }
+</style>
 </body>
 
 </html>

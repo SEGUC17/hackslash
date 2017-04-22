@@ -17,7 +17,6 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-                console.log(response);
                 if (response.data == "The user you're trying to view does not exist!") {
                     return {
                         'success': false,
@@ -49,11 +48,8 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-                console.log('wee');
                 $window.location = '/profile/' + un;
             }, function error(response) {
-                console.log('hah');
-                console.log(response);
                 return {
                     'success': false,
                     'message': response.data.message

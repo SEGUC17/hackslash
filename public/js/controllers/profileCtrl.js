@@ -3,7 +3,6 @@ angular.module('pettts')
         $scope.givenUsername = $routeParams.username
         $scope.token = $window.sessionStorage.accessToken;
         $scope.myUsername = $window.sessionStorage.username;
-        $scope.messageRated = $window.sessionStorage.messageRated;
         $scope.submitRate = function() {
             var rating = $scope.rateGiven;
             var rated = $scope.userInfo.email;
@@ -75,30 +74,40 @@ angular.module('pettts')
         }
 
         $scope.logout = function() {
-            $window.sessionStorage.token = undefined;
+            delete $window.sessionStorage.accessToken;
+            delete $window.sessionStorage.email;
+            delete $window.sessionStorage.username;
+            delete $scope.token;
+            $window.location = '/';
         }
 
 
         profileService.view($scope.givenUsername).then(function(response) {
+            console.log(response);
             $scope.success = response.success;
-            $scope.userInfo = response.data.userProfileInfo;
-            $scope.posts = response.data.myPosts;
-            if($scope.profilePicture = response.data.userProfileInfo.profilePicture){
-                $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);                
+            if(response.data){
+                $scope.userInfo = response.data.userProfileInfo;
+                $scope.posts = response.data.myPosts;
+                if(response.data.userProfileInfo){
+                    if(response.data.userProfileInfo.profilePicture){
+                        $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);                
+                    }
+                }
+                if ($scope.posts == "||&This user has no Posts yet.&||") {
+                    $scope.posts = undefined;
+                }else if($scope.posts){
+                    $scope.posts.sort(function(a, b) {
+                        return new Date(b.date).getTime() - new Date(a.date).getTime();
+                    });
+                    $scope.pageSize = 7;
+                    $scope.currentPage = 1;
+                    $scope.maxSize = 5;
+                }
+                $scope.myEmail = $window.sessionStorage.email;
             }
-            if ($scope.Posts == "||&This user has no Posts yet.&||") {
-                $scope.Posts = undefined;
-            }else{
-                $scope.posts.sort(function(a, b) {
-                    return new Date(b.date).getTime() - new Date(a.date).getTime();
-                });
-                $scope.pageSize = 7;
-                $scope.currentPage = 1;
-                $scope.maxSize = 5;
-            }
-            $scope.myEmail = $window.sessionStorage.email;
         });
     })
+
 app.directive('ngFileModel', ['$parse', function($parse) {
     return {
         restrict: 'A',
