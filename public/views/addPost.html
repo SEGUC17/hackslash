@@ -89,7 +89,7 @@
                 <div ng-switch-when="sell">
                     <div class="form-group">
                       <label for="price">price (required)</label>
-                      <input type="number" name="price" ng-model="post.price" required placeholder="price" class="form-control" />
+                      <input type="number" min="0" name="price" ng-model="post.price"  placeholder="price" class="form-control" />
                     </div>
                 </div>
             </div>
