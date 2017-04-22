@@ -2,7 +2,6 @@
 
 <div class="register-outer"  ng-controller="registerController">
 
-  <div ng-if="message" type="danger">{{ message }}</div>
 
   <div class="registerForm">
 
@@ -64,6 +63,8 @@
       </div>
 
       <button type="submit" class="btn btn-success btn-block">Join now</button>
+      <div ng-if="message" type="danger">{{ message }}</div>
+
 
       <hr>
 

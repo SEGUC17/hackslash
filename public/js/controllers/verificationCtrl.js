@@ -4,6 +4,7 @@ app.controller('verificationController', function($scope, $http, verificationSer
     $scope.message = undefined;
     $scope.verificationToken = $routeParams.verification;
     verificationService.get($scope.verificationToken).then(function(response){
+        console.log(response);
         $scope.message = response.message;
     })
 });
