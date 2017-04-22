@@ -31,43 +31,43 @@ function validateInput(username, email, password, firstName, lastName) {
 
     if (!firstName) {
         output.success = false;
-        output.firstNameMessage = "First name in not entered"
+        output.message = "First name in not entered"
     }
 
     if (!lastName) {
         output.success = false;
-        output.lastNameMessage = "Last name in not entered"
+        output.message = "Last name in not entered"
     }
 
     if (!username) {
         output.success = false;
-        output.usernameMessage = "Username in not entered"
+        output.message = "Username in not entered"
     }
     // CHECK USERNAME LENGTH
     else if (username.length < 5 || username.length > 20) {
         output.success = false;
-        output.usernameMessage = "Username length must be between 5 and 20 characters";
+        output.message = "Username length must be between 5 and 20 characters";
     }
     // CHECK IF EMAIL IS ENTERED
     if (!email) {
         output.success = false;
-        output.emailMessage = "No email entered";
+        output.message = "No email entered";
     }
     // CHECK EMAIL FORMAT
     else if (!validateEmail(email)) {
         output.success = false;
-        output.emailMessage = "Email format is not valid";
+        output.message = "Email format is not valid";
     }
 
     // CHECK IF PASSWORD IS ENTERED
     if (!password) {
         output.success = false;
-        output.passwordMessage = "No password entered";
+        output.message = "No password entered";
     }
     // CHECK PASSWORD LENGTH
     else if (password.length < 5) {
         output.success = false;
-        output.passwordMessage = "Password length must be more than 5 characters";
+        output.message = "Password length must be at least 5 characters";
     }
 
 

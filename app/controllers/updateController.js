@@ -49,13 +49,15 @@ let updateController = {
                     }
                     foundUser.save(function(err, updatedUser) { //Save the changes.
                         if (err) {
-                            res.status(500).json('Internal error');
+                            res.status(403).json('this username is taken by another user');
+
                         } else {
+                            console.log("here");
                             res.status(200).json(updatedUser);
                         }
                     })
                 } else { //User not found. Send relevent error message.
-                    res.status(404).json('Cannot update non-existent user');
+                    res.status(403).json('Cannot update non-existent user');
                 }
             }
         })

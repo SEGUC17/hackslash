@@ -112,13 +112,22 @@ angular.module('pettts')
                         'x-access-token': userToken
                     }
                 }).then(function success(response) {
-                    $window.location = '/profile/' + userUsername;
-                }, function error(response) {
-                    return {
-                        'success': false,
-                        'message': 'Error in service request'
-                    };
-                });
+                        //console.log(response);
+                        console.log(user.username);
+                        if (user.username && user.username.length > 0 || user.username != userUsername) {
+                            console.log("true");
+                            if (user && user.username)
+                                $window.sessionStorage.username = user.username;
+                            console.log($window.sessionStorage.username);
+                            console.log(user.username);
+                        }
+                        $window.location = '/profile/' + $window.sessionStorage.username;
+
+                    },
+                    function error(response) {
+                        $scope.messageError = response.data;
+
+                    });
             }
         }
     }
