@@ -184,6 +184,18 @@ var registerController = {
         var password = req.body.password;
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
+
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+            }
+        }
         // validating the format of username, email, and password
         var validatedInput = validateInput(username, email, password, firstName, lastName);
         //path for default profile pic or the uploaded pic if exists

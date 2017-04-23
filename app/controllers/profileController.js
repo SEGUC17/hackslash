@@ -20,6 +20,24 @@ var updateController = require("./updateController");
 let profileController = {
     //This function takes in the user's new information, and edits it.
     editProfile: function(req, res) {
+
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                var errorMessage = "you should upload an image with extension jpg or png only";
+                var data = {
+                    message: errorMessage
+                }
+                res.status(403).json(data);
+
+            }
+        }
+
         if (!req.body) {
             if (req.file) {
                 fs.unlinkSync(req.file.path);
