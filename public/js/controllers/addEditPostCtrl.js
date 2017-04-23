@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('postController', function($scope, $http, $window, Post, $routeParams) {
+.controller('addEditPostCtrl', function($scope, $http, $window, Post, $routeParams) {
 
     $scope.token = $window.sessionStorage.accessToken;
 
