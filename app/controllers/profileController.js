@@ -158,6 +158,9 @@ let profileController = {
     },
     //This function allows the user to delete his/her profile.
     deleteUser: function(req, res) {
+
+
+
         if (!req.body) {
             res.status(400).json('There is a problem with your request.');
             return;
@@ -184,7 +187,17 @@ let profileController = {
                                     if (err) {
                                         res.status(500).json('error');
                                     } else {
-                                        res.status(200).json({ success: true, message: 'Your profile has been deleted! D:', token: null });
+                                        post.remove({ ownerEmail: uEmail }, function(err, posts) {
+                                            if (err) {
+                                                res.json(err.message);
+                                                return;
+                                            } else {
+                                                console.log(posts);
+                                                console.log("removed");
+                                                res.status(200).json({ success: true, message: 'Your profile has been deleted! D:', token: null });
+                                                return;
+                                            }
+                                        })
                                     }
                                 })
                             } else { //Password didn't match.
