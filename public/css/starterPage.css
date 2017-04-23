@@ -1,5 +1,5 @@
 body {
-    background-image:url("../images/starter-page-pic.jpg");
+    background-image:url("../images/startImage.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -11,18 +11,20 @@ html {
 .content {
     text-align: center;
     padding-top: 15%;
+    font-weight: bold;
+
 
 }
 
 h3 {
     font-family:sans-serif;
-    color: black;
+    color: blue;
     font-size: bold ;
     font-size: 3em;
 }
 
 h5 {
-    color: blue;
+    color: red;
     font-style: italic;
     font-family: sans-serif;
     font-size: 2em;
