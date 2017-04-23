@@ -1,10 +1,13 @@
 angular.module('pettts')
 
-// connecting frontend postcontroller with the api .
-
 .factory('reviewPostService', function($http, $window) {
+
+  // This Service is used to connect the reviewPostctrl to the API
+
     var token = $window.sessionStorage.accessToken;
     return {
+      // Vote Function is used to send the required information with the type of vote
+      // to the Server and Recieves the confirmation .
         vote: function(id, vote) {
             var value = 0;
             if (vote == "up") {
@@ -22,16 +25,19 @@ angular.module('pettts')
                 data: { 'vote': value, 'token': token }
             }
             return $http(req).then(function successCallback(response) {
-                //console.log("Going to back");
-                //console.log(vote + " "+id );
-
+              // The vote has been added Successfully .
                 return response.data;
             }, function errorCallback(response) {
-                console.log("There's an Error");
+                // There is an Error occcured while connecting to the server .
                 return response;
             });
         },
 
+        ////////////////////////
+        ////////////////////////
+
+        // ViewPostInfo Function is used to get the  information about the Post
+        // from the Server  .
         viewPostInfo: function(id) {
             var req = {
                 method: 'GET',
@@ -41,18 +47,21 @@ angular.module('pettts')
                 }
             }
             return $http(req).then(function successCallback(response) {
-                    console.log(response);
+                  // The data of the post has been retrieved Successfully from the Server .
                     return response;
                 },
                 function errorCallback(response) {
-                    console.log("Error in reviewPostService");
+                  // There is an Error happened while connecting to the Server .
                     return response;
                 }
             );
-        }
+        },
 
-        ,
+        ////////////////////////
+        ////////////////////////
 
+        // ViewOwnerInfo Function is used to get the  information about the Owner of the Post
+        // from the Server  .
         viewOwnerInfo: function(id) {
             var req = {
                 method: 'GET',
@@ -62,9 +71,11 @@ angular.module('pettts')
                 }
             }
             return $http(req).then(function successCallback(response) {
+              // The data of the owner of the post has been retrieved Successfully from the Server .
                     return response;
                 },
                 function errorCallback(response) {
+                    // An Error has occured .
                     return response;
                 }
             );
