@@ -73,10 +73,10 @@ let postController = {
                         foundPost.type = post.type;
                     }
                     if (post.kind) {
-                        foundPost.kind = post.kind;
+                        foundPost.kind = post.kind.toLowerCase();
                     }
                     if (post.species) {
-                        foundPost.species = post.species;
+                        foundPost.species = post.species.toLowerCase();
                     }
                     if (post.gender) {
                         foundPost.gender = post.gender;
@@ -124,7 +124,11 @@ let postController = {
     // Searching posts by kind and species
     searchPosts: function(req, res) {
         var kindQuery = req.header("kind");
+        if(kindQuery != undefined)
+        kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
+        if(speciesQuery != undefined)
+        speciesQuery = speciesQuery.toLowerCase();
         if (kindQuery != undefined && speciesQuery != undefined) {
             Post.find({ kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
@@ -207,7 +211,11 @@ let postController = {
     searchAndFilterPosts: function(req, res) {
         var filterType;
         var kindQuery = req.header("kind");
+        if(kindQuery != undefined)
+        kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
+        if(speciesQuery != undefined)
+        speciesQuery = speciesQuery.toLowerCase();
         switch (req.header("filter")) {
             case "sell":
                 filterType = 1
@@ -416,7 +424,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("problem inserting");
@@ -473,7 +482,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("problem inserting");
@@ -529,7 +539,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("cant save post");
@@ -585,7 +596,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("cant add post");
@@ -643,7 +655,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("CANT ADD POST");
@@ -699,6 +712,8 @@ let postController = {
             post.ownerEmail = ownerEmailDecoded; //save it with the new email ( from the token )
             if (req.file)
                 post.image = req.file.path;
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("cant add post");
