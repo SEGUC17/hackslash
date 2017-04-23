@@ -13,8 +13,21 @@ var fs = require('fs');
 let postController = {
     /// edit post
     editPost: function(req, res) {
-        ////  get images               ////
+
         //handle exceptions
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+
+
+            }
+        }
         if (req.body == undefined) {
             res.status(400).json("error occured");
             if (req.file)
@@ -364,6 +377,19 @@ let postController = {
     sellPost: function(req, res) { //sell
         //exceptions
 
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+
+
+            }
+        }
         if (!req.body) {
             res.status(400).json("problem with the sent request");
             if (req.file)
@@ -416,8 +442,21 @@ let postController = {
         }
     },
     /// post type=> mate
-    matePost: function(req, res) { //mate request
+    matePost: function(req, res) {
         //exceptions
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+
+
+            }
+        }
         if (!req.body) {
             res.status(400).json("problem with the sent request");
             if (req.file)
@@ -463,6 +502,19 @@ let postController = {
     },
     /// post type=> shelter
     shelterPost: function(req, res) {
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+
+
+            }
+        }
         if (!req.body) {
             res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
             if (req.file)
@@ -508,6 +560,19 @@ let postController = {
     },
     /// post type=> found
     foundPost: function(req, res) {
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+
+
+            }
+        }
         if (!req.body) {
             res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
             if (req.file)
@@ -554,6 +619,21 @@ let postController = {
     /// post type=> lost
 
     lostPost: function(req, res) {
+
+
+
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+
+
+            }
+        }
         if (!req.body) {
             res.status(400).json("INCOMING REQUEST ISNT CORRECT*DOESNT HAVE A BODY*");
             if (req.file)
@@ -598,8 +678,20 @@ let postController = {
     },
     /// post type=> exchange
     exchangePost: function(req, res) {
-        ////  get images               ////
+
         ////handle exceptions
+        ///handle not supported image file    
+        if (req.file) {
+            var checkImage = req.file.originalname;
+            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
+            if (checkImage != "png" && checkImage != "jpg") {
+                console.log(checkImage);
+                fs.unlinkSync(req.file.path);
+                res.status(403).json("you should upload an image with extension jpg or png only");
+
+
+            }
+        }
         if (!req.body) {
             res.status(400).json("problem with the sent request");
             if (req.file)

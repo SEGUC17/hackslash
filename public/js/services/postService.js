@@ -35,7 +35,7 @@ angular.module('pettts')
                             $scope.message = "Post Added Successfully";
                             $window.location = '/profile/' + $window.sessionStorage.username;
                         }, function errorCallback(response) {
-                            $scope.message = "There is an Error";
+                            $scope.message = response.data;
                             return response;
                         });
                     }
@@ -53,7 +53,7 @@ angular.module('pettts')
                             $scope.message = "Post Added Successfully";
                             $window.location = '/profile/' + $window.sessionStorage.username;
                         }, function errorCallback(response) {
-                            $scope.message = "There is an Error";
+                            $scope.message = response.data;
                             return response;
                         });
                     }
@@ -71,7 +71,7 @@ angular.module('pettts')
                             $scope.message = "Post Added Successfully";
                             $window.location = '/profile/' + $window.sessionStorage.username;
                         }, function errorCallback(response) {
-                            $scope.message = "There is an Error";
+                            $scope.message = response.data;
                             return response;
                         });
                     }
@@ -90,7 +90,7 @@ angular.module('pettts')
                             $scope.message = "Post Added Successfully";
                             $window.location = '/profile/' + $window.sessionStorage.username;
                         }, function errorCallback(response) {
-                            $scope.message = "There is an Error";
+                            $scope.message = response.data;
                             return response;
                         });
                     }
@@ -108,7 +108,7 @@ angular.module('pettts')
                             $scope.message = "Post Added Successfully";
                             $window.location = '/profile/' + $window.sessionStorage.username;
                         }, function errorCallback(response) {
-                            $scope.message = "There is an Error";
+                            $scope.message = response.data;
                             return response;
                         });
                     }
@@ -126,7 +126,7 @@ angular.module('pettts')
                             $scope.message = "Post Added Successfully";
                             $window.location = '/profile/' + $window.sessionStorage.username;
                         }, function errorCallback(response) {
-                            $scope.message = "There is an Error";
+                            $scope.message = response.data;
                             return response;
                         });
                     }
@@ -207,7 +207,7 @@ angular.module('pettts')
                     $scope.message = "Post edited Successfully";
                     $window.location = '/profile/' + $window.sessionStorage.username;
                 }, function errorCallback(response) {
-                    $scope.message = "There is an Error";
+                    $scope.message = response.data;
                     return response;
                 });
 
