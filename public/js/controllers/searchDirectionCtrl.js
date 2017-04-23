@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('searchDirectionController', function($scope, $window, searchService, $location) {
+.controller('searchDirectionCtrl', function($scope, $window, searchService, $location) {
 
 
     /// take the search key and redirect to the search route

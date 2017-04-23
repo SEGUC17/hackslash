@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('postsController', function($scope, postsService) {
+.controller('postsCtrl', function($scope, postsService) {
 
     postsService.get().then(function(posts) {
         $scope.posts = posts

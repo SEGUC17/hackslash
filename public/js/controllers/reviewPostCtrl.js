@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('reviewPostController', function($scope, $window, $http, $routeParams, reviewPostService) {
+.controller('reviewPostCtrl', function($scope, $window, $http, $routeParams, reviewPostService) {
 
     // get the token and the post id
     $scope.token = $window.sessionStorage.accessToken;

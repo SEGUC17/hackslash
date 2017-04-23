@@ -1,5 +1,5 @@
 angular.module('pettts')
-    .controller('profileController', function($scope, $http, profileService, $window, $location, $routeParams) {
+    .controller('profileCtrl', function($scope, $http, profileService, $window, $location, $routeParams) {
 
         //get the attributes for the username to visit, my username and the token
         $scope.givenUsername = $routeParams.username

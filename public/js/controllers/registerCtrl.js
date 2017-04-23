@@ -1,6 +1,6 @@
 var app = angular.module('pettts');
 
-app.controller('registerController', function($scope, $http, $window, User) {
+app.controller('registerCtrl', function($scope, $http, $window, User) {
 
 
     ///check if logged in redirect to home

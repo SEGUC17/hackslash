@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('viewMoreDirectionController', function($scope, $window, $location) {
+.controller('viewMoreDirectionCtrl', function($scope, $window, $location) {
 
 
     //view full post in new window

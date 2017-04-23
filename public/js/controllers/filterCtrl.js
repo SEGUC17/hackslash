@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('filterController', function($scope, $routeParams, filterService) {
+.controller('filterCtrl', function($scope, $routeParams, filterService) {
 
     // getting the route parameter
     $scope.type = $routeParams.type
