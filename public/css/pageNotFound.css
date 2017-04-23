@@ -3,7 +3,7 @@
 }
 
 body {
-    background-image:url(../images/notfoundbacground.jpg);
+    background-image:url(../images/errorimage.jpg);
     background-size: cover;
 }
 
@@ -17,14 +17,18 @@ body {
 
 .logo {
 	text-align:center;
-	margin-top:250px;
+	margin-top:150px;
 }
 
-.logo img {
-	width:180px;
-}
+
 
 .logo p {
 	color:red;
-	font-size:40px;
+	font-size:3em;
+}
+#jumbo {
+     background-color: rgba(255, 255, 255, 0.5);
+     border-radius: 100px;
+		 width: 500px;
+
 }
