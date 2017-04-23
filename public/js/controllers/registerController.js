@@ -1,10 +1,17 @@
 var app = angular.module('pettts');
 
-app.controller('registerController', function($scope, $http, User) {
+app.controller('registerController', function($scope, $http, $window, User) {
+
+
+    ///check if logged in redirect to home
+    if ($window.sessionStorage.accessToken) {
+        $window.location = '/profile/' + $window.sessionStorage.username;
+    }
 
     ////////////////////////////////////
     ///////////////////////////////////
     // add user to the family
+
     $scope.submitUser = function() {
 
         var user = $scope.user;

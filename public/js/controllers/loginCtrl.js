@@ -2,6 +2,12 @@ var app = angular.module('pettts');
 
 app.controller('loginCtrl', function($scope, $http, $location, $window) {
 
+
+    ///check if logged in redirect to home
+    if ($window.sessionStorage.accessToken) {
+        $window.location = '/profile/' + $window.sessionStorage.username;
+    }
+
     //if the forgot button was clicked
     $scope.forgot = function() {
             //getting user on the app scope to pass it later to other ctrlers
