@@ -44,14 +44,16 @@ p {
     text-align: center;
     margin-bottom: 10px;
 }
+.glyphicon-star-full:before {
+            color: gray;
+}
 
 .glyphicon-star:before {
-    color: gray;
+            color: gold;
+        
 }
 
-.glyphicon-star-full:before {
-    color: gold;
-}
+
 
 .glyphicon-envelope:before {
   padding-right: 2px;
