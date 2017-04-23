@@ -22,7 +22,12 @@
                         <div class="media-left">
                             <!-- post image -->
                             <a href="#">
-                                <img class="media-object" src="http://placehold.it/150x150" alt="...">
+                              <div ng-if="post.image">
+                                  <img class="media-object" src="{{post.image.substring(7,post.image.length)}}" width="150px" alt="...">
+                              </div>
+                              <div ng-if="!post.image">
+                                  <img class="media-object" src="http://placehold.it/150x150" alt="...">
+                              </div>
                             </a>
                         </div>
                         <div class="media-body">
