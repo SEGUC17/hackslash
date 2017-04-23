@@ -3,14 +3,12 @@ angular.module('pettts')
 .controller('viewMoreDirectionController', function($scope, $window, $location) {
 
 
+    //view full post in new window
+
     $scope.submitViewMore = function() {
-        //console.log($scope.post._id);
+        //re route by id to view the full post 
         if ($scope.post._id != undefined) {
             $location.path('/posts/viewMore').search({ id: $scope.post._id });
-
-        } else {
-
-            console.log("No ID Found");
 
         }
     }

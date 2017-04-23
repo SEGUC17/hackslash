@@ -1,29 +1,49 @@
 angular.module('pettts')
     .controller('profileController', function($scope, $http, profileService, $window, $location, $routeParams) {
+
+        //get the attributes for the username to visit, my username and the token
         $scope.givenUsername = $routeParams.username
         $scope.token = $window.sessionStorage.accessToken;
         $scope.myUsername = $window.sessionStorage.username;
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        //rate the user
         $scope.submitRate = function() {
             var rating = $scope.rateGiven;
             var rated = $scope.userInfo.email;
             var un = $scope.userInfo.username;
+            //check for the rating value
             if (rating > 5 || rating < 1) {
                 $scope.message = "Rating must be between 1 and 5"
             } else {
+                //send the rate request to the corresponding service
                 profileService.rate(rating, rated, un, $scope).then(function(response) {
+                    //get the result back from the service and display it
                     $scope.messageRated = response.message;
                 });
             }
         };
 
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        //edit my profile
         $scope.submitEdit = function() {
             var edit = $scope.edit;
             profileService.edit(edit, $scope);
         };
 
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        //delete my profile and run away!!!
         $scope.delete = function() {
+            //message for pasword and its confirmation matching error
             $scope.messagePass = undefined;
+            //message for the password when not given
             $scope.messageNotGiven = undefined;
+
             var password = $scope.dPassword;
             var verify = $scope.dVerify;
             if (password) {
@@ -37,7 +57,13 @@ angular.module('pettts')
             }
         };
 
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        //change my password
         $scope.passChange = function() {
+
+            //error messages for changing the password
             $scope.messageEmpty = undefined;
             $scope.messageError = undefined;
             $scope.messageNew = undefined;
@@ -46,6 +72,8 @@ angular.module('pettts')
             var verify = $scope.verify;
             var newPassword = $scope.newPassword;
             var verNewPassword = $scope.verNewPassword;
+
+            //checks for various input errors by user
             if (password && newPassword) {
                 if (newPassword == verNewPassword && newPassword.length >= 5) {
                     if (password == verify) {
@@ -65,14 +93,25 @@ angular.module('pettts')
             }
         };
 
+        ////////////////////////////////////
+        ///////////////////////////////////
+        //edit my post
         $scope.editPost = function() {
             $location.path('/post/edit').search({ id: $scope.post._id });
         }
 
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        //view specific post
         $scope.viewPost = function() {
             $location.path('/posts/viewMore').search({ id: $scope.post._id });
         }
 
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        //logout and say bye
         $scope.logout = function() {
             delete $window.sessionStorage.accessToken;
             delete $window.sessionStorage.email;
@@ -81,25 +120,31 @@ angular.module('pettts')
             $window.location = '/';
         }
 
+        ////////////////////////////////////
+        ///////////////////////////////////
 
+        // to view my profile
         profileService.view($scope.givenUsername).then(function(response) {
-            console.log(response);
             $scope.success = response.success;
+            // get the values back from the service
             if (response.data) {
                 $scope.userInfo = response.data.userProfileInfo;
-                console.log(response.data.userProfileInfo);
                 $scope.posts = response.data.myPosts;
                 if (response.data.userProfileInfo) {
                     if (response.data.userProfileInfo.profilePicture) {
+                        // formulate the profile picture path 
                         $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);
                     }
                 }
                 if ($scope.posts == "||&This user has no Posts yet.&||") {
+                    //if the user has no posts
                     $scope.posts = undefined;
                 } else if ($scope.posts) {
+                    //sort the posts by date
                     $scope.posts.sort(function(a, b) {
                         return new Date(b.date).getTime() - new Date(a.date).getTime();
                     });
+                    //set page attributes
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;
                     $scope.maxSize = 5;
@@ -108,6 +153,12 @@ angular.module('pettts')
             }
         });
     })
+
+
+////////////////////////////////////
+///////////////////////////////////
+
+//directive for file upload in edit profile
 
 app.directive('ngFileModel', ['$parse', function($parse) {
     return {

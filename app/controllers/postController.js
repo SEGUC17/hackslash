@@ -9,6 +9,10 @@ var type = upload.single('postPic');
 var fs = require('fs');
 ////////////////////////
 
+/*
+postController description
+It should add and edit all types of the posts as well as search filter and getting post and owner information .
+*/
 
 let postController = {
     /// edit post
@@ -16,12 +20,11 @@ let postController = {
 
         //handle exceptions
 
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
                 return;
@@ -48,22 +51,11 @@ let postController = {
             var ownerEmailDecoded = req.decoded._doc.email;
             var post = new Post(req.body);
             post.ownerEmail = ownerEmailDecoded;
-
-            // if (!post.type || !post.kind || !post.species || !post.gender) {
-            //     res.status(403).json("incomplete request ");
-            //     return;
-            // }
-            // if (post.type == 6 && (!post.speciesB || !post.kindB || !post.genderB || post.genderB == 'null')) {
-            //     res.status(403).json("input problem with exchange type");
-            //     return;
-            // }
             var id = req.body.id;
 
             if (req.file)
                 post.image = req.file.path;
 
-            console.log(id);
-            console.log(ownerEmailDecoded);
             Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) { //add ownerEmail here
                 if (err) {
                     res.status(403).json("project not found or not your project");
@@ -71,7 +63,6 @@ let postController = {
                         fs.unlinkSync(req.file.path);
                 } else {
                     //no match exception
-                    console.log(foundPost);
                     if (foundPost == null) {
                         res.status(403).json("post does not match with anything");
                         if (req.file)
@@ -82,10 +73,10 @@ let postController = {
                         foundPost.type = post.type;
                     }
                     if (post.kind) {
-                        foundPost.kind = post.kind;
+                        foundPost.kind = post.kind.toLowerCase();
                     }
                     if (post.species) {
-                        foundPost.species = post.species;
+                        foundPost.species = post.species.toLowerCase();
                     }
                     if (post.gender) {
                         foundPost.gender = post.gender;
@@ -133,7 +124,11 @@ let postController = {
     // Searching posts by kind and species
     searchPosts: function(req, res) {
         var kindQuery = req.header("kind");
+        if(kindQuery != undefined)
+        kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
+        if(speciesQuery != undefined)
+        speciesQuery = speciesQuery.toLowerCase();
         if (kindQuery != undefined && speciesQuery != undefined) {
             Post.find({ kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
@@ -216,7 +211,11 @@ let postController = {
     searchAndFilterPosts: function(req, res) {
         var filterType;
         var kindQuery = req.header("kind");
+        if(kindQuery != undefined)
+        kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
+        if(speciesQuery != undefined)
+        speciesQuery = speciesQuery.toLowerCase();
         switch (req.header("filter")) {
             case "sell":
                 filterType = 1
@@ -377,12 +376,11 @@ let postController = {
         //exceptions
 
 
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
                 return;
@@ -405,7 +403,6 @@ let postController = {
             let post = new Post(req.body);
             if (!ownerEmailDecoded || !post.type || !post.kind || !post.species || !post.gender || !post.price) {
                 res.status(400).json("incomplete request ");
-                console.log(post);
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -427,7 +424,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("problem inserting");
@@ -443,12 +441,11 @@ let postController = {
     matePost: function(req, res) {
         //exceptions
 
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
                 return;
@@ -485,7 +482,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("problem inserting");
@@ -500,12 +498,11 @@ let postController = {
     /// post type=> shelter
     shelterPost: function(req, res) {
 
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
                 return;
@@ -542,7 +539,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("cant save post");
@@ -557,12 +555,11 @@ let postController = {
     /// post type=> found
     foundPost: function(req, res) {
 
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
                 return;
@@ -599,7 +596,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("cant add post");
@@ -617,12 +615,11 @@ let postController = {
 
 
 
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
                 return;
@@ -658,7 +655,8 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("CANT ADD POST");
@@ -674,12 +672,11 @@ let postController = {
     exchangePost: function(req, res) {
 
         ////handle exceptions
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
                 return;
@@ -715,6 +712,8 @@ let postController = {
             post.ownerEmail = ownerEmailDecoded; //save it with the new email ( from the token )
             if (req.file)
                 post.image = req.file.path;
+            post.kind = post.kind.toLowerCase();
+            post.species = post.species.toLowerCase();
             post.save(function(err, Post) {
                 if (err) {
                     res.status(403).json("cant add post");
@@ -726,8 +725,8 @@ let postController = {
             })
         }
     },
+    // get Post information by its id .
     findPostbyId: function(req, res) {
-        console.log("In the findPostbyId backend");
         var id = req.header("_id");
         Post.findOne({ _id: id }, function(err, foundPost) {
             if (err) {
@@ -737,17 +736,14 @@ let postController = {
                     res.json("There is no post with this ID");
                 } else {
                     res.json(foundPost);
-                    console.log(foundPost.ownerEmail);
                 }
             }
         });
     },
-
+    // get owner of the Post information by its id .
     findOwnerByPostID: function(req, res) {
-            console.log("In the findOwnerByPostID backend");
             var neededEmail;
             var id = req.header("_id");
-            console.log(id);
             Post.findOne({ _id: id }, function(err, foundPost) {
                 if (err) {
                     res.json("There's an Error finding this post");
@@ -764,7 +760,6 @@ let postController = {
                                 if (foundUser == null) res.send("No Owner with this Email");
                                 else {
                                     res.json(foundUser.username);
-                                    console.log("first Name " + foundUser.firstName);
                                 }
                             }
                         });
@@ -772,20 +767,7 @@ let postController = {
                 }
             });
         }
-        //   ,
-        //     viewPostInfo: function(req , res)
-        //     {
-        //       var idQuery = req.header("id");
-        //       Post.findOne({_id: idQuery }, function(err, post) {
-        //           if (err) {
-        //               res.json(err.message);
 
-    //           } else {
-    //                   res.json({post});
-    //           }
-    //       });
-
-    //     }
 }
 
 module.exports = postController;
