@@ -42,8 +42,7 @@ angular.module('pettts')
             $scope.note = response.data.note;
 
 
-        //console.log("Response::  ");
-        //console.log(response.data.ownerEmail);
+
     });
 
     reviewPostService.viewOwnerInfo($routeParams.id).then(function(response) {
