@@ -1,24 +1,27 @@
 angular.module('pettts')
-
-// connecting frontend postcontroller with the api .
 .factory('Post', function($http, $window) {
-    var token = $window.sessionStorage.accessToken;
-    // if (!token)
-    //     $window.location = '/login';
-    // else
-    return {
 
-        ///add callbacks for success and failure TODO
+  // This Service is used to connect the postctrl to the API
+
+    // accessing the token from the session
+    var token = $window.sessionStorage.accessToken;
+
+    return {
+        // ADD Function is used to add Post to the database
+        // with specific attributes .
         add: function(post, type, $scope) {
+          // Checking that the type must be entered .
             if (!type) {
                 $scope.message = "you should select the type of the post";
                 return;
             }
-
+            // Every type has some different attributes .
+            // callbacks by success of the added post or an error occcured .
             switch (type) {
                 case "sell":
                     {
                         post.type = 1;
+                        // Checking for price mush be postive .
                         if (post.price <= 0) {
                             $scope.message = "price should be a postive number";
                         }
@@ -135,8 +138,13 @@ angular.module('pettts')
             }
 
         },
-        edit: function(post, type, $scope, id) {
 
+        ////////////////////////
+        ////////////////////////
+
+        // Edit Function is used to edit an existing post in the database .
+        edit: function(post, type, $scope, id) {
+            // Checking that the type must be entered and also the ID to make changes in the right post .
                 if (!type) {
                     $scope.message = "you should select the type of the post";
                     return;
@@ -145,6 +153,8 @@ angular.module('pettts')
                     $scope.message = "invalid post";
                     return;
                 }
+                // Every type has some different attributes .
+                // callbacks by success of the edited post or an error occcured .
                 switch (type) {
                     case "sell":
                         {
@@ -181,22 +191,6 @@ angular.module('pettts')
                 }
 
                 post.id = id;
-                ///add id of post to be edited
-                /*  var req = {
-                        method: 'POST',
-                        url: '/post/edit',
-                        headers: {
-                            'x-access-token': token
-                        },
-                        data: { post, id }
-                    }
-                    return $http(req).then(function successCallback(response) {
-                        $scope.message = "Post edited Successfully";
-                        return response;
-                    }, function errorCallback(response) {
-                        $scope.message = "There is an Error";
-                        return response;
-                    });*/
                 var fd = new FormData();
                 for (var key in post)
                     fd.append(key, post[key]);
@@ -212,22 +206,5 @@ angular.module('pettts')
                 });
 
             }
-            // ,
-            // getPost : function (id) {
-            //   var req = {
-            //       method: 'get',
-            //       url: '/post/postInfo', // The URL
-            //       headers: {
-            //           'id': id
-            //       }
-            //   }
-            //   return $http(req).then(function successCallback(response) {
-            //       return response;
-            //   }, function errorCallback(response) {
-            //       return response;
-            //   });
-            //
-            //
-            // }
     }
 });
