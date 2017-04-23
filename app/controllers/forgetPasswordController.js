@@ -58,9 +58,7 @@ var sendForgetPasswordEmail = function(foundUser) {
     });
     //////////////////////// EMAIL SENT \\\\\\\\\\\\\\\\\\\\\\\\\\
     sg.API(request, function(error, response) {
-        console.log(response.statusCode);
-        console.log(response.body);
-        console.log(response.headers);
+
     });
 }
 

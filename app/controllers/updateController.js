@@ -11,9 +11,11 @@ let updateController = {
         var uEmail = user.email;
         //First, find this user in the database.
         User.findOne({ email: uEmail }, function(err, foundUser) {
-            if (err) { //Internal Error
+            if (err) {
+                //Internal Error
                 res.status(500).json(err.message);
-            } else { //User found. Check all given parameters, if given, change it.
+            } else {
+                //User found. Check all given parameters, if given, change it.
                 if (foundUser) {
                     if (user.username) {
                         foundUser.username = user.username;
@@ -57,11 +59,11 @@ let updateController = {
                             res.status(403).json('this username is taken by another user');
 
                         } else {
-                            console.log("here");
                             res.status(200).json(updatedUser);
                         }
                     })
-                } else { //User not found. Send relevent error message.
+                } else {
+                    //User not found. Send relevent error message.
                     res.status(403).json('Cannot update non-existent user');
                 }
             }
