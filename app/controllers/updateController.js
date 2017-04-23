@@ -1,6 +1,10 @@
 //Connecting to JS defined Schema.
 let User = require('../models/user');
 
+
+//require file system for editing profile picture
+var fs = require('fs');
+
 let updateController = {
     //This function updates all the User's info in the database if it is changed.
     updateProfile: function(user, res) {
@@ -36,6 +40,7 @@ let updateController = {
                         foundUser.homeNumber = user.homeNumber;
                     }
                     if (user.profilePicture) {
+                        fs.unlinkSync(foundUser.profilePicture);
                         foundUser.profilePicture = user.profilePicture;
                     }
                     if (user.rate) {

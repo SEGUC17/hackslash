@@ -85,17 +85,18 @@ angular.module('pettts')
         profileService.view($scope.givenUsername).then(function(response) {
             console.log(response);
             $scope.success = response.success;
-            if(response.data){
+            if (response.data) {
                 $scope.userInfo = response.data.userProfileInfo;
+                console.log(response.data.userProfileInfo);
                 $scope.posts = response.data.myPosts;
-                if(response.data.userProfileInfo){
-                    if(response.data.userProfileInfo.profilePicture){
-                        $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);                
+                if (response.data.userProfileInfo) {
+                    if (response.data.userProfileInfo.profilePicture) {
+                        $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);
                     }
                 }
                 if ($scope.posts == "||&This user has no Posts yet.&||") {
                     $scope.posts = undefined;
-                }else if($scope.posts){
+                } else if ($scope.posts) {
                     $scope.posts.sort(function(a, b) {
                         return new Date(b.date).getTime() - new Date(a.date).getTime();
                     });
