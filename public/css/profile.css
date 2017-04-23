@@ -3,8 +3,8 @@ h2 {
 }
 
 p {
-    padding-left:2px; 
-    color: gray; 
+    padding-left: 2px;
+    color: gray;
     margin-top: 0;
 }
 
@@ -29,10 +29,13 @@ p {
 #view-btn {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-right: 1px solid rgb(0,70,160);
+    border-right: 1px solid rgb(0, 70, 160);
 }
 
-#stars1, #stars2, #stars3, #stars4 {
+#stars1,
+#stars2,
+#stars3,
+#stars4 {
     display: inline;
 }
 
@@ -46,7 +49,7 @@ p {
 }
 
 .glyphicon-star:before {
-    color: gray;
+    color: gold;
 }
 
 .glyphicon-star-full:before {
@@ -54,9 +57,9 @@ p {
 }
 
 .glyphicon-envelope:before {
-  padding-right: 2px;
+    padding-right: 2px;
 }
 
 .glyphicon-phone:before {
-  padding-right: 2px;
+    padding-right: 2px;
 }

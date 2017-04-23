@@ -47,7 +47,7 @@ angular.module('pettts')
             var newPassword = $scope.newPassword;
             var verNewPassword = $scope.verNewPassword;
             if (password && newPassword) {
-                if (newPassword == verNewPassword && newPassword.length > 5) {
+                if (newPassword == verNewPassword && newPassword.length >= 5) {
                     if (password == verify) {
                         if (password != newPassword) {
                             profileService.pass(password, newPassword, $scope);
