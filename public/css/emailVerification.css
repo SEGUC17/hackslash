@@ -3,8 +3,8 @@
 }
 
 body {
-    background-image:url(../images/verificationSentBackground.jpg);
-    background-size: cover;
+    background-image:url(../images/verification.jpg);
+		background-size: 1450px 800px;
     background-position: center;
 }
 
@@ -16,7 +16,7 @@ body {
 	font-family: 'Love Ya Like A Sister', cursive;
 }
 
-.logo {	
+.logo {
 	margin-top:250px;
 	margin-left:15px;
 }
@@ -27,8 +27,8 @@ body {
 
 .logo p {
 	color:blue;
-	font-size:40px;	
-}	
+	font-size:40px;
+}
 
 .sub {
 	margin-left:250px;;

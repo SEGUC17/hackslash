@@ -1,5 +1,5 @@
 body {
-    background-image:url("../images/about-pic.jpg");
+    background-image:url("../images/aboutImage.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -9,13 +9,19 @@ html {
 }
 
 #jumbo {
-    padding-top: 1%;
+    padding-top: 9%;
+
 }
 
 #info {
      background-color: rgba(255, 255, 255, 0.5);
+     border-radius: 150px;
+
 }
 
 .pa {
     color: darkblue;
+}
+h1{
+  text-align: center;
 }

@@ -14,7 +14,7 @@ var resetPasswordController = {
         var passSource = req.body.params.password;
         var passToGo = passSource.password; // EXTRACTING THE PASSWORD VALUE ITSELF
         if (passToGo.length < 5) {
-            res.status(400).json("password is too short");
+            res.status(403).json({ success: false, message: "password is too short" });
             return;
         }
 
