@@ -191,7 +191,6 @@ var registerController = {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json({ success: false, message: "you should upload an image with extension jpg or png only" });
                 return;
@@ -214,7 +213,6 @@ var registerController = {
 
             User.findOne({ username: username }, function(err, foundUser) {
                 if (err) {
-                    console.log(err);
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                     return res.status(400).json({ success: false, message: "an error occured" })
@@ -229,7 +227,6 @@ var registerController = {
                         // if email is already in database
                         User.findOne({ email: email }, function(err, foundUser2) {
                             if (err) {
-                                console.log(err);
                                 if (req.file)
                                     fs.unlinkSync(req.file.path);
                                 return res.status(400).json({ success: false, message: "an error occured" })
@@ -264,7 +261,6 @@ var registerController = {
                                     if (err) {
                                         if (req.file)
                                             fs.unlinkSync(req.file.path);
-                                        console.log(err);
                                     }
 
                                     // user already exists in persistent collection...

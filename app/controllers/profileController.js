@@ -27,7 +27,6 @@ let profileController = {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
             if (checkImage != "png" && checkImage != "jpg") {
-                console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json('you should upload an image with extension jpg or png only');
                 return;
@@ -207,8 +206,6 @@ let profileController = {
                                                 res.json(err.message);
                                                 return;
                                             } else {
-                                                console.log(posts);
-                                                console.log("removed");
                                                 res.status(200).json({ success: true, message: 'Your profile has been deleted! D:', token: null });
                                                 return;
                                             }

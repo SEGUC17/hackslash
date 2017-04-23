@@ -40,7 +40,6 @@ app.controller('pass_ctrl', function($scope, $http, $location, $window, $routePa
                     $window.alert("Something Went Wrong  ,, please Try Again");
                 }
             }, function errorCallback(response) {
-                console.log(response.data.message);
                 $scope.errorMessage = response.data.message;
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
