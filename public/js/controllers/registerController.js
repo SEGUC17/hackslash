@@ -2,14 +2,22 @@ var app = angular.module('pettts');
 
 app.controller('registerController', function($scope, $http, User) {
 
+    ////////////////////////////////////
+    ///////////////////////////////////
+    // add user to the family
     $scope.submitUser = function() {
 
         var user = $scope.user;
+        //call the service function
         User.add(user, $scope);
 
     };
 });
 
+////////////////////////////////////
+///////////////////////////////////
+
+//directive for profile picture upload 
 app.directive('ngFileModel', ['$parse', function($parse) {
     return {
         restrict: 'A',

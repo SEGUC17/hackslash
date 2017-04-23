@@ -4,7 +4,6 @@ angular.module('pettts')
 
     postsService.get().then(function(posts) {
         $scope.posts = posts
-
         if (!$scope.posts) {
             $scope.notFound = true;
         } else {
@@ -13,6 +12,7 @@ angular.module('pettts')
             $scope.posts.sort(function(a, b) {
                 return new Date(b.date).getTime() - new Date(a.date).getTime();
             });
+            //setting page attributes
             $scope.pageSize = 7;
             $scope.currentPage = 1;
             $scope.maxSize = 5;
