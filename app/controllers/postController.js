@@ -96,7 +96,7 @@ let postController = {
                     if (post.speciesB) {
                         foundPost.speciesB = post.speciesB;
                     }
-                    if (post.price) {
+                    if (post.price && post.type == 1 && post.price > 0) {
                         foundPost.price = post.price;
                     }
                     if (post.description) {

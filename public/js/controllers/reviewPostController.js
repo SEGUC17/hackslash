@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('reviewPostController', function($scope,$window, $http, $routeParams, reviewPostService) {
+.controller('reviewPostController', function($scope, $window, $http, $routeParams, reviewPostService) {
     console.log("entered the reviewPostController");
     $scope.token = $window.sessionStorage.accessToken;
     $scope.id = $routeParams.id;
@@ -27,6 +27,7 @@ angular.module('pettts')
         $scope.gender = response.data.gender;
         $scope.species = response.data.species;
         $scope.description = response.data.description;
+        $scope.date = response.data.date;
         console.log(response.data.type);
         if (response.data.type == 1) {
             $scope.sell = 1;
@@ -38,10 +39,8 @@ angular.module('pettts')
             $scope.genderB = response.data.genderB;
             $scope.speciesB = response.data.speciesB;
         }
-
-
-        //console.log("Response::  ");
-        //console.log(response.data.ownerEmail);
+        if (response.data.note)
+            $scope.note = response.data.note;
     });
 
     reviewPostService.viewOwnerInfo($routeParams.id).then(function(response) {
