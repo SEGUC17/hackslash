@@ -9,6 +9,7 @@ angular.module('pettts')
             console.log("submitVote Called : " + $scope.vote);
         }
         //var response = reviewPostService.vote($routeParams.id,$scope.vote);
+
         reviewPostService.vote($routeParams.id, $scope.vote).then(function(response) {
             $scope.message = response;
         });
