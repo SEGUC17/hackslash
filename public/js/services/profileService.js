@@ -31,11 +31,13 @@ angular.module('pettts')
             }, function error(response) {
                 return {
                     'success': false,
-                    'message': 'Error in service request'
+                    'message': 'Error can not view profile'
                 };
             });
         },
 
+        ////////////////////////////////////
+        ///////////////////////////////////
         //Service to call rateUser
         rate: function(rating, rated, un, $scope) {
             var request = {
@@ -56,6 +58,9 @@ angular.module('pettts')
                 };
             });
         },
+
+        ////////////////////////////////////
+        ///////////////////////////////////
         //Service to call deleteUser
         delete: function(password, $scope) {
             var request = {
@@ -75,10 +80,12 @@ angular.module('pettts')
             }, function error(response) {
                 return {
                     'success': false,
-                    'message': 'Error in service request'
+                    'message': 'error occured can not delete the user try again later'
                 };
             });
         },
+        ////////////////////////////////////
+        ///////////////////////////////////
         //Service to call changePassword
         pass: function(password, newPassword, $scope) {
             var request = {
@@ -96,10 +103,12 @@ angular.module('pettts')
             }, function error(response) {
                 return {
                     'success': false,
-                    'message': 'Error in service request'
+                    'message': 'Error can not change password try again later'
                 };
             });
         },
+        ////////////////////////////////////
+        ///////////////////////////////////
         //Service to call editProfile
         edit: function(user, $scope) {
             if (user) {
@@ -126,7 +135,7 @@ angular.module('pettts')
 
                     },
                     function error(response) {
-                        $scope.messageError = response.data;
+                        $scope.messageUpload = response.data;
 
                     });
             }

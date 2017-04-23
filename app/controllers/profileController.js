@@ -29,12 +29,8 @@ let profileController = {
             if (checkImage != "png" && checkImage != "jpg") {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
-                var errorMessage = "you should upload an image with extension jpg or png only";
-                var data = {
-                    message: errorMessage
-                }
-                res.status(403).json(data);
-
+                res.status(403).json('you should upload an image with extension jpg or png only');
+                return;
             }
         }
 
@@ -43,6 +39,7 @@ let profileController = {
                 fs.unlinkSync(req.file.path);
             }
             res.status(400).json('There is a problem with your request.');
+
             return;
         }
         var token = req.body.token || req.header("x-access-token") || req.query.token;

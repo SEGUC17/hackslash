@@ -24,8 +24,7 @@ let postController = {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
-
-
+                return;
             }
         }
         if (req.body == undefined) {
@@ -386,8 +385,7 @@ let postController = {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
-
-
+                return;
             }
         }
         if (!req.body) {
@@ -453,8 +451,7 @@ let postController = {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
-
-
+                return;
             }
         }
         if (!req.body) {
@@ -511,8 +508,7 @@ let postController = {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
-
-
+                return;
             }
         }
         if (!req.body) {
@@ -569,8 +565,7 @@ let postController = {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
-
-
+                return;
             }
         }
         if (!req.body) {
@@ -630,8 +625,7 @@ let postController = {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
-
-
+                return;
             }
         }
         if (!req.body) {
@@ -688,8 +682,7 @@ let postController = {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
                 res.status(403).json("you should upload an image with extension jpg or png only");
-
-
+                return;
             }
         }
         if (!req.body) {
