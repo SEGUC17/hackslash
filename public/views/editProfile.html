@@ -21,12 +21,12 @@
 </div>
 
 <div ng-if="token">
-    <div ng-controller="profileController">
+    <div ng-controller="profileCtrl">
         <div class="setting-forms">
             <h2>These are your profile settings.</h2>
             <hr>
 
-            <form class="text-left" ng-controller="profileController" ng-submit="submitEdit()">
+            <form class="text-left" ng-controller="profileCtrl" ng-submit="submitEdit()">
 
                 <div class="editForm">
                     <h4>Please choose which of the following you wish to edit</h4>
@@ -80,7 +80,7 @@
 
             <hr>
 
-            <form class="text-left" ng-controller="profileController" ng-submit="passChange()">
+            <form class="text-left" ng-controller="profileCtrl" ng-submit="passChange()">
                 <div class="passForm">
                     <h4>If you wish to change your password please fill the below textboxes</h4>
 
@@ -123,7 +123,7 @@
 
             <p id="danger-zone">Danger Zone</p>
 
-            <form class="text-left" ng-controller="profileController" ng-submit="delete()">
+            <form class="text-left" ng-controller="profileCtrl" ng-submit="delete()">
                 <div class="delForm">
                     <h4>Are you leaving us? :(</h4>
                     <p style="padding-top:0;">Please enter your password to delete your account</p>

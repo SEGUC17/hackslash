@@ -31,32 +31,32 @@
 
     <!-- controllers -->
     <script type="text/javascript" src="js/services/postsService.js"></script>
-    <script type="text/javascript" src="js/controllers/postsController.js"></script>
+    <script type="text/javascript" src="js/controllers/postsCtrl.js"></script>
 
-    <script type="text/javascript" src="js/controllers/searchDirectionController.js"></script>
+    <script type="text/javascript" src="js/controllers/searchDirectionCtrl.js"></script>
 
     <script type="text/javascript" src="js/services/filterService.js"></script>
-    <script type="text/javascript" src="js/controllers/filterController.js"></script>
+    <script type="text/javascript" src="js/controllers/filterCtrl.js"></script>
 
     <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
 
-    <script type="text/javascript" src="js/controllers/searchController.js"></script>
+    <script type="text/javascript" src="js/controllers/searchCtrl.js"></script>
     <script type="text/javascript" src="js/services/searchService.js"></script>
 
     <script type="text/javascript" src="js/services/profileService.js"></script>
     <script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
 
-    <script type="text/javascript" src="js/controllers/pass_ctrl.js"></script>
+    <script type="text/javascript" src="js/controllers/passCtrl.js"></script>
 
     <script type="text/javascript" src="js/services/postService.js"></script>
-    <script type="text/javascript" src="js/controllers/postController.js"></script>
+    <script type="text/javascript" src="js/controllers/addEditPostCtrl.js"></script>
 
-    <script type="text/javascript" src="js/controllers/registerController.js"></script>
+    <script type="text/javascript" src="js/controllers/registerCtrl.js"></script>
     <script type="text/javascript" src="js/services/registerService.js"></script>
 
-    <script type="text/javascript" src="js/controllers/reviewPostController.js"></script>
+    <script type="text/javascript" src="js/controllers/reviewPostCtrl.js"></script>
     <script type="text/javascript" src="js/services/reviewPostService.js"></script>
-    <script type="text/javascript" src="js/controllers/viewMoreDirectionController.js"></script>
+    <script type="text/javascript" src="js/controllers/viewMoreDirectionCtrl.js"></script>
 
     <script type="text/javascript" src="js/controllers/verificationCtrl.js"></script>
     <script type="text/javascript" src="js/services/verificationService.js"></script>
@@ -85,10 +85,10 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    <ul ng-controller="profileController" class="nav navbar-nav navbar-right">
+                    <ul ng-controller="profileCtrl" class="nav navbar-nav navbar-right">
                         <!-- Search bar -->
 
-                        <form class="navbar-form navbar-left" ng-controller="searchDirectionController" ng-submit="submitSearch()">
+                        <form class="navbar-form navbar-left" ng-controller="searchDirectionCtrl" ng-submit="submitSearch()">
                             <div class="input-group stylish-input-group">
                                 <input type="text" class="form-control" id="search-input" placeholder="What species are you looking for?(e.g. Cat, Dog)" ng-model="searchKey">
 

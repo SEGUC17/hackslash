@@ -16,7 +16,7 @@
 </div>
 
 <div ng-if="token">
-    <div ng-controller="profileController">
+    <div ng-controller="profileCtrl">
         <div ng-if="success">
             <div class="container" id="profile-container">
                 <div class="row">
@@ -63,7 +63,7 @@
                             </form>
                         </div>
                         <div ng-if="myEmail!=userInfo.email">
-                            <form name="rateForm" ng-controller="profileController" ng-submit="submitRate()">
+                            <form name="rateForm" ng-controller="profileCtrl" ng-submit="submitRate()">
                                 <input type="number" name="rate" ng-model="rateGiven" placeholder="A number from 1-5"> <br>
                                 <button type="submit" class="btn btn-default">Rate {{userInfo.username}}</button>
                                 <div ng-if="message" type="danger">
@@ -109,10 +109,10 @@
                                                 <!-- fixing description length to display by 250 chars -->
                                                 <p>{{ post.description.slice(0,250) }}...</p>
                                                 <!-- link to show post page -->
-                                                <div ng-controller="profileController" ng-click="editPost()">
+                                                <div ng-controller="profileCtrl" ng-click="editPost()">
                                                     <button type="button" class="btn btn-primary" id="edit-btn">Edit</button>
                                                 </div>
-                                                <button ng-controller="profileController" ng-click="viewPost()" id="view-btn" href="#" class="btn btn-primary">View more</button>
+                                                <button ng-controller="profileCtrl" ng-click="viewPost()" id="view-btn" href="#" class="btn btn-primary">View more</button>
                                             </div>
                                             <!-- End of media-body -->
                                         </div>

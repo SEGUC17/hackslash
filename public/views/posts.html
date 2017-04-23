@@ -1,4 +1,4 @@
-<div class="main" ng-controller="postsController">
+<div class="main" ng-controller="postsCtrl">
 
     <!-- if no posts are found -->
     <div class="container" ng-if="notFound==true">
@@ -14,7 +14,7 @@
         </div>
 
         <!-- loop through the posts -->
-        <div class="row" ng-controller="viewMoreDirectionController" ng-repeat="post in posts | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
+        <div class="row" ng-controller="viewMoreDirectionCtrl" ng-repeat="post in posts | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="media">

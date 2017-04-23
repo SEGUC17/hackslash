@@ -16,7 +16,7 @@
 </div>
 
 <div ng-if="token">
-    <div ng-controller="reviewPostController" class="container post-details">
+    <div ng-controller="reviewPostCtrl" class="container post-details">
         <div class="row">
 
             <div class="col-md-3">
@@ -24,7 +24,7 @@
                 <p id="email-info"><label><strong>Contact email:</strong> {{email}}</label></p>
 
                 <!-- up & down vote form -->
-                <form ng-controller="reviewPostController" ng-submit="submitVote()">
+                <form ng-controller="reviewPostCtrl" ng-submit="submitVote()">
                     <label class="radio-inline">
             <input type="radio" value="up" ng-model="vote">Up-vote
           </label>
