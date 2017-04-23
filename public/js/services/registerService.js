@@ -1,34 +1,13 @@
 var app = angular.module('pettts');
 
 app.factory('User', function($http, $window) {
+
+  // This Service is used to connect the reviewPostctrl to the API
+
     return {
+      // Add Function is used to add the user in the database of the server
+      // by sending the required information about the new user .
         add: function(user, $scope) {
-            //  return $http.post('/register', user);
-            /*  var req = {
-                                method: 'POST',
-                                url: '/register',
-
-                                 data: {
-                            'email':user.email,
-                            'password':user.password,
-                            'username': user.username,
-                            'firstName': user.firstName,
-                            'middleName': user.middleName,
-                            'lastName': user.lastName,
-                            'phoneNumber1': user.phoneNumber1,
-                            'phoneNumber2': user.phoneNumber2,
-                            'homeNumber': user.homeNumber
-                                        }
-                }
-
-                             return $http(req).then(function successCallback(response) {
-                                $scope.message = "verification mail sent";
-                                return response;
-                            }, function errorCallback(response) {
-                                $scope.message = "err occcured can't register";
-                                return response;
-                            });*/
-
             var fd = new FormData();
             for (var key in user)
                 fd.append(key, user[key]);
@@ -36,11 +15,11 @@ app.factory('User', function($http, $window) {
                 transformRequest: angular.indentity,
                 headers: { 'Content-Type': undefined }
             }).then(function successCallback(response) {
+              // verification mail has been sent Successfully .
                 $scope.message = "verification mail sent";
-              //  $window.location = '/v/:verification';
                 return response;
             }, function errorCallback(response) {
-              console.log(response);
+              // An Error has occcured .
                 $scope.message = response.data.message;
                 return response;
             });

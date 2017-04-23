@@ -1,34 +1,43 @@
 angular.module('pettts')
 
-//Services to connect with back end routes.
 .factory('profileService', function($http, $window) {
+
+  // This Service is used to connect the profilectrl to the API
+
+    // attributes saved for the profile
     var userEmail = $window.sessionStorage.email;
     var userUsername = $window.sessionStorage.username;
     var userToken = $window.sessionStorage.accessToken;
+
     return {
-        //Service to call viewProfile
+      // View Function is used to retrieve the data of a user from the server .
+      // to appears as the user's profile .
         view: function(givenUsername) {
             var request = {
                 method: 'GET',
                 url: '/profile/view',
                 headers: {
                     'x-access-token': userToken,
-                    'username': givenUsername //TODO:REDIRECT TO DIFFERENT USERS
+                    'username': givenUsername
                 }
             };
             return $http(request).then(function success(response) {
+              // Ther is no existing user with this username .
                 if (response.data == "The user you're trying to view does not exist!") {
                     return {
                         'success': false,
                         'data': 'No User'
                     }
-                } else {
+                }
+                // The profile of the user has been retrieved Successfully from the Server .
+                else {
                     return {
                         'success': true,
                         'data': response.data
                     };
                 }
             }, function error(response) {
+              // An Error has occcured .
                 return {
                     'success': false,
                     'message': 'Error can not view profile'
@@ -36,9 +45,10 @@ angular.module('pettts')
             });
         },
 
-        ////////////////////////////////////
-        ///////////////////////////////////
-        //Service to call rateUser
+        ////////////////////////
+        ////////////////////////
+
+        // Rate Function is used to send the rating that the user entered to another user .
         rate: function(rating, rated, un, $scope) {
             var request = {
                 method: 'POST',
@@ -50,18 +60,17 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
+              // the user has been rated Successfully .
                 $window.location = '/profile/' + un;
             }, function error(response) {
+              // An Error has occured .
                 return {
                     'success': false,
                     'message': response.data.message
                 };
             });
         },
-
-        ////////////////////////////////////
-        ///////////////////////////////////
-        //Service to call deleteUser
+        //Delete Function is used to delete the profile from the database .
         delete: function(password, $scope) {
             var request = {
                 method: 'POST',
@@ -73,6 +82,7 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
+              // All attributes saved in the sessions for this user will be deleted .
                 delete $window.sessionStorage.accessToken;
                 delete $window.sessionStorage.email;
                 delete $window.sessionStorage.username;
@@ -84,9 +94,11 @@ angular.module('pettts')
                 };
             });
         },
-        ////////////////////////////////////
-        ///////////////////////////////////
-        //Service to call changePassword
+
+        ////////////////////////
+        ////////////////////////
+
+        //Pass Function is used to call changePassword
         pass: function(password, newPassword, $scope) {
             var request = {
                 method: 'POST',
@@ -99,17 +111,21 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
+              // The Password has been changes .
                 $window.location = '/profile/' + userUsername;
             }, function error(response) {
+              // An Error occured .
                 return {
                     'success': false,
                     'message': 'Error can not change password try again later'
                 };
             });
         },
-        ////////////////////////////////////
-        ///////////////////////////////////
-        //Service to call editProfile
+
+        ////////////////////////
+        ////////////////////////
+
+        //Edit Function is User to Edit the profile attributes in the database .
         edit: function(user, $scope) {
             if (user) {
                 var fd = new FormData();
@@ -122,19 +138,16 @@ angular.module('pettts')
                         'x-access-token': userToken
                     }
                 }).then(function success(response) {
-                        //console.log(response);
-                        console.log(user.username);
+                  // Checking for username and its length .
                         if (user.username && user.username.length > 0 || user.username != userUsername) {
-                            console.log("true");
                             if (user && user.username)
                                 $window.sessionStorage.username = user.username;
-                            console.log($window.sessionStorage.username);
-                            console.log(user.username);
                         }
                         $window.location = '/profile/' + $window.sessionStorage.username;
 
                     },
                     function error(response) {
+                      // An Error has occured .
                         $scope.messageUpload = response.data;
 
                     });
