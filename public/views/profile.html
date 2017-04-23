@@ -1,18 +1,18 @@
 <link rel="stylesheet" href="../css/profile.css">
 
 <div ng-if="!token">
-  <div class="container not-logged-in">
-    <h2>I see you're not logged in.</h2>
-    <hr>
-    <p>Click here to login</p>
-    <a class="btn btn-success btn-block" href="/login">Login</a>
-    <hr>
-    <p>Perhaps you don't have an account?</p>
-    <a class ="btn btn-primary btn-block" href="/register">Register now | It's free!</a>
-    <div style="text-align:center">
-      <img src="../images/login-pic-2.png" width="250px">
+    <div class="container not-logged-in">
+        <h2>I see you're not logged in.</h2>
+        <hr>
+        <p>Click here to login</p>
+        <a class="btn btn-success btn-block" href="/login">Login</a>
+        <hr>
+        <p>Perhaps you don't have an account?</p>
+        <a class="btn btn-primary btn-block" href="/register">Register now | It's free!</a>
+        <div style="text-align:center">
+            <img src="../images/login-pic-2.png" width="250px">
+        </div>
     </div>
-  </div>
 </div>
 
 <div ng-if="token">
@@ -20,7 +20,8 @@
         <div ng-if="success">
             <div class="container" id="profile-container">
                 <div class="row">
-                    <div class="col-md-3"><!-- Start of profile info -->
+                    <div class="col-md-3">
+                        <!-- Start of profile info -->
                         <img src="{{profilePicture}}" alt="" class="img-responsive img-thumbnail"> <br>
                         <h2>{{userInfo.firstName}} {{userInfo.lastName}}</h2>
                         <p>{{userInfo.username}}</p>
@@ -61,23 +62,25 @@
                         <hr>
                         <div ng-if="myEmail==userInfo.email">
                             <form>
-                                <a  href="/editProfile" class="btn btn-primary" id="profile-edit-btn">Profile settings</a>    
+                                <a href="/editProfile" class="btn btn-primary" id="profile-edit-btn">Profile settings</a>
                             </form>
                         </div>
                         <div ng-if="myEmail!=userInfo.email">
                             <form name="rateForm" ng-controller="profileController" ng-submit="submitRate()">
-                                <input type="number" name="rate" ng-model="rate" placeholder="A number from 1-5"> <br>
+                                <input type="number" name="rate" ng-model="rateGiven" placeholder="A number from 1-5"> <br>
                                 <button type="submit" class="btn btn-default">Rate {{userInfo.username}}</button>
-                                <div ng-if="message" type = "danger">
+                                <div ng-if="message" type="danger">
                                     {{message}}
                                 </div>
-                                <div ng-if="messageRated" type = "danger">
+                                <div ng-if="messageRated" type="danger">
                                     {{messageRated}}
                                 </div>
                             </form>
                         </div>
-                    </div><!-- End of profile info -->
-                    <div class="col-md-9" style="text-align: left !important;"><!-- Start of posts area -->
+                    </div>
+                    <!-- End of profile info -->
+                    <div class="col-md-9" style="text-align: left !important;">
+                        <!-- Start of posts area -->
                         <div ng-if="!posts">
                             <h3>
                                 This user has no posts yet.
@@ -113,15 +116,21 @@
                                                     <button type="button" class="btn btn-primary" id="edit-btn">Edit</button>
                                                 </div>
                                                 <button ng-controller="profileController" ng-click="viewPost()" id="view-btn" href="#" class="btn btn-primary">View more</button>
-                                            </div> <!-- End of media-body -->
-                                        </div> <!-- End of media -->
-                                    </div> <!-- End of panel-body -->
-                                </div> <!-- End of panel -->
-                            </div> <!-- End of row -->
+                                            </div>
+                                            <!-- End of media-body -->
+                                        </div>
+                                        <!-- End of media -->
+                                    </div>
+                                    <!-- End of panel-body -->
+                                </div>
+                                <!-- End of panel -->
+                            </div>
+                            <!-- End of row -->
                             <ul uib-pagination boundary-links="true" total-items="posts.length" items-per-page="pageSize" ng-model="currentPage" max-size="maxSize" class="pagination-md pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
                             </ul>
                         </div>
-                    </div><!-- End of posts area -->
+                    </div>
+                    <!-- End of posts area -->
                 </div>
             </div>
         </div>
