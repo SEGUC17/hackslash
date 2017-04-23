@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('searchController', function($scope, $window, searchService, $location, $routeParams) {
+.controller('searchCtrl', function($scope, $window, searchService, $location, $routeParams) {
 
     // go search for the post 
 

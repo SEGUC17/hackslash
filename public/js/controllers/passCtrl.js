@@ -1,6 +1,6 @@
 var app = angular.module('pettts');
 
-app.controller('pass_ctrl', function($scope, $http, $location, $window, $routeParams) {
+app.controller('passCtrl', function($scope, $http, $location, $window, $routeParams) {
 
 
     $scope.pop = function() { //USER CLICKED ON CHANGE PASSWORD BUTTON IN RESET PASSWORD PAGE

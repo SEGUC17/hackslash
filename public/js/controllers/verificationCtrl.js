@@ -1,6 +1,6 @@
 var app = angular.module('pettts');
 
-app.controller('verificationController', function($scope, $http, verificationService, $routeParams) {
+app.controller('verificationCtrl', function($scope, $http, verificationService, $routeParams) {
 
     $scope.message = undefined;
     $scope.verificationToken = $routeParams.verification;
