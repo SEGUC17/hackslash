@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('reviewPostController', function($scope,$window, $http, $routeParams, reviewPostService) {
+.controller('reviewPostController', function($scope, $window, $http, $routeParams, reviewPostService) {
     console.log("entered the reviewPostController");
     $scope.token = $window.sessionStorage.accessToken;
     $scope.id = $routeParams.id;
@@ -38,6 +38,8 @@ angular.module('pettts')
             $scope.genderB = response.data.genderB;
             $scope.speciesB = response.data.speciesB;
         }
+        if (response.data.note)
+            $scope.note = response.data.note;
 
 
         //console.log("Response::  ");
