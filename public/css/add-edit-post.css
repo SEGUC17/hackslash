@@ -13,3 +13,7 @@
 .add-edit-post-form textarea {
     resize: none;
 }
+.message{
+  font-weight: bold;
+  color: blue;
+}
