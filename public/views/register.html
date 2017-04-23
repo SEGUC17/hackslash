@@ -14,56 +14,55 @@
 
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" name="username" ng-model="user.username" required class="form-control">
+        <input type="text" name="username" ng-model="user.username" placeholder="Username" required class="form-control">
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" ng-model="user.password" required class="form-control">
+        <input type="password" name="password" ng-model="user.password" placeholder="Password" required class="form-control">
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" name="email" ng-model="user.email" required class="form-control">
+        <input type="text" name="email" ng-model="user.email" placeholder="Email" required class="form-control">
       </div>
 
       <div class="form-group">
         <label for="firstName">First name</label>
-        <input type="text" name="firstName" ng-model="user.firstName" required class="form-control">
+        <input type="text" name="firstName" ng-model="user.firstName" placeholder="First Name" required class="form-control">
       </div>
 
       <div class="form-group">
         <label for="middleName">Middle name</label>
-        <input type="text" name="middleName" ng-model="user.middleName" class="form-control">
+        <input type="text" name="middleName" ng-model="user.middleName" placeholder="Middle Name" class="form-control">
       </div>
 
       <div class="form-group">
         <label for="lastName">Last name</label>
-        <input type="text" name="lastName" ng-model="user.lastName" required class="form-control">
+        <input type="text" name="lastName" ng-model="user.lastName" placeholder="Last Name" required class="form-control">
       </div>
 
       <div class="form-group">
         <label for="phoneNumber1">Phone number 1</label>
-        <input type="text" name="phoneNumber1" ng-model="user.phoneNumber1" class="form-control">
+        <input type="text" name="phoneNumber1" ng-model="user.phoneNumber1" placeholder="Phone Number 1" class="form-control">
       </div>
 
       <div class="form-group">
         <label for="phoneNumber2">Phone number 2</label>
-        <input type="text" name="phoneNumber2" ng-model="user.phoneNumber2" class="form-control">
+        <input type="text" name="phoneNumber2" ng-model="user.phoneNumber2" placeholder="Phone Number 2" class="form-control">
       </div>
 
       <div class="form-group">
         <label for="homeNumber">Home number</label>
-        <input type="text" name="homeNumber" ng-model="user.homeNumber" class="form-control">
+        <input type="text" name="homeNumber" ng-model="user.homeNumber" placeholder="Home Number" class="form-control">
       </div>
 
       <div class="form-group">
         <label for="profilePic">Profile picture</label> <br>
         <input type="file" name="profilePic" ng-File-Model="user.profilePic" />
       </div>
-
       <button type="submit" class="btn btn-success btn-block">Join now</button>
-      <div ng-if="message" type="danger">{{ message }}</div>
+      <div class = "message" ng-if="message" >{{ message }}</div>
 
 
       <hr>
