@@ -68,8 +68,9 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-                $window.sessionStorage.accessToken = null;
-                $window.sessionStorage.email = null;
+                delete $window.sessionStorage.accessToken;
+                delete $window.sessionStorage.email;
+                delete $window.sessionStorage.username;
                 $window.location = '/posts';
             }, function error(response) {
                 return {
