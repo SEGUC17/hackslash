@@ -193,7 +193,8 @@ var registerController = {
             if (checkImage != "png" && checkImage != "jpg") {
                 console.log(checkImage);
                 fs.unlinkSync(req.file.path);
-                res.status(403).json("you should upload an image with extension jpg or png only");
+                res.status(403).json({ success: false, message: "you should upload an image with extension jpg or png only" });
+                return;
             }
         }
         // validating the format of username, email, and password
