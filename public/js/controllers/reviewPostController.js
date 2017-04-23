@@ -27,6 +27,7 @@ angular.module('pettts')
         $scope.gender = response.data.gender;
         $scope.species = response.data.species;
         $scope.description = response.data.description;
+        $scope.date = response.data.date;
         console.log(response.data.type);
         if (response.data.type == 1) {
             $scope.sell = 1;
@@ -40,9 +41,6 @@ angular.module('pettts')
         }
         if (response.data.note)
             $scope.note = response.data.note;
-
-
-
     });
 
     reviewPostService.viewOwnerInfo($routeParams.id).then(function(response) {
