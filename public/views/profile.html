@@ -111,7 +111,7 @@
                                                 <p>{{ post.description.slice(0,250) }}...</p>
                                                 <!-- link to show post page -->
                                                 <div ng-controller="profileCtrl" ng-click="editPost()">
-                                                    <button type="button" class="btn btn-primary" id="edit-btn">Edit</button>
+                                                    <button type="button" ng-if="myProfile" class="btn btn-primary" id="edit-btn">Edit</button>
                                                 </div>
                                                 <button ng-controller="profileCtrl" ng-click="viewPost()" id="view-btn" href="#" class="btn btn-primary">View more</button>
                                             </div>

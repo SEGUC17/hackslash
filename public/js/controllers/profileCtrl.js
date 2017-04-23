@@ -131,6 +131,11 @@ angular.module('pettts')
                 $scope.userInfo = response.data.userProfileInfo;
                 $scope.posts = response.data.myPosts;
                 if (response.data.userProfileInfo) {
+                    //check if my profile or not
+                    if ($scope.givenUsername == $window.sessionStorage.username) {
+                        $scope.myProfile = "yes";
+                    }
+                    //check for profile picture
                     if (response.data.userProfileInfo.profilePicture) {
                         // formulate the profile picture path 
                         $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);
