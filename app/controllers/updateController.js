@@ -42,7 +42,10 @@ let updateController = {
                         foundUser.homeNumber = user.homeNumber;
                     }
                     if (user.profilePicture) {
-                        fs.unlinkSync(foundUser.profilePicture);
+                        //check to prevent deletion of the default profile picture
+                        var defaultProfilePic = "public/images/default.jpg"
+                        if (defaultProfilePic != foundUser.profilePicture)
+                            fs.unlinkSync(foundUser.profilePicture);
                         foundUser.profilePicture = user.profilePicture;
                     }
                     if (user.rate) {
