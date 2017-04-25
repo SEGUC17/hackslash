@@ -101,7 +101,7 @@
                             <div class="col-md-3" id="left-col">
                                 <img ng-if="post.image" ng-src="{{ post.image.substring(7,post.image.length) }}" alt="{{ post.type | stringifyType }} post image" class="img-responsive img-thumbnail">
                                 <img ng-if="!post.image" src="http://placehold.it/200x200" alt="No image available" class="img-responsive img-thumbnail">
-                                <p>by: {{ post.username }}</p>
+                                <p id="postOwnerUsername">by: {{ post.username }}</p>
                                 <p id="email-info" style="word-wrap: break-word;">
                                   <label><strong>Contact email:</strong></label> {{post.ownerEmail}}
                                 </p>

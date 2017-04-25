@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.factory('searchService', function($http, $location, $window) {
+.factory('searchService', function($http, $location, $window, reviewPostService) {
 
   // This Service is used to connect the Searchctrl to the API
 
@@ -27,6 +27,19 @@ angular.module('pettts')
                     $scope.posts.sort(function(a, b) {
                     return new Date(b.date).getTime() - new Date(a.date).getTime();
                     });
+
+                    $scope.posts.forEach(function(post){
+                      reviewPostService.viewOwnerInfo(post._id).then(function(response){
+                        post.username = response.data
+                      });
+                    });
+
+                    $scope.submitVote = function(id){
+                      reviewPostService.vote(id, $scope.vote).then(function(response){
+                        $scope.message = response;
+                      })
+                    }
+
                     // Making Pagination
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;

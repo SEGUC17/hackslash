@@ -10,6 +10,10 @@
   border-right: 2px solid #ebebeb;
 }
 
+#postOwnerUsername {
+  margin-top: 5px;
+}
+
 #email-info {
   margin-top: 20px;
 }
