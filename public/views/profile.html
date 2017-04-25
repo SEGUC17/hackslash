@@ -65,10 +65,7 @@
                                 <div class="modal-dialog modal-lg" ng-if="token">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h2>My Inbox</h2>
-                                        </div>
-                                        <div class="modal-body" ng-repeat="x in [1,2,3]">
-                                            messgae:{{x}}
+                                            My Inbox
                                         </div>
                                     </div>
                                 </div>
@@ -76,8 +73,8 @@
                         </div>
                         <div ng-if="myEmail!=userInfo.email">
                             <form name="rateForm" ng-controller="profileCtrl" ng-submit="submitRate()">
-                                <input type="number" name="rate" ng-model="rateGiven" placeholder="A number from 1-5"> <br>
-                                <button type="submit" class="btn btn-default">Rate {{userInfo.username}}</button>
+                                <input type="number" name="rate" ng-model="rateGiven" placeholder="A number from 1-5" class ="form-control"> <br>
+                                <button type="submit" class="btn btn-primary">Rate {{userInfo.username}}</button>
                                 <div ng-if="message" type="danger">
                                     {{message}}
                                 </div>
