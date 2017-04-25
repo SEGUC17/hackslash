@@ -64,14 +64,14 @@
 
                   <div class="modal-body">
                     <p>Get back to your account</p>
-                    <a class="btn btn-success btn-block" href="/login">Login now</a>
+                    <a class="btn btn-success btn-block" data-dismiss="modal" href="" ng-click="goTo('login')">Login now</a>
 
                     <div class="strike">
                        <span>or</span>
                     </div>
 
                     <p>Perhaps you don't have an account?</p>
-                    <a class="btn btn-primary btn-block" href="/register">Register now, It's free!</a>
+                    <a class="btn btn-primary btn-block" href="" data-dismiss="modal" ng-click="goTo('register')">Register now, It's free!</a>
 
                     <div style="text-align:center; margin-top:1.75em;">
                         <img src="../images/login-pic-2.png" width="250px">
@@ -95,7 +95,7 @@
 
                   <div class="modal-body">
 
-                    <div ng-controller="reviewPostCtrl" class="container-fluid post-details">
+                    <div class="container-fluid post-details">
                         <div class="row">
 
                             <div class="col-md-3">
@@ -107,7 +107,7 @@
                                 </p>
 
                                 <!-- up & down vote form -->
-                                <form ng-controller="reviewPostCtrl" ng-submit="submitVote()">
+                                <form ng-submit="submitVote(post._id)">
                                     <label class="radio-inline">
                                       <input type="radio" value="up" ng-model="vote">Up-vote
                                     </label>
@@ -118,7 +118,7 @@
                                     <div>{{message}}</div>
                                 </form>
 
-                                <a href="/profile/{{username}}" id="view-contact-btn" class="btn btn-info btn-block">View contact profile</a>
+                                <a href="" ng-click="visitProfile(post.username)" id="view-contact-btn" class="btn btn-info btn-block" data-dismiss="modal">View contact profile</a>
                             </div>
 
                             <div class="col-md-9" id="right-col">
