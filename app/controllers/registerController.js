@@ -186,7 +186,7 @@ var registerController = {
         var lastName = req.body.lastName;
 
 
-        ///handle not supported image file    
+        ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
             checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);

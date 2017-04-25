@@ -41,6 +41,7 @@ var auth     = require('./app/routes/auth');
 var client   = require('./app/routes/client');
 var user     = require('./app/routes/user');
 var profile  = require('./app/routes/profile');
+var message    = require('./app/routes/message');
 var index    = require('./app/routes/index');
 
 // Using routes
@@ -49,7 +50,9 @@ app.use(auth);
 app.use(client);
 app.use(user);
 app.use(profile);
+app.use(message);
 app.use(index);
+
 
 
 // STRIPE PART
