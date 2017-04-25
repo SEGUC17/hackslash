@@ -24,18 +24,14 @@ var authController = {
         // CHECK IF GIVEN IS USERNAME
         User.findOne({ username: req.body.username }, function(err, user) {
             if (user) { // this correct a username
-              var token = jwt.sign(user, req.app.get('superSecret'), { expiresIn: 60 * 60 * 24 }); // expires in 24 hours
-
-              res.json({ success: true, message: 'Enjoy your token!', token: token, email: user.email, username: user.username });
-
-                // bcrypt.compare(req.body.password, user.password, function(err, result) {
-                //     if (result) {
-                //         var token = jwt.sign(user, req.app.get('superSecret'), { expiresIn: 60 * 60 * 24 }); // expires in 24 hours
-                //         res.json({ success: true, message: 'Enjoy your token!', token: token, email: user.email, username: user.username });
-                //     } else {
-                //         res.json({ success: false, message: 'Login failed. Wrong  Password.' }); // right username and wrong password
-                //     }
-                // });
+                bcrypt.compare(req.body.password, user.password, function(err, result) {
+                    if (result) {
+                        var token = jwt.sign(user, req.app.get('superSecret'), { expiresIn: 60 * 60 * 24 }); // expires in 24 hours
+                        res.json({ success: true, message: 'Enjoy your token!', token: token, email: user.email, username: user.username });
+                    } else {
+                        res.json({ success: false, message: 'Login failed. Wrong  Password.' }); // right username and wrong password
+                    }
+                });
             } else { // NOT USERNAME
                 User.findOne({ email: req.body.username }, function(err, user) {
                     if (user) { // this correct a username
