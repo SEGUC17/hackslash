@@ -22,6 +22,7 @@ var authController = {
     login: function(req, res) {
 
         // CHECK IF GIVEN IS USERNAME
+
         User.findOne({ username: req.body.username }, function(err, user) {
             if (user) { // this correct a username
                 bcrypt.compare(req.body.password, user.password, function(err, result) {
