@@ -67,8 +67,8 @@
                                         <div class="modal-header">
                                             <h2>My Inbox</h2>
                                         </div>
-                                        <div class="modal-body" ng-repeat="x in [1,2,3]">
-                                            messgae:{{x}}
+                                        <div class="modal-body" ng-repeat="message in fullMessages">
+                                            {{message.sender}} : {{message.content}}
                                         </div>
                                     </div>
                                 </div>

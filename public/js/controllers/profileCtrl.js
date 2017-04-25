@@ -173,11 +173,18 @@ angular.module('pettts')
         ///////////////////////////////////
 
         // to view my messages
-        profileService.getMessages().then(function(response){
+        profileService.getMessages().then(function(response) {
+            $scope.fullMessages = [];
             $scope.messageSuccess = response.success;
-            if(messageSuccess){
-                $scope.myMessages = response;
-            }else{
+            if ($scope.messageSuccess) {
+                for (var i = 0; i < response.message.messagesContents.length; i++) {
+                    var sender = response.message.messagesUsernames[i];
+                    console.log(sender);
+                    var content = response.message.messagesContents[i];
+                    $scope.fullMessages.push({ sender, content });
+                }
+                console.log($scope.fullMessages)
+            } else {
                 $scope.messageFail = response.message;
             }
         })
