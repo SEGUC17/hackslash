@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('postsCtrl', function($scope, postsService) {
+.controller('postsCtrl', function($scope, postsService, reviewPostService) {
 
     postsService.get().then(function(posts) {
         $scope.posts = posts
@@ -12,6 +12,13 @@ angular.module('pettts')
             $scope.posts.sort(function(a, b) {
                 return new Date(b.date).getTime() - new Date(a.date).getTime();
             });
+
+            $scope.posts.forEach(function(post){
+              reviewPostService.viewOwnerInfo(post._id).then(function(response){
+                post.username = response.data
+              });
+            });
+
             //setting page attributes
             $scope.pageSize = 7;
             $scope.currentPage = 1;

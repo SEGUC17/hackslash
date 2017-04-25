@@ -50,6 +50,7 @@
             </div>
             <!-- End of panel -->
 
+            <!-- ========================================================================================= -->
             <!-- Modals shown upon view more clicked -->
             <div id="myModal-{{ post._id }}" class="modal fade">
               <!-- if the user is not logged in, don't allow him to view more the post -->
@@ -100,6 +101,7 @@
                             <div class="col-md-3">
                                 <img ng-if="post.image" ng-src="{{ post.image.substring(7,post.image.length) }}" alt="{{ post.type | stringifyType }} post image" class="img-responsive img-thumbnail">
                                 <img ng-if="!post.image" src="http://placehold.it/200x200" alt="No image available" class="img-responsive img-thumbnail">
+                                <p>by: {{ post.username }}</p>
                                 <p id="email-info" style="word-wrap: break-word;">
                                   <label><strong>Contact email:</strong></label> {{post.ownerEmail}}
                                 </p>
@@ -163,6 +165,7 @@
 
             </div>
             <!-- End of modal -->
+            <!-- ========================================================================================= -->
 
         </div>
         <!-- End of row -->
