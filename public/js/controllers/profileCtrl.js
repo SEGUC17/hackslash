@@ -125,15 +125,12 @@ angular.module('pettts')
 
         // to send message
         $scope.sendMessage = function() {
-            var messageContent = $scope.messageContent;
+            var content = $scope.content;
             var senderUsername = $scope.myUsername;
             var receiverUsename = $scope.givenUsername;
-            console.log(messageContent);
-            console.log(senderUsername);
-            console.log(receiverUsename);
-            // profileService.sendMessage(messageContent,senderUsername,receiverUsename).then(function(response) {
-            //     $scope.messageIndicator = response.message;
-            // });
+            profileService.sendMessage(content,senderUsername,receiverUsename).then(function(response) {
+                $scope.messageIndicator = response.message;
+            });
         }
 
         ////////////////////////////////////
@@ -180,7 +177,7 @@ angular.module('pettts')
         // to view my messages
         profileService.getMessages().then(function(response){
             $scope.messageSuccess = response.success;
-            if(messageSuccess){
+            if($scope.messageSuccess){
                 $scope.myMessages = response;
             }else{
                 $scope.messageFail = response.message;

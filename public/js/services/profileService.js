@@ -192,7 +192,7 @@ angular.module('pettts')
                 method: 'POST',
                 url: '/message/send',
                 data: {
-                    'message': messageWritten,
+                    'messageContent': messageWritten,
                     'senderUsername': senderUsername,
                     'receiverUsername': receiverUsername,
                     'token': userToken
