@@ -67,8 +67,15 @@
                                         <div class="modal-header">
                                             <h2>My Inbox</h2>
                                         </div>
-                                        <div class="modal-body" ng-repeat="message in fullMessages">
-                                            {{message.sender}} : {{message.content}}
+                                        <div ng-if="!messageFail">
+                                            <div class="modal-body" ng-repeat="message in fullMessages">
+                                                {{message.sender}} : {{message.content}}
+                                            </div>
+                                        </div>
+                                        <div ng-if="messageFail">
+                                            <div class="modal-body">
+                                                {{messageFail}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -94,9 +101,9 @@
                                         </div>
                                         <form name="messageForm" ng-controller="profileCtrl" ng-submit="sendMessage()">
                                             <textarea name="description" ng-model="content" placeholder="description" rows="3" class="form-control"></textarea>
-                                            <button type="submit" class="btn btn-default">test</button>
+                                            <button type="submit" class="btn btn-success">Send</button>
+                                            {{messageIndicator}}
                                         </form>
-                                        {{messageIndicator}}
                                     </div>
                                 </div>
                             </div>

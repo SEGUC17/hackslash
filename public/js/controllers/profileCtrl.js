@@ -128,9 +128,14 @@ angular.module('pettts')
             var content = $scope.content;
             var senderUsername = $scope.myUsername;
             var receiverUsename = $scope.givenUsername;
-            profileService.sendMessage(content, senderUsername, receiverUsename).then(function(response) {
-                $scope.messageIndicator = response.message;
-            });
+            if(content && content.length > 0 && content.length < 300){
+                profileService.sendMessage(content, senderUsername, receiverUsename).then(function(response) {
+                    $scope.messageIndicator = response.message;
+                    $scope.content = null;
+                });
+            }else{
+                $scope.messageIndicator = 'You have to write a message between 1 and 300 characters';
+            }
         }
 
         ////////////////////////////////////
@@ -176,16 +181,19 @@ angular.module('pettts')
 
         // to view my messages
         profileService.getMessages().then(function(response) {
+            $scope.messageFail = undefined;
             $scope.fullMessages = [];
             $scope.messageSuccess = response.success;
             if ($scope.messageSuccess) {
-                for (var i = 0; i < response.message.messagesContents.length; i++) {
-                    var sender = response.message.messagesUsernames[i];
-                    console.log(sender);
-                    var content = response.message.messagesContents[i];
-                    $scope.fullMessages.push({ sender, content });
+                if(response.messagesContents && response.messagesContents.length > 0){
+                    for (var i = 0; i < response.messagesContents.length; i++) {
+                        var sender = response.messagesUsernames[i];
+                        var content = response.messagesContents[i];
+                        $scope.fullMessages.push({sender, content});
+                    }
+                }else{
+                    $scope.messageFail = 'There are no message in your inbox yet.';
                 }
-                console.log($scope.fullMessages)
             } else {
                 $scope.messageFail = response.message;
             }

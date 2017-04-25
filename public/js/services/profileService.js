@@ -169,10 +169,7 @@ angular.module('pettts')
             };
             return $http(request).then(function success(response) {
                 //In case of success return all the user's messages
-                return {
-                    'success': true,
-                    'message': response
-                }
+                return response.data;
             }, function error(response) {
                 //In case of failure return relevant error message.
                 return {
