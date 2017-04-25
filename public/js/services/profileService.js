@@ -147,11 +147,68 @@ angular.module('pettts')
 
                     },
                     function error(response) {
-                      // An Error has occured .
+                        // An Error has occured .
                         $scope.messageUpload = response.data;
 
                     });
             }
+        },
+
+        ////////////////////////
+        ////////////////////////
+
+        // For logged in user view all his messages (only on his profile)
+        getMessages: function() {
+            //Initializing request
+            var request = {
+                method: 'GET',
+                url: '',
+                headers: {
+                    'x-access-token': userToken
+                }
+            };
+            return $http(request).then(function success(response){
+                //In case of success return all the user's messages
+                return {
+                    'success' : true,
+                    'message' : response
+                }
+            },function error(response){
+                //In case of failure return relevant error message.
+                return {
+                    'success' : false,
+                    'message' : 'Error in request, please try again.'
+                };
+            });
+        },
+
+        ////////////////////////
+        ////////////////////////
+
+        // For sending a single message to the user whose profile is being viewed.
+        sendMessage: function(messageWritten) {
+            //Initializing request
+            var request = {
+                method: 'POST',
+                url: '',
+                data: {
+                    'message': messageWritten,
+                    'token': userToken
+                }
+            };
+            return $http(request).then(function success(response){
+                //In case of success display success prompt
+                return {
+                    'success': true,
+                    'message': 'Your message has been sent'
+                };
+            },function error(response){
+                //In case of error display relevant error message
+                return {
+                    'success': false,
+                    'message': 'Error in sending message to ' + givenUsername + '. Please, try again.'
+                };
+            });
         }
     }
 });

@@ -123,6 +123,17 @@ angular.module('pettts')
         ////////////////////////////////////
         ///////////////////////////////////
 
+        // to send message
+        $scope.sendMessage = function() {
+            var messageContent = $scope.messageContent;
+            profileService.sendMessage(messageContent).then(function(response) {
+                $scope.messageIndicator = response.message;
+            });
+        }
+
+        ////////////////////////////////////
+        ///////////////////////////////////
+
         // to view my profile
         profileService.view($scope.givenUsername).then(function(response) {
             $scope.success = response.success;
@@ -157,6 +168,20 @@ angular.module('pettts')
                 $scope.myEmail = $window.sessionStorage.email;
             }
         });
+
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        // to view my messages
+        profileService.getMessages().then(function(response){
+            $scope.messageSuccess = response.success;
+            if(messageSuccess){
+                $scope.myMessages = response;
+            }else{
+                $scope.messageFail = response.message;
+            }
+        })
+
     })
 
 
