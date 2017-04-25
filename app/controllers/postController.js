@@ -121,6 +121,41 @@ let postController = {
             });
         }
     },
+    // Deleting a Post
+    deletePost: function(req, res) {
+        //handle exceptions
+        if (req.body == undefined) {
+            res.status(400).json("error occured");
+            return;
+        }
+        var token = req.headers['x-access-token'];
+        if (!token) { //
+            res.status(403).json("not loggedin ");
+        } else {
+            if (!req.decoded) {
+                res.status(403).json("not loggedin ");
+                return;
+            }
+        var ownerEmailDecoded = req.decoded._doc.email;
+        var postID = req.body.id;
+
+            Post.findOne({ _id: postID, ownerEmail: ownerEmailDecoded }, function(err, post) {
+                if (err) {
+                    res.status(403).json("Post not found or not your Post");
+                } else {
+                    if(!post)
+                    {
+                      res.status(403).json("Post not found or not your Post");
+                    }
+                    else
+                    {
+                      post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
+                      res.json({"message":"The post has been deleted "});
+                  }
+                }
+            });
+        }
+    },
     // Searching posts by kind and species
     searchPosts: function(req, res) {
         var kindQuery = req.header("kind");
