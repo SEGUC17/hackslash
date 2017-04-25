@@ -766,39 +766,6 @@ let postController = {
                     }
                 }
             });
-        },
-      deletePost:function(req,res){
-          if (!req.body) {
-              res.status(400).json("problem with the sent request");
-              return;
-          }
-          var token = req.body.token;
-          if (!token) { //
-              res.status(403).json("not loggedin ");
-          }
-          else {
-            var postId = req.header("_id");
-            var ownerEmail = req.header("email");
-            var currentEmail = req.decoded._doc.email;
-            Post.findOne({_id :postId},function(err,foundPost){
-              if(err) res.json("There's an Error Finding this post");
-              else {
-                if(foundPost == null ) res.json("No Post With This id" + " " + postId);
-                else {
-                  if(foundPost.ownerEmail != currentEmail) res.json("This is not your post , you can't delete it ");
-                  else {
-                    Post.remove({_id:postId},function(err,deletedPost){
-                      if(err) res.json("There's an Error Deleting This Post");
-                      else {
-                        res.json("Post Deleted Successfully");
-                      }
-                    });
-                  }
-                }
-              }
-            });
-
-          }
         }
 
 }
