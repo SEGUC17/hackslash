@@ -147,11 +147,27 @@ angular.module('pettts')
 
                     },
                     function error(response) {
-                      // An Error has occured .
+                        // An Error has occured .
                         $scope.messageUpload = response.data;
 
                     });
             }
+        },
+
+        ////////////////////////
+        ////////////////////////
+
+        // For logged in user view all his messages (only on his profile)
+        getMessages: function() {
+
+        },
+
+        ////////////////////////
+        ////////////////////////
+
+        // For sending a single message to the user whose profile is being viewed.
+        sendMessage: function() {
+
         }
     }
 });
