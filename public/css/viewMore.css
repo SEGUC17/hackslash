@@ -6,8 +6,8 @@
   border-bottom-right-radius: 5px;
 }
 
-#right-col {
-  border-left: 2px solid #ebebeb;
+#left-col {
+  border-right: 2px solid #ebebeb;
 }
 
 #email-info {

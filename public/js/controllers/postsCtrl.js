@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('postsCtrl', function($scope, $location, postsService, reviewPostService) {
+.controller('postsCtrl', function($scope, $window, $location, postsService, reviewPostService) {
 
     $scope.token = $window.sessionStorage.accessToken;
 

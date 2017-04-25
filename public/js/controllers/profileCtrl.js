@@ -1,5 +1,5 @@
 angular.module('pettts')
-    .controller('profileCtrl', function($scope, $http, profileService, $window, $location, $routeParams) {
+    .controller('profileCtrl', function($scope, $http, profileService, $window, $location, $routeParams, reviewPostService) {
 
         //get the attributes for the username to visit, my username and the token
         $scope.givenUsername = $routeParams.username
@@ -137,7 +137,7 @@ angular.module('pettts')
                     }
                     //check for profile picture
                     if (response.data.userProfileInfo.profilePicture) {
-                        // formulate the profile picture path 
+                        // formulate the profile picture path
                         $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);
                     }
                 }
@@ -149,6 +149,28 @@ angular.module('pettts')
                     $scope.posts.sort(function(a, b) {
                         return new Date(b.date).getTime() - new Date(a.date).getTime();
                     });
+
+                    // put the username of the user who posted in each post
+                    $scope.posts.forEach(function(post){
+                      reviewPostService.viewOwnerInfo(post._id).then(function(response){
+                        post.username = response.data
+                      });
+                    });
+
+                    $scope.submitVote = function(id){
+                      reviewPostService.vote(id, $scope.vote).then(function(response){
+                        $scope.message = response;
+                      })
+                    }
+
+                    $scope.goTo = function(path){
+                      $location.path('/' + path);
+                    }
+
+                    $scope.visitProfile = function(username){
+                      $location.path('/profile/' + username);
+                    }
+
                     //set page attributes
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;
@@ -157,7 +179,7 @@ angular.module('pettts')
                 $scope.myEmail = $window.sessionStorage.email;
             }
         });
-    })
+    });
 
 
 ////////////////////////////////////
