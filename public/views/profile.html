@@ -62,7 +62,7 @@
                             <a href="/editProfile" class="btn btn-primary" id="profile-edit-btn">Profile settings</a>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-messages">My Inbox</button>
                             <div id="myModal-messages" class="modal fade">
-                                <div class="modal-dialog modal-lg" ng-if="token">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h2>My Inbox</h2>
@@ -85,6 +85,21 @@
                                     {{messageRated}}
                                 </div>
                             </form>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-write">Message {{userInfo.username}}</button>
+                            <div id="myModal-write" class="modal fade">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2>Write your message Below</h2>
+                                        </div>
+                                        <form name="messageForm" ng-controller="profileCtrl" ng-submit="sendMessage()">
+                                            <textarea name="description" ng-model="content" placeholder="description" rows="3" class="form-control"></textarea>
+                                            <button type="submit" class="btn btn-default">test</button>
+                                        </form>
+                                        {{messageIndicator}}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- End of profile info -->
