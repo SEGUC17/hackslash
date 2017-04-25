@@ -124,10 +124,10 @@ let postController = {
     // Deleting a Post
     deletePost: function(req, res) {
         //handle exceptions
-        if (req.body == undefined) {
-            res.status(400).json("error occured");
-            return;
-        }
+        // if (req.body == undefined) {
+        //     res.status(400).json("error occured");
+        //     return;
+        // }
         var token = req.headers['x-access-token'];
         if (!token) { //
             res.status(403).json("not loggedin ");
@@ -137,8 +137,7 @@ let postController = {
                 return;
             }
         var ownerEmailDecoded = req.decoded._doc.email;
-        var postID = req.body.id;
-
+        var postID = req.headers['id'];
             Post.findOne({ _id: postID, ownerEmail: ownerEmailDecoded }, function(err, post) {
                 if (err) {
                     res.status(403).json("Post not found or not your Post");
