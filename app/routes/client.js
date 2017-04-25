@@ -21,7 +21,6 @@ router.post('/post/found', middleware.isLoggedIn, type, postController.foundPost
 router.post('/post/sell', middleware.isLoggedIn, type, postController.sellPost);
 router.post('/post/mate', middleware.isLoggedIn, type, postController.matePost);
 router.get('/post/specificUser', postController.findOwnerByPostID);
-router.get('/post/delete',middleware.isLoggedIn,postController.deletePost);
 
 
 
