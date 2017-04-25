@@ -59,9 +59,17 @@
                         </div>
                         <hr>
                         <div ng-if="myEmail==userInfo.email">
-                            <form>
-                                <a href="/editProfile" class="btn btn-primary" id="profile-edit-btn">Profile settings</a>
-                            </form>
+                            <a href="/editProfile" class="btn btn-primary" id="profile-edit-btn">Profile settings</a>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-messages">My Inbox</button>
+                            <div id="myModal-messages" class="modal fade">
+                                <div class="modal-dialog modal-lg" ng-if="token">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            My Inbox
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div ng-if="myEmail!=userInfo.email">
                             <form name="rateForm" ng-controller="profileCtrl" ng-submit="submitRate()">
