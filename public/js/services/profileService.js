@@ -162,7 +162,7 @@ angular.module('pettts')
             //Initializing request
             var request = {
                 method: 'GET',
-                url: '',
+                url: '/message/view',
                 headers: {
                     'x-access-token': userToken
                 }
@@ -186,13 +186,15 @@ angular.module('pettts')
         ////////////////////////
 
         // For sending a single message to the user whose profile is being viewed.
-        sendMessage: function(messageWritten) {
+        sendMessage: function(messageWritten,senderUsername,receiverUsername) {
             //Initializing request
             var request = {
                 method: 'POST',
-                url: '',
+                url: '/message/send',
                 data: {
                     'message': messageWritten,
+                    'senderUsername': senderUsername,
+                    'receiverUsername': receiverUsername,
                     'token': userToken
                 }
             };

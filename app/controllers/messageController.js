@@ -19,6 +19,7 @@ var messageController = {
      }
     );
   },
+  
   send: function(req, res) {
     var senderUsername = req.body.senderUsername;
     var receiverUsername = req.body.receiverUsername;
