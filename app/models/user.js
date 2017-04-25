@@ -47,7 +47,9 @@ var userSchema = new mongoose.Schema({
     },
     raters: [String],
     resetToken : String,
-    resetTokenExpiryDate : Date
+    resetTokenExpiryDate : Date,
+    messagesUsernames : [String],
+    messagesContents : [String]
 });
 
 var User = mongoose.model("user", userSchema);

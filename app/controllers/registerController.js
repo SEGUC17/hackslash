@@ -10,7 +10,7 @@ var User = require('../models/user.js');
 
 //profile picture upload
 var multer = require('multer');
-var upload = multer({ dest: "public/images/profilePics" });
+var upload = multer({ dest: "views/profilePics" });
 var type = upload.single('profilePic');
 // file system
 var fs = require('fs');
@@ -31,43 +31,43 @@ function validateInput(username, email, password, firstName, lastName) {
 
     if (!firstName) {
         output.success = false;
-        output.message = "First name in not entered"
+        output.firstNameMessage = "First name in not entered"
     }
 
     if (!lastName) {
         output.success = false;
-        output.message = "Last name in not entered"
+        output.lastNameMessage = "Last name in not entered"
     }
 
     if (!username) {
         output.success = false;
-        output.message = "Username in not entered"
+        output.usernameMessage = "Username in not entered"
     }
     // CHECK USERNAME LENGTH
     else if (username.length < 5 || username.length > 20) {
         output.success = false;
-        output.message = "Username length must be between 5 and 20 characters";
+        output.usernameMessage = "Username length must be between 5 and 20 characters";
     }
     // CHECK IF EMAIL IS ENTERED
     if (!email) {
         output.success = false;
-        output.message = "No email entered";
+        output.emailMessage = "No email entered";
     }
     // CHECK EMAIL FORMAT
     else if (!validateEmail(email)) {
         output.success = false;
-        output.message = "Email format is not valid";
+        output.emailMessage = "Email format is not valid";
     }
 
     // CHECK IF PASSWORD IS ENTERED
     if (!password) {
         output.success = false;
-        output.message = "No password entered";
+        output.passwordMessage = "No password entered";
     }
     // CHECK PASSWORD LENGTH
     else if (password.length < 5) {
         output.success = false;
-        output.message = "Password length must be at least 5 characters";
+        output.passwordMessage = "Password length must be more than 5 characters";
     }
 
 
@@ -94,7 +94,7 @@ function myHasher(password, tempUserData, insertTempUser, callback) {
 // nod-email-verification configurations
 nev.configure({
 
-        verificationURL: 'http://35.162.12.121:8080/v/${URL}',
+        verificationURL: 'http://localhost:8080/email-verification/${URL}',
         URLLength: 48,
         // mongo-stuff
         persistentUserModel: User,
@@ -184,22 +184,10 @@ var registerController = {
         var password = req.body.password;
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
-
-
-        ///handle not supported image file    
-        if (req.file) {
-            var checkImage = req.file.originalname;
-            checkImage = checkImage.substring(checkImage.length - 3, checkImage.length);
-            if (checkImage != "png" && checkImage != "jpg") {
-                fs.unlinkSync(req.file.path);
-                res.status(403).json({ success: false, message: "you should upload an image with extension jpg or png only" });
-                return;
-            }
-        }
         // validating the format of username, email, and password
         var validatedInput = validateInput(username, email, password, firstName, lastName);
         //path for default profile pic or the uploaded pic if exists
-        var profilePicPath = "public/images/default.jpg";
+        var profilePicPath = "views/profilePics/defaultProfile.jpg";
         if (req.file)
             profilePicPath = req.file.path;
         // if the validation respone is false
@@ -213,6 +201,7 @@ var registerController = {
 
             User.findOne({ username: username }, function(err, foundUser) {
                 if (err) {
+                    console.log(err);
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                     return res.status(400).json({ success: false, message: "an error occured" })
@@ -227,6 +216,7 @@ var registerController = {
                         // if email is already in database
                         User.findOne({ email: email }, function(err, foundUser2) {
                             if (err) {
+                                console.log(err);
                                 if (req.file)
                                     fs.unlinkSync(req.file.path);
                                 return res.status(400).json({ success: false, message: "an error occured" })
@@ -261,6 +251,7 @@ var registerController = {
                                     if (err) {
                                         if (req.file)
                                             fs.unlinkSync(req.file.path);
+                                        console.log(err);
                                     }
 
                                     // user already exists in persistent collection...
