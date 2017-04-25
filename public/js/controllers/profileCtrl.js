@@ -126,9 +126,14 @@ angular.module('pettts')
         // to send message
         $scope.sendMessage = function() {
             var messageContent = $scope.messageContent;
-            profileService.sendMessage(messageContent).then(function(response) {
-                $scope.messageIndicator = response.message;
-            });
+            var senderUsername = $scope.myUsername;
+            var receiverUsename = $scope.givenUsername;
+            console.log(messageContent);
+            console.log(senderUsername);
+            console.log(receiverUsename);
+            // profileService.sendMessage(messageContent,senderUsername,receiverUsename).then(function(response) {
+            //     $scope.messageIndicator = response.message;
+            // });
         }
 
         ////////////////////////////////////
