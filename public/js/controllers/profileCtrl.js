@@ -98,7 +98,7 @@ angular.module('pettts')
         //edit my post
         $scope.editPost = function() {
             $location.path('/post/edit').search({ id: $scope.post._id });
-        }
+        };
 
         ////////////////////////////////////
         ///////////////////////////////////
@@ -106,7 +106,7 @@ angular.module('pettts')
         //view specific post
         $scope.viewPost = function() {
             $location.path('/posts/viewMore').search({ id: $scope.post._id });
-        }
+        };
 
         ////////////////////////////////////
         ///////////////////////////////////
@@ -118,7 +118,7 @@ angular.module('pettts')
             delete $window.sessionStorage.username;
             delete $scope.token;
             $window.location = '/';
-        }
+        };
 
         ////////////////////////////////////
         ///////////////////////////////////
@@ -128,15 +128,23 @@ angular.module('pettts')
             var content = $scope.content;
             var senderUsername = $scope.myUsername;
             var receiverUsename = $scope.givenUsername;
-            if(content && content.length > 0 && content.length < 300){
+            if(content && content.length > 0 && content.length < 301){//Check message validity, and send it.
                 profileService.sendMessage(content, senderUsername, receiverUsename).then(function(response) {
                     $scope.messageIndicator = response.message;
                     $scope.content = null;
                 });
-            }else{
+            }else{//In case of empty message or one that is too large. 
                 $scope.messageIndicator = 'You have to write a message between 1 and 300 characters';
             }
-        }
+        };
+
+        ////////////////////////////////////
+        ///////////////////////////////////
+
+        // to go to the sender's profile
+        $scope.goToProfile = function(senderUsername){
+            $window.location = '/profile/' + senderUsername;
+        };
 
         ////////////////////////////////////
         ///////////////////////////////////
@@ -182,24 +190,27 @@ angular.module('pettts')
         // to view my messages
         profileService.getMessages().then(function(response) {
             $scope.messageFail = undefined;
+            //Create an empty array to hold all the messages and senders combined.
             $scope.fullMessages = [];
             $scope.messageSuccess = response.success;
-            if ($scope.messageSuccess) {
+            if ($scope.messageSuccess) {//Messages sent back successfully.
                 if(response.messagesContents && response.messagesContents.length > 0){
                     for (var i = 0; i < response.messagesContents.length; i++) {
                         var sender = response.messagesUsernames[i];
                         var content = response.messagesContents[i];
                         $scope.fullMessages.push({sender, content});
                     }
-                }else{
+                    //Order the array (Most recent first).
+                    $scope.fullMessages.reverse();
+                }else{//Recieved no messages yet.
                     $scope.messageFail = 'There are no message in your inbox yet.';
                 }
-            } else {
+            }else{//Other errors
                 $scope.messageFail = response.message;
             }
-        })
+        });
 
-    })
+    });
 
 
 ////////////////////////////////////
