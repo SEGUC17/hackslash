@@ -1,16 +1,17 @@
 .post-details {
-  margin-top: 50px;
-  margin-bottom: 80px;
   background-color: white;
   padding: 25px;
-  border: 1px solid #ebebeb;
-  border-left: 5px solid #2e91f7;
+  /*border: 1px solid #ebebeb;*/
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-#right-col {
-  border-left: 2px solid #ebebeb;
+#left-col {
+  border-right: 2px solid #ebebeb;
+}
+
+#postOwnerUsername {
+  margin-top: 5px;
 }
 
 #email-info {
@@ -18,9 +19,44 @@
 }
 
 #vote-btn {
-  margin-left: 1em;
+  margin-top: 1.10em;
 }
 
 #view-contact-btn {
   margin-top: 20px;
+}
+
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.strike > span {
+  position: relative;
+  display: inline-block;
+  color: rgb(94, 94, 94);
+}
+
+.strike > span:before,
+.strike > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: rgb(226, 226, 226);
+}
+
+.strike > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > span:after {
+  left: 100%;
+  margin-left: 15px;
 }

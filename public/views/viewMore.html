@@ -1,71 +1,115 @@
 <link rel="stylesheet" href="../css/viewMore.css">
 
-<div ng-if="!token">
-    <div class="container not-logged-in">
-        <h2>I see you're not logged in.</h2>
-        <hr>
-        <p>Click here to login</p>
-        <a class="btn btn-success btn-block" href="/login">Login</a>
-        <hr>
+<!-- Modals shown upon view more clicked -->
+<div id="myModal-{{ post._id }}" class="modal fade">
+  <!-- if the user is not logged in, don't allow him to view more the post -->
+  <div class="modal-dialog" ng-if="!token">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>We are sorry, you must be logged in to view it more</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>Get back to your account</p>
+        <a class="btn btn-success btn-block" href="/login">Login now</a>
+
+        <div class="strike">
+           <span>or</span>
+        </div>
+
         <p>Perhaps you don't have an account?</p>
-        <a class="btn btn-primary btn-block" href="/register">Register now | It's free!</a>
-        <div style="text-align:center">
+        <a class="btn btn-primary btn-block" href="/register">Register now, It's free!</a>
+
+        <div style="text-align:center; margin-top:1.75em;">
             <img src="../images/login-pic-2.png" width="250px">
         </div>
-    </div>
-</div>
 
-<div ng-if="token">
-    <div ng-controller="reviewPostCtrl" class="container post-details">
-        <div class="row">
+      </div> <!--  End of modal-body -->
 
-            <div class="col-md-3">
-                <img ng-src="{{picture}}" alt="No Image Available for this Post" class="img-responsive img-thumbnail">
-                <p id="email-info"><label><strong>Contact email:</strong> {{email}}</label></p>
+    </div> <!--  End of modal-content -->
 
-                <!-- up & down vote form -->
-                <form ng-controller="reviewPostCtrl" ng-submit="submitVote()">
-                    <label class="radio-inline">
-            <input type="radio" value="up" ng-model="vote">Up-vote
-          </label>
-                    <label class="radio-inline">
-            <input type="radio" value="down" ng-model="vote">Down-vote
-          </label>
-                    <button type="submit" id="vote-btn" class="btn btn-success">Vote</button>
-                    <div>{{message}}</div>
-                </form>
+  </div>
+  <!-- End of !token div -->
 
-                <a href="/profile/{{username}}" id="view-contact-btn" class="btn btn-info btn-block">View contact profile</a>
-            </div>
+  <!-- if the user is logged in, allow him to view more the post -->
+  <div class="modal-dialog modal-lg" ng-if="token">
+    <div class="modal-content">
 
-            <div class="col-md-9" id="right-col">
-                <p><strong>Post date:</strong> {{ date | date : "MMM d, yyyy h:mm a" }}</p>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>{{ post.type | stringifyType }}</h4>
+      </div>
 
-                <p><strong>Description:</strong> {{description}}</p>
+      <div class="modal-body">
 
-                <hr>
+        <div ng-controller="reviewPostCtrl" class="container-fluid post-details">
+            <div class="row">
 
-                <p><strong>Post Up-Votes: </strong> {{upVotes}}</p>
-                <p><strong>Post Down-Votes:</strong> {{downVotes}}</p>
-                <p><strong>Species:</strong> {{species}}</p>
-                <p><strong>Kind:</strong> {{kind}}</p>
-                <p><strong>Gender:</strong> {{gender}}</p>
+                <div class="col-md-3">
+                    <img ng-if="post.image" ng-src="{{ post.image.substring(7,post.image.length) }}" alt="{{ post.type | stringifyType }} post image" class="img-responsive img-thumbnail">
+                    <img ng-if="!post.image" src="http://placehold.it/200x200" alt="No image available" class="img-responsive img-thumbnail">
+                    <p id="email-info" style="word-wrap: break-word;">
+                      <label><strong>Contact email:</strong></label> {{post.ownerEmail}}
+                    </p>
 
-                <div ng-if="sell">
-                    <p><strong>Price:</strong> {{price}}</p>
+                    <!-- up & down vote form -->
+                    <form ng-controller="reviewPostCtrl" ng-submit="submitVote()">
+                        <label class="radio-inline">
+                          <input type="radio" value="up" ng-model="vote">Up-vote
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" value="down" ng-model="vote">Down-vote
+                        </label>
+                        <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
+                        <div>{{message}}</div>
+                    </form>
+
+                    <a href="/profile/{{username}}" id="view-contact-btn" class="btn btn-info btn-block">View contact profile</a>
                 </div>
 
-                <div ng-if="exchange">
-                    <p><strong>SpeciesB : {{speciesB}}</strong></p>
-                    <p><strong>KindB : {{kindB}}</strong></p>
-                    <p><strong>GenderB : {{genderB}}</strong></p>
-                </div>
+                <div class="col-md-9" id="right-col">
+                    <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
 
-                <hr>
-                <div ng-if="note">
-                    <p><strong>notes about the post:</strong> {{note}}</p>
+                    <p><strong>Description:</strong> {{post.description}}</p>
+
+                    <hr>
+
+                    <p><strong>Post Up-Votes: </strong> {{post.upVote}}</p>
+                    <p><strong>Post Down-Votes:</strong> {{post.downVote}}</p>
+                    <p><strong>Species:</strong> {{post.species}}</p>
+                    <p><strong>Kind:</strong> {{post.kind}}</p>
+                    <p><strong>Gender:</strong> {{post.gender}}</p>
+
+                    <div ng-if="sell">
+                        <p><strong>Price:</strong> {{post.price}}</p>
+                    </div>
+
+                    <div ng-if="exchange">
+                        <p><strong>SpeciesB : {{post.speciesB}}</strong></p>
+                        <p><strong>KindB : {{post.kindB}}</strong></p>
+                        <p><strong>GenderB : {{post.genderB}}</strong></p>
+                    </div>
+
+                    <div ng-if="note">
+                        <hr>
+                        <p><strong>notes about the post:</strong> {{post.note}}</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+      </div> <!--  End of modal-body -->
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+
+    </div> <!--  End of modal-content -->
+
+  </div>
+  <!-- End of if token -->
+
 </div>
+<!-- End of modal -->
