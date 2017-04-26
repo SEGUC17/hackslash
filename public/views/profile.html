@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../css/profile.css">
+<link rel="stylesheet" href="../css/viewMore.css">
 
 <div ng-if="!token">
     <div class="container not-logged-in">
@@ -109,13 +110,14 @@
                                                 <!-- fixing description length to display by 250 chars -->
                                                 <p>{{ post.description.slice(0,250) }}...</p>
                                                 <!-- link to show post page -->
+                                                <button type="button" ng-if="myProfile" ng-click="editPost()" class="btn btn-primary" id="edit-btn">Edit</button>
+                                                <button id="view-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
                                                 <div ng-controller="profileCtrl" ng-click="deletePost()">
                                                     <button type="button" ng-if="myProfile" class="btn btn-primary" id="delete-btn">Delete</button>
                                                 </div>
                                                 <div ng-controller="profileCtrl" ng-click="editPost()">
                                                     <button type="button" ng-if="myProfile" class="btn btn-primary" id="edit-btn">Edit</button>
                                                 </div>
-                                                <button ng-controller="profileCtrl" ng-click="viewPost()" id="view-btn" href="#" class="btn btn-primary">View more</button>
                                             </div>
                                             <!-- End of media-body -->
                                         </div>
@@ -124,6 +126,125 @@
                                     <!-- End of panel-body -->
                                 </div>
                                 <!-- End of panel -->
+
+                                <!-- ========================================================================================= -->
+                                <!-- Modals shown upon view more clicked -->
+                                <div id="myModal-{{ post._id }}" class="modal fade">
+                                  <!-- if the user is not logged in, don't allow him to view more the post -->
+                                  <div class="modal-dialog" ng-if="!token">
+                                    <div class="modal-content">
+
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4>We are sorry, you must be logged in to view it more</h4>
+                                      </div>
+
+                                      <div class="modal-body">
+                                        <p>Get back to your account</p>
+                                        <a class="btn btn-success btn-block" data-dismiss="modal" href="" ng-click="goTo('login')">Login now</a>
+
+                                        <div class="strike">
+                                           <span>or</span>
+                                        </div>
+
+                                        <p>Perhaps you don't have an account?</p>
+                                        <a class="btn btn-primary btn-block" href="" data-dismiss="modal" ng-click="goTo('register')">Register now, It's free!</a>
+
+                                        <div style="text-align:center; margin-top:1.75em;">
+                                            <img src="../images/login-pic-2.png" width="250px">
+                                        </div>
+
+                                      </div> <!--  End of modal-body -->
+
+                                    </div> <!--  End of modal-content -->
+
+                                  </div>
+                                  <!-- End of !token div -->
+
+                                  <!-- if the user is logged in, allow him to view more the post -->
+                                  <div class="modal-dialog modal-lg" ng-if="token">
+                                    <div class="modal-content">
+
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4>{{ post.type | stringifyType }}</h4>
+                                      </div>
+
+                                      <div class="modal-body">
+
+                                        <div class="container-fluid post-details">
+                                            <div class="row">
+
+                                                <div class="col-md-3" id="left-col">
+                                                    <img ng-if="post.image" ng-src="{{ post.image.substring(7,post.image.length) }}" alt="{{ post.type | stringifyType }} post image" class="img-responsive img-thumbnail">
+                                                    <img ng-if="!post.image" src="http://placehold.it/200x200" alt="No image available" class="img-responsive img-thumbnail">
+                                                    <p id="postOwnerUsername">by: {{ post.username }}</p>
+                                                    <p id="email-info" style="word-wrap: break-word;">
+                                                      <label><strong>Contact email:</strong></label> {{post.ownerEmail}}
+                                                    </p>
+
+                                                    <!-- up & down vote form -->
+                                                    <form ng-submit="submitVote(post._id)" ng-if="!myProfile">
+                                                        <label class="radio-inline">
+                                                          <input type="radio" value="up" ng-model="vote">Up-vote
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                          <input type="radio" value="down" ng-model="vote">Down-vote
+                                                        </label>
+                                                        <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
+                                                        <div>{{message}}</div>
+                                                    </form>
+
+                                                    <button class="btn btn-success btn-block" data-dismiss="modal" ng-click="editPost()">Edit Post</button>
+                                                </div>
+
+
+                                                <div class="col-md-9" id="right-col">
+                                                    <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
+
+                                                    <p><strong>Description:</strong> {{post.description}}</p>
+
+                                                    <hr>
+
+                                                    <p><strong>Post Up-Votes: </strong> {{post.upVote}}</p>
+                                                    <p><strong>Post Down-Votes:</strong> {{post.downVote}}</p>
+                                                    <p><strong>Species:</strong> {{post.species}}</p>
+                                                    <p><strong>Kind:</strong> {{post.kind}}</p>
+                                                    <p><strong>Gender:</strong> {{post.gender}}</p>
+
+                                                    <div ng-if="sell">
+                                                        <p><strong>Price:</strong> {{post.price}}</p>
+                                                    </div>
+
+                                                    <div ng-if="exchange">
+                                                        <p><strong>SpeciesB : {{post.speciesB}}</strong></p>
+                                                        <p><strong>KindB : {{post.kindB}}</strong></p>
+                                                        <p><strong>GenderB : {{post.genderB}}</strong></p>
+                                                    </div>
+
+                                                    <div ng-if="note">
+                                                        <hr>
+                                                        <p><strong>notes about the post:</strong> {{post.note}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                      </div> <!--  End of modal-body -->
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      </div>
+
+                                    </div> <!--  End of modal-content -->
+
+                                  </div>
+                                  <!-- End of if token -->
+
+                                </div>
+                                <!-- End of modal -->
+                                <!-- ========================================================================================= -->
+
                             </div>
                             <!-- End of row -->
                             <ul uib-pagination boundary-links="true" total-items="posts.length" items-per-page="pageSize" ng-model="currentPage" max-size="maxSize" class="pagination-md pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">

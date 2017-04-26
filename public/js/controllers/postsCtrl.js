@@ -1,6 +1,8 @@
 angular.module('pettts')
 
-.controller('postsCtrl', function($scope, postsService) {
+.controller('postsCtrl', function($scope, $window, $location, postsService, reviewPostService) {
+
+    $scope.token = $window.sessionStorage.accessToken;
 
     postsService.get().then(function(posts) {
         $scope.posts = posts
@@ -12,6 +14,19 @@ angular.module('pettts')
             $scope.posts.sort(function(a, b) {
                 return new Date(b.date).getTime() - new Date(a.date).getTime();
             });
+
+            $scope.posts.forEach(function(post){
+              reviewPostService.viewOwnerInfo(post._id).then(function(response){
+                post.username = response.data
+              });
+            });
+
+            $scope.submitVote = function(id){
+              reviewPostService.vote(id, $scope.vote).then(function(response){
+                $scope.message = response;
+              })
+            }
+
             //setting page attributes
             $scope.pageSize = 7;
             $scope.currentPage = 1;
@@ -19,6 +34,14 @@ angular.module('pettts')
         }
 
     });
+
+    $scope.goTo = function(path){
+      $location.path('/' + path);
+    }
+
+    $scope.visitProfile = function(username){
+      $location.path('/profile/' + username);
+    }
 
 });
 
