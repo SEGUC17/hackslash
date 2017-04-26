@@ -30,12 +30,16 @@ body {
   float: right;
 }
 
-.media-body .btn-primary {
+.media-body .btn-primary,
+.media-body .btn-danger {
   position: relative;
-  background-color: #2e91f7;
   border: none;
   float: right;
   /*bottom: -15px;*/
+}
+
+.media-body .btn-primary {
+  background-color: #2e91f7;
 }
 
 .media-body .btn-primary:hover {
