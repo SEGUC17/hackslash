@@ -140,10 +140,10 @@ angular.module('pettts')
         ///////////////////////////////////
 
         //delete specific post
-        $scope.deletePost = function() {
+        $scope.deletePost = function(id) {
           var un = $scope.userInfo.username;
 
-          profileService.deletePost( $scope, $scope.post._id, un);
+          profileService.deletePost( $scope, id, un);
         }
 
         ////////////////////////////////////
@@ -171,7 +171,7 @@ angular.module('pettts')
                     $scope.messageIndicator = response.message;
                     $scope.content = null;
                 });
-            }else{//In case of empty message or one that is too large. 
+            }else{//In case of empty message or one that is too large.
                 $scope.messageIndicator = 'You have to write a message between 1 and 300 characters';
             }
         };
@@ -243,7 +243,7 @@ angular.module('pettts')
                 $scope.myEmail = $window.sessionStorage.email;
             }
         });
-  
+
         ////////////////////////////////////
         ///////////////////////////////////
 
