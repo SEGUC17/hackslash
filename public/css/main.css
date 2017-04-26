@@ -30,7 +30,8 @@ body {
   float: right;
 }
 
-.media-body .btn-primary {
+.media-body .btn-primary,
+.media-body .btn-danger {
   position: relative;
   background-color: #2e91f7;
   border: none;
