@@ -2,7 +2,7 @@ angular.module('pettts')
 
 .factory('profileService', function($http, $window) {
 
-  // This Service is used to connect the profilectrl to the API
+    // This Service is used to connect the profilectrl to the API
 
     // attributes saved for the profile
     var userEmail = $window.sessionStorage.email;
@@ -10,8 +10,8 @@ angular.module('pettts')
     var userToken = $window.sessionStorage.accessToken;
 
     return {
-      // View Function is used to retrieve the data of a user from the server .
-      // to appears as the user's profile .
+        // View Function is used to retrieve the data of a user from the server .
+        // to appears as the user's profile .
         view: function(givenUsername) {
             var request = {
                 method: 'GET',
@@ -22,7 +22,7 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-              // Ther is no existing user with this username .
+                // Ther is no existing user with this username .
                 if (response.data == "The user you're trying to view does not exist!") {
                     return {
                         'success': false,
@@ -37,7 +37,7 @@ angular.module('pettts')
                     };
                 }
             }, function error(response) {
-              // An Error has occcured .
+                // An Error has occcured .
                 return {
                     'success': false,
                     'message': 'Error can not view profile'
@@ -60,10 +60,10 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-              // the user has been rated Successfully .
+                // the user has been rated Successfully .
                 $window.location = '/profile/' + un;
             }, function error(response) {
-              // An Error has occured .
+                // An Error has occured .
                 return {
                     'success': false,
                     'message': response.data.message
@@ -82,7 +82,7 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-              // All attributes saved in the sessions for this user will be deleted .
+                // All attributes saved in the sessions for this user will be deleted .
                 delete $window.sessionStorage.accessToken;
                 delete $window.sessionStorage.email;
                 delete $window.sessionStorage.username;
@@ -111,10 +111,10 @@ angular.module('pettts')
                 }
             };
             return $http(request).then(function success(response) {
-              // The Password has been changes .
+                // The Password has been changes .
                 $window.location = '/profile/' + userUsername;
             }, function error(response) {
-              // An Error occured .
+                // An Error occured .
                 return {
                     'success': false,
                     'message': 'Error can not change password try again later'
@@ -138,7 +138,7 @@ angular.module('pettts')
                         'x-access-token': userToken
                     }
                 }).then(function success(response) {
-                  // Checking for username and its length .
+                        // Checking for username and its length .
                         if (user.username && user.username.length > 0 || user.username != userUsername) {
                             if (user && user.username)
                                 $window.sessionStorage.username = user.username;
@@ -147,11 +147,88 @@ angular.module('pettts')
 
                     },
                     function error(response) {
-                      // An Error has occured .
+                        // An Error has occured .
                         $scope.messageUpload = response.data;
 
                     });
             }
+        },
+
+        ////////////////////////
+        ////////////////////////
+
+        // For logged in user view all his messages (only on his profile)
+        getMessages: function() {
+            //Initializing request
+            var request = {
+                method: 'GET',
+                url: '/message/view',
+                headers: {
+                    'x-access-token': userToken
+                }
+            };
+            return $http(request).then(function success(response) {
+                //In case of success return all the user's messages
+                return response.data;
+            }, function error(response) {
+                //In case of failure return relevant error message.
+                return {
+                    'success': false,
+                    'message': 'Error in request, please try again.'
+                };
+            });
+        },
+
+        ////////////////////////
+        ////////////////////////
+
+        // For sending a single message to the user whose profile is being viewed.
+        sendMessage: function(messageWritten,senderUsername,receiverUsername) {
+            //Initializing request
+            var request = {
+                method: 'POST',
+                url: '/message/send',
+                data: {
+                    'messageContent': messageWritten,
+                    'senderUsername': senderUsername,
+                    'receiverUsername': receiverUsername,
+                    'token': userToken
+                }
+            };
+            return $http(request).then(function success(response) {
+                //In case of success display success prompt
+                return {
+                    'success': true,
+                    'message': 'Your message has been sent'
+                };
+            }, function error(response) {
+                //In case of error display relevant error message
+                return {
+                    'success': false,
+                    'message': 'Error in sending message to ' + givenUsername + '. Please, try again.'
+                };
+            });
+        },
+        
+        ////////////////////////
+        ////////////////////////
+
+        // Delete Function is used to delete an existing post in the database
+        delete: function($scope,postId ,un) {
+
+            $http.get('/post/delete', {
+            transformRequest: angular.indentity,
+            headers: {
+                'Content-Type': undefined,
+                'x-access-token': userToken ,
+                'id':postId
+            }
+            }).then(function successCallback(response) {
+             $window.location = '/profile/' + un;
+          }, function errorCallback(response) {
+              $scope.messageDeleted = response.data.message;
+              return response;
+          });
         }
     }
 });
