@@ -30,7 +30,35 @@ angular.module('pettts')
 
         //edit my profile
         $scope.submitEdit = function() {
+            $scope.messageUpload = undefined;
             var edit = $scope.edit;
+            //Check if phone number(s) entered have valid characters (+12345... or (12)345... or 12345... or 12-345...)
+            //Regular expression that contains '+', '-', '(', ')', ' ' and numbers.
+            var regex = /^[\d ()+-]+$/;
+            if(edit){
+                if($scope.edit.phoneNumber1){
+                    if(!regex.test($scope.edit.phoneNumber1)){
+                        $scope.messageUpload = "Invalid phone number in field Phone number 1. It should only contain numbers, '+', '(', ')' and '-'.";
+                        return;
+                    }
+                }
+                if($scope.edit.phoneNumber2){
+                    if(!regex.test($scope.edit.phoneNumber2)){
+                        $scope.messageUpload = "Invalid phone number in field Phone number 2. It should only contain numbers, '+', '(', ')' and '-'.";
+                        return;
+                    }
+                }
+                if($scope.edit.homeNumber){
+                    if(!regex.test($scope.edit.homeNumber)){
+                        $scope.messageUpload = "Invalid phone number in field Home number. It should only contain numbers, '+', '(', ')' and '-'.";
+                        return;
+                    }
+                }
+            }else{
+                $scope.messageUpload = "Please choose something to edit";
+                return;
+            }
+            //Submit user to be edited
             profileService.edit(edit, $scope);
         };
 
