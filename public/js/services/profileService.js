@@ -209,12 +209,12 @@ angular.module('pettts')
                 };
             });
         },
-        
+
         ////////////////////////
         ////////////////////////
 
         // Delete Function is used to delete an existing post in the database
-        delete: function($scope,postId ,un) {
+        deletePost: function($scope,postId ,un) {
 
             $http.get('/post/delete', {
             transformRequest: angular.indentity,

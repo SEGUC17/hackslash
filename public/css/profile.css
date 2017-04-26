@@ -18,8 +18,8 @@ p {
 }
 
 #edit-btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0px;
+    border-right: 1px solid rgb(0, 70, 160);
 }
 #delete-btn {
     border-top-left-radius: 0;
