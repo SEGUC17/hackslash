@@ -111,6 +111,16 @@ angular.module('pettts')
         ////////////////////////////////////
         ///////////////////////////////////
 
+        //delete specific post
+        $scope.deletePost = function() {
+          var un = $scope.userInfo.username;
+
+          profileService.delete( $scope, $scope.post._id, un);
+        }
+
+        ////////////////////////////////////
+        ///////////////////////////////////
+
         //logout and say bye
         $scope.logout = function() {
             delete $window.sessionStorage.accessToken;
@@ -163,7 +173,7 @@ angular.module('pettts')
                     }
                     //check for profile picture
                     if (response.data.userProfileInfo.profilePicture) {
-                        // formulate the profile picture path 
+                        // formulate the profile picture path
                         $scope.profilePicture = response.data.userProfileInfo.profilePicture.substring(7, response.data.userProfileInfo.profilePicture.length);
                     }
                 }

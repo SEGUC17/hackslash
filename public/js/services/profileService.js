@@ -208,6 +208,27 @@ angular.module('pettts')
                     'message': 'Error in sending message to ' + givenUsername + '. Please, try again.'
                 };
             });
+        },
+        
+        ////////////////////////
+        ////////////////////////
+
+        // Delete Function is used to delete an existing post in the database
+        delete: function($scope,postId ,un) {
+
+            $http.get('/post/delete', {
+            transformRequest: angular.indentity,
+            headers: {
+                'Content-Type': undefined,
+                'x-access-token': userToken ,
+                'id':postId
+            }
+            }).then(function successCallback(response) {
+             $window.location = '/profile/' + un;
+          }, function errorCallback(response) {
+              $scope.messageDeleted = response.data.message;
+              return response;
+          });
         }
     }
 });
