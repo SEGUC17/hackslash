@@ -110,9 +110,8 @@
                                                 <!-- fixing description length to display by 250 chars -->
                                                 <p>{{ post.description.slice(0,250) }}...</p>
                                                 <!-- link to show post page -->
-                                                <div ng-controller="profileCtrl" ng-click="deletePost()">
-                                                    <button type="button" ng-if="myProfile" class="btn btn-danger" id="delete-btn">Delete</button>
-                                                </div>
+
+                                                <button type="button" ng-if="myProfile" ng-click="deletePost()" class="btn btn-danger" id="delete-btn">Delete</button>
                                                 <button type="button" ng-if="myProfile" ng-click="editPost()" class="btn btn-primary" id="edit-btn">Edit</button>
                                                 <button id="view-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
                                             </div>
