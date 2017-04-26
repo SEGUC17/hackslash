@@ -115,7 +115,7 @@ angular.module('pettts')
         $scope.deletePost = function() {
           var un = $scope.userInfo.username;
 
-          profileService.delete( $scope, $scope.post._id, un);
+          profileService.deletePost( $scope, $scope.post._id, un);
         }
 
         ////////////////////////////////////
