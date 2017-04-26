@@ -132,41 +132,41 @@ let postController = {
         if (kindQuery != undefined && speciesQuery != undefined) {
             Post.find({ kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
-                    res.json(err.message);
+                    res.status(400).json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(400).json({ "message": "No Posts Exists" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
         } else if (kindQuery != undefined) {
             Post.find({ kind: { $regex: kindQuery } }, function(err, posts) {
                 if (err) {
-                    res.json(err.message);
+                    res.status(400).json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(400).json({ "message": "No Posts Exists" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
         } else if (speciesQuery != undefined) {
             Post.find({ species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
-                    res.json(err.message);
+                    res.status(400).json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(400).json({ "message": "No Posts Exists" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
         } else {
-            res.json({ "message": "Please enter a search parameter." });
+            res.status(400).json({ "message": "Please enter a search parameter." });
         }
     },
     // Filtering Posts by Type
@@ -197,12 +197,12 @@ let postController = {
         }
         Post.find({ type: filterType }, function(err, posts) {
             if (err) {
-                res.json(err.message);
+                res.status(400).json(err.message);
             } else {
                 if (posts.length == 0) {
-                    res.json({ message: "No Posts Exists" });
+                    res.status(400).json({ message: "No Posts Exists" });
                 } else {
-                    res.json({ posts });
+                    res.status(200).json({ posts });
                 }
             }
         })
@@ -241,53 +241,53 @@ let postController = {
         if (kindQuery != undefined && speciesQuery != undefined) {
             Post.find({ type: filterType, kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
-                    res.json(err.message);
+                    res.status(400).json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(400).json({ "message": "No Posts Exists" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
         } else if (kindQuery != undefined) {
             Post.find({ type: filterType, kind: { $regex: kindQuery } }, function(err, posts) {
                 if (err) {
-                    res.json(err.message);
+                    res.status(400).json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(400).json({ "message": "No Posts Exists" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
         } else if (speciesQuery != undefined) {
             Post.find({ type: filterType, species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
-                    res.json(err.message);
+                    res.status(400).json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(400).json({ "message": "No Posts Exists" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
         } else {
-            res.json({ "message": "Please enter a search parameter." });
+            res.status(400).json({ "message": "Please enter a search parameter." });
         }
     },
     // showing the posts without the contact info of the users
     viewPostsOnly: function(req, res) {
         Post.find({}, function(err, posts) {
             if (err) {
-                res.json(err.message);
+                res.status(400).json(err.message);
             } else {
                 if (posts.length == 0) {
-                    res.json("No posts , Yet");
+                    res.status(400).json("No posts , Yet");
                 } else {
-                    res.json({ posts });
+                    res.status(200).json({ posts });
                 }
             }
         })
@@ -304,15 +304,15 @@ let postController = {
         } else {
             Post.find({}, function(err, allPosts) {
                 if (err) {
-                    res.json(err.message);
+                    res.status(400).json(err.message);
                 } else if (allPosts.length == 0) {
-                    res.json("No Posts , Yet");
+                    res.status(400).json("No Posts , Yet");
                 } else {
                     User.find({}, function(err, allUsers) {
                         if (err) {
-                            res.json(err.message);
+                            res.status(400).json(err.message);
                         } else {
-                            res.json({ allPosts, allUsers });
+                            res.status(200).json({ allPosts, allUsers });
                         }
                     })
                 }
@@ -335,13 +335,13 @@ let postController = {
 
             Post.findOne({ _id: id }, function(err, post) {
                 if (post == null) {
-                    res.json("Post Doesn't Exist");
+                    res.status(400).json("Post Doesn't Exist");
                     return;
                 } else if (post.ownerEmail == userMail) {
-                    res.json("You Own This Post so , You Can't Rate it ");
+                    res.status(400).json("You Own This Post so , You Can't Rate it ");
                     return;
                 } else if (post.raters.includes(userMail)) {
-                    res.json("You Rated This Item Before");
+                    res.status(400).json("You Rated This Item Before");
                     return;
                 } else {
                     if (vote == 0) {
@@ -365,7 +365,7 @@ let postController = {
                             }
                         })
                     } else {
-                        res.json("Not a Valid Vote");
+                        res.status(400).json("Not a Valid Vote");
                     }
                 }
             });
@@ -432,7 +432,7 @@ let postController = {
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
-                    res.json("done");
+                    res.status(200).json("done");
                 }
             })
         }
@@ -490,7 +490,7 @@ let postController = {
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
-                    res.json("done");
+                    res.status(200).json("done");
                 }
             })
         }
@@ -547,7 +547,7 @@ let postController = {
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
-                    res.json("shelter post IS POSTED successfully");
+                    res.status(200).json("shelter post IS POSTED successfully");
                 }
             })
         }
@@ -604,7 +604,7 @@ let postController = {
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
-                    res.json("FOUND POST IS POSTED successfully");
+                    res.status(200).json("FOUND POST IS POSTED successfully");
                 }
             })
         }
@@ -663,7 +663,7 @@ let postController = {
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
-                    res.json("LOST POST successfully POSTED");
+                    res.status(200).json("LOST POST successfully POSTED");
                 }
             })
         }
@@ -720,7 +720,7 @@ let postController = {
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
-                    res.json("done");
+                    res.status(200).json("done");
                 }
             })
         }
@@ -730,12 +730,12 @@ let postController = {
         var id = req.header("_id");
         Post.findOne({ _id: id }, function(err, foundPost) {
             if (err) {
-                res.json("There's an Error finding this post");
+                res.status(400).json("There's an Error finding this post");
             } else {
                 if (foundPost == null) {
-                    res.json("There is no post with this ID");
+                    res.status(400).json("There is no post with this ID");
                 } else {
-                    res.json(foundPost);
+                    res.status(200).json(foundPost);
                 }
             }
         });
@@ -746,20 +746,20 @@ let postController = {
             var id = req.header("_id");
             Post.findOne({ _id: id }, function(err, foundPost) {
                 if (err) {
-                    res.json("There's an Error finding this post");
+                    res.status(400).json("There's an Error finding this post");
                     return;
                 } else {
                     if (foundPost == null) {
-                        res.json("There is no post with this ID");
+                        res.status(400).json("There is no post with this ID");
                         return;
                     } else {
                         neededEmail = foundPost.ownerEmail;
                         User.findOne({ email: neededEmail }, function(err, foundUser) {
-                            if (err) res.json("There's an error finding this person");
+                            if (err) res.status(400).json("There's an error finding this person");
                             else {
-                                if (foundUser == null) res.send("No Owner with this Email");
+                                if (foundUser == null) res.status(400).json("No Owner with this Email");
                                 else {
-                                    res.json(foundUser.username);
+                                    res.status(200).json(foundUser.username);
                                 }
                             }
                         });

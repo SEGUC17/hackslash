@@ -14,9 +14,9 @@ var authController = {
         // CHECK IF GIVEN IS USERNAME
         var token = req.body.token;
         if (token) { //
-            res.json({ success: true, message: 'Logged Out Successfully', token: null });
+            res.status(200).json({ success: true, message: 'Logged Out Successfully', token: null });
         } else { // there is no token
-            res.json({ success: false, message: 'Not Logged in' });
+            res.status(400).json({ success: false, message: 'Not Logged in' });
         }
     },
     login: function(req, res) {
@@ -27,9 +27,9 @@ var authController = {
                 bcrypt.compare(req.body.password, user.password, function(err, result) {
                     if (result) {
                         var token = jwt.sign(user, req.app.get('superSecret'), { expiresIn: 60 * 60 * 24 }); // expires in 24 hours
-                        res.json({ success: true, message: 'Enjoy your token!', token: token, email: user.email, username: user.username });
+                        res.status(200).json({ success: true, message: 'Enjoy your token!', token: token, email: user.email, username: user.username });
                     } else {
-                        res.json({ success: false, message: 'Login failed. Wrong  Password.' }); // right username and wrong password
+                        res.status(400).json({ success: false, message: 'Login failed. Wrong  Password.' }); // right username and wrong password
                     }
                 });
             } else { // NOT USERNAME
@@ -38,13 +38,13 @@ var authController = {
                         bcrypt.compare(req.body.password, user.password, function(err, result) {
                             if (result) {
                                 var token = jwt.sign(user, req.app.get('superSecret'), { expiresIn: 60 * 60 * 24 }); // expires in 24 hours
-                                res.json({ success: true, message: 'Enjoy your token!', token: token, email: user.email, username: user.username });
+                                res.status(200).json({ success: true, message: 'Enjoy your token!', token: token, email: user.email, username: user.username });
                             } else {
-                                res.json({ success: false, message: 'Login failed. Wrong  Password.' }); // right username and wrong password
+                                res.status(400).json({ success: false, message: 'Login failed. Wrong  Password.' }); // right username and wrong password
                             }
                         });
                     } else {
-                        res.json({ success: false, message: 'wrong username or password.' }); // right username and wrong password
+                        res.status(400).json({ success: false, message: 'wrong username or password.' }); // right username and wrong password
                     }
                 });
             }

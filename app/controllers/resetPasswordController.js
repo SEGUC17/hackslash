@@ -42,10 +42,10 @@ var resetPasswordController = {
                     // SEND THE USER A TOKEN TO MAKE HIM LOGGED IN
                     User.findOne({ username: foundUser.username }, function(err, user) {
                         var token = jwt.sign(user, req.app.get('superSecret'), { expiresIn: 60 * 60 * 24 }); // expires in 24 hours
-                        res.json({ success: true, message: 'Enjoy your token!', token: token });
+                        res.status(200).json({ success: true, message: 'Enjoy your token!', token: token });
                     });
 
-                } else res.json({ success: false, message: "Bad Token" });
+                } else res.status(400).json({ success: false, message: "Bad Token" });
             }
         });
 

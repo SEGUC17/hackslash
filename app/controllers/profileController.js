@@ -75,7 +75,7 @@ let profileController = {
         }
         var token = req.body.token || req.header("x-access-token") || req.query.token;
         if (!token) {
-            res.json('You must be logged in to view profiles.')
+            res.status(400).json('You must be logged in to view profiles.')
         } else {
             //To add: if this is my profile, show edit button.
             var myEmail = req.decoded._doc.email;
@@ -101,7 +101,7 @@ let profileController = {
                         }
                     })
                 } else { //User not found. Send relevant error message.
-                    res.json('The user you\'re trying to view does not exist!');
+                    res.status(400).json('The user you\'re trying to view does not exist!');
                 }
             })
         }
@@ -203,7 +203,7 @@ let profileController = {
                                     } else {
                                         post.remove({ ownerEmail: uEmail }, function(err, posts) {
                                             if (err) {
-                                                res.json(err.message);
+                                                res.status(400).json(err.message);
                                                 return;
                                             } else {
                                                 res.status(200).json({ success: true, message: 'Your profile has been deleted! D:', token: null });
@@ -235,7 +235,7 @@ let profileController = {
         }
         var token = req.body.token;
         if (!token) {
-            res.json('You must be logged in to change your password.')
+            res.status(400).json('You must be logged in to change your password.')
         } else {
             var uEmail = req.decoded._doc.email;
             var uPassword = req.body.password;

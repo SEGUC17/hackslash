@@ -35,14 +35,18 @@ app.set('superSecret', config.superSecret); // Secret of Tokens!
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/public/views'));
 
+
 // Requiring routes
 var register = require('./app/routes/register');
 var auth     = require('./app/routes/auth');
 var client   = require('./app/routes/client');
 var user     = require('./app/routes/user');
 var profile  = require('./app/routes/profile');
-var message    = require('./app/routes/message');
+var message  = require('./app/routes/message');
 var index    = require('./app/routes/index');
+
+// REQUIRING THE TESTS
+require('./app/tests.js');
 
 // Using routes
 app.use(register);

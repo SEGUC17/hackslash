@@ -15,7 +15,7 @@ var forgetPasswordController = {
                     if (foundUser) {
                         // SEND HIM AN EMAIL
                         sendForgetPasswordEmail(foundUser);
-                        res.status(403).json({ success: true, message: "Reset password email sent." });
+                        res.status(200).json({ success: true, message: "Reset password email sent." });
                     } else {
                         res.status(403).json({ success: false, message: "Wrong Email" });
                     }

@@ -281,7 +281,7 @@ var registerController = {
                                                 console.log("error in sending verification email");
                                                 console.log(err);
                                             } else {
-                                                res.json({ success: true, message: "Verification mail sent" });
+                                                res.status(200).json({ success: true, message: "Verification mail sent" });
                                             }
                                         });
                                         // user already exists in temporary collection...
@@ -321,7 +321,7 @@ var registerController = {
                         user.verified = true;
                         user.save();
                         console.log("verified: " + user.verified);
-                        res.json({ success: true, message: "Email verified successfully" });
+                        res.status(200).json({ success: true, message: "Email verified successfully" });
                     }
                 });
             }
@@ -329,7 +329,7 @@ var registerController = {
             // user's data probably expired...
             else {
                 // redirect to sign-up
-                res.json({ success: false, message: "Something wrong happended!, please sign up again" });
+                res.status(400).json({ success: false, message: "Something wrong happended!, please sign up again" });
             }
         });
     },
@@ -343,10 +343,10 @@ var registerController = {
                 console.log(err);
             } else if (userFound) {
                 // every thing went well and the email resent successfully
-                res.json({ success: true, message: "Verfication email resent successfully" });
+                res.status(200).json({ success: true, message: "Verfication email resent successfully" });
             } else {
                 // failure
-                res.json({ success: false, message: "Something went wrong, unable to identify your account" });
+                res.status(400).json({ success: false, message: "Something went wrong, unable to identify your account" });
             }
         });
     }
