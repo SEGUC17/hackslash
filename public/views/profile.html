@@ -84,7 +84,7 @@
                                 This user has no posts yet.
                             </h3>
                         </div>
-                        <a id="new-btn" href="/post/new" class="btn btn-primary">Create a new post!</a>
+                        <a id="new-btn" ng-if="myProfile" href="/post/new" class="btn btn-primary">Create a new post!</a>
                         <hr>
                         <div ng-if="posts">
                             <div ng-repeat="post in posts | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
