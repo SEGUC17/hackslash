@@ -136,21 +136,18 @@ let postController = {
                 res.status(403).json("not loggedin ");
                 return;
             }
-        var ownerEmailDecoded = req.decoded._doc.email;
-        var postID = req.headers['id'];
+            var ownerEmailDecoded = req.decoded._doc.email;
+            var postID = req.headers['id'];
             Post.findOne({ _id: postID, ownerEmail: ownerEmailDecoded }, function(err, post) {
                 if (err) {
                     res.status(403).json("Post not found or not your Post");
                 } else {
-                    if(!post)
-                    {
-                      res.status(403).json("Post not found or not your Post");
+                    if (!post) {
+                        res.status(403).json("Post not found or not your Post");
+                    } else {
+                        post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
+                        res.json({ "message": "The post has been deleted " });
                     }
-                    else
-                    {
-                      post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
-                      res.json({"message":"The post has been deleted "});
-                  }
                 }
             });
         }
@@ -158,11 +155,11 @@ let postController = {
     // Searching posts by kind and species
     searchPosts: function(req, res) {
         var kindQuery = req.header("kind");
-        if(kindQuery != undefined)
-        kindQuery = kindQuery.toLowerCase();
+        if (kindQuery != undefined)
+            kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
-        if(speciesQuery != undefined)
-        speciesQuery = speciesQuery.toLowerCase();
+        if (speciesQuery != undefined)
+            speciesQuery = speciesQuery.toLowerCase();
         if (kindQuery != undefined && speciesQuery != undefined) {
             Post.find({ kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
                 if (err) {
@@ -245,11 +242,11 @@ let postController = {
     searchAndFilterPosts: function(req, res) {
         var filterType;
         var kindQuery = req.header("kind");
-        if(kindQuery != undefined)
-        kindQuery = kindQuery.toLowerCase();
+        if (kindQuery != undefined)
+            kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
-        if(speciesQuery != undefined)
-        speciesQuery = speciesQuery.toLowerCase();
+        if (speciesQuery != undefined)
+            speciesQuery = speciesQuery.toLowerCase();
         switch (req.header("filter")) {
             case "sell":
                 filterType = 1
@@ -385,7 +382,7 @@ let postController = {
                             if (err) {
                                 res.status(403).json("can't update");
                             } else {
-                                res.status(200).json("update succ downVoted");
+                                res.status(200).json("you disliked this post");
                             }
                         })
                     } else if (vote == 1) {
@@ -395,7 +392,7 @@ let postController = {
                             if (err) {
                                 res.status(403).json("can't update");
                             } else {
-                                res.status(200).json("update succ upvoted");
+                                res.status(200).json("you liked this post");
                             }
                         })
                     } else {
@@ -776,31 +773,31 @@ let postController = {
     },
     // get owner of the Post information by its id .
     findOwnerByPostID: function(req, res) {
-            var neededEmail;
-            var id = req.header("_id");
-            Post.findOne({ _id: id }, function(err, foundPost) {
-                if (err) {
-                    res.json("There's an Error finding this post");
+        var neededEmail;
+        var id = req.header("_id");
+        Post.findOne({ _id: id }, function(err, foundPost) {
+            if (err) {
+                res.json("There's an Error finding this post");
+                return;
+            } else {
+                if (foundPost == null) {
+                    res.json("There is no post with this ID");
                     return;
                 } else {
-                    if (foundPost == null) {
-                        res.json("There is no post with this ID");
-                        return;
-                    } else {
-                        neededEmail = foundPost.ownerEmail;
-                        User.findOne({ email: neededEmail }, function(err, foundUser) {
-                            if (err) res.json("There's an error finding this person");
+                    neededEmail = foundPost.ownerEmail;
+                    User.findOne({ email: neededEmail }, function(err, foundUser) {
+                        if (err) res.json("There's an error finding this person");
+                        else {
+                            if (foundUser == null) res.send("No Owner with this Email");
                             else {
-                                if (foundUser == null) res.send("No Owner with this Email");
-                                else {
-                                    res.json(foundUser.username);
-                                }
+                                res.json(foundUser.username);
                             }
-                        });
-                    }
+                        }
+                    });
                 }
-            });
-        }
+            }
+        });
+    }
 
 }
 

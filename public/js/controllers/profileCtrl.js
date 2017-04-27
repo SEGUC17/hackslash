@@ -225,8 +225,8 @@ angular.module('pettts')
                         });
                     });
 
-                    $scope.submitVote = function(id) {
-                        reviewPostService.vote(id, $scope.vote).then(function(response) {
+                    $scope.submitVote = function(id, vote) {
+                        reviewPostService.vote(id, vote).then(function(response) {
                             $scope.message = response;
                         })
                     }

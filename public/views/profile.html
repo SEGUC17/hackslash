@@ -182,7 +182,7 @@
                                                             </p>
 
                                                             <!-- up & down vote form -->
-                                                            <form ng-submit="submitVote(post._id)" ng-if="!myProfile">
+                                                            <form ng-submit="submitVote(post._id,vote)" ng-if="!myProfile">
                                                                 <label class="radio-inline">
                                                           <input type="radio" value="up" ng-model="vote">Up-vote
                                                         </label>
