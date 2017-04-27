@@ -58,6 +58,12 @@ angular.module('pettts')
                         return;
                     }
                 }
+                if($scope.edit.username){
+                    if($scope.edit.username.length < 5){
+                        $scope.messageUpload = "Invalid username. Username must be at least 6 characters long.";
+                        return;
+                    }
+                }
             } else {
                 $scope.messageUpload = "Please choose something to edit";
                 return;

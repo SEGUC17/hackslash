@@ -11,8 +11,8 @@ var messageController = {
     
     // View Function is used to return the user all his messages .
     view: function(req, res) {
-        var username = req.decoded._doc.username;
-        User.findOne({ username: username },
+        var email = req.decoded._doc.email;
+        User.findOne({ email: email },
             function(err, foundUser) {
                 res.json({ success: true, messagesUsernames: foundUser.messagesUsernames, messagesContents: foundUser.messagesContents, message: "Messages Sent Successfully." });
             }
