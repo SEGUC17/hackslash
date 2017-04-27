@@ -1,5 +1,5 @@
 angular.module('pettts')
-    .controller('profileCtrl', function($scope, $http, profileService, $window, $location, $routeParams, reviewPostService) {
+    .controller('profileCtrl', function($scope, $http, profileService, $window, $location, $routeParams, $timeout, reviewPostService) {
 
         //get the attributes for the username to visit, my username and the token
         $scope.givenUsername = $routeParams.username
@@ -16,11 +16,15 @@ angular.module('pettts')
             //check for the rating value
             if (rating > 5 || rating < 1) {
                 $scope.message = "Rating must be between 1 and 5"
+                    //for the message to disappear
+                $timeout(function() { $scope.message = undefined }, 4000);
             } else {
                 //send the rate request to the corresponding service
                 profileService.rate(rating, rated, un, $scope).then(function(response) {
                     //get the result back from the service and display it
                     $scope.messageRated = response.message;
+                    //for the message to disappear
+                    $timeout(function() { $scope.messageRated = undefined }, 4000);
                 });
             }
         };
@@ -35,26 +39,26 @@ angular.module('pettts')
             //Check if phone number(s) entered have valid characters (+12345... or (12)345... or 12345... or 12-345...)
             //Regular expression that contains '+', '-', '(', ')', ' ' and numbers.
             var regex = /^[\d ()+-]+$/;
-            if(edit){
-                if($scope.edit.phoneNumber1){
-                    if(!regex.test($scope.edit.phoneNumber1)){
+            if (edit) {
+                if ($scope.edit.phoneNumber1) {
+                    if (!regex.test($scope.edit.phoneNumber1)) {
                         $scope.messageUpload = "Invalid phone number in field Phone number 1. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
                     }
                 }
-                if($scope.edit.phoneNumber2){
-                    if(!regex.test($scope.edit.phoneNumber2)){
+                if ($scope.edit.phoneNumber2) {
+                    if (!regex.test($scope.edit.phoneNumber2)) {
                         $scope.messageUpload = "Invalid phone number in field Phone number 2. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
                     }
                 }
-                if($scope.edit.homeNumber){
-                    if(!regex.test($scope.edit.homeNumber)){
+                if ($scope.edit.homeNumber) {
+                    if (!regex.test($scope.edit.homeNumber)) {
                         $scope.messageUpload = "Invalid phone number in field Home number. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
                     }
                 }
-            }else{
+            } else {
                 $scope.messageUpload = "Please choose something to edit";
                 return;
             }
@@ -141,9 +145,9 @@ angular.module('pettts')
 
         //delete specific post
         $scope.deletePost = function(id) {
-          var un = $scope.userInfo.username;
+            var un = $scope.userInfo.username;
 
-          profileService.deletePost( $scope, id, un);
+            profileService.deletePost($scope, id, un);
         }
 
         ////////////////////////////////////
@@ -166,12 +170,12 @@ angular.module('pettts')
             var content = $scope.content;
             var senderUsername = $scope.myUsername;
             var receiverUsename = $scope.givenUsername;
-            if(content && content.length > 0 && content.length < 301){//Check message validity, and send it.
+            if (content && content.length > 0 && content.length < 301) { //Check message validity, and send it.
                 profileService.sendMessage(content, senderUsername, receiverUsename).then(function(response) {
                     $scope.messageIndicator = response.message;
                     $scope.content = null;
                 });
-            }else{//In case of empty message or one that is too large.
+            } else { //In case of empty message or one that is too large.
                 $scope.messageIndicator = 'You have to write a message between 1 and 300 characters';
             }
         };
@@ -180,7 +184,7 @@ angular.module('pettts')
         ///////////////////////////////////
 
         // to go to the sender's profile
-        $scope.goToProfile = function(senderUsername){
+        $scope.goToProfile = function(senderUsername) {
             $window.location = '/profile/' + senderUsername;
         };
 
@@ -215,24 +219,24 @@ angular.module('pettts')
                     });
 
                     // put the username of the user who posted in each post
-                    $scope.posts.forEach(function(post){
-                      reviewPostService.viewOwnerInfo(post._id).then(function(response){
-                        post.username = response.data
-                      });
+                    $scope.posts.forEach(function(post) {
+                        reviewPostService.viewOwnerInfo(post._id).then(function(response) {
+                            post.username = response.data
+                        });
                     });
 
-                    $scope.submitVote = function(id){
-                      reviewPostService.vote(id, $scope.vote).then(function(response){
-                        $scope.message = response;
-                      })
+                    $scope.submitVote = function(id) {
+                        reviewPostService.vote(id, $scope.vote).then(function(response) {
+                            $scope.message = response;
+                        })
                     }
 
-                    $scope.goTo = function(path){
-                      $location.path('/' + path);
+                    $scope.goTo = function(path) {
+                        $location.path('/' + path);
                     }
 
-                    $scope.visitProfile = function(username){
-                      $location.path('/profile/' + username);
+                    $scope.visitProfile = function(username) {
+                        $location.path('/profile/' + username);
                     }
 
                     //set page attributes
@@ -253,19 +257,19 @@ angular.module('pettts')
             //Create an empty array to hold all the messages and senders combined.
             $scope.fullMessages = [];
             $scope.messageSuccess = response.success;
-            if ($scope.messageSuccess) {//Messages sent back successfully.
-                if(response.messagesContents && response.messagesContents.length > 0){
+            if ($scope.messageSuccess) { //Messages sent back successfully.
+                if (response.messagesContents && response.messagesContents.length > 0) {
                     for (var i = 0; i < response.messagesContents.length; i++) {
                         var sender = response.messagesUsernames[i];
                         var content = response.messagesContents[i];
-                        $scope.fullMessages.push({sender, content});
+                        $scope.fullMessages.push({ sender, content });
                     }
                     //Order the array (Most recent first).
                     $scope.fullMessages.reverse();
-                }else{//Recieved no messages yet.
+                } else { //Recieved no messages yet.
                     $scope.messageFail = 'There are no message in your inbox yet.';
                 }
-            }else{//Other errors
+            } else { //Other errors
                 $scope.messageFail = response.message;
             }
         });
