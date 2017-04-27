@@ -193,7 +193,7 @@
                                                                 <div>{{message}}</div>
                                                             </form>
 
-                                                            <button class="btn btn-success btn-block" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>
+                                                            <button class="btn btn-success btn-block" ng-if="myProfile" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>
                                                         </div>
 
 
