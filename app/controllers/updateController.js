@@ -59,7 +59,6 @@ let updateController = {
                     }
                     foundUser.save(function(err, updatedUser) { //Save the changes.
                         if (err) {
-                            console.log('hi');
                             res.status(403).json('this username is already taken by another user.');
                         } else {
                             res.status(200).json(updatedUser);
