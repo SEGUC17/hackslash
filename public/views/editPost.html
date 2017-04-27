@@ -24,12 +24,12 @@
 
                 <div class="form-group">
                     <label for="type">Post Type</label> <br>
-                    <input type="radio" name="type" ng-model="post.type" value="sell"> Sell
-                    <input type="radio" name="type" ng-model="post.type" value="exchange"> Exchange
-                    <input type="radio" name="type" ng-model="post.type" value="mate"> Mate
-                    <input type="radio" name="type" ng-model="post.type" value="lost"> Lost
-                    <input type="radio" name="type" ng-model="post.type" value="found"> Found
-                    <input type="radio" name="type" ng-model="post.type" value="shelter"> Shelter
+                    <input type="radio" name="type" ng-model="post.type" required value="sell"> Sell
+                    <input type="radio" name="type" ng-model="post.type" required value="exchange"> Exchange
+                    <input type="radio" name="type" ng-model="post.type" required value="mate"> Mate
+                    <input type="radio" name="type" ng-model="post.type" required value="lost"> Lost
+                    <input type="radio" name="type" ng-model="post.type" required value="found"> Found
+                    <input type="radio" name="type" ng-model="post.type" required value="shelter"> Shelter
                 </div>
 
                 <div class="form-group">
@@ -100,7 +100,9 @@
 
         </form>
 
-        <div class="message" ng-if="message" type="danger">{{ message }}</div>
+        <div ng-if="message">
+            <div class="alert alert-danger" ng-if="error==true" type="danger">{{ message }}</div>
+            <div class="alert alert-success" ng-if="error==false" type="danger">{{ message }}</div>
+        </div>
         </div>
     </div>
-</div>

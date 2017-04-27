@@ -128,8 +128,8 @@ angular.module('pettts')
         ////////////////////////////////////
         ///////////////////////////////////
         //edit my post
-        $scope.editPost = function() {
-            $location.path('/post/edit').search({ id: $scope.post._id });
+        $scope.editPost = function(id) {
+            $location.path('/post/edit').search({ id });
         };
 
         ////////////////////////////////////

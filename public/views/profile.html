@@ -112,7 +112,7 @@
                                                 <!-- link to show post page -->
 
                                                 <button type="button" ng-if="myProfile" ng-click="deletePost(post._id)" class="btn btn-danger" id="delete-btn">Delete</button>
-                                                <button type="button" ng-if="myProfile" ng-click="editPost()" class="btn btn-primary" id="edit-btn">Edit</button>
+                                                <button type="button" ng-if="myProfile" ng-click="editPost(post._id)" class="btn btn-primary" id="edit-btn">Edit</button>
                                                 <button id="view-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
                                             </div>
                                             <!-- End of media-body -->
@@ -193,7 +193,7 @@
                                                                 <div>{{message}}</div>
                                                             </form>
 
-                                                            <button class="btn btn-success btn-block" data-dismiss="modal" ng-click="editPost()">Edit Post</button>
+                                                            <button class="btn btn-success btn-block" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>
                                                         </div>
 
 
