@@ -114,10 +114,14 @@ angular.module('pettts')
 
             //checks for various input errors by user
             if (password && newPassword) {
-                if (newPassword == verNewPassword && newPassword.length >= 5) {
+                if (newPassword == verNewPassword) {
                     if (password == verify) {
                         if (password != newPassword) {
-                            profileService.pass(password, newPassword, $scope);
+                            if(newPassword.length >= 5) {
+                                profileService.pass(password, newPassword, $scope);
+                            }else{
+                                $scope.messageError = "Your password needs to be at least 5 characters in length.";
+                            }
                         } else {
                             $scope.messageError = "Your old and new passwords need to be different.";
                         }
