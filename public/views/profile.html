@@ -190,7 +190,7 @@
                                                           <input type="radio" value="down" ng-model="vote">Down-vote
                                                         </label>
                                                                 <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
-                                                                <div>{{message}}</div>
+                                                                <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div>
                                                             </form>
 
                                                             <button class="btn btn-success btn-block" ng-if="myProfile" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>

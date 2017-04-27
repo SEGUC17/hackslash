@@ -227,7 +227,9 @@ angular.module('pettts')
 
                     $scope.submitVote = function(id, vote) {
                         reviewPostService.vote(id, vote).then(function(response) {
-                            $scope.message = response;
+                            $scope.postMessage = response;
+                            // for message to disappear 
+                            $timeout(function() { $scope.postMessage = undefined }, 4000);
                         })
                     }
 
