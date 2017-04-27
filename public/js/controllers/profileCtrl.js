@@ -174,9 +174,12 @@ angular.module('pettts')
                 profileService.sendMessage(content, senderUsername, receiverUsename).then(function(response) {
                     $scope.messageIndicator = response.message;
                     $scope.content = null;
+                    $timeout(function() { $scope.messageIndicator = undefined }, 4000);
                 });
             } else { //In case of empty message or one that is too large.
                 $scope.messageIndicator = 'You have to write a message between 1 and 300 characters';
+                $timeout(function() { $scope.messageIndicator = undefined }, 4000);
+
             }
         };
 
