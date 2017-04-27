@@ -70,6 +70,10 @@ angular.module('pettts')
                 };
             });
         },
+        
+        ////////////////////////
+        ////////////////////////
+        
         //Delete Function is used to delete the profile from the database .
         delete: function(password, $scope) {
             var request = {
@@ -226,7 +230,7 @@ angular.module('pettts')
             }).then(function successCallback(response) {
              $window.location = '/profile/' + un;
           }, function errorCallback(response) {
-              $scope.messageDeleted = response.data.message;
+              $scope.messageDeleted = "An Error happened while deleting the post ";
               return response;
           });
         }
