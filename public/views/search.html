@@ -38,7 +38,7 @@
                             <!-- display post date -->
                             <p><small class="date"><em>{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></small></p>
                             <!-- fixing description length to display by 250 chars -->
-                            <p>{{ post.description.slice(0,250) }}...</p>
+                            <p style="word-break: break-all; hyphens: auto;">{{ post.description.slice(0,250) }}...</p>
                             <!-- link to show post page -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
                         </div>
@@ -111,11 +111,11 @@
                                         <!-- up & down vote form -->
                                         <form ng-submit="submitVote(post._id,vote)">
                                             <label class="radio-inline">
-                                      <input type="radio" value="up" ng-model="vote">Up-vote
-                                    </label>
+                                                <input type="radio" value="up" ng-model="vote">Up-vote
+                                            </label>
                                             <label class="radio-inline">
-                                      <input type="radio" value="down" ng-model="vote">Down-vote
-                                    </label>
+                                                <input type="radio" value="down" ng-model="vote">Down-vote
+                                            </label>
                                             <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
                                             <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div>
                                         </form>
@@ -126,7 +126,7 @@
                                     <div class="col-md-9" id="right-col">
                                         <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
 
-                                        <p><strong>Description:</strong> {{post.description}}</p>
+                                        <p style="word-break: break-all; hyphens: auto;"><strong>Description:</strong> {{post.description}}</p>
 
                                         <hr>
 

@@ -37,7 +37,7 @@
                             <!-- display post date -->
                             <p><small class="date"><em>{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></small></p>
                             <!-- fixing description length to display by 250 chars -->
-                            <p>{{ post.description.slice(0,250) }}...</p>
+                            <p style="word-break: break-all; hyphens: auto;">{{ post.description.slice(0,250) }}...</p>
 
                             <!-- button to show post modal -->
                             <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
@@ -126,7 +126,7 @@
                                     <div class="col-md-9" id="right-col">
                                         <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
 
-                                        <p><strong>Description:</strong> {{post.description}}</p>
+                                        <p style="word-break: break-all; hyphens: auto;"><strong>Description:</strong> {{post.description}}</p>
 
                                         <hr>
 
