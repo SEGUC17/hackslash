@@ -36,6 +36,7 @@ angular.module('pettts')
         $scope.submitEdit = function() {
             $scope.messageUpload = undefined;
             var edit = $scope.edit;
+            console.log(edit);
             //Check if phone number(s) entered have valid characters (+12345... or (12)345... or 12345... or 12-345...)
             //Regular expression that contains '+', '-', '(', ')', ' ' and numbers.
             var regex = /^[\d ()+-]+$/;
@@ -58,7 +59,13 @@ angular.module('pettts')
                         return;
                     }
                 }
-            } else {
+                if($scope.edit.username){
+                    if($scope.edit.username.length <= 5){
+                        $scope.messageUpload = "Invalid username. Username must be at least 5 characters long.";
+                        return;
+                    }
+                }
+            }else{
                 $scope.messageUpload = "Please choose something to edit";
                 return;
             }

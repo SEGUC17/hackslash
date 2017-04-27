@@ -48,26 +48,26 @@ let updateController = {
                             fs.unlinkSync(foundUser.profilePicture);
                         foundUser.profilePicture = user.profilePicture;
                     }
-                    if (user.rate) {
+                    if (user.rate && user.rate > 0) {
                         foundUser.rate = user.rate;
                     }
                     if (user.count) {
                         foundUser.count = user.count;
                     }
-                    if (user.raters) {
+                    if (user.raters && user.raters.length > 0) {
                         foundUser.raters = user.raters;
                     }
                     foundUser.save(function(err, updatedUser) { //Save the changes.
                         if (err) {
-                            res.status(403).json('this username is taken by another user');
-
+                            console.log('hi');
+                            res.status(403).json('this username is already taken by another user.');
                         } else {
                             res.status(200).json(updatedUser);
                         }
                     })
                 } else {
                     //User not found. Send relevent error message.
-                    res.status(403).json('Cannot update non-existent user');
+                    res.status(403).json('Cannot update non-existent user.');
                 }
             }
         })
