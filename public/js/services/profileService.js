@@ -142,19 +142,16 @@ angular.module('pettts')
                         'x-access-token': userToken
                     }
                 }).then(function success(response) {
-                        // Checking for username and its length .
-                        if (user.username && user.username.length > 0 || user.username != userUsername) {
-                            if (user && user.username)
-                                $window.sessionStorage.username = user.username;
-                        }
-                        $window.location = '/profile/' + $window.sessionStorage.username;
-
-                    },
-                    function error(response) {
-                        // An Error has occured .
-                        $scope.messageUpload = response.data;
-
-                    });
+                    // Checking for username and its length .
+                    if (user.username && user.username.length > 0 || user.username != userUsername) {
+                        if (user && user.username)
+                            $window.sessionStorage.username = user.username;
+                    }
+                    $window.location = '/profile/' + $window.sessionStorage.username;
+                },function error(response) {
+                    // An Error has occured .
+                    $scope.messageUpload = response.data;
+                });
             }
         },
 

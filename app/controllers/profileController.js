@@ -59,6 +59,14 @@ let profileController = {
                 phoneNumber2: req.body.phoneNumber2,
                 homeNumber: req.body.homeNumber
             });
+            //Check if username fits the necessary criteria.
+            if(edited.username)
+            {
+                if(edited.username.length < 5)
+                {
+                    res.status(200).json('Your username must be at least 5 characters in length.');
+                }
+            }
             //For profile picture only
             if (req.file) {
                 edited.profilePicture = req.file.path;
