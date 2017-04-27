@@ -1,6 +1,6 @@
 angular.module('pettts')
 
-.controller('filterCtrl', function($scope, $location, $window, $routeParams, filterService, reviewPostService) {
+.controller('filterCtrl', function($scope, $location, $timeout, $window, $routeParams, filterService, reviewPostService) {
 
     $scope.token = $window.sessionStorage.accessToken;
 
@@ -25,16 +25,18 @@ angular.module('pettts')
                 return new Date(b.date).getTime() - new Date(a.date).getTime();
             });
 
-            $scope.posts.forEach(function(post){
-              reviewPostService.viewOwnerInfo(post._id).then(function(response){
-                post.username = response.data
-              });
+            $scope.posts.forEach(function(post) {
+                reviewPostService.viewOwnerInfo(post._id).then(function(response) {
+                    post.username = response.data
+                });
             });
 
-            $scope.submitVote = function(id){
-              reviewPostService.vote(id, $scope.vote).then(function(response){
-                $scope.message = response;
-              })
+            $scope.submitVote = function(id, vote) {
+                reviewPostService.vote(id, vote).then(function(response) {
+                    $scope.postMessage = response;
+                    $timeout(function() { $scope.postMessage = undefined }, 4000);
+
+                })
             }
 
             //set page attributes
@@ -45,12 +47,12 @@ angular.module('pettts')
 
     });
 
-    $scope.goTo = function(path){
-      $location.path('/' + path);
+    $scope.goTo = function(path) {
+        $location.path('/' + path);
     }
 
-    $scope.visitProfile = function(username){
-      $location.path('/profile/' + username);
+    $scope.visitProfile = function(username) {
+        $location.path('/profile/' + username);
     }
 
 });

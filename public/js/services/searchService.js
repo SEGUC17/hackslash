@@ -1,12 +1,12 @@
 angular.module('pettts')
 
-.factory('searchService', function($http, $location, $window, reviewPostService) {
+.factory('searchService', function($http, $location, $timeout, $window, reviewPostService) {
 
-  // This Service is used to connect the Searchctrl to the API
+    // This Service is used to connect the Searchctrl to the API
 
     return {
-      // Search Function is used to send The Search key to the api
-      // and recieves all the desired posts at the frontend
+        // Search Function is used to send The Search key to the api
+        // and recieves all the desired posts at the frontend
         search: function($scope) {
             var req = {
                 method: 'GET',
@@ -17,27 +17,30 @@ angular.module('pettts')
             }
             return $http(req).then(function successCallback(response) {
                 if (response.data.posts == undefined) {
-                  // No data has been retrieved from the search .
+                    // No data has been retrieved from the search .
                     $scope.notFound = true;
                     return response.data.message;
                 } else {
-                  // Posts data have been retrieved from the search .
+                    // Posts data have been retrieved from the search .
                     $scope.posts = response.data.posts;
                     // Sorting posts with date .
                     $scope.posts.sort(function(a, b) {
-                    return new Date(b.date).getTime() - new Date(a.date).getTime();
+                        return new Date(b.date).getTime() - new Date(a.date).getTime();
                     });
 
-                    $scope.posts.forEach(function(post){
-                      reviewPostService.viewOwnerInfo(post._id).then(function(response){
-                        post.username = response.data
-                      });
+                    $scope.posts.forEach(function(post) {
+                        reviewPostService.viewOwnerInfo(post._id).then(function(response) {
+                            post.username = response.data
+                        });
                     });
 
-                    $scope.submitVote = function(id){
-                      reviewPostService.vote(id, $scope.vote).then(function(response){
-                        $scope.message = response;
-                      })
+                    $scope.submitVote = function(id, vote) {
+                        reviewPostService.vote(id, vote).then(function(response) {
+
+                            $scope.postMessage = response;
+                            $timeout(function() { $scope.postMessage = undefined }, 4000);
+
+                        })
                     }
 
                     // Making Pagination
