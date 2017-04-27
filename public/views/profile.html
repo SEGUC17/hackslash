@@ -184,19 +184,16 @@
                                                             <!-- up & down vote form -->
                                                             <form ng-submit="submitVote(post._id,vote)" ng-if="!myProfile">
                                                                 <label class="radio-inline">
-                                                          <input type="radio" value="up" ng-model="vote">Up-vote
-                                                        </label>
+                                                                    <input type="radio" value="up" ng-model="vote">Up-vote
+                                                                </label>
                                                                 <label class="radio-inline">
-                                                          <input type="radio" value="down" ng-model="vote">Down-vote
-                                                        </label>
+                                                                    <input type="radio" value="down" ng-model="vote">Down-vote
+                                                                </label>
                                                                 <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
                                                                 <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div>
                                                             </form>
-
                                                             <button class="btn btn-success btn-block" ng-if="myProfile" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>
                                                         </div>
-
-
                                                         <div class="col-md-9" id="right-col">
                                                             <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
 
@@ -210,24 +207,23 @@
                                                             <p><strong>Kind:</strong> {{post.kind}}</p>
                                                             <p><strong>Gender:</strong> {{post.gender}}</p>
 
-                                                            <div ng-if="sell">
+                                                            <div ng-if="post.type == 1">
                                                                 <p><strong>Price:</strong> {{post.price}}</p>
                                                             </div>
 
-                                                            <div ng-if="exchange">
-                                                                <p><strong>SpeciesB : {{post.speciesB}}</strong></p>
-                                                                <p><strong>KindB : {{post.kindB}}</strong></p>
-                                                                <p><strong>GenderB : {{post.genderB}}</strong></p>
+                                                            <div ng-if="post.type == 6">
+                                                                <p><strong>SpeciesB:</strong> {{post.speciesB}}</p>
+                                                                <p><strong>KindB:</strong> {{post.kindB}}</p>
+                                                                <p><strong>GenderB:</strong> {{post.genderB}}</p>
                                                             </div>
 
-                                                            <div ng-if="note">
+                                                            <div ng-if="post.note">
                                                                 <hr>
                                                                 <p><strong>notes about the post:</strong> {{post.note}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                             <!--  End of modal-body -->
 

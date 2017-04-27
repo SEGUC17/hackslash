@@ -136,17 +136,17 @@
                                         <p><strong>Kind:</strong> {{post.kind}}</p>
                                         <p><strong>Gender:</strong> {{post.gender}}</p>
 
-                                        <div ng-if="sell">
+                                        <div ng-if="post.type == 1">
                                             <p><strong>Price:</strong> {{post.price}}</p>
                                         </div>
 
-                                        <div ng-if="exchange">
+                                        <div ng-if="post.type == 6">
                                             <p><strong>SpeciesB : {{post.speciesB}}</strong></p>
                                             <p><strong>KindB : {{post.kindB}}</strong></p>
                                             <p><strong>GenderB : {{post.genderB}}</strong></p>
                                         </div>
 
-                                        <div ng-if="note">
+                                        <div ng-if="post.note">
                                             <hr>
                                             <p><strong>notes about the post:</strong> {{post.note}}</p>
                                         </div>
