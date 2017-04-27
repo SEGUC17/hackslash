@@ -33,36 +33,36 @@
 
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" placeholder ="Username" ng-model="edit.username" class="form-control">
+                        <input type="text" name="username" placeholder="Username" ng-model="edit.username" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="firstName">First name</label>
-                        <input type="text" name="firstName"placeholder ="First Name" ng-model="edit.firstName" class="form-control">
+                        <input type="text" name="firstName" placeholder="First Name" ng-model="edit.firstName" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="middleName">Middle name</label>
-                        <input type="text" name="middleName"  placeholder ="Middle Name" ng-model="edit.middleName" class="form-control">
+                        <input type="text" name="middleName" placeholder="Middle Name" ng-model="edit.middleName" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="lastName">Last name</label>
-                        <input type="text" name="lastName" placeholder ="Last Name" ng-model="edit.lastName" class="form-control">
+                        <input type="text" name="lastName" placeholder="Last Name" ng-model="edit.lastName" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="phoneNumber1">Phone number 1</label>
-                        <input type="text" name="phoneNumber1" placeholder ="Phone Number 1"  ng-model="edit.phoneNumber1" class="form-control">
+                        <input type="text" name="phoneNumber1" placeholder="Phone Number 1" ng-model="edit.phoneNumber1" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="phoneNumber2">Phone number 2</label>
-                        <input type="text" name="phoneNumber2" placeholder ="Phone Number 2" ng-model="edit.phoneNumber2" class="form-control">
+                        <input type="text" name="phoneNumber2" placeholder="Phone Number 2" ng-model="edit.phoneNumber2" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="homeNumber">Home number</label>
-                        <input type="text" name="homeNumber" placeholder ="Home Number" ng-model="edit.homeNumber" class="form-control">
+                        <input type="text" name="homeNumber" placeholder="Home Number" ng-model="edit.homeNumber" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="profilePicture">Upload image</label> <br>
@@ -70,7 +70,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success" id="edit-btn">Edit yourself!</button>
-                    <div class = "message" ng-if="messageUpload">
+                    <div class="alert alert-danger" ng-if="messageUpload">
                         {{messageUpload}}
                     </div>
 
@@ -86,35 +86,35 @@
 
                     <div class="form-group">
                         <label for="password">Your current password</label>
-                        <input type="password" placeholder = "Current Password" name="password" ng-model="password" class="form-control">
+                        <input type="password" placeholder="Current Password" name="password" ng-model="password" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="verify">Confirm your current password</label>
-                        <input type="password" placeholder = "Confirm Current Password" name="verify" ng-model="verify" class="form-control">
+                        <input type="password" placeholder="Confirm Current Password" name="verify" ng-model="verify" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="newPassword">Your new password</label>
-                        <input type="password" placeholder = "New Password" name="newPassword" ng-model="newPassword" class="form-control">
+                        <input type="password" placeholder="New Password" name="newPassword" ng-model="newPassword" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="verNewPassword">Confirm your new password</label>
-                        <input type="password" placeholder = "Confirm New Password" name="verNewPassword" ng-model="verNewPassword" class="form-control">
+                        <input type="password" placeholder="Confirm New Password" name="verNewPassword" ng-model="verNewPassword" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-success" id="pass-btn">Change password</button>
 
-                    <div class="message" ng-if="messageEmpty">
+                    <div class="alert alert-danger" ng-if="messageEmpty">
                         {{messageEmpty}}
                     </div>
-                    <div class="message" ng-if="messageOld">
+                    <div class="alert alert-danger" ng-if="messageOld">
                         {{messageOld}}
                     </div>
-                    <div class="message" ng-if="messageNew">
+                    <div class="alert alert-danger" ng-if="messageNew">
                         {{messageNew}}
                     </div>
-                    <div class="message" ng-if="messageError">
+                    <div class="alert alert-danger" ng-if="messageError">
                         {{messageError}}
                     </div>
 
@@ -140,10 +140,10 @@
 
                     <button type="submit" class="btn btn-danger" id="del-btn">Bye bye :(</button>
 
-                    <div class = "message" ng-if="messagePass">
+                    <div class="alert alert-danger" ng-if="messagePass">
                         {{messagePass}}
                     </div>
-                    <div class = "message" ng-if="messageNotGiven">
+                    <div class="alert alert-danger" ng-if="messageNotGiven">
                         {{messageNotGiven}}
                     </div>
 
