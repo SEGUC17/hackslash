@@ -28,52 +28,47 @@ function validateInput(username, email, password, firstName, lastName) {
     var output = {
         success: true
     };
-
-    if (!firstName) {
+    // Check if first name is enetered
+    if (!firstName){
         output.success = false;
         output.message = "First name in not entered"
+    }else if(firstName.length < 1 || firstName.length > 30){// Check first name lenght
+        output.success = false;
+        output.message = "First name length must be between 1 and 30 characters";
     }
-
+    // Check if last name is entered
     if (!lastName) {
         output.success = false;
         output.message = "Last name in not entered"
+    }else if(lastName.length < 1 || lastName.length > 30){// Check last name lenght
+        output.success = false;
+        output.message = "Last name length must be between 1 and 30 characters";
     }
-
+    // Check if username is entered
     if (!username) {
         output.success = false;
         output.message = "Username in not entered"
-    }
-    // CHECK USERNAME LENGTH
-    else if (username.length < 5 || username.length > 20) {
+    }else if (username.length < 5 || username.length > 30) {// Check username lenght
         output.success = false;
-        output.message = "Username length must be between 5 and 20 characters";
+        output.message = "Username length must be between 5 and 30 characters";
     }
-    // CHECK IF EMAIL IS ENTERED
+    // Check if email is entered
     if (!email) {
         output.success = false;
         output.message = "No email entered";
-    }
-    // CHECK EMAIL FORMAT
-    else if (!validateEmail(email)) {
+    }else if (!validateEmail(email)){// Check email format
         output.success = false;
         output.message = "Email format is not valid";
     }
-
-    // CHECK IF PASSWORD IS ENTERED
-    if (!password) {
+    // Check if password is entered
+    if (!password){
         output.success = false;
         output.message = "No password entered";
-    }
-    // CHECK PASSWORD LENGTH
-    else if (password.length < 5) {
+    }else if (password.length < 5){// Check password length
         output.success = false;
         output.message = "Password length must be at least 5 characters";
     }
-
-
-
     return output;
-
 }
 
 // =============================================================================
