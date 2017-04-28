@@ -3,32 +3,35 @@
 }
 
 body {
-    background-image:url(../images/errorimage.jpg);
+    background-image:linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+	                 url(../images/not-found-pic.jpeg);
     background-size: cover;
+    background-position: center;
+	background-position-y: -10px; 
 }
 
-html {
+/*html {
     height: 100%;
-}
+}*/
 
 body {
 	font-family: 'Love Ya Like A Sister', cursive;
 }
 
 .logo {
+	float: right;
+	margin-right: 160px;
 	text-align:center;
-	margin-top:150px;
+	margin-top:50px;
 }
-
-
 
 .logo p {
 	color:red;
-	font-size:3em;
+	font-size:2.5em;
 }
-#jumbo {
-     background-color: rgba(255, 255, 255, 0.5);
-     border-radius: 100px;
-		 width: 500px;
 
+#jumbo {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 100px;
+	width: 420px;
 }
