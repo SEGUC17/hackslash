@@ -89,10 +89,6 @@ let postController = {
                     if (post.price && post.type == 1 && post.price > 0) {
                         foundPost.price = post.price;
                     }
-                    if(post.type !==1)
-                    {
-                      foundPost.price =undefined ;
-                    }
                     if (post.description) {
                         foundPost.description = post.description;
                     }
