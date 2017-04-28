@@ -60,15 +60,25 @@ let profileController = {
                 homeNumber: req.body.homeNumber
             });
             //Check if username fits the necessary criteria.
-            if(edited.username)
-            {
-                if(edited.username.length < 5)
-                {
-                    res.status(200).json('Your username must be at least 5 characters in length.');
+            if(edited.username){
+                if(edited.username.length < 5 || edited.username.length > 30){
+                    res.status(403).json('Your username must be between least 1 and 30 characters in length.');
+                }
+            }
+            //Check if first name fits the necessary criteria
+            if(edited.firstName){
+                if(edited.firstName.length < 1 || edited.firstName.length > 30){
+                    res.status(403).json('Your first name must be between least 1 and 30 characters in length.');
+                }
+            }
+            //Check if last name fits the necessary criteria
+            if(edited.lastName){
+                if(edited.lastName.length < 1 || edited.lastName.length > 30){
+                    res.status(403).json('Your last name must be between least 1 and 30 characters in length.');
                 }
             }
             //For profile picture only
-            if (req.file) {
+            if (req.file){
                 edited.profilePicture = req.file.path;
             }
             //Updating the user.
