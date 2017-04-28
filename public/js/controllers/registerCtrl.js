@@ -18,21 +18,21 @@ app.controller('registerCtrl', function($scope, $http, $window, User) {
         //Regular expression that contains '+', '-', '(', ')', ' ' and numbers.
         var regex = /^[\d ()+-]+$/;
         var user = $scope.user;
-        //Check on Phone number 1
+        //Check on Phone number 1 (if provided)
         if($scope.user.phoneNumber1){
             if(!regex.test($scope.user.phoneNumber1)){
                 $scope.message = "Invalid phone number in field Phone number 1. It should only contain numbers, '+', '(', ')' and '-'.";
                 return;
             }
         }
-        //Check on Phone number 2
+        //Check on Phone number 2 (if provided)
         if($scope.user.phoneNumber2){
             if(!regex.test($scope.user.phoneNumber2)){
                 $scope.message = "Invalid phone number in field Phone number 2. It should only contain numbers, '+', '(', ')' and '-'.";
                 return;
             }
         }
-        //Check on Home number
+        //Check on Home number (if provided)
         if($scope.user.homeNumber){
             if(!regex.test($scope.user.homeNumber)){
                 $scope.message = "Invalid phone number in field Home number. It should only contain numbers, '+', '(', ')' and '-'.";
@@ -50,14 +50,21 @@ app.controller('registerCtrl', function($scope, $http, $window, User) {
             return;
         }
         //Check on first name
-        if($scope.user.firstName.length > 30 || $scope.user.username.length < 1){
+        if($scope.user.firstName.length > 30 || $scope.user.firstName.length < 1){
             $scope.message = "Invalid first name. It must be between 1 and 30 charcters long";
             return;
         }
         //Check on last name
-        if($scope.user.lastName.length > 30 || $scope.user.username.length < 1){
+        if($scope.user.lastName.length > 30 || $scope.user.lastName.length < 1){
             $scope.message = "Invalid last name. It must be between 1 and 30 charcters long";
             return;
+        }
+        //Check on middle name (if provided)
+        if($scope.user.middleName){
+            if($scope.user.middleName.length > 30 || $scope.user.middleName.length < 1){
+                $scope.message = "Invalid middle name. It must be between 1 and 30 charcters long";
+                return;
+            }
         }
         //call the service function
         User.add(user, $scope);
