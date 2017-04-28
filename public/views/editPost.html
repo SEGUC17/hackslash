@@ -34,12 +34,12 @@
 
                 <div class="form-group">
                     <label for="species">Species</label>
-                    <input type="text" name="species" ng-model="post.species" placeholder="{{oldPost.species}}" class="form-control">
+                    <input type="text" name="species" ng-model="post.species" placeholder="Animal species" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="kind">Animal kind</label>
-                    <input type="text" name="kind" ng-model="post.kind" placeholder="{{oldPost.kind}}" class="form-control">
+                    <input type="text" name="kind" ng-model="post.kind" placeholder="Animal Kind" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -53,12 +53,12 @@
                     <div ng-switch-when="exchange">
                         <div class="form-group">
                             <label for="speciesB">Other Animal species </label> <br>
-                            <input type="text" name="speciesB" required ng-model="post.speciesB" placeholder="{{oldPost.speciesB}}">
+                            <input type="text" name="speciesB" required ng-model="post.speciesB" placeholder="Other Animal species">
                         </div>
 
                         <div class="form-group">
                             <label for="kindB"> Other Animal kind</label>
-                            <input type="text" name="kindB" required ng-model="post.kindB" placeholder=" {{oldPost.kindB}}" class="form-control">
+                            <input type="text" name="kindB" required ng-model="post.kindB" placeholder=" Other Animal Kind" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -72,12 +72,12 @@
 
                 <div class="form-group">
                     <label for="description">Description</label> <br>
-                    <textarea type="text" rows="3" name="description" ng-model="post.description" placeholder="{{oldPost.description}}" class="form-control"></textarea>
+                    <textarea type="text" rows="3" name="description" ng-model="post.description" placeholder="description" class="form-control"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="note">Notes</label>
-                    <input type="text" name="note" ng-model="post.note" placeholder="{{oldPost.note}}" class="form-control">
+                    <input type="text" name="note" ng-model="post.note" placeholder="Notes" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -90,7 +90,7 @@
                     <div ng-switch-when="sell">
                         <div class="form-group">
                             <label for="price">price (required)</label>
-                            <input type="number" min="1" name="price" required ng-model="post.price" required placeholder="{{oldPost.price}}" class="form-control" />
+                            <input type="number" min="1" name="price" required ng-model="post.price" required placeholder="price" class="form-control" />
                         </div>
                     </div>
                 </div>
