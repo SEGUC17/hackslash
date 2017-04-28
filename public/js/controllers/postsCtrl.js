@@ -22,14 +22,14 @@ angular.module('pettts')
             });
 
             $scope.submitVote = function(id, vote) {
-                if(vote!="up" && vote != "down"){
+                if (vote != "up" && vote != "down") {
                     $scope.postMessage = "You need to choose an option before you rate this post.";
-                }else{
+                } else {
                     reviewPostService.vote(id, vote).then(function(response) {
                         $scope.postMessage = response;
-                        $timeout(function() { $scope.postMessage = undefined }, 4000);
                     })
                 }
+                $timeout(function() { $scope.postMessage = undefined }, 4000);
             }
 
             //setting page attributes

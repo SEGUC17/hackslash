@@ -32,11 +32,14 @@ angular.module('pettts')
             });
 
             $scope.submitVote = function(id, vote) {
-                reviewPostService.vote(id, vote).then(function(response) {
-                    $scope.postMessage = response;
-                    $timeout(function() { $scope.postMessage = undefined }, 4000);
-
-                })
+                if (vote != "up" && vote != "down") {
+                    $scope.postMessage = "You need to choose an option before you rate this post.";
+                } else {
+                    reviewPostService.vote(id, vote).then(function(response) {
+                        $scope.postMessage = response;
+                    })
+                }
+                $timeout(function() { $scope.postMessage = undefined }, 4000);
             }
 
             //set page attributes

@@ -55,7 +55,6 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-
             Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) { //add ownerEmail here
                 if (err) {
                     res.status(403).json("project not found or not your project");
@@ -90,6 +89,10 @@ let postController = {
                     if (post.price && post.type == 1 && post.price > 0) {
                         foundPost.price = post.price;
                     }
+                    if(post.type !==1)
+                    {
+                      foundPost.price =undefined ;
+                    }
                     if (post.description) {
                         foundPost.description = post.description;
                     }
@@ -108,6 +111,7 @@ let postController = {
                     if (post.image) {
                         foundPost.image = post.image;
                     }
+                    console.log(post);
                     foundPost.save(function(err, updatedPost) {
                         if (err) {
                             res.status(403).json("can't update");
