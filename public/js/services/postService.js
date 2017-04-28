@@ -240,7 +240,7 @@ angular.module('pettts')
                     headers: { 'Content-Type': undefined, 'x-access-token': token }
                 }).then(function successCallback(response) {
                     $scope.error = false;
-                    $scope.message = "Post Edied Successfully";
+                    $scope.message = "Post Edited Successfully";
                     // for message to disappear
                     $timeout(function() { $scope.message = undefined }, 4000);
                     $window.location = '/profile/' + $window.sessionStorage.username;

@@ -12,6 +12,40 @@ angular.module('pettts')
           .then(function successCallback(res) {
               oldPost = res.data ;
               $scope.post = oldPost;
+              switch (oldPost.type) {
+                  case 1:
+                      {
+                          $scope.post.type = "sell";
+                      }
+                      break;
+                  case 2:
+                      {
+                          $scope.post.type = "shelter";
+                      }
+                      break;
+                  case 3:
+                      {
+                          $scope.post.type = "mate";
+                      }
+
+                      break;
+                  case 4:
+                      {
+                          $scope.post.type = "lost";
+                      }
+                      break;
+                  case 5:
+                      {
+                          $scope.post.type = "found";
+                      }
+                      break;
+                  case 6:
+                      {
+                          $scope.post.type = "exchange";
+                      }
+                      break;
+
+              }
               return res.data;
           });
 
