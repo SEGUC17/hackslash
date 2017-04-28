@@ -40,45 +40,61 @@ angular.module('pettts')
             //Regular expression that contains '+', '-', '(', ')', ' ' and numbers.
             var regex = /^[\d ()+-]+$/;
             if (edit) {
-               //Check on Phone number 1
+               //Check on Phone number 1 (if provided)
                 if($scope.edit.phoneNumber1){
                     if(!regex.test($scope.edit.phoneNumber1)){
                         $scope.messageUpload = "Invalid phone number in field Phone number 1. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
+                    }else if($scope.edit.phoneNumber1.length > 25){
+                        $scope.messageUpload = "Your phone number (Phone number 1) can't be longer than 25 characters!";
+                        return;
                     }
                 }
-                //Check on Phone number 2
+                //Check on Phone number 2 (if provided)
                 if($scope.edit.phoneNumber2){
                     if(!regex.test($scope.edit.phoneNumber2)){
                         $scope.messageUpload = "Invalid phone number in field Phone number 2. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
+                    }else if($scope.edit.phoneNumber2.length > 25){
+                        $scope.messageUpload = "Your phone number (Phone number 2) can't be longer than 25 characters!";
+                        return;
                     }
                 }
-                //Check on Home number
+                //Check on Home number (if provided)
                 if($scope.edit.homeNumber){
                     if(!regex.test($scope.edit.homeNumber)){
                         $scope.messageUpload = "Invalid phone number in field Home number. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
+                    }else if($scope.edit.homeNumber.length > 25){
+                        $scope.messageUpload = "Your phone number (Home number) can't be longer than 25 characters!";
+                        return;
                     }
                 }
-                //Check on username
+                //Check on username (if provided)
                 if($scope.edit.username){
-                    if($scope.edit.username.length <= 5){
+                    if($scope.edit.username.length > 30 || $scope.edit.username.length < 5){
                         $scope.messageUpload = "Invalid username. It must be between 5 and 30 characters long.";
                         return;
                     }
                 }
-                //Check on first name
+                //Check on first name (if provided)
                 if($scope.edit.firstName){
-                    if($scope.edit.firstName.length > 30 || $scope.edit.username.length < 1){
+                    if($scope.edit.firstName.length > 30 || $scope.edit.firstName.length < 1){
                         $scope.messageUpload = "Invalid first name. It must be between 1 and 30 charcters long";
                         return;
                     }
                 }
-                //Check on last name
+                //Check on last name (if provided)
                 if($scope.edit.lastName){
-                    if($scope.edit.lastName.length > 30 || $scope.edit.username.length < 1){
+                    if($scope.edit.lastName.length > 30 || $scope.edit.lastName.length < 1){
                         $scope.messageUpload = "Invalid last name. It must be between 1 and 30 charcters long";
+                        return;
+                    }
+                }
+                //Check on middle name (if provided)
+                if($scope.user.middleName){
+                    if($scope.user.middleName.length > 30 || $scope.user.middleName.length < 1){
+                        $scope.message = "Invalid middle name. It must be between 1 and 30 charcters long";
                         return;
                     }
                 }
