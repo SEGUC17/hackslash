@@ -40,65 +40,65 @@ angular.module('pettts')
             //Regular expression that contains '+', '-', '(', ')', ' ' and numbers.
             var regex = /^[\d ()+-]+$/;
             if (edit) {
-               //Check on Phone number 1 (if provided)
-                if($scope.edit.phoneNumber1){
-                    if(!regex.test($scope.edit.phoneNumber1)){
+                //Check on Phone number 1 (if provided)
+                if ($scope.edit.phoneNumber1) {
+                    if (!regex.test($scope.edit.phoneNumber1)) {
                         $scope.messageUpload = "Invalid phone number in field Phone number 1. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
-                    }else if($scope.edit.phoneNumber1.length > 25){
+                    } else if ($scope.edit.phoneNumber1.length > 25) {
                         $scope.messageUpload = "Your phone number (Phone number 1) can't be longer than 25 characters!";
                         return;
                     }
                 }
                 //Check on Phone number 2 (if provided)
-                if($scope.edit.phoneNumber2){
-                    if(!regex.test($scope.edit.phoneNumber2)){
+                if ($scope.edit.phoneNumber2) {
+                    if (!regex.test($scope.edit.phoneNumber2)) {
                         $scope.messageUpload = "Invalid phone number in field Phone number 2. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
-                    }else if($scope.edit.phoneNumber2.length > 25){
+                    } else if ($scope.edit.phoneNumber2.length > 25) {
                         $scope.messageUpload = "Your phone number (Phone number 2) can't be longer than 25 characters!";
                         return;
                     }
                 }
                 //Check on Home number (if provided)
-                if($scope.edit.homeNumber){
-                    if(!regex.test($scope.edit.homeNumber)){
+                if ($scope.edit.homeNumber) {
+                    if (!regex.test($scope.edit.homeNumber)) {
                         $scope.messageUpload = "Invalid phone number in field Home number. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
-                    }else if($scope.edit.homeNumber.length > 25){
+                    } else if ($scope.edit.homeNumber.length > 25) {
                         $scope.messageUpload = "Your phone number (Home number) can't be longer than 25 characters!";
                         return;
                     }
                 }
                 //Check on username (if provided)
-                if($scope.edit.username){
-                    if($scope.edit.username.length > 30 || $scope.edit.username.length < 5){
+                if ($scope.edit.username) {
+                    if ($scope.edit.username.length > 30 || $scope.edit.username.length < 5) {
                         $scope.messageUpload = "Invalid username. It must be between 5 and 30 characters long.";
                         return;
                     }
                 }
                 //Check on first name (if provided)
-                if($scope.edit.firstName){
-                    if($scope.edit.firstName.length > 30 || $scope.edit.firstName.length < 1){
+                if ($scope.edit.firstName) {
+                    if ($scope.edit.firstName.length > 30 || $scope.edit.firstName.length < 1) {
                         $scope.messageUpload = "Invalid first name. It must be between 1 and 30 charcters long";
                         return;
                     }
                 }
                 //Check on last name (if provided)
-                if($scope.edit.lastName){
-                    if($scope.edit.lastName.length > 30 || $scope.edit.lastName.length < 1){
+                if ($scope.edit.lastName) {
+                    if ($scope.edit.lastName.length > 30 || $scope.edit.lastName.length < 1) {
                         $scope.messageUpload = "Invalid last name. It must be between 1 and 30 charcters long";
                         return;
                     }
                 }
                 //Check on middle name (if provided)
-                if($scope.edit.middleName){
-                    if($scope.edit.middleName.length > 30 || $scope.edit.middleName.length < 1){
+                if ($scope.edit.middleName) {
+                    if ($scope.edit.middleName.length > 30 || $scope.edit.middleName.length < 1) {
                         $scope.message = "Invalid middle name. It must be between 1 and 30 charcters long";
                         return;
                     }
                 }
-            }else{
+            } else {
                 $scope.messageUpload = "Please choose something to edit";
                 return;
             }
@@ -150,9 +150,9 @@ angular.module('pettts')
                 if (newPassword == verNewPassword) {
                     if (password == verify) {
                         if (password != newPassword) {
-                            if(newPassword.length >= 5) {
+                            if (newPassword.length >= 5) {
                                 profileService.pass(password, newPassword, $scope);
-                            }else{
+                            } else {
                                 $scope.messageError = "Your password needs to be at least 5 characters in length.";
                             }
                         } else {
@@ -273,11 +273,14 @@ angular.module('pettts')
                     });
 
                     $scope.submitVote = function(id, vote) {
-                        reviewPostService.vote(id, vote).then(function(response) {
-                            $scope.postMessage = response;
-                            // for message to disappear 
-                            $timeout(function() { $scope.postMessage = undefined }, 4000);
-                        })
+                        if (vote != "up" && vote != "down") {
+                            $scope.postMessage = "You need to choose an option before you rate this post.";
+                        } else {
+                            reviewPostService.vote(id, vote).then(function(response) {
+                                $scope.postMessage = response;
+                            })
+                        }
+                        $timeout(function() { $scope.postMessage = undefined }, 4000);
                     }
 
                     $scope.goTo = function(path) {
