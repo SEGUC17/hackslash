@@ -7,10 +7,11 @@ angular.module('pettts')
 // Setting default value of edit post (The old values of the post )
     if($routeParams.id)
     {
+      var oldPost ;
       $http.get('/post/specificPost',{headers :{"_id":$routeParams.id}})
           .then(function successCallback(res) {
-              $scope.oldPost = res.data ;
-              $scope.post = $scope.oldPost;
+              oldPost = res.data ;
+              $scope.post = oldPost;
               return res.data;
           });
 
