@@ -16,6 +16,7 @@ angular.module('pettts')
                   case 1:
                       {
                           $scope.post.type = "sell";
+                          $scope.post.price = parseFloat(oldPost.price);
                       }
                       break;
                   case 2:
