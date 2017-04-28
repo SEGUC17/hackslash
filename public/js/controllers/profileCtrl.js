@@ -36,32 +36,49 @@ angular.module('pettts')
         $scope.submitEdit = function() {
             $scope.messageUpload = undefined;
             var edit = $scope.edit;
-            console.log(edit);
             //Check if phone number(s) entered have valid characters (+12345... or (12)345... or 12345... or 12-345...)
             //Regular expression that contains '+', '-', '(', ')', ' ' and numbers.
             var regex = /^[\d ()+-]+$/;
             if (edit) {
-                if ($scope.edit.phoneNumber1) {
-                    if (!regex.test($scope.edit.phoneNumber1)) {
+               //Check on Phone number 1
+                if($scope.edit.phoneNumber1){
+                    if(!regex.test($scope.edit.phoneNumber1)){
                         $scope.messageUpload = "Invalid phone number in field Phone number 1. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
                     }
                 }
-                if ($scope.edit.phoneNumber2) {
-                    if (!regex.test($scope.edit.phoneNumber2)) {
+                //Check on Phone number 2
+                if($scope.edit.phoneNumber2){
+                    if(!regex.test($scope.edit.phoneNumber2)){
                         $scope.messageUpload = "Invalid phone number in field Phone number 2. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
                     }
                 }
-                if ($scope.edit.homeNumber) {
-                    if (!regex.test($scope.edit.homeNumber)) {
+                //Check on Home number
+                if($scope.edit.homeNumber){
+                    if(!regex.test($scope.edit.homeNumber)){
                         $scope.messageUpload = "Invalid phone number in field Home number. It should only contain numbers, '+', '(', ')' and '-'.";
                         return;
                     }
                 }
+                //Check on username
                 if($scope.edit.username){
                     if($scope.edit.username.length <= 5){
-                        $scope.messageUpload = "Invalid username. Username must be at least 5 characters long.";
+                        $scope.messageUpload = "Invalid username. It must be between 5 and 30 characters long.";
+                        return;
+                    }
+                }
+                //Check on first name
+                if($scope.edit.firstName){
+                    if($scope.edit.firstName.length > 30 || $scope.edit.username.length < 1){
+                        $scope.messageUpload = "Invalid first name. It must be between 1 and 30 charcters long";
+                        return;
+                    }
+                }
+                //Check on last name
+                if($scope.edit.lastName){
+                    if($scope.edit.lastName.length > 30 || $scope.edit.username.length < 1){
+                        $scope.messageUpload = "Invalid last name. It must be between 1 and 30 charcters long";
                         return;
                     }
                 }
