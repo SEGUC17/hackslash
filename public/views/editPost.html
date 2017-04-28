@@ -33,13 +33,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="kind">Animal kind</label>
-                    <input type="text" name="kind" ng-model="post.kind" placeholder="Animal Kind" class="form-control">
+                    <label for="species">Species</label>
+                    <input type="text" name="species" ng-model="post.species" placeholder="Animal species" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="species">Species</label>
-                    <input type="text" name="species" ng-model="post.species" placeholder="Animal species" class="form-control">
+                    <label for="kind">Animal kind</label>
+                    <input type="text" name="kind" ng-model="post.kind" placeholder="Animal Kind" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -52,13 +52,13 @@
                 <div ng-switch="post.type">
                     <div ng-switch-when="exchange">
                         <div class="form-group">
-                            <label for="kindB"> Other Animal kind</label>
-                            <input type="text" name="kindB" required ng-model="post.kindB" placeholder=" Other Animal Kind" class="form-control">
-                        </div>
-
-                        <div class="form-group">
                             <label for="speciesB">Other Animal species </label> <br>
                             <input type="text" name="speciesB" required ng-model="post.speciesB" placeholder="Other Animal species">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="kindB"> Other Animal kind</label>
+                            <input type="text" name="kindB" required ng-model="post.kindB" placeholder=" Other Animal Kind" class="form-control">
                         </div>
 
                         <div class="form-group">
