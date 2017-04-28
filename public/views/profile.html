@@ -64,7 +64,7 @@
                         </div>
                         <div ng-if="myEmail!=userInfo.email">
                             <form name="rateForm" ng-controller="profileCtrl" ng-submit="submitRate()">
-                                <input type="number" required name="rate" ng-model="rateGiven" placeholder="Rate {{userInfo.username}}"> <br>
+                                <input type="number" required name="rate" ng-model="rateGiven" placeholder="Rate {{userInfo.username}}" class="form-control"> <br>
                                 <button type="submit" class="btn btn-primary" id="rate-btn">Rate {{userInfo.username}}</button>
                                 <div ng-if="message" type="danger" class="alert alert-danger">
                                     {{message}}
