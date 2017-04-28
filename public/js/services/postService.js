@@ -37,7 +37,7 @@ angular.module('pettts')
                             }).then(function successCallback(response) {
                                 $scope.error = false;
                                 $scope.message = "Post Added Successfully";
-                                // for message to disappear 
+                                // for message to disappear
                                 $timeout(function() { $scope.message = undefined }, 4000);
                                 $window.location = '/profile/' + $window.sessionStorage.username;
                             }, function errorCallback(response) {
@@ -60,7 +60,7 @@ angular.module('pettts')
                             }).then(function successCallback(response) {
                                 $scope.error = false;
                                 $scope.message = "Post Added Successfully";
-                                // for message to disappear 
+                                // for message to disappear
                                 $timeout(function() { $scope.message = undefined }, 4000);
                                 $window.location = '/profile/' + $window.sessionStorage.username;
                             }, function errorCallback(response) {
@@ -83,7 +83,7 @@ angular.module('pettts')
                             }).then(function successCallback(response) {
                                 $scope.error = false;
                                 $scope.message = "Post Added Successfully";
-                                // for message to disappear 
+                                // for message to disappear
                                 $timeout(function() { $scope.message = undefined }, 4000);
                                 $window.location = '/profile/' + $window.sessionStorage.username;
                             }, function errorCallback(response) {
@@ -107,7 +107,7 @@ angular.module('pettts')
                             }).then(function successCallback(response) {
                                 $scope.error = false;
                                 $scope.message = "Post Added Successfully";
-                                // for message to disappear 
+                                // for message to disappear
                                 $timeout(function() { $scope.message = undefined }, 4000);
                                 $window.location = '/profile/' + $window.sessionStorage.username;
                             }, function errorCallback(response) {
@@ -130,7 +130,7 @@ angular.module('pettts')
                             }).then(function successCallback(response) {
                                 $scope.error = false;
                                 $scope.message = "Post Added Successfully";
-                                // for message to disappear 
+                                // for message to disappear
                                 $timeout(function() { $scope.message = undefined }, 4000);
                                 $window.location = '/profile/' + $window.sessionStorage.username;
                             }, function errorCallback(response) {
@@ -153,7 +153,7 @@ angular.module('pettts')
                             }).then(function successCallback(response) {
                                 $scope.error = false;
                                 $scope.message = "Post Added Successfully";
-                                // for message to disappear 
+                                // for message to disappear
                                 $timeout(function() { $scope.message = undefined }, 4000);
                                 $window.location = '/profile/' + $window.sessionStorage.username;
                             }, function errorCallback(response) {
@@ -183,8 +183,19 @@ angular.module('pettts')
                     $scope.message = "invalid post";
                     return;
                 }
+                if(type !="sell")
+                {
+                  post.price = undefined;
+                }
+                if(type !="exchange")
+                {
+                  post.speciesB = undefined ;
+                  post.kindB = undefined ;
+                  post.genderB = undefined ;
+                }
                 // Every type has some different attributes .
                 // callbacks by success of the edited post or an error occcured .
+
                 switch (type) {
                     case "sell":
                         {
@@ -230,7 +241,7 @@ angular.module('pettts')
                 }).then(function successCallback(response) {
                     $scope.error = false;
                     $scope.message = "Post Edied Successfully";
-                    // for message to disappear 
+                    // for message to disappear
                     $timeout(function() { $scope.message = undefined }, 4000);
                     $window.location = '/profile/' + $window.sessionStorage.username;
                 }, function errorCallback(response) {

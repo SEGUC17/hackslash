@@ -4,6 +4,17 @@ angular.module('pettts')
 
     $scope.token = $window.sessionStorage.accessToken;
 
+    if($routeParams.id)
+    {
+      var oldPost ;
+      $http.get('/post/specificPost',{headers :{"_id":$routeParams.id}})
+          .then(function successCallback(res) {
+              $scope.oldPost = res.data ;
+              return res.data;
+          });
+    }
+
+
     //send the request to the server to add the post
     $scope.submitAdd = function() {
         var post = $scope.post;
@@ -55,7 +66,10 @@ angular.module('pettts')
     };
     //send the request to the server to edit the post with the parameter id
     $scope.submitEdit = function() {
-        var post = $scope.post;
+
+
+
+          var post = $scope.post;
         //Character limit check on description (if provided)
         if($scope.post.description){
             if($scope.post.description.length > 300 || $scope.post.description.length < 1){
