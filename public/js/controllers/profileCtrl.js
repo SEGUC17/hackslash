@@ -92,8 +92,8 @@ angular.module('pettts')
                     }
                 }
                 //Check on middle name (if provided)
-                if($scope.user.middleName){
-                    if($scope.user.middleName.length > 30 || $scope.user.middleName.length < 1){
+                if($scope.edit.middleName){
+                    if($scope.edit.middleName.length > 30 || $scope.edit.middleName.length < 1){
                         $scope.message = "Invalid middle name. It must be between 1 and 30 charcters long";
                         return;
                     }
