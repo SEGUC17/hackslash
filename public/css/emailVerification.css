@@ -3,14 +3,15 @@
 }
 
 body {
-    background-image:url(../images/verification.jpg);
-		background-size: 1450px 800px;
+    background-image:linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+	                 url(../images/verification-pic.jpeg);
+	background-size: cover;
     background-position: center;
 }
 
-html {
+/*html {
     height: 100%;
-}
+}*/
 
 body {
 	font-family: 'Love Ya Like A Sister', cursive;
@@ -35,8 +36,9 @@ body {
 }
 
 .jumbotron {
-	width:300 px;
-	margin: 40px 800px 0 40px;
+	float: right;
+	width: 300px;
+	margin: 10% 6% 0 0;
 	border: 1px solid gray;
 	text-align: center;
 	border-radius: 10px;
