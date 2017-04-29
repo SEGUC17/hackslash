@@ -4,7 +4,10 @@
 <div class="container">
   <div class="row" id="welcome-div">
     <div class="col-sm-4" id="welcome-text">
-      <h1>Welcome to<br><strong>pettts.com</strong></h1>
+      <div id="welcome-text-content">
+        <h1>Welcome to<br><strong>pettts.com</strong></h1>
+        <a href="/posts" class="btn btn-primary btn-block">Get started now</a>
+      </div>
     </div>
     <div class="col-sm-8" id="welcome-hero"></div>
 
@@ -25,30 +28,31 @@
     <div class="row">
 
       <div class="col-md-4">
-        <div class="thumbnail">
+        <a href="/posts/buy" class="thumbnail">
           <img src="../images/buy.jpg" alt="buy pets">
           <div class="caption">
             <h3>Buy a pet</h3>
           </div>
-        </div>
+        </a>
       </div>
 
       <div class="col-md-4">
-        <div class="thumbnail">
+        <a href="/login" class="thumbnail">
           <img src="../images/sell.jpg" alt="sell pets">
           <div class="caption">
             <h3>Sell a pet</h3>
+            <p id="selling-note">Note: you must be logged in to post about selling your pet</p>
           </div>
-        </div>
+        </a>
       </div>
 
       <div class="col-md-4">
-        <div class="thumbnail">
+        <a href="/posts/f/shelter" class="thumbnail">
           <img src="../images/shelter.jpg" alt="shelter pets">
           <div class="caption">
             <h3>Find shelter for your pet</h3>
           </div>
-        </div>
+        </a>
       </div>
 
     </div>
@@ -56,30 +60,30 @@
     <div class="row">
 
       <div class="col-md-4">
-        <div class="thumbnail">
-          <img src="../images/lost.jpg" alt="shelter pets">
+        <a href="/posts/f/lost" class="thumbnail">
+          <img src="../images/lost.jpg" alt="lost pets">
           <div class="caption">
             <h3>Post about a lost pet</h3>
           </div>
-        </div>
+        </a>
       </div>
 
       <div class="col-md-4">
-        <div class="thumbnail">
-          <img src="../images/found.none" alt="shelter pets">
+        <a href="/posts/f/found" class="thumbnail">
+          <img src="../images/found.none" alt="found pets">
           <div class="caption">
             <h3>Post about a found pet</h3>
           </div>
-        </div>
+        </a>
       </div>
 
       <div class="col-md-4">
-        <div class="thumbnail">
+        <a href="/posts/f/mate" class="thumbnail">
           <img src="../images/love.jpg" alt="find love for your pet">
           <div class="caption">
             <h3>Find love for your pet</h3>
           </div>
-        </div>
+        </a>
       </div>
 
     </div>
@@ -88,9 +92,13 @@
 
 </div>
 
-<div id="laster">
-  <div>
+<div id="laster" ng-controller="profileCtrl">
+  <div ng-if="!token">
     <h2>Sign up now and join pettts.com marketplace</h2>
     <a href="/register" class="btn btn-primary">REGISTER NOW</a>
+  </div>
+  <div ng-if="token">
+    <h2>View all posts and see what missed you</h2>
+    <a href="/posts" class="btn btn-primary">VIEW POSTS</a>
   </div>
 </div>
