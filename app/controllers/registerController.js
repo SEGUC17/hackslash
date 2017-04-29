@@ -1,6 +1,5 @@
 var bcrypt = require('bcrypt'); // BCRYPT FOR PASSWORD ENCRYPTION
 var mongoose = require('mongoose');
-var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 var nev = require('email-verification')(mongoose);
 var nodemailer = require('nodemailer');
 var configure = require('../config/config');

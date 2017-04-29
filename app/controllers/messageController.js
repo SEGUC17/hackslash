@@ -14,7 +14,11 @@ var messageController = {
         var email = req.decoded._doc.email;
         User.findOne({ email: email },
             function(err, foundUser) {
-                res.json({ success: true, messagesUsernames: foundUser.messagesUsernames, messagesContents: foundUser.messagesContents, message: "Messages Sent Successfully." });
+                if(foundUser){
+                    res.json({ success: true, messagesUsernames: foundUser.messagesUsernames, messagesContents: foundUser.messagesContents, message: "Messages Sent Successfully." });
+                }else{
+                    res.json({success: false, message: "Could not get messages"});
+                }
             }
         );
     },
