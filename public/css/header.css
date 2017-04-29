@@ -63,6 +63,10 @@
   /*margin: 0 20px;*/
 }
 
+#categories li a:focus {
+  background-color: transparent;
+}
+
 #categories li a:hover {
   text-decoration: none;
   background-color: #2e91f7;

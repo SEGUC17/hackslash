@@ -1,12 +1,104 @@
 <link rel="stylesheet" href="../css/starterPage.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
 
-<div id="jumbo"class=" jumbotron container  content"  >
-    <h3>Pettts.com</h3>
-    <h5>All You Need For Your Pets</h5>
+<div class="container">
+  <div class="row" id="welcome-div">
+    <div class="col-sm-4" id="welcome-text">
+      <div id="welcome-text-content">
+        <h1>Welcome to<br><strong>pettts.com</strong></h1>
+        <a href="/posts" class="btn btn-primary btn-block">Get started now</a>
+      </div>
+    </div>
+    <div class="col-sm-8" id="welcome-hero"></div>
+
+  </div>
+
+  <div class="row" id="short-desc">
+    <p id="short-desc-title">The first online marketplace specialized in pets.</p>
     <hr>
     <p>
-        <a class="btn btn-success btn-lg" href="/posts" role="button">
-            <i class="fa fa-sign-in"></i> Get Started
-        </a>
+      With pettts.com, you will be able to buy and sell pets,
+      exchange them, post about lost and found ones,
+      find someone to shelter yours, or even get a date for your pet
     </p>
+  </div>
+
+  <div id="starter-page-categories">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <a href="/posts/buy" class="thumbnail">
+          <img src="../images/buy.jpg" alt="buy pets">
+          <div class="caption">
+            <h3>Buy a pet</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/login" class="thumbnail">
+          <img src="../images/sell.jpg" alt="sell pets">
+          <div class="caption">
+            <h3>Sell a pet</h3>
+            <p id="selling-note">Note: you must be logged in to post about selling your pet</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/posts/f/shelter" class="thumbnail">
+          <img src="../images/shelter.jpg" alt="shelter pets">
+          <div class="caption">
+            <h3>Find shelter for your pet</h3>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <a href="/posts/f/lost" class="thumbnail">
+          <img src="../images/lost.jpg" alt="lost pets">
+          <div class="caption">
+            <h3>Post about a lost pet</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/posts/f/found" class="thumbnail">
+          <img src="../images/found.none" alt="found pets">
+          <div class="caption">
+            <h3>Post about a found pet</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/posts/f/mate" class="thumbnail">
+          <img src="../images/love.jpg" alt="find love for your pet">
+          <div class="caption">
+            <h3>Find love for your pet</h3>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="laster" ng-controller="profileCtrl">
+  <div ng-if="!token">
+    <h2>Sign up now and join pettts.com marketplace</h2>
+    <a href="/register" class="btn btn-primary">REGISTER NOW</a>
+  </div>
+  <div ng-if="token">
+    <h2>View all posts and see what missed you</h2>
+    <a href="/posts" class="btn btn-primary">VIEW POSTS</a>
+  </div>
 </div>

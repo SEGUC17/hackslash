@@ -1,48 +1,146 @@
-body {
-    background-image:linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
-    url("../images/starter-page-pic.jpeg");
-    background-size: cover;
-    background-position: center;
+
+#welcome-div {
+  margin-top: 50px;
+  height: 400px;
+  box-shadow: 10px 10px 12px #c4c4c4;
+  border-radius: 5px;
 }
 
-/*html {
-    height: 100%;
-}*/
-
-.content {
-    text-align: center;
-    padding-top: 15%;
-    font-weight: bold;
+#welcome-text {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  height: inherit;
+  background: linear-gradient(to right, rgb(46, 145, 247), rgb(29, 191, 235));
 }
 
-.container {
-    margin-left: 5%;
+#welcome-text-content {
+  width: 78%;
+  position: relative;
+  top: 43%;
+  left: 10%;
+  transform: perspective(1px) translateY(-50%);
+  font-family: 'Roboto', sans-serif;
+
 }
 
-h3 {
-    font-family:sans-serif;
-    color: darkblue;
-    font-size: bold ;
-    font-size: 5em;
+#welcome-text-content h1 {
+  font-size: 50px;
+  padding-bottom: 20px;
+  border-bottom: 10px solid rgb(101, 199, 255);
+  color: white;
+  font-size: 60px;
 }
 
-h5 {
-    color: red;
-    font-style: italic;
-    font-family: sans-serif;
-    font-size: 2.5em;
+#welcome-text-content a {
+  background-color: rgb(255, 255, 255);
+  color: rgb(46, 145, 247);
+  border: none;
+  margin-top: 1.3em;
+  margin-left: auto;
+  padding: 10px 40px;
+  font-size: 1.2em;
 }
 
-hr {
-    width: 400px;
-    color: aqua;
+#welcome-text-content a:hover {
+  background-color: rgb(235, 235, 235);
+  color: rgb(23, 134, 247);
 }
 
-#jumbo {
-    width: 460px;
-    height: 460px;
-    margin-top: 0.5%;
-    padding-top: 10%;
-    border-radius: 700px;
-    background-color: rgba(255, 255, 255, 0.5);
+#welcome-hero {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  height: inherit;
+  background-image: linear-gradient(to right, rgba(46, 145, 247, 0.4), rgba(46, 247, 138, 0.2)),
+                    url("../images/home.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+#welcome-to {
+  font-size: 50px;
+}
+
+#short-desc {
+  margin-top: 80px;
+  text-align: center;
+  color: rgb(94, 94, 94);
+  font-size: 18px;
+}
+
+#short-desc-title {
+  font-size: 21px;
+}
+
+#starter-page-categories {
+  margin-top: 50px;
+}
+
+#starter-page-categories img {
+  height: 200px;
+  width: 100%;
+}
+
+.thumbnail {
+  padding: 0;
+  margin: 1.2em;
+  margin-bottom: 3em;
+  border: none;
+  box-shadow: 10px 10px 11px #e0e0e0;
+  transition: 0.17s linear;
+  -webkit-transition: 0.17s linear;
+}
+
+.thumbnail img {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.thumbnail .caption {
+  font-size: 20px;
+  padding-left: 1.4em;
+  font-family: 'Roboto', sans-serif;
+  height: 120px;
+}
+
+.thumbnail:hover {
+  text-decoration: none;
+  box-shadow: 4px 4px 8px #dedbdb;
+  transition: 0.17s linear;
+  -webkit-transition: 0.17s linear;
+}
+
+#selling-note {
+  font-size: 12px;
+}
+
+#laster {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 50px;
+  color: white;
+  text-align: center;
+  height: 350px;
+  background: linear-gradient(to right, rgba(46, 145, 247, 0.8), rgba(29, 235, 173, 0.8)),
+              url("../images/startImage.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+#laster div {
+  position: relative;
+  top: 45%;
+  transform: perspective(1px) translateY(-50%);
+}
+
+#laster div a {
+  background-color: rgb(255, 255, 255);
+  color: rgb(46, 145, 247);
+  border: none;
+  margin-top: 1.4em;
+  padding: 10px 40px;
+  font-size: 1.2em;
+}
+
+#laster div a:hover {
+  background-color: rgb(235, 235, 235);
+  color: rgb(23, 134, 247);
 }
