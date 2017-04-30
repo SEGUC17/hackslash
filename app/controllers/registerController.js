@@ -108,7 +108,7 @@ nev.configure({
             }
         },
         verifyMailOptions: {
-            from: 'Do Not Reply <se7ss@pettts.com>',
+            from: 'Do Not Reply <petts@petts.com>',
             subject: 'Confirm your account',
             html: '<p>Please verify your account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and ' +
                 'paste the following link into your browser:</p><p>${URL}</p>',
@@ -118,7 +118,7 @@ nev.configure({
         // confirmation mail configurations
         shouldSendConfirmation: true,
         confirmMailOptions: {
-            from: 'Do Not Reply <se7ss@pettts.com>',
+            from: 'Do Not Reply <petts@petts.com>',
             subject: 'Successfully verified!',
             html: '<p>Your account has been successfully verified.</p>',
             text: 'Your account has been successfully verified.'
