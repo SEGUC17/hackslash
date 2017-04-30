@@ -89,7 +89,7 @@ function myHasher(password, tempUserData, insertTempUser, callback) {
 // nod-email-verification configurations
 nev.configure({
 
-        verificationURL: 'http://35.162.12.121:8080/v/${URL}',
+        verificationURL: 'http://54.189.196.49:8080/v/${URL}',
         URLLength: 48,
         // mongo-stuff
         persistentUserModel: User,
