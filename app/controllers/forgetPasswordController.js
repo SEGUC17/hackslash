@@ -47,7 +47,7 @@ var sendForgetPasswordEmail = function(foundUser) {
     fromEmail = new helper.Email("pettts@pettts.com");
     toEmail = new helper.Email(foundUser.email);
     subject = "Reset Password";
-    content = new helper.Content("text/plain", "To reset your password, please go to http://35.162.12.121:8080/resetPassword/" + token);
+    content = new helper.Content("text/plain", "To reset your password, please go to http://54.189.196.49:8080/resetPassword/" + token);
     mail = new helper.Mail(fromEmail, subject, toEmail, content);
 
     var sg = require('sendgrid')("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");
