@@ -1,4 +1,6 @@
 var User = require('../models/user.js');
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+var configure = require('../config/config');
 
 var forgetPasswordController = {
         /*
@@ -50,7 +52,6 @@ var sendForgetPasswordEmail = function(foundUser) {
     content = new helper.Content("text/plain", "To reset your password, please go to http://54.189.196.49:8080/resetPassword/" + token);
     mail = new helper.Mail(fromEmail, subject, toEmail, content);
 
-    var sg = require('sendgrid')("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");
     var request = sg.emptyRequest({
         method: 'POST',
         path: '/v3/mail/send',
