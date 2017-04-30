@@ -8,18 +8,22 @@ var User = require('../models/user.js');
 var middleware = require("../middleware");
 
 var messageController = {
-    
+
     // View Function is used to return the user all his messages .
     view: function(req, res) {
         var email = req.decoded._doc.email;
         User.findOne({ email: email },
             function(err, foundUser) {
-                res.json({ success: true, messagesUsernames: foundUser.messagesUsernames, messagesContents: foundUser.messagesContents, message: "Messages Sent Successfully." });
+                if (foundUser)
+                    res.json({ success: true, messagesUsernames: foundUser.messagesUsernames, messagesContents: foundUser.messagesContents, message: "Messages Sent Successfully." });
+                else {
+                    res.status(400).json({ success: false, message: "user not found." });
+                }
             }
         );
     },
 
-     // Send Function is used to add a new message for the receiver in his inbox with information about the sender .
+    // Send Function is used to add a new message for the receiver in his inbox with information about the sender .
     send: function(req, res) {
         var senderUsername = req.body.senderUsername;
         var receiverUsername = req.body.receiverUsername;

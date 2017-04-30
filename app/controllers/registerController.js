@@ -29,10 +29,10 @@ function validateInput(username, email, password, firstName, lastName) {
         success: true
     };
     // Check if first name is enetered
-    if (!firstName){
+    if (!firstName) {
         output.success = false;
         output.message = "First name in not entered"
-    }else if(firstName.length < 1 || firstName.length > 30){// Check first name lenght
+    } else if (firstName.length < 1 || firstName.length > 30) { // Check first name lenght
         output.success = false;
         output.message = "First name length must be between 1 and 30 characters";
     }
@@ -40,7 +40,7 @@ function validateInput(username, email, password, firstName, lastName) {
     if (!lastName) {
         output.success = false;
         output.message = "Last name in not entered"
-    }else if(lastName.length < 1 || lastName.length > 30){// Check last name lenght
+    } else if (lastName.length < 1 || lastName.length > 30) { // Check last name lenght
         output.success = false;
         output.message = "Last name length must be between 1 and 30 characters";
     }
@@ -48,7 +48,7 @@ function validateInput(username, email, password, firstName, lastName) {
     if (!username) {
         output.success = false;
         output.message = "Username in not entered"
-    }else if (username.length < 5 || username.length > 30) {// Check username lenght
+    } else if (username.length < 5 || username.length > 30) { // Check username lenght
         output.success = false;
         output.message = "Username length must be between 5 and 30 characters";
     }
@@ -56,15 +56,15 @@ function validateInput(username, email, password, firstName, lastName) {
     if (!email) {
         output.success = false;
         output.message = "No email entered";
-    }else if (!validateEmail(email)){// Check email format
+    } else if (!validateEmail(email)) { // Check email format
         output.success = false;
         output.message = "Email format is not valid";
     }
     // Check if password is entered
-    if (!password){
+    if (!password) {
         output.success = false;
         output.message = "No password entered";
-    }else if (password.length < 5){// Check password length
+    } else if (password.length < 5) { // Check password length
         output.success = false;
         output.message = "Password length must be at least 5 characters";
     }
