@@ -1,6 +1,6 @@
 var User = require('../models/user.js');
-var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 var configure = require('../config/config');
+var sg = require('sendgrid')(configure.sendGridAPI);
 
 var forgetPasswordController = {
         /*
