@@ -44,13 +44,13 @@ var sendForgetPasswordEmail = function(foundUser) {
     // Now I will send him an email using SendGrid
     var helper = require('sendgrid').mail;
     // Here we should put our company's email
-    fromEmail = new helper.Email("petts@petts.com");
+    fromEmail = new helper.Email("pettts@pettts.com");
     toEmail = new helper.Email(foundUser.email);
     subject = "Reset Password";
     content = new helper.Content("text/plain", "To reset your password, please go to http://35.162.12.121:8080/resetPassword/" + token);
     mail = new helper.Mail(fromEmail, subject, toEmail, content);
 
-    var sg = require('sendgrid')("SG.QcQQAalRQXC1lWmXPHc-FA.HU-IzqO75z6RpadeIz1RTWUeFAhtUldhAnQna8r5tO8");
+    var sg = require('sendgrid')("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");
     var request = sg.emptyRequest({
         method: 'POST',
         path: '/v3/mail/send',
