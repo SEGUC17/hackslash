@@ -7,7 +7,7 @@ angular.module('pettts')
     return {
         // Search Function is used to send The Search key to the api
         // and recieves all the desired posts at the frontend
-        advancedSearch: function(species,kind,type) {
+        advancedSearch: function($scope,species,kind,type) {
             var req = {
                 method: 'GET',
                 url: '/post/search',

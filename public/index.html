@@ -45,7 +45,6 @@
 
     <script type="text/javascript" src="js/controllers/advSearchDirectionCtrl.js"></script>
     <script type="text/javascript" src="js/services/advSearchService.js"></script>
-    <script type="text/javascript" src="js/services/advSearchResCtrl.js"></script>
 
     <script type="text/javascript" src="js/services/profileService.js"></script>
     <script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
@@ -192,7 +191,8 @@
                             <input type="radio" name="type" ng-model="type" value="shelter"> Shelter
                         </div>
                         <button type="submit" class="btn btn-success" id="send-btn">Search</button>
-                        <div ng-if="messageIndicator" class="alert alert-info"></div>
+                        <div ng-if="messageIndicator" class="alert alert-info">Message {{messageAdvanced}}</div>
+                        sndjsj
                     </form>
                 </div>
                 <div class="modal-footer">
