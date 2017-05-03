@@ -23,34 +23,50 @@ function validateEmail(email) {
 
 /* function to validate the format of the entered username, email, password of
 the user before registration */
-function validateInput(username, email, password, firstName, lastName) {
+function validateInput(username, email, password, firstName, lastName, middleName, phoneNumber1, phoneNumber2, homeNumber) {
 
     var output = {
         success: true
     };
+    //name matching 
+    var nameRegex = new RegExp(/^[a-zA-Z\-]+$/);
+    //username matching
+    var usernameRegex = new RegExp(/^[a-zA-Z0-9]+$/);
+
+    //phone number matching TODO
+
+    //check for middle name if exists
+    if (middleName) {
+        if (middleName.length < 1 || middleName.length > 30 || !nameRegex.test(middleName)) {
+            output.success = false;
+            output.message = "Middle name length must be between 1 and 30 characters and should contain only letters";
+        }
+
+    }
     // Check if first name is enetered
     if (!firstName) {
         output.success = false;
         output.message = "First name in not entered"
-    } else if (firstName.length < 1 || firstName.length > 30) { // Check first name lenght
+    } else if (firstName.length < 1 || firstName.length > 30 || !nameRegex.test(firstName)) { // Check first name lenght
         output.success = false;
-        output.message = "First name length must be between 1 and 30 characters";
+        output.message = "First name length must be between 1 and 30 characters and should contain only letters";
     }
     // Check if last name is entered
     if (!lastName) {
         output.success = false;
         output.message = "Last name in not entered"
-    } else if (lastName.length < 1 || lastName.length > 30) { // Check last name lenght
+    } else if (lastName.length < 1 || lastName.length > 30 || !nameRegex.test(lastName)) { // Check last name lenght
+        console.log(nameRegex.test(lastName));
         output.success = false;
-        output.message = "Last name length must be between 1 and 30 characters";
+        output.message = "Last name length must be between 1 and 30 characters and should contain only letters";
     }
     // Check if username is entered
     if (!username) {
         output.success = false;
         output.message = "Username in not entered"
-    } else if (username.length < 5 || username.length > 30) { // Check username lenght
+    } else if (username.length < 5 || username.length > 30 || !usernameRegex.test(username)) { // Check username lenght
         output.success = false;
-        output.message = "Username length must be between 5 and 30 characters";
+        output.message = "Username length must be between 5 and 30 characters and should be a valid username";
     }
     // Check if email is entered
     if (!email) {
@@ -68,6 +84,8 @@ function validateInput(username, email, password, firstName, lastName) {
         output.success = false;
         output.message = "Password length must be at least 5 characters";
     }
+
+
     return output;
 }
 
@@ -179,8 +197,10 @@ var registerController = {
         var password = req.body.password;
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
-
-
+        var middleName = req.body.middleName;
+        var phoneNumber1 = req.body.phoneNumber1;
+        var phoneNumber2 = req.body.phoneNumber2;
+        var homeNumber = req.body.homeNumber;
         ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
@@ -192,7 +212,7 @@ var registerController = {
             }
         }
         // validating the format of username, email, and password
-        var validatedInput = validateInput(username, email, password, firstName, lastName);
+        var validatedInput = validateInput(username, email, password, firstName, lastName, middleName, phoneNumber1, phoneNumber2, homeNumber);
         //path for default profile pic or the uploaded pic if exists
         var profilePicPath = "public/images/default.jpg";
         if (req.file)
