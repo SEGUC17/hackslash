@@ -19,6 +19,7 @@ angular.module('pettts')
                 if (response.data.posts == undefined) {
                     // No data has been retrieved from the search .
                     $scope.notFound = true;
+                    $scope.loading = false;
                     return response.data.message;
                 } else {
                     // Posts data have been retrieved from the search .
@@ -33,19 +34,18 @@ angular.module('pettts')
                             post.username = response.data
                         });
                     });
-
+                    $scope.loading = false;
                     $scope.submitVote = function(id, vote) {
-                        if (vote != "up" && vote != "down") {
-                            $scope.postMessage = "You need to choose an option before you rate this post.";
-                        } else {
-                            reviewPostService.vote(id, vote).then(function(response) {
-                                $scope.postMessage = response;
-                            })
+                            if (vote != "up" && vote != "down") {
+                                $scope.postMessage = "You need to choose an option before you rate this post.";
+                            } else {
+                                reviewPostService.vote(id, vote).then(function(response) {
+                                    $scope.postMessage = response;
+                                })
+                            }
+                            $timeout(function() { $scope.postMessage = undefined }, 4000);
                         }
-                        $timeout(function() { $scope.postMessage = undefined }, 4000);
-                    }
-
-                    // Making Pagination
+                        // Making Pagination
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;
                     $scope.maxSize = 5;
@@ -53,7 +53,7 @@ angular.module('pettts')
                     return response.data.posts;
 
                 }
-                $scope.loading = false;
+
 
             }, function errorCallback(response) {
                 $scope.loading = false;
