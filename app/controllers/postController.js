@@ -817,6 +817,19 @@ let postController = {
             res.json({success : true, message : "Post Reported Successfully"});
          }
       });
+   },
+    // Admin wants to delete Reports of a Specific post.
+    deleteReports : function (req, res) {
+      var id = req.headers['id']; // post ID
+      console.log(id);
+      Post.findOne({ _id: id }, function(err, post) {
+         if (err || !post) { res.json({success : false, message : "Something Wrong Happened."}); }
+         else {
+            post.reports = {};
+            post.save();
+            res.json({success : true, message : "Reports Deleted Successfully"});
+         }
+      });
     }
 }
 
