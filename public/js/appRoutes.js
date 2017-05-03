@@ -40,7 +40,10 @@ angular.module('pettts')
                 controller: 'searchCtrl'
             })
             //Advanced Search route
-            
+            .when('/posts/advanced', {
+                templateUrl: 'views/advSearch.html',
+                controller: 'advSearchCtrl'
+            })
             //Payment routes
             //Stripe route
             .when('/charge', {

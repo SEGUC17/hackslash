@@ -7,10 +7,10 @@ angular.module('pettts')
     return {
         // Search Function is used to send The Search key to the api
         // and recieves all the desired posts at the frontend
-        advancedSearch: function($scope,species,kind,type) {
+        advancedSearch: function(species,kind,type) {
             var req = {
                 method: 'GET',
-                url: '/post/search',
+                url: '/post/searchAndfilter',
                 headers: {
                     'species': species,
                     'kind': kind,
@@ -18,11 +18,9 @@ angular.module('pettts')
                 }
             }
             return $http(req).then(function successCallback(response) {
-                $scope.loading = false;
-                return response;
+                return response.data;
             }, function errorCallback(response) {
-                $scope.loading = false;
-                return response;
+                return response.data;
             });
         }
     }
