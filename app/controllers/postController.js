@@ -275,9 +275,9 @@ let postController = {
                     res.json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(404).json({ "message": "No Posts Exist" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
@@ -287,9 +287,9 @@ let postController = {
                     res.json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(404).json({ "message": "No Posts Exist" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })
@@ -299,9 +299,9 @@ let postController = {
                     res.json(err.message);
                 } else {
                     if (posts.length == 0) {
-                        res.json({ "message": "No Posts Exists" });
+                        res.status(404).json({ "message": "No Posts Exist" });
                     } else {
-                        res.json({ posts });
+                        res.status(200).json({ posts });
                     }
                 }
             })

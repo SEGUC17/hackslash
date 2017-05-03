@@ -242,6 +242,9 @@ angular.module('pettts')
         // to view my profile
         profileService.view($scope.givenUsername).then(function(response) {
             $scope.success = response.success;
+            if ($scope.success == false) {
+                $scope.loading = false;
+            }
             // get the values back from the service
             if (response.data) {
                 $scope.userInfo = response.data.userProfileInfo;
