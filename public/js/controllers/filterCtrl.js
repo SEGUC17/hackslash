@@ -30,7 +30,7 @@ angular.module('pettts')
                     post.username = response.data
                 });
             });
-            $scope.loading = false;
+
             $scope.submitVote = function(id, vote) {
                 if (vote != "up" && vote != "down") {
                     $scope.postMessage = "You need to choose an option before you rate this post.";
@@ -47,6 +47,7 @@ angular.module('pettts')
             $scope.currentPage = 1;
             $scope.maxSize = 5;
         }
+        $scope.loading = false;
 
     });
 
