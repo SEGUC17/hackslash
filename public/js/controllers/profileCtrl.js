@@ -260,6 +260,7 @@ angular.module('pettts')
                 if ($scope.posts == "||&This user has no Posts yet.&||") {
                     //if the user has no posts
                     $scope.posts = undefined;
+                    $scope.loading = false;
                 } else if ($scope.posts) {
                     //sort the posts by date
                     $scope.posts.sort(function(a, b) {
@@ -272,6 +273,7 @@ angular.module('pettts')
                             post.username = response.data
                         });
                     });
+                    $scope.loading = false;
 
                     $scope.submitVote = function(id, vote) {
                         if (vote != "up" && vote != "down") {
@@ -297,7 +299,6 @@ angular.module('pettts')
                     $scope.currentPage = 1;
                     $scope.maxSize = 5;
                 }
-                $scope.loading = false;
                 $scope.myEmail = $window.sessionStorage.email;
             }
         });

@@ -8,6 +8,8 @@ angular.module('pettts')
         $scope.posts = posts
         if (!$scope.posts) {
             $scope.notFound = true;
+            $scope.loading = false;
+
         } else {
             $scope.notFound = false;
             // Sorting posts according to date descendingly
@@ -20,6 +22,7 @@ angular.module('pettts')
                     post.username = response.data
                 });
             });
+            $scope.loading = false;
 
             $scope.submitVote = function(id, vote) {
                 if (vote != "up" && vote != "down") {
@@ -37,7 +40,6 @@ angular.module('pettts')
             $scope.currentPage = 1;
             $scope.maxSize = 5;
         }
-        $scope.loading = false;
 
     });
 
