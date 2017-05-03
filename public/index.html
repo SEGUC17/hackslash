@@ -43,8 +43,9 @@
     <script type="text/javascript" src="js/controllers/searchCtrl.js"></script>
     <script type="text/javascript" src="js/services/searchService.js"></script>
 
-    <script type="text/javascript" src="js/controllers/advSearchCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/advSearchDirectionCtrl.js"></script>
     <script type="text/javascript" src="js/services/advSearchService.js"></script>
+    <script type="text/javascript" src="js/services/advSearchResCtrl.js"></script>
 
     <script type="text/javascript" src="js/services/profileService.js"></script>
     <script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
@@ -172,7 +173,7 @@
                     <h4>Here you can search posts, not only by species, but also kind and filter the posts by type.</h4>
                 </div>
                 <div class="modal-body">
-                    <form name="messageForm" ng-controller="profileCtrl" ng-submit="advancedSearch()">
+                    <form name="messageForm" ng-controller="profileCtrl" ng-submit="advancedSearch(species,kind,type)">
                         <div class="form-group">
                             <label for="species">Search by Species</label> <br>
                             <input type="text" class="form-control" name="species" placeholder="Species (e.g. Cat, Dog)" ng-model="species">
@@ -183,12 +184,12 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Filter by Post Type</label> <br>
-                            <input type="radio" name="type" ng-model="type" required value="sell"> Sell
-                            <input type="radio" name="type" ng-model="type" required value="exchange"> Exchange
-                            <input type="radio" name="type" ng-model="type" required value="mate"> Mate
-                            <input type="radio" name="type" ng-model="type" required value="lost"> Lost
-                            <input type="radio" name="type" ng-model="type" required value="found"> Found
-                            <input type="radio" name="type" ng-model="type" required value="shelter"> Shelter
+                            <input type="radio" name="type" ng-model="type" value="sell"> Sell
+                            <input type="radio" name="type" ng-model="type" value="exchange"> Exchange
+                            <input type="radio" name="type" ng-model="type" value="mate"> Mate
+                            <input type="radio" name="type" ng-model="type" value="lost"> Lost
+                            <input type="radio" name="type" ng-model="type" value="found"> Found
+                            <input type="radio" name="type" ng-model="type" value="shelter"> Shelter
                         </div>
                         <button type="submit" class="btn btn-success" id="send-btn">Search</button>
                         <div ng-if="messageIndicator" class="alert alert-info"></div>
@@ -200,6 +201,7 @@
             </div>
         </div>
     </div>
+    <!-- End of Modal -->
 
 <style>
     #logout {

@@ -1,12 +1,190 @@
-<link rel="stylesheet" href="../css/advSearch.css">
-<!-- Header -->
-<div class="header">
-    <h1>This is the advanced Search.</h1>
-    <h3>Here you can search posts, not only by species, but also kind and filter the posts by type.</h3>
-</div>
-<!-- End of header -->
-<!-- Search form -->
-<div>
+<link rel="stylesheet" href="../css/viewMore.css">
 
+<div class="main" ng-controller="advSearchResCtrl">
+
+    <div ng-if="loading==true">
+        <img class="displayed" src="../images/animal.gif" alt="loading">
+    </div>
+
+    <div ng-if="loading==false">
+
+        <!-- if no posts are found -->
+        <!--  -->
+        <div class="container" ng-if="notFound==true">
+            <div class="row">
+                <h4 style="margin-top: 2em;">No Posts Found</h4>
+            </div>
+        </div>
+
+        <!-- if there are posts received through the api -->
+        <div class="container" id="main" ng-if="notFound==false">
+            <div class="row">
+                <h3>Latest Posts</h3>
+            </div>
+
+            <!-- loop through the posts -->
+            <div class="row" ng-repeat="post in posts | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left">
+                                <!-- post image -->
+                                <a href="#">
+                                    <div ng-if="post.image">
+                                        <img class="media-object" src="{{post.image.substring(7,post.image.length)}}" width="150px" alt="...">
+                                    </div>
+                                    <div ng-if="!post.image">
+                                        <img class="media-object" src="http://placehold.it/150x150" alt="...">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <!-- displaying post type as the title as there is no title! -->
+                                <h4 class="media-heading label label-success">{{ post.type | stringifyType }}</h4>
+                                <!-- display post date -->
+                                <p><small class="date"><em>{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></small></p>
+                                <!-- fixing description length to display by 250 chars -->
+                                <p style="word-break: break-all; hyphens: auto;">{{ post.description.slice(0,250) }}...</p>
+                                <!-- link to show post page -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
+                            </div>
+                            <!-- End of media-body -->
+                        </div>
+                        <!-- End of media -->
+                    </div>
+                    <!-- End of panel-body -->
+                </div>
+                <!-- End of panel -->
+
+                <!-- ========================================================================================= -->
+                <!-- Modals shown upon view more clicked -->
+                <div id="myModal-{{ post._id }}" class="modal fade">
+                    <!-- if the user is not logged in, don't allow him to view more the post -->
+                    <div class="modal-dialog" ng-if="!token">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4>We are sorry, you must be logged in to view it more</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <p>Get back to your account</p>
+                                <a class="btn btn-success btn-block" data-dismiss="modal" href="" ng-click="goTo('login')">Login now</a>
+
+                                <div class="strike">
+                                    <span>or</span>
+                                </div>
+
+                                <p>Perhaps you don't have an account?</p>
+                                <a class="btn btn-primary btn-block" href="" data-dismiss="modal" ng-click="goTo('register')">Register now, It's free!</a>
+
+                                <div style="text-align:center; margin-top:1.75em;">
+                                    <img src="../images/login-pic-2.png" width="250px">
+                                </div>
+
+                            </div>
+                            <!--  End of modal-body -->
+
+                        </div>
+                        <!--  End of modal-content -->
+
+                    </div>
+                    <!-- End of !token div -->
+
+                    <!-- if the user is logged in, allow him to view more the post -->
+                    <div class="modal-dialog modal-lg" ng-if="token">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4>{{ post.type | stringifyType }}</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="container-fluid post-details">
+                                    <div class="row">
+
+                                        <div class="col-md-3" id="left-col">
+                                            <img ng-if="post.image" ng-src="{{ post.image.substring(7,post.image.length) }}" alt="{{ post.type | stringifyType }} post image" class="img-responsive img-thumbnail">
+                                            <img ng-if="!post.image" src="http://placehold.it/200x200" alt="No image available" class="img-responsive img-thumbnail">
+                                            <p id="postOwnerUsername">by: {{ post.username }}</p>
+                                            <p id="email-info" style="word-wrap: break-word;">
+                                                <label><strong>Contact email:</strong></label> {{post.ownerEmail}}
+                                            </p>
+
+                                            <!-- up & down vote form -->
+                                            <form ng-submit="submitVote(post._id,vote)">
+                                                <label class="radio-inline">
+                                                <input type="radio" value="up" ng-model="vote">Up-vote
+                                            </label>
+                                                <label class="radio-inline">
+                                                <input type="radio" value="down" ng-model="vote">Down-vote
+                                            </label>
+                                                <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
+                                                <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div>
+                                            </form>
+
+                                            <a href="" ng-click="visitProfile(post.username)" id="view-contact-btn" class="btn btn-info btn-block" data-dismiss="modal">View contact profile</a>
+                                        </div>
+
+                                        <div class="col-md-9" id="right-col">
+                                            <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
+
+                                            <p style="word-break: break-all; hyphens: auto;"><strong>Description:</strong> {{post.description}}</p>
+
+                                            <hr>
+
+                                            <p><strong>Post Up-Votes: </strong> {{post.upVote}}</p>
+                                            <p><strong>Post Down-Votes:</strong> {{post.downVote}}</p>
+                                            <p><strong>Species:</strong> {{post.species}}</p>
+                                            <p><strong>Kind:</strong> {{post.kind}}</p>
+                                            <p><strong>Gender:</strong> {{post.gender}}</p>
+
+                                            <div ng-if="post.type == 1">
+                                                <p><strong>Price:</strong> {{post.price}}</p>
+                                            </div>
+
+                                            <div ng-if="post.type == 6">
+                                                <p><strong>Species of the desired animal:</strong> {{post.speciesB}}</p>
+                                                <p><strong>Kind of the desired animal:</strong> {{post.kindB}}</p>
+                                                <p><strong>Gender of the desired animal:</strong> {{post.genderB}}</p>
+                                            </div>
+
+                                            <div ng-if="post.note">
+                                                <hr>
+                                                <p><strong>notes about the post:</strong> {{post.note}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--  End of modal-body -->
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                        <!--  End of modal-content -->
+
+                    </div>
+                    <!-- End of if token -->
+
+                </div>
+                <!-- End of modal -->
+                <!-- ========================================================================================= -->
+
+            </div>
+            <!-- End of row -->
+
+            <ul uib-pagination boundary-links="true" total-items="posts.length" items-per-page="pageSize" ng-model="currentPage" max-size="maxSize" class="pagination-md pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </ul>
+
+        </div>
+        <!-- End of container -->
+    </div>
 </div>
-<!-- End of search form -->
+<!-- End of main -->

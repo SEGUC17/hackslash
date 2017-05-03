@@ -40,7 +40,7 @@ angular.module('pettts')
                 controller: 'searchCtrl'
             })
             //Advanced Search route
-            .when('/advanced',{
+            .when('/posts/advanced',{
                 templateUrl: 'views/advSearch.html',
                 controller: 'advSearchCtrl'
             })
