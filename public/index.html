@@ -191,8 +191,7 @@
                             <input type="radio" name="type" ng-model="type" value="shelter"> Shelter
                         </div>
                         <button type="submit" class="btn btn-success" id="send-btn">Search</button>
-                        <div ng-if="messageIndicator" class="alert alert-info">Message {{messageAdvanced}}</div>
-                        sndjsj
+                        <div ng-if="messageAdvanced" class="alert alert-danger">{{messageAdvanced}}</div>
                     </form>
                 </div>
                 <div class="modal-footer">

@@ -9,8 +9,8 @@ angular.module('pettts')
         }else{
             //Close modal first
             $('#myModal-search').modal('hide');
-            //Got to posts page with the right parameters
-            $location.path('/posts/advanced').search({ species, kind, type });
+            //Go to posts page with the right parameters
+            //$location.path('/posts/advanced').search({ species, kind, type });
         }
     }
 });
