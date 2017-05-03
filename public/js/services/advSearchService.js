@@ -14,7 +14,7 @@ angular.module('pettts')
                 headers: {
                     'species': species,
                     'kind': kind,
-                    'type': type
+                    'filter': type
                 }
             }
             return $http(req).then(function successCallback(response) {
