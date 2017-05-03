@@ -1,61 +1,66 @@
 html {
-  position: relative;
-  min-height: 100%;
-  min-width: 100%;
+    position: relative;
+    min-height: 100%;
+    min-width: 100%;
 }
 
 body {
-  background-color: #fAfAfA;
+    background-color: #fAfAfA;
 }
 
 #main {
-  margin-top: 30px;
-  margin-bottom: 60px;
+    margin-top: 30px;
+    margin-bottom: 60px;
 }
 
 #main .row h3 {
-  font-size: 23px;
-  margin-bottom: 20px;
+    font-size: 23px;
+    margin-bottom: 20px;
 }
 
-
 .panel {
-  border-left: 3px solid #2e91f7;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+    border-left: 3px solid #2e91f7;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 .media-body h4 {
-  display: inline;
-  float: right;
+    display: inline;
+    float: right;
 }
 
 .media-body .btn-primary,
 .media-body .btn-danger {
-  position: relative;
-  border: none;
-  float: right;
-  /*bottom: -15px;*/
+    position: relative;
+    border: none;
+    float: right;
+    /*bottom: -15px;*/
 }
 
 .media-body .btn-primary {
-  background-color: #2e91f7;
+    background-color: #2e91f7;
 }
 
 .media-body .btn-primary:hover {
-  background-color: #1975d4;
+    background-color: #1975d4;
 }
 
 .date {
-  color: #7e7c7c;
+    color: #7e7c7c;
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
-.pagination > .active > a {
-  background-color: #2e91f7;
-  border-color: #2e91f7;
+.pagination>.active>a {
+    background-color: #2e91f7;
+    border-color: #2e91f7;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
 }

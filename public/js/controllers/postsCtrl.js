@@ -3,8 +3,8 @@ angular.module('pettts')
 .controller('postsCtrl', function($scope, $window, $timeout, $location, postsService, reviewPostService) {
 
     $scope.token = $window.sessionStorage.accessToken;
-
-    postsService.get().then(function(posts) {
+    $scope.loading = true;
+    postsService.get($scope).then(function(posts) {
         $scope.posts = posts
         if (!$scope.posts) {
             $scope.notFound = true;
@@ -20,7 +20,7 @@ angular.module('pettts')
                     post.username = response.data
                 });
             });
-
+            $scope.loading = false;
             $scope.submitVote = function(id, vote) {
                 if (vote != "up" && vote != "down") {
                     $scope.postMessage = "You need to choose an option before you rate this post.";

@@ -5,6 +5,7 @@ angular.module('pettts')
         $scope.givenUsername = $routeParams.username
         $scope.token = $window.sessionStorage.accessToken;
         $scope.myUsername = $window.sessionStorage.username;
+        $scope.loading = true;
         ////////////////////////////////////
         ///////////////////////////////////
 
@@ -271,7 +272,7 @@ angular.module('pettts')
                             post.username = response.data
                         });
                     });
-
+                    $scope.loading = false;
                     $scope.submitVote = function(id, vote) {
                         if (vote != "up" && vote != "down") {
                             $scope.postMessage = "You need to choose an option before you rate this post.";

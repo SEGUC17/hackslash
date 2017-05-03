@@ -20,6 +20,7 @@ p {
     border-radius: 0px;
     border-right: 1px solid rgb(0, 70, 160);
 }
+
 #delete-btn {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -60,13 +61,13 @@ p {
 }
 
 .btn-link {
-     background:none!important;
-     color:rgb(0, 100, 210);
-     border:none; 
-     padding:0!important;
-     font: inherit;
-     border-bottom:1px solid #444; 
-     cursor: pointer;
+    background: none!important;
+    color: rgb(0, 100, 210);
+    border: none;
+    padding: 0!important;
+    font: inherit;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
 }
 
 .modal-content {
@@ -74,7 +75,7 @@ p {
 }
 
 .modal-body {
-    width:90%;
+    width: 90%;
     margin-left: 40px;
 }
 
@@ -93,16 +94,14 @@ p {
 .col-md-9 {
     margin-bottom: 10px;
 }
+
 .glyphicon-star-full:before {
-            color: gray;
+    color: gray;
 }
 
 .glyphicon-star:before {
-            color: gold;
-
+    color: gold;
 }
-
-
 
 .glyphicon-envelope:before {
     padding-right: 2px;
@@ -110,4 +109,10 @@ p {
 
 .glyphicon-phone:before {
     padding-right: 2px;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
 }
