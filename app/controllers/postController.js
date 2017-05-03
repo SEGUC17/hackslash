@@ -797,8 +797,27 @@ let postController = {
                 }
             }
         });
+    },
+    // client wants to report a post.
+    report : function (req, res) {
+      var id = req.body.id;
+      var message = req.body.message;
+      var email = req.decoded._doc.email;
+      Post.findOne({ _id: id }, function(err, post) {
+         if (err || !post) { res.json({success : false, message : "Something Wrong Happened."}); }
+         else {
+            var ownerEmail = post.ownerEmail;
+            if(email == ownerEmail) {res.json({success : false, message : "You Can't Report you own Post."}); return;}
+            var oldReports = post.reports;
+            oldReports.forEach(function(report) {
+               if (report.email == email) {res.json({success : false, message : "This user reported this post before."}); return;}
+            });
+            post.reports.push({'email' : email, 'message' : message});
+            post.save();
+            res.json({success : true, message : "Post Reported Successfully"});
+         }
+      });
     }
-
 }
 
 module.exports = postController;

@@ -22,7 +22,7 @@ router.post('/post/sell', middleware.isLoggedIn, type, postController.sellPost);
 router.post('/post/mate', middleware.isLoggedIn, type, postController.matePost);
 router.get('/post/specificUser', postController.findOwnerByPostID);
 router.get('/post/delete', middleware.isLoggedIn,postController.deletePost);
-
+router.post('/post/report', middleware.isLoggedIn, type, postController.report);
 
 
 module.exports = router;
