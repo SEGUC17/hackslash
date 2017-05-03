@@ -821,16 +821,28 @@ let postController = {
     // Admin wants to delete Reports of a Specific post.
     deleteReports : function (req, res) {
       var id = req.headers['id']; // post ID
-      console.log(id);
       Post.findOne({ _id: id }, function(err, post) {
          if (err || !post) { res.json({success : false, message : "Something Wrong Happened."}); }
          else {
-            post.reports = {};
+            post.reports = [];
             post.save();
             res.json({success : true, message : "Reports Deleted Successfully"});
          }
       });
-    }
+   },
+   viewReportedPosts : function (req, res) {
+      Post.find({  }, function(err, posts) {
+         if (err || !posts) { res.json({success : false, message : "Something Wrong Happened."}); }
+         else {
+            var reportedPosts = [];
+            posts.forEach(function(post) {
+               if (post.reports.length != 0) {reportedPosts.push(post);}
+            });
+
+            res.json({success : true, reportedPosts : reportedPosts});
+         }
+      });
+   }
 }
 
 module.exports = postController;

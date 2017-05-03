@@ -24,6 +24,7 @@ router.get('/post/specificUser', postController.findOwnerByPostID);
 router.get('/post/delete', middleware.isLoggedIn,postController.deletePost);
 router.post('/post/report', middleware.isLoggedIn, postController.report);
 router.get('/post/deleteReports', middleware.isLoggedIn, postController.deleteReports);
+router.get('/post/viewReportedPosts', middleware.isLoggedIn, postController.viewReportedPosts);
 
 
 module.exports = router;
