@@ -3,7 +3,7 @@ angular.module('pettts')
 .controller('filterCtrl', function($scope, $location, $timeout, $window, $routeParams, filterService, reviewPostService) {
 
     $scope.token = $window.sessionStorage.accessToken;
-
+    $scope.loading = true;
     // getting the route parameter
     $scope.type = $routeParams.type
 
@@ -30,7 +30,7 @@ angular.module('pettts')
                     post.username = response.data
                 });
             });
-
+            $scope.loading = false;
             $scope.submitVote = function(id, vote) {
                 if (vote != "up" && vote != "down") {
                     $scope.postMessage = "You need to choose an option before you rate this post.";

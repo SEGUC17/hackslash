@@ -3,7 +3,7 @@ angular.module('pettts')
 .controller('searchCtrl', function($scope, $location, $window, searchService, $location, $routeParams) {
 
     $scope.token = $window.sessionStorage.accessToken;
-
+    $scope.loading = true;
     // go search for the post
 
     //set the search key in the scope
@@ -12,11 +12,11 @@ angular.module('pettts')
     //pass the request to the service
     searchService.search($scope);
 
-    $scope.goTo = function(path){
-      $location.path('/' + path);
+    $scope.goTo = function(path) {
+        $location.path('/' + path);
     }
 
-    $scope.visitProfile = function(username){
-      $location.path('/profile/' + username);
+    $scope.visitProfile = function(username) {
+        $location.path('/profile/' + username);
     }
 });
