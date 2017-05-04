@@ -188,15 +188,16 @@
                                                                 <!-- up & down vote form -->
                                                                 <form ng-submit="submitVote(post._id,vote)" ng-if="!myProfile">
                                                                     <label class="radio-inline">
-                                                                    <input type="radio" value="up" ng-model="vote">Up-vote
-                                                                </label>
+                                                                        <input type="radio" value="up" ng-model="vote">Up-vote
+                                                                    </label>
                                                                     <label class="radio-inline">
-                                                                    <input type="radio" value="down" ng-model="vote">Down-vote
-                                                                </label>
+                                                                        <input type="radio" value="down" ng-model="vote">Down-vote
+                                                                    </label>
                                                                     <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
-                                                                    <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div>
+                                                                    <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div><br>
                                                                 </form>
                                                                 <button class="btn btn-success btn-block" ng-if="myProfile" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>
+                                                                <button type="button" ng-if="!myProfile" ng-click="openReport()" class="btn btn-danger btn-block">Report</button>
                                                             </div>
                                                             <div class="col-md-9" id="right-col">
                                                                 <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
@@ -230,9 +231,22 @@
                                                     </div>
                                                 </div>
                                                 <!--  End of modal-body -->
-
+                                                <div ng-if="report">
+                                                    <hr>
+                                                    <div class="modal-body" ng-controller="reportCtrl" id="report-modal">
+                                                        <h2>Write your Report Below</h2>
+                                                        <div class="modal-body">
+                                                            <form name="messageForm" ng-submit="report(post._id)">
+                                                                <textarea name="content" ng-model="reportMessage" placeholder="Write your report here." rows="5" class="form-control"></textarea>
+                                                                <button type="submit" class="btn btn-success" id="report-btn">Report</button>
+                                                                <div ng-if="reportWarning" class="alert alert-danger">{{reportWarning}}</div>
+                                                                <div ng-if="reportSuccess" class="alert alert-info">{{reportSuccess}}</div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" ng-click="close()" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
 
                                             </div>

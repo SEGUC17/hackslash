@@ -38,6 +38,15 @@ app.controller('advSearchCtrl', function($scope, $http, $window, $routeParams, $
                 }
                 $timeout(function() { $scope.postMessage = undefined }, 4000);
             }
+
+            $scope.openReport = function() {
+                $scope.report = !$scope.report;
+            };
+
+            $scope.close = function() {
+                $scope.report = false;
+            }
+
             $scope.pageSize = 7;
             $scope.currentPage = 1;
             $scope.maxSize = 5;

@@ -297,6 +297,14 @@ angular.module('pettts')
                         $location.path('/profile/' + username);
                     }
 
+                    $scope.openReport = function() {
+                        $scope.report = !$scope.report;
+                    };
+
+                    $scope.close = function() {
+                        $scope.report = false;
+                    }
+
                     //set page attributes
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;

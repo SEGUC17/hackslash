@@ -36,16 +36,24 @@ angular.module('pettts')
                     });
                     $scope.loading = false;
                     $scope.submitVote = function(id, vote) {
-                            if (vote != "up" && vote != "down") {
-                                $scope.postMessage = "You need to choose an option before you rate this post.";
-                            } else {
-                                reviewPostService.vote(id, vote).then(function(response) {
-                                    $scope.postMessage = response;
-                                })
-                            }
-                            $timeout(function() { $scope.postMessage = undefined }, 4000);
+                        if (vote != "up" && vote != "down") {
+                            $scope.postMessage = "You need to choose an option before you rate this post.";
+                        } else {
+                            reviewPostService.vote(id, vote).then(function(response) {
+                                $scope.postMessage = response;
+                            })
                         }
-                        // Making Pagination
+                        $timeout(function() { $scope.postMessage = undefined }, 4000);
+                    }
+
+                    $scope.openReport = function() {
+                        $scope.report = !$scope.report;
+                    };
+
+                    $scope.close = function() {
+                        $scope.report = false;
+                    }
+                    // Making Pagination
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;
                     $scope.maxSize = 5;
