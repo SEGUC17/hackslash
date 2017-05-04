@@ -471,7 +471,6 @@ let postController = {
     sellPost: function(req, res) { //sell
         //exceptions
 
-
         ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
@@ -505,6 +504,12 @@ let postController = {
             }
             if (post.type != 1) {
                 res.status(403).json("not the same type");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -574,6 +579,12 @@ let postController = {
                     fs.unlinkSync(req.file.path);
                 return;
             }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
             post.ownerEmail = ownerEmailDecoded; //save to owner's email
 
             if (req.file)
@@ -626,6 +637,12 @@ let postController = {
             }
             if (post.type != 2) {
                 res.status(403).json("wrong post type ");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -684,6 +701,12 @@ let postController = {
             }
             if (post.type != 5) {
                 res.status(403).json("wrong post type ");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -747,6 +770,12 @@ let postController = {
                     fs.unlinkSync(req.file.path);
                 return;
             }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
             post.ownerEmail = ownerEmailDecoded;
 
             if (req.file)
@@ -801,6 +830,12 @@ let postController = {
             }
             if (post.type != 6 || !post.speciesB || !post.kindB || !post.genderB) {
                 res.status(403).json("not exchange post");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
