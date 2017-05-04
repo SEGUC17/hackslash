@@ -55,9 +55,9 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-            Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) { //add ownerEmail here
+            Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) {
                 if (err) {
-                    res.status(403).json("project not found or not your project");
+                    res.status(403).json("post not found or not your post");
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
@@ -114,7 +114,7 @@ let postController = {
                             if (req.file)
                                 fs.unlinkSync(req.file.path);
                         } else {
-                            res.status(200).json("update succ");
+                            res.status(200).json("update successful");
                         }
                     })
                 }
@@ -138,18 +138,36 @@ let postController = {
             }
             var ownerEmailDecoded = req.decoded._doc.email;
             var postID = req.headers['id'];
-            Post.findOne({ _id: postID, ownerEmail: ownerEmailDecoded }, function(err, post) {
-                if (err) {
-                    res.status(403).json("Post not found or not your Post");
-                } else {
-                    if (!post) {
+            var username = req.decoded._doc.username;
+            if (username == "admin") {
+                Post.findOne({ _id: postID }, function(err, post) {
+                    if (err) {
                         res.status(403).json("Post not found or not your Post");
                     } else {
-                        post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
-                        res.json({ "message": "The post has been deleted " });
+                        if (!post) {
+                            res.status(403).json("Post not found or not your Post");
+                        } else {
+                            post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
+                            res.json({ "message": "The post has been deleted " });
+                        }
                     }
-                }
-            });
+                });
+
+
+            } else {
+                Post.findOne({ _id: postID, ownerEmail: ownerEmailDecoded }, function(err, post) {
+                    if (err) {
+                        res.status(403).json("Post not found or not your Post");
+                    } else {
+                        if (!post) {
+                            res.status(403).json("Post not found or not your Post");
+                        } else {
+                            post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
+                            res.json({ "message": "The post has been deleted " });
+                        }
+                    }
+                });
+            }
         }
     },
     // Searching posts by kind and species
