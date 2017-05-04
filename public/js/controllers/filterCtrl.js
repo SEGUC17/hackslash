@@ -43,6 +43,14 @@ angular.module('pettts')
                 $timeout(function() { $scope.postMessage = undefined }, 4000);
             }
 
+            $scope.openReport = function() {
+                $scope.report = !$scope.report;
+            };
+
+            $scope.close = function() {
+                $scope.report = false;
+            }
+
             //set page attributes
             $scope.pageSize = 7;
             $scope.currentPage = 1;

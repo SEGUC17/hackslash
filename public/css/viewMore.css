@@ -26,6 +26,10 @@
   margin-top: 20px;
 }
 
+#report-modal {
+  margin: 0 50px 0 50px;
+}
+
 .strike {
   display: block;
   text-align: center;

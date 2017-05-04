@@ -797,8 +797,67 @@ let postController = {
                 }
             }
         });
+    },
+    // client wants to report a post.
+    report : function (req, res) {
+        var id = req.body.id;
+        var message = req.body.message;
+        var email = req.decoded._doc.email;
+        Post.findOne({ _id: id }, function(err, post) {
+            if (err || !post) {
+                res.json({success : false, message : "Something Wrong Happened."});
+            }else{
+                var ownerEmail = post.ownerEmail;
+                if(email == ownerEmail) {
+                    res.json({success : false, message : "You Can't Report you own Post."});
+                    return;
+                }
+                var oldReports = post.reports;
+                var entered = false;
+                oldReports.forEach(function(report) {
+                    if (report.email == email) {
+                        res.json({success : false, message : "This user reported this post before."});
+                        entered = true;
+                        return;
+                    }
+                });
+                if (!entered) {
+                    post.reports.push({'email' : email, 'message' : message});
+                    post.save();
+                    res.json({success : true, message : "Post Reported Successfully"});
+                }
+            }
+        });
+    },
+    // Admin wants to delete Reports of a Specific post.
+    deleteReports : function (req, res) {
+        var id = req.headers['id']; // post ID
+        Post.findOne({ _id: id }, function(err, post) {
+            if (err || !post) {
+                res.json({success : false, message : "Something Wrong Happened."});
+            }else{
+                post.reports = [];
+                post.save();
+                res.json({success : true, message : "Reports Deleted Successfully"});
+            }
+        });
+    },
+    //Get all posts that are reported for admin to view
+    viewReportedPosts : function (req, res) {
+        Post.find({  }, function(err, posts) {
+            if (err || !posts) {
+                res.json({success : false, message : "Something Wrong Happened."});
+            }else{
+                var reportedPosts = [];
+                posts.forEach(function(post) {
+                    if (post.reports.length != 0) {
+                        reportedPosts.push(post);
+                    }
+                });
+                res.json({success : true, reportedPosts : reportedPosts});
+            }
+        });
     }
-
 }
 
 module.exports = postController;

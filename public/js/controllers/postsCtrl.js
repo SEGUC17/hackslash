@@ -5,6 +5,7 @@ angular.module('pettts')
     $scope.token = $window.sessionStorage.accessToken;
     $scope.loading = true;
     postsService.get($scope).then(function(posts) {
+        $scope.report = false;
         $scope.posts = posts
         if (!$scope.posts) {
             $scope.notFound = true;
@@ -33,6 +34,14 @@ angular.module('pettts')
                     })
                 }
                 $timeout(function() { $scope.postMessage = undefined }, 4000);
+            };
+
+            $scope.openReport = function() {
+                $scope.report = !$scope.report;
+            };
+
+            $scope.close = function() {
+                $scope.report = false;
             }
 
             //setting page attributes
