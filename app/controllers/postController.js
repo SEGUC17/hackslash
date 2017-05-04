@@ -428,7 +428,10 @@ let postController = {
             var userMail = req.decoded._doc.email;
             var id = req.header("id");
             var vote = req.body.vote;
-
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin like or dislike posts");
+                return;
+            }
             Post.findOne({ _id: id }, function(err, post) {
                 if (post == null) {
                     res.json("Post Doesn't Exist");
