@@ -40,6 +40,10 @@ angular.module('pettts')
                 $scope.report = !$scope.report;
             };
 
+            $scope.close = function() {
+                $scope.report = false;
+            }
+
             //setting page attributes
             $scope.pageSize = 7;
             $scope.currentPage = 1;

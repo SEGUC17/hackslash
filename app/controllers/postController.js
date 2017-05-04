@@ -809,12 +809,15 @@ let postController = {
             var ownerEmail = post.ownerEmail;
             if(email == ownerEmail) {res.json({success : false, message : "You Can't Report you own Post."}); return;}
             var oldReports = post.reports;
+            var entered = false;
             oldReports.forEach(function(report) {
-               if (report.email == email) {res.json({success : false, message : "This user reported this post before."}); return;}
+               if (report.email == email) {res.json({success : false, message : "This user reported this post before."}); entered = true; return;}
             });
-            post.reports.push({'email' : email, 'message' : message});
-            post.save();
-            res.json({success : true, message : "Post Reported Successfully"});
+            if (!entered) {
+               post.reports.push({'email' : email, 'message' : message});
+               post.save();
+               res.json({success : true, message : "Post Reported Successfully"});
+            }
          }
       });
    },
