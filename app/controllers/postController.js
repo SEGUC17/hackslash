@@ -906,6 +906,11 @@ let postController = {
         var id = req.body.id;
         var message = req.body.message;
         var email = req.decoded._doc.email;
+
+        if (req.decoded._doc.username == "admin") {
+            res.status(403).json("admin cannot report posts");
+            return;
+        }
         Post.findOne({ _id: id }, function(err, post) {
             if (err || !post) {
                 res.json({ success: false, message: "Something Wrong Happened." });
@@ -935,6 +940,10 @@ let postController = {
     // Admin wants to delete Reports of a Specific post.
     deleteReports: function(req, res) {
         var id = req.headers['id']; // post ID
+        if (req.decoded._doc.username != "admin") {
+            res.status(403).json("only the admin can do that");
+            return;
+        }
         Post.findOne({ _id: id }, function(err, post) {
             if (err || !post) {
                 res.json({ success: false, message: "Something Wrong Happened." });

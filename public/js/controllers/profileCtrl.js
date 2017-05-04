@@ -195,8 +195,13 @@ angular.module('pettts')
             profileService.deletePost($scope, id, un);
         }
 
-        ////////////////////////////////////
-        ///////////////////////////////////
+        $scope.deleteReports = function(id) {
+                var un = $scope.userInfo.username;
+
+                profileService.deleteReports($scope, id, un);
+            }
+            ////////////////////////////////////
+            ///////////////////////////////////
 
         //logout and say bye
         $scope.logout = function() {
