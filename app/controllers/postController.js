@@ -242,6 +242,7 @@ let postController = {
     searchAndFilterPosts: function(req, res) {
         var filterType;
         var kindQuery = req.header("kind");
+        var filter = req.header("filter");
         if (kindQuery != undefined)
             kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
@@ -270,41 +271,87 @@ let postController = {
                 filterType = 1;
         }
         if (kindQuery != undefined && speciesQuery != undefined) {
-            Post.find({ type: filterType, kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
-                if (err) {
-                    res.json(err.message);
-                } else {
-                    if (posts.length == 0) {
-                        res.status(404).json({ "message": "No Posts Exist" });
+            if (filterType != undefined) {
+                Post.find({ type: filterType, kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
                     } else {
-                        res.status(200).json({ posts });
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                Post.find({ kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
+                    } else {
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
+                    }
+                })
+            }
+
+
         } else if (kindQuery != undefined) {
-            Post.find({ type: filterType, kind: { $regex: kindQuery } }, function(err, posts) {
-                if (err) {
-                    res.json(err.message);
-                } else {
-                    if (posts.length == 0) {
-                        res.status(404).json({ "message": "No Posts Exist" });
+            if (filter != undefined) {
+                Post.find({ type: filterType, kind: { $regex: kindQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
                     } else {
-                        res.status(200).json({ posts });
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                Post.find({ kind: { $regex: kindQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
+                    } else {
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
+                    }
+                })
+            }
         } else if (speciesQuery != undefined) {
-            Post.find({ type: filterType, species: { $regex: speciesQuery } }, function(err, posts) {
-                if (err) {
-                    res.json(err.message);
-                } else {
-                    if (posts.length == 0) {
-                        res.status(404).json({ "message": "No Posts Exist" });
+            if (filter != undefined) {
+                Post.find({ type: filterType, species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
                     } else {
-                        res.status(200).json({ posts });
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                Post.find({ species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
+                    } else {
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
+                    }
+                })
+
+
+            }
         } else {
             res.json({ "message": "Please enter a search parameter." });
         }
@@ -799,62 +846,62 @@ let postController = {
         });
     },
     // client wants to report a post.
-    report : function (req, res) {
+    report: function(req, res) {
         var id = req.body.id;
         var message = req.body.message;
         var email = req.decoded._doc.email;
         Post.findOne({ _id: id }, function(err, post) {
             if (err || !post) {
-                res.json({success : false, message : "Something Wrong Happened."});
-            }else{
+                res.json({ success: false, message: "Something Wrong Happened." });
+            } else {
                 var ownerEmail = post.ownerEmail;
-                if(email == ownerEmail) {
-                    res.json({success : false, message : "You Can't Report you own Post."});
+                if (email == ownerEmail) {
+                    res.json({ success: false, message: "You Can't Report you own Post." });
                     return;
                 }
                 var oldReports = post.reports;
                 var entered = false;
                 oldReports.forEach(function(report) {
                     if (report.email == email) {
-                        res.json({success : false, message : "This user reported this post before."});
+                        res.json({ success: false, message: "This user reported this post before." });
                         entered = true;
                         return;
                     }
                 });
                 if (!entered) {
-                    post.reports.push({'email' : email, 'message' : message});
+                    post.reports.push({ 'email': email, 'message': message });
                     post.save();
-                    res.json({success : true, message : "Post Reported Successfully"});
+                    res.json({ success: true, message: "Post Reported Successfully" });
                 }
             }
         });
     },
     // Admin wants to delete Reports of a Specific post.
-    deleteReports : function (req, res) {
+    deleteReports: function(req, res) {
         var id = req.headers['id']; // post ID
         Post.findOne({ _id: id }, function(err, post) {
             if (err || !post) {
-                res.json({success : false, message : "Something Wrong Happened."});
-            }else{
+                res.json({ success: false, message: "Something Wrong Happened." });
+            } else {
                 post.reports = [];
                 post.save();
-                res.json({success : true, message : "Reports Deleted Successfully"});
+                res.json({ success: true, message: "Reports Deleted Successfully" });
             }
         });
     },
     //Get all posts that are reported for admin to view
-    viewReportedPosts : function (req, res) {
-        Post.find({  }, function(err, posts) {
+    viewReportedPosts: function(req, res) {
+        Post.find({}, function(err, posts) {
             if (err || !posts) {
-                res.json({success : false, message : "Something Wrong Happened."});
-            }else{
+                res.json({ success: false, message: "Something Wrong Happened." });
+            } else {
                 var reportedPosts = [];
                 posts.forEach(function(post) {
                     if (post.reports.length != 0) {
                         reportedPosts.push(post);
                     }
                 });
-                res.json({success : true, reportedPosts : reportedPosts});
+                res.json({ success: true, reportedPosts: reportedPosts });
             }
         });
     }
