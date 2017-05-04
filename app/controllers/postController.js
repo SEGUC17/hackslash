@@ -889,22 +889,7 @@ let postController = {
             }
         });
     },
-    //Get all posts that are reported for admin to view
-    viewReportedPosts: function(req, res) {
-        Post.find({}, function(err, posts) {
-            if (err || !posts) {
-                res.json({ success: false, message: "Something Wrong Happened." });
-            } else {
-                var reportedPosts = [];
-                posts.forEach(function(post) {
-                    if (post.reports.length != 0) {
-                        reportedPosts.push(post);
-                    }
-                });
-                res.json({ success: true, reportedPosts: reportedPosts });
-            }
-        });
-    }
+
 }
 
 module.exports = postController;

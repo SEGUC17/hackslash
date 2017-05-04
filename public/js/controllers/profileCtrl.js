@@ -240,6 +240,7 @@ angular.module('pettts')
         ///////////////////////////////////
 
         // to view my profile
+        //or if  I am an admin get the reported posts for me
         profileService.view($scope.givenUsername).then(function(response) {
             $scope.success = response.success;
             if ($scope.success == false) {
