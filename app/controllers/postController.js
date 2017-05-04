@@ -429,7 +429,7 @@ let postController = {
             var id = req.header("id");
             var vote = req.body.vote;
             if (req.decoded._doc.username == "admin") {
-                res.status(403).json("admin like or dislike posts");
+                res.json("admin cannot like or dislike posts");
                 return;
             }
             Post.findOne({ _id: id }, function(err, post) {
