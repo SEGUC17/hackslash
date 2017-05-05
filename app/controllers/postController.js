@@ -55,9 +55,9 @@ let postController = {
 
             if (req.file)
                 post.image = req.file.path;
-            Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) { //add ownerEmail here
+            Post.findOne({ _id: id, ownerEmail: ownerEmailDecoded }, function(err, foundPost) {
                 if (err) {
-                    res.status(403).json("project not found or not your project");
+                    res.status(403).json("post not found or not your post");
                     if (req.file)
                         fs.unlinkSync(req.file.path);
                 } else {
@@ -114,7 +114,7 @@ let postController = {
                             if (req.file)
                                 fs.unlinkSync(req.file.path);
                         } else {
-                            res.status(200).json("update succ");
+                            res.status(200).json("update successful");
                         }
                     })
                 }
@@ -138,18 +138,36 @@ let postController = {
             }
             var ownerEmailDecoded = req.decoded._doc.email;
             var postID = req.headers['id'];
-            Post.findOne({ _id: postID, ownerEmail: ownerEmailDecoded }, function(err, post) {
-                if (err) {
-                    res.status(403).json("Post not found or not your Post");
-                } else {
-                    if (!post) {
+            var username = req.decoded._doc.username;
+            if (username == "admin") {
+                Post.findOne({ _id: postID }, function(err, post) {
+                    if (err) {
                         res.status(403).json("Post not found or not your Post");
                     } else {
-                        post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
-                        res.json({ "message": "The post has been deleted " });
+                        if (!post) {
+                            res.status(403).json("Post not found or not your Post");
+                        } else {
+                            post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
+                            res.json({ "message": "The post has been deleted " });
+                        }
                     }
-                }
-            });
+                });
+
+
+            } else {
+                Post.findOne({ _id: postID, ownerEmail: ownerEmailDecoded }, function(err, post) {
+                    if (err) {
+                        res.status(403).json("Post not found or not your Post");
+                    } else {
+                        if (!post) {
+                            res.status(403).json("Post not found or not your Post");
+                        } else {
+                            post.remove({ _id: postID, ownerEmail: ownerEmailDecoded });
+                            res.json({ "message": "The post has been deleted " });
+                        }
+                    }
+                });
+            }
         }
     },
     // Searching posts by kind and species
@@ -242,6 +260,7 @@ let postController = {
     searchAndFilterPosts: function(req, res) {
         var filterType;
         var kindQuery = req.header("kind");
+        var filter = req.header("filter");
         if (kindQuery != undefined)
             kindQuery = kindQuery.toLowerCase();
         var speciesQuery = req.header("species");
@@ -270,41 +289,87 @@ let postController = {
                 filterType = 1;
         }
         if (kindQuery != undefined && speciesQuery != undefined) {
-            Post.find({ type: filterType, kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
-                if (err) {
-                    res.json(err.message);
-                } else {
-                    if (posts.length == 0) {
-                        res.status(404).json({ "message": "No Posts Exist" });
+            if (filterType != undefined) {
+                Post.find({ type: filterType, kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
                     } else {
-                        res.status(200).json({ posts });
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                Post.find({ kind: { $regex: kindQuery }, species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
+                    } else {
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
+                    }
+                })
+            }
+
+
         } else if (kindQuery != undefined) {
-            Post.find({ type: filterType, kind: { $regex: kindQuery } }, function(err, posts) {
-                if (err) {
-                    res.json(err.message);
-                } else {
-                    if (posts.length == 0) {
-                        res.status(404).json({ "message": "No Posts Exist" });
+            if (filter != undefined) {
+                Post.find({ type: filterType, kind: { $regex: kindQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
                     } else {
-                        res.status(200).json({ posts });
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                Post.find({ kind: { $regex: kindQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
+                    } else {
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
+                    }
+                })
+            }
         } else if (speciesQuery != undefined) {
-            Post.find({ type: filterType, species: { $regex: speciesQuery } }, function(err, posts) {
-                if (err) {
-                    res.json(err.message);
-                } else {
-                    if (posts.length == 0) {
-                        res.status(404).json({ "message": "No Posts Exist" });
+            if (filter != undefined) {
+                Post.find({ type: filterType, species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
                     } else {
-                        res.status(200).json({ posts });
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                Post.find({ species: { $regex: speciesQuery } }, function(err, posts) {
+                    if (err) {
+                        res.json(err.message);
+                    } else {
+                        if (posts.length == 0) {
+                            res.status(404).json({ "message": "No Posts Exist" });
+                        } else {
+                            res.status(200).json({ posts });
+                        }
+                    }
+                })
+
+
+            }
         } else {
             res.json({ "message": "Please enter a search parameter." });
         }
@@ -363,7 +428,10 @@ let postController = {
             var userMail = req.decoded._doc.email;
             var id = req.header("id");
             var vote = req.body.vote;
-
+            if (req.decoded._doc.username == "admin") {
+                res.json("admin cannot like or dislike posts");
+                return;
+            }
             Post.findOne({ _id: id }, function(err, post) {
                 if (post == null) {
                     res.json("Post Doesn't Exist");
@@ -406,7 +474,6 @@ let postController = {
     sellPost: function(req, res) { //sell
         //exceptions
 
-
         ///handle not supported image file
         if (req.file) {
             var checkImage = req.file.originalname;
@@ -440,6 +507,12 @@ let postController = {
             }
             if (post.type != 1) {
                 res.status(403).json("not the same type");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -509,6 +582,12 @@ let postController = {
                     fs.unlinkSync(req.file.path);
                 return;
             }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
             post.ownerEmail = ownerEmailDecoded; //save to owner's email
 
             if (req.file)
@@ -561,6 +640,12 @@ let postController = {
             }
             if (post.type != 2) {
                 res.status(403).json("wrong post type ");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -619,6 +704,12 @@ let postController = {
             }
             if (post.type != 5) {
                 res.status(403).json("wrong post type ");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -682,6 +773,12 @@ let postController = {
                     fs.unlinkSync(req.file.path);
                 return;
             }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
             post.ownerEmail = ownerEmailDecoded;
 
             if (req.file)
@@ -736,6 +833,12 @@ let postController = {
             }
             if (post.type != 6 || !post.speciesB || !post.kindB || !post.genderB) {
                 res.status(403).json("not exchange post");
+                if (req.file)
+                    fs.unlinkSync(req.file.path);
+                return;
+            }
+            if (req.decoded._doc.username == "admin") {
+                res.status(403).json("admin cannot add posts");
                 if (req.file)
                     fs.unlinkSync(req.file.path);
                 return;
@@ -799,65 +902,59 @@ let postController = {
         });
     },
     // client wants to report a post.
-    report : function (req, res) {
+    report: function(req, res) {
         var id = req.body.id;
         var message = req.body.message;
         var email = req.decoded._doc.email;
+        var username = req.decoded._doc.username;
+        if (req.decoded._doc.username == "admin") {
+            res.status(403).json("admin cannot report posts");
+            return;
+        }
         Post.findOne({ _id: id }, function(err, post) {
             if (err || !post) {
-                res.json({success : false, message : "Something Wrong Happened."});
-            }else{
+                res.json({ success: false, message: "Something Wrong Happened." });
+            } else {
                 var ownerEmail = post.ownerEmail;
-                if(email == ownerEmail) {
-                    res.json({success : false, message : "You Can't Report you own Post."});
+                if (email == ownerEmail) {
+                    res.json({ success: false, message: "You Can't Report you own Post." });
                     return;
                 }
                 var oldReports = post.reports;
                 var entered = false;
                 oldReports.forEach(function(report) {
                     if (report.email == email) {
-                        res.json({success : false, message : "This user reported this post before."});
+                        res.json({ success: false, message: "This user reported this post before." });
                         entered = true;
                         return;
                     }
                 });
                 if (!entered) {
-                    post.reports.push({'email' : email, 'message' : message});
+                    post.reports.push({ 'email': email, 'username': username, 'message': message });
                     post.save();
-                    res.json({success : true, message : "Post Reported Successfully"});
+                    res.json({ success: true, message: "Post Reported Successfully" });
                 }
             }
         });
     },
     // Admin wants to delete Reports of a Specific post.
-    deleteReports : function (req, res) {
+    deleteReports: function(req, res) {
         var id = req.headers['id']; // post ID
+        if (req.decoded._doc.username != "admin") {
+            res.status(403).json("only the admin can do that");
+            return;
+        }
         Post.findOne({ _id: id }, function(err, post) {
             if (err || !post) {
-                res.json({success : false, message : "Something Wrong Happened."});
-            }else{
+                res.json({ success: false, message: "Something Wrong Happened." });
+            } else {
                 post.reports = [];
                 post.save();
-                res.json({success : true, message : "Reports Deleted Successfully"});
+                res.json({ success: true, message: "Reports Deleted Successfully" });
             }
         });
     },
-    //Get all posts that are reported for admin to view
-    viewReportedPosts : function (req, res) {
-        Post.find({  }, function(err, posts) {
-            if (err || !posts) {
-                res.json({success : false, message : "Something Wrong Happened."});
-            }else{
-                var reportedPosts = [];
-                posts.forEach(function(post) {
-                    if (post.reports.length != 0) {
-                        reportedPosts.push(post);
-                    }
-                });
-                res.json({success : true, reportedPosts : reportedPosts});
-            }
-        });
-    }
+
 }
 
 module.exports = postController;

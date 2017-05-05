@@ -70,10 +70,10 @@ angular.module('pettts')
                 };
             });
         },
-        
+
         ////////////////////////
         ////////////////////////
-        
+
         //Delete Function is used to delete the profile from the database .
         delete: function(password, $scope) {
             var request = {
@@ -148,7 +148,7 @@ angular.module('pettts')
                             $window.sessionStorage.username = user.username;
                     }
                     $window.location = '/profile/' + $window.sessionStorage.username;
-                },function error(response) {
+                }, function error(response) {
                     // An Error has occured .
                     $scope.messageUpload = response.data;
                 });
@@ -184,7 +184,7 @@ angular.module('pettts')
         ////////////////////////
 
         // For sending a single message to the user whose profile is being viewed.
-        sendMessage: function(messageWritten,senderUsername,receiverUsername) {
+        sendMessage: function(messageWritten, senderUsername, receiverUsername) {
             //Initializing request
             var request = {
                 method: 'POST',
@@ -215,21 +215,38 @@ angular.module('pettts')
         ////////////////////////
 
         // Delete Function is used to delete an existing post in the database
-        deletePost: function($scope,postId ,un) {
+        deletePost: function($scope, postId, un) {
 
             $http.get('/post/delete', {
-            transformRequest: angular.indentity,
-            headers: {
-                'Content-Type': undefined,
-                'x-access-token': userToken ,
-                'id':postId
-            }
+                transformRequest: angular.indentity,
+                headers: {
+                    'Content-Type': undefined,
+                    'x-access-token': userToken,
+                    'id': postId
+                }
             }).then(function successCallback(response) {
-             $window.location = '/profile/' + un;
-          }, function errorCallback(response) {
-              $scope.messageDeleted = "An Error happened while deleting the post ";
-              return response;
-          });
+                $window.location = '/profile/' + un;
+            }, function errorCallback(response) {
+                $scope.messageDeleted = "An Error happened while deleting the post ";
+                return response;
+            });
+        },
+        deleteReports: function($scope, postId, un) {
+            $http.get('/post/deleteReports', {
+                transformRequest: angular.indentity,
+                headers: {
+                    'Content-Type': undefined,
+                    'x-access-token': userToken,
+                    'id': postId
+                }
+            }).then(function successCallback(response) {
+                $window.location = '/profile/' + un;
+            }, function errorCallback(response) {
+                $scope.messageDeleted = "An Error happened while deleting the reports ";
+                return response;
+            });
+
+
         }
     }
 });
