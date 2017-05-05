@@ -908,7 +908,7 @@ let postController = {
         var email = req.decoded._doc.email;
         var username = req.decoded._doc.username;
         if (req.decoded._doc.username == "admin") {
-            res.status(403).json("admin cannot report posts");
+            res.status(403).json({ success: false, message: "admin cannot report posts" });
             return;
         }
         Post.findOne({ _id: id }, function(err, post) {
@@ -932,7 +932,7 @@ let postController = {
                 if (!entered) {
                     post.reports.push({ 'email': email, 'username': username, 'message': message });
                     post.save();
-                    res.json({ success: true, message: "Post Reported Successfully" });
+                    res.status(200).json({ success: true, message: "Post Reported Successfully" });
                 }
             }
         });

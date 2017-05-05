@@ -62,6 +62,9 @@
                 <input type="file" name="profilePic" ng-File-Model="user.profilePic" class="form-control" />
             </div>
             <button type="submit" class="btn btn-success btn-block">Join now</button>
+            <div ng-if="loading">
+                <img class="displayed" src="../images/animal.gif" alt="loading">
+            </div>
             <div ng-if="message">
                 <div class="alert alert-danger" ng-if="error">{{ message }}</div>
                 <div class="alert alert-success" ng-if="!error">{{ message }}</div>

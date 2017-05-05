@@ -164,7 +164,7 @@
                             <div ng-if="report">
                                 <hr>
                                 <div class="modal-body" ng-controller="reportCtrl" id="report-modal">
-                                    <h2>Write your Report Below</h2>
+                                    <h2 id = "report-header">Write your Report Below</h2>
                                     <div class="modal-body">
                                         <form name="messageForm" ng-submit="report(post._id)">
                                             <textarea name="content" ng-model="reportMessage" placeholder="Write your report here." rows="5" class="form-control"></textarea>
