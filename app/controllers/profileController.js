@@ -118,7 +118,9 @@ let profileController = {
                                         myPosts.push(post);
                                     }
                                 });
-
+                                if (myPosts.length == 0) {
+                                    myPosts = "||&This user has no Posts yet.&||";
+                                }
                                 var profileData = { userProfileInfo, myPosts };
                                 res.status(200).json(profileData);
                             } else { //View User's info.

@@ -231,7 +231,7 @@ angular.module('pettts')
                 return response;
             });
         },
-        deleteReports: function($scope, id, un) {
+        deleteReports: function($scope, postId, un) {
             $http.get('/post/deleteReports', {
                 transformRequest: angular.indentity,
                 headers: {

@@ -6,6 +6,10 @@ angular.module('pettts')
         $scope.token = $window.sessionStorage.accessToken;
         $scope.myUsername = $window.sessionStorage.username;
         $scope.loading = true;
+
+        if ($scope.myUsername == "admin") {
+            $scope.admin = true;
+        }
         ////////////////////////////////////
         ///////////////////////////////////
 

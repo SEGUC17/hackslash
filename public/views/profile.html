@@ -84,11 +84,13 @@
                         <div class="col-md-9" style="text-align: left !important;">
                             <!-- Start of posts area -->
                             <div ng-if="!posts">
+                                <div ng-if="!admin">
+                                    <a id="new-btn" ng-if="myProfile" href="/post/new" class="btn btn-primary">Create a new post!</a>
+                                </div>
                                 <h3>
                                     This user has no posts yet.
                                 </h3>
                             </div>
-                            <a id="new-btn" ng-if="myProfile" href="/post/new" class="btn btn-primary">Create a new post!</a>
                             <hr>
                             <div ng-if="posts">
                                 <div ng-repeat="post in posts | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
@@ -116,7 +118,12 @@
                                                     <!-- link to show post page -->
 
                                                     <button type="button" ng-if="myProfile" ng-click="deletePost(post._id)" class="btn btn-danger" id="delete-btn">Delete</button>
-                                                    <button type="button" ng-if="myProfile" ng-click="editPost(post._id)" class="btn btn-primary" id="edit-btn">Edit</button>
+                                                    <div ng-if="!admin">
+                                                        <button type="button" ng-if="myProfile" ng-click="editPost(post._id)" class="btn btn-primary" id="edit-btn">Edit</button>
+                                                    </div>
+                                                    <div ng-if="admin">
+                                                        <button type="button" ng-if="myProfile" ng-click="deleteReports(post._id)" class="btn btn-primary" id="edit-btn">Delete reports</button>
+                                                    </div>
                                                     <button id="view-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
                                                 </div>
                                                 <!-- End of media-body -->
@@ -196,8 +203,12 @@
                                                                     <button type="submit" id="vote-btn" class="btn btn-success btn-block">Vote</button>
                                                                     <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div><br>
                                                                 </form>
-                                                                <button class="btn btn-success btn-block" ng-if="myProfile" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>
-                                                                <button type="button" ng-if="!myProfile" ng-click="openReport()" class="btn btn-danger btn-block">Report</button>
+                                                                <div ng-if="!admin">
+                                                                    <button class="btn btn-success btn-block" ng-if="myProfile" data-dismiss="modal" ng-click="editPost(post._id)">Edit Post</button>
+                                                                </div>
+                                                                <div ng-if="!admin">
+                                                                    <button type="button" ng-if="!myProfile" ng-click="openReport()" class="btn btn-danger btn-block">Report</button>
+                                                                </div>
                                                             </div>
                                                             <div class="col-md-9" id="right-col">
                                                                 <p><em class="date">{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></p>
@@ -225,6 +236,17 @@
                                                                 <div ng-if="post.note">
                                                                     <hr>
                                                                     <p><strong>notes about the post:</strong> {{post.note}}</p>
+                                                                </div>
+                                                                <div ng-if="admin">
+                                                                    <hr>
+                                                                    <h3>reports</h3>
+                                                                    <div ng-repeat="report in post.reports">
+                                                                        <button style="float: left;" class="btn-link" ng-click="goToProfile(report.username)" data-toggle="modal" data-target="#myModal-messages">
+                                                                      <b>{{report.username}}</b>
+                                                                    </button>
+                                                                        <p style="word-break: break-all; hyphens: auto; float: left;">&nbsp;{{report.message}}</p>
+                                                                        <hr>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

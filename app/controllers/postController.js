@@ -906,7 +906,7 @@ let postController = {
         var id = req.body.id;
         var message = req.body.message;
         var email = req.decoded._doc.email;
-
+        var username = req.decoded._doc.username;
         if (req.decoded._doc.username == "admin") {
             res.status(403).json("admin cannot report posts");
             return;
@@ -930,7 +930,7 @@ let postController = {
                     }
                 });
                 if (!entered) {
-                    post.reports.push({ 'email': email, 'message': message });
+                    post.reports.push({ 'email': email, 'username': username, 'message': message });
                     post.save();
                     res.json({ success: true, message: "Post Reported Successfully" });
                 }
