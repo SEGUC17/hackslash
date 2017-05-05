@@ -83,10 +83,10 @@
                         <!-- End of profile info -->
                         <div class="col-md-9" style="text-align: left !important;">
                             <!-- Start of posts area -->
+                            <div ng-if="!admin">
+                                <a id="new-btn" ng-if="myProfile" href="/post/new" class="btn btn-primary">Create a new post!</a>
+                            </div>
                             <div ng-if="!posts">
-                                <div ng-if="!admin">
-                                    <a id="new-btn" ng-if="myProfile" href="/post/new" class="btn btn-primary">Create a new post!</a>
-                                </div>
                                 <h3>
                                     This user has no posts yet.
                                 </h3>
@@ -143,7 +143,7 @@
 
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4>We are sorry, you must be logged in to view it more</h4>
+                                                    <h4>We are sorry, you must be logged in to view more</h4>
                                                 </div>
 
                                                 <div class="modal-body">
@@ -175,7 +175,7 @@
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <button type="button" ng-click="close()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     <h4>{{ post.type | stringifyType }}</h4>
                                                 </div>
 

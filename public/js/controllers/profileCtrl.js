@@ -9,6 +9,8 @@ angular.module('pettts')
 
         if ($scope.myUsername == "admin") {
             $scope.admin = true;
+        }else if($scope.givenUsername == "admin"){
+            $location.path('/profile/' + $scope.myUsername);
         }
         ////////////////////////////////////
         ///////////////////////////////////
