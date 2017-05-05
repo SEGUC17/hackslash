@@ -39,6 +39,11 @@ angular.module('pettts')
                 templateUrl: 'views/search.html',
                 controller: 'searchCtrl'
             })
+            //Advanced Search route
+            .when('/posts/advanced', {
+                templateUrl: 'views/advSearch.html',
+                controller: 'advSearchCtrl'
+            })
             //Payment routes
             //Stripe route
             .when('/charge', {
@@ -88,9 +93,8 @@ angular.module('pettts')
                 templateUrl: 'views/editProfile.html',
                 controller: 'profileCtrl'
             })
-
-        //Default route (Page not Found)
-        .when('/notFound', {
+            //Default route (Page not Found)
+            .when('/notFound', {
                 templateUrl: 'views/pageNotFound.html'
             })
             .otherwise({

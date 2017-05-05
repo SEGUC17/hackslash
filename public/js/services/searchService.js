@@ -19,6 +19,7 @@ angular.module('pettts')
                 if (response.data.posts == undefined) {
                     // No data has been retrieved from the search .
                     $scope.notFound = true;
+                    $scope.loading = false;
                     return response.data.message;
                 } else {
                     // Posts data have been retrieved from the search .
@@ -33,7 +34,7 @@ angular.module('pettts')
                             post.username = response.data
                         });
                     });
-
+                    $scope.loading = false;
                     $scope.submitVote = function(id, vote) {
                         if (vote != "up" && vote != "down") {
                             $scope.postMessage = "You need to choose an option before you rate this post.";
@@ -45,6 +46,13 @@ angular.module('pettts')
                         $timeout(function() { $scope.postMessage = undefined }, 4000);
                     }
 
+                    $scope.openReport = function() {
+                        $scope.report = !$scope.report;
+                    };
+
+                    $scope.close = function() {
+                        $scope.report = false;
+                    }
                     // Making Pagination
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;
@@ -53,7 +61,7 @@ angular.module('pettts')
                     return response.data.posts;
 
                 }
-                $scope.loading = false;
+
 
             }, function errorCallback(response) {
                 $scope.loading = false;

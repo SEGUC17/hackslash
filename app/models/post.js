@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 Schema = mongoose.Schema,
-require('mongoose-double')(mongoose);
+    require('mongoose-double')(mongoose);
 autoIncrement = require('mongoose-auto-increment');
 
 var SchemaTypes = mongoose.Schema.Types;
@@ -33,7 +33,7 @@ var postSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: true,
-        enum: ['male','female','null']
+        enum: ['male', 'female', 'null']
     },
     kindB: {
         type: String
@@ -43,7 +43,7 @@ var postSchema = new mongoose.Schema({
     },
     genderB: {
         type: String,
-        enum: ['male','female','null']
+        enum: ['male', 'female', 'null']
     },
     price: {
         type: SchemaTypes.Double
@@ -55,17 +55,18 @@ var postSchema = new mongoose.Schema({
     note: String,
     date: {
         type: Date,
-        default :Date.now
+        default: Date.now
     },
     upVote: {
         type: Number,
-        default :0
+        default: 0
     },
     downVote: {
         type: Number,
-        default :0
+        default: 0
     },
-   raters :[String]
+    raters: [String],
+    reports: [{ 'email': String, 'username': String, 'message': String }]
 });
 
 postSchema.plugin(autoIncrement.plugin, 'Post');

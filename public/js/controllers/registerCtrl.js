@@ -8,6 +8,8 @@ app.controller('registerCtrl', function($scope, $http, $window, User) {
         $window.location = '/profile/' + $window.sessionStorage.username;
     }
 
+    $scope.loading = false;
+
     ////////////////////////////////////
     ///////////////////////////////////
 
@@ -76,6 +78,7 @@ app.controller('registerCtrl', function($scope, $http, $window, User) {
             }
         }
         //call the service function
+        $scope.loading = true;
         User.add(user, $scope);
     };
 });

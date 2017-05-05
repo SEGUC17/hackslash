@@ -26,6 +26,14 @@
   margin-top: 20px;
 }
 
+#report-modal {
+  margin: 0 50px 0 50px;
+}
+
+#report-header {
+  margin-left: 20px;
+}
+
 .strike {
   display: block;
   text-align: center;

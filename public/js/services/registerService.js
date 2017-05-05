@@ -19,12 +19,13 @@ app.factory('User', function($http, $window) {
                 // verification mail has been sent Successfully .
                 $scope.message = "verification mail sent";
                 $scope.error = undefined;
+                $scope.loading = false;
                 return response;
             }, function errorCallback(response) {
                 // An Error has occcured .
                 $scope.error = true;
                 $scope.message = response.data.message;
-
+                $scope.loading = false;
                 return response;
             });
         }

@@ -1,37 +1,33 @@
-angular.module('pettts')
+var app = angular.module('pettts');
 
-.controller('filterCtrl', function($scope, $location, $timeout, $window, $routeParams, filterService, reviewPostService) {
-
+app.controller('advSearchCtrl', function($scope, $http, $window, $routeParams, $timeout, $location, advSearchService, reviewPostService) {
     $scope.token = $window.sessionStorage.accessToken;
     $scope.loading = true;
-    // getting the route parameter
-    $scope.type = $routeParams.type
 
-    //check the type
-    if ($scope.type !== "buy" || $scope.type !== "exchange" || $scope.type !== "shelter" || $scope.type !== "mate" || $scope.type !== "lost" || $scope.type !== "found") {
-        $scope.notFound = true;
+    var species = $routeParams.species;
+    var kind = $routeParams.kind;
+    var type = $routeParams.type;
+
+    $scope.visitProfile = function(username) {
+        $location.path('/profile/' + username);
     }
 
-    ///send request to the server and get the required posts
-    filterService.get($scope.type).then(function(posts) {
-        $scope.posts = posts
-
-        if (!$scope.posts) {
+    advSearchService.advancedSearch(species, kind, type).then(function (response) {
+        if(response.message)
+        {
             $scope.notFound = true;
             $scope.loading = false;
-        } else {
+        }else if(response.posts){
             $scope.notFound = false;
-            // Sorting posts according to date descendingly
+            $scope.posts = response.posts;
             $scope.posts.sort(function(a, b) {
                 return new Date(b.date).getTime() - new Date(a.date).getTime();
             });
-
             $scope.posts.forEach(function(post) {
                 reviewPostService.viewOwnerInfo(post._id).then(function(response) {
                     post.username = response.data
                 });
             });
-            $scope.loading = false;
             $scope.submitVote = function(id, vote) {
                 if (vote != "up" && vote != "down") {
                     $scope.postMessage = "You need to choose an option before you rate this post.";
@@ -51,21 +47,10 @@ angular.module('pettts')
                 $scope.report = false;
             }
 
-            //set page attributes
             $scope.pageSize = 7;
             $scope.currentPage = 1;
             $scope.maxSize = 5;
+            $scope.loading = false;
         }
-
-
     });
-
-    $scope.goTo = function(path) {
-        $location.path('/' + path);
-    }
-
-    $scope.visitProfile = function(username) {
-        $location.path('/profile/' + username);
-    }
-
 });

@@ -60,25 +60,25 @@ let profileController = {
                 homeNumber: req.body.homeNumber
             });
             //Check if username fits the necessary criteria.
-            if(edited.username){
-                if(edited.username.length < 5 || edited.username.length > 30){
+            if (edited.username) {
+                if (edited.username.length < 5 || edited.username.length > 30) {
                     res.status(403).json('Your username must be between least 1 and 30 characters in length.');
                 }
             }
             //Check if first name fits the necessary criteria
-            if(edited.firstName){
-                if(edited.firstName.length < 1 || edited.firstName.length > 30){
+            if (edited.firstName) {
+                if (edited.firstName.length < 1 || edited.firstName.length > 30) {
                     res.status(403).json('Your first name must be between least 1 and 30 characters in length.');
                 }
             }
             //Check if last name fits the necessary criteria
-            if(edited.lastName){
-                if(edited.lastName.length < 1 || edited.lastName.length > 30){
+            if (edited.lastName) {
+                if (edited.lastName.length < 1 || edited.lastName.length > 30) {
                     res.status(403).json('Your last name must be between least 1 and 30 characters in length.');
                 }
             }
             //For profile picture only
-            if (req.file){
+            if (req.file) {
                 edited.profilePicture = req.file.path;
             }
             //Updating the user.
@@ -106,18 +106,44 @@ let profileController = {
                     res.status(500).json(err.message);
                 } else if (userProfileInfo) { //User found.
                     var uEmail = userProfileInfo.email;
-                    post.find({ ownerEmail: uEmail }, function(err, myPosts) { //Find his posts as well.
-                        if (err) { //Internal Error
-                            res.status(500).json(err.message);
-                        } else if (myPosts.length > 0) { //View User's info and his posts.
-                            var profileData = { userProfileInfo, myPosts };
-                            res.status(200).json(profileData);
-                        } else { //View User's info.
-                            myPosts = "||&This user has no Posts yet.&||";
-                            var profileData = { userProfileInfo, myPosts };
-                            res.status(200).json(profileData);
-                        }
-                    })
+                    if (uUsername == "admin") {
+                        //get the reported posts
+                        post.find({}, function(err, posts) { //Find his posts as well.
+                            if (err) { //Internal Error
+                                res.status(500).json(err.message);
+                            } else if (posts.length > 0) { //View User's info and his posts.
+                                var myPosts = [];
+                                posts.forEach(function(post) {
+                                    if (post.reports.length != 0) {
+                                        myPosts.push(post);
+                                    }
+                                });
+                                if (myPosts.length == 0) {
+                                    myPosts = "||&This user has no Posts yet.&||";
+                                }
+                                var profileData = { userProfileInfo, myPosts };
+                                res.status(200).json(profileData);
+                            } else { //View User's info.
+                                myPosts = "||&This user has no Posts yet.&||";
+                                var profileData = { userProfileInfo, myPosts };
+                                res.status(200).json(profileData);
+                            }
+                        })
+
+                    } else {
+                        post.find({ ownerEmail: uEmail }, function(err, myPosts) { //Find his posts as well.
+                            if (err) { //Internal Error
+                                res.status(500).json(err.message);
+                            } else if (myPosts.length > 0) { //View User's info and his posts.
+                                var profileData = { userProfileInfo, myPosts };
+                                res.status(200).json(profileData);
+                            } else { //View User's info.
+                                myPosts = "||&This user has no Posts yet.&||";
+                                var profileData = { userProfileInfo, myPosts };
+                                res.status(200).json(profileData);
+                            }
+                        })
+                    }
                 } else { //User not found. Send relevant error message.
                     res.json('The user you\'re trying to view does not exist!');
                 }

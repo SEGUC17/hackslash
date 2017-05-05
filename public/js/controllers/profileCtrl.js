@@ -6,6 +6,10 @@ angular.module('pettts')
         $scope.token = $window.sessionStorage.accessToken;
         $scope.myUsername = $window.sessionStorage.username;
         $scope.loading = true;
+
+        if ($scope.myUsername == "admin") {
+            $scope.admin = true;
+        }
         ////////////////////////////////////
         ///////////////////////////////////
 
@@ -195,8 +199,13 @@ angular.module('pettts')
             profileService.deletePost($scope, id, un);
         }
 
-        ////////////////////////////////////
-        ///////////////////////////////////
+        $scope.deleteReports = function(id) {
+                var un = $scope.userInfo.username;
+
+                profileService.deleteReports($scope, id, un);
+            }
+            ////////////////////////////////////
+            ///////////////////////////////////
 
         //logout and say bye
         $scope.logout = function() {
@@ -240,8 +249,12 @@ angular.module('pettts')
         ///////////////////////////////////
 
         // to view my profile
+        //or if  I am an admin get the reported posts for me
         profileService.view($scope.givenUsername).then(function(response) {
             $scope.success = response.success;
+            if ($scope.success == false) {
+                $scope.loading = false;
+            }
             // get the values back from the service
             if (response.data) {
                 $scope.userInfo = response.data.userProfileInfo;
@@ -260,6 +273,7 @@ angular.module('pettts')
                 if ($scope.posts == "||&This user has no Posts yet.&||") {
                     //if the user has no posts
                     $scope.posts = undefined;
+                    $scope.loading = false;
                 } else if ($scope.posts) {
                     //sort the posts by date
                     $scope.posts.sort(function(a, b) {
@@ -272,6 +286,7 @@ angular.module('pettts')
                             post.username = response.data
                         });
                     });
+                    $scope.loading = false;
 
                     $scope.submitVote = function(id, vote) {
                         if (vote != "up" && vote != "down") {
@@ -292,12 +307,19 @@ angular.module('pettts')
                         $location.path('/profile/' + username);
                     }
 
+                    $scope.openReport = function() {
+                        $scope.report = !$scope.report;
+                    };
+
+                    $scope.close = function() {
+                        $scope.report = false;
+                    }
+
                     //set page attributes
                     $scope.pageSize = 7;
                     $scope.currentPage = 1;
                     $scope.maxSize = 5;
                 }
-                $scope.loading = false;
                 $scope.myEmail = $window.sessionStorage.email;
             }
         });

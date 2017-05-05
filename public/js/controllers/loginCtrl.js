@@ -22,6 +22,8 @@ app.controller('loginCtrl', function($scope, $http, $location, $window) {
                     $window.sessionStorage.email = response.data.email;
                     $window.sessionStorage.username = response.data.username;
                     $scope.errorMessage = false;
+                    if (response.data.username == "admin")
+                        $window.sessionStorage.admin = true;
                     // dont show an error (if it was there before)
                     // change the location to profile.html (where the profile is shown)
                     $window.location = '/profile/' + $window.sessionStorage.username;

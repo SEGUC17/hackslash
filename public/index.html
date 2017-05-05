@@ -43,6 +43,10 @@
     <script type="text/javascript" src="js/controllers/searchCtrl.js"></script>
     <script type="text/javascript" src="js/services/searchService.js"></script>
 
+    <script type="text/javascript" src="js/controllers/advSearchDirectionCtrl.js"></script>
+    <script type="text/javascript" src="js/services/advSearchService.js"></script>
+    <script type="text/javascript" src="js/controllers/advSearchCtrl.js"></script>
+
     <script type="text/javascript" src="js/services/profileService.js"></script>
     <script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
 
@@ -60,6 +64,9 @@
 
     <script type="text/javascript" src="js/controllers/verificationCtrl.js"></script>
     <script type="text/javascript" src="js/services/verificationService.js"></script>
+
+    <script type="text/javascript" src="js/controllers/reportCtrl.js"></script>
+    <script type="text/javascript" src="js/services/reportService.js"></script>
 
     <script type="text/javascript" src="js/appRoutes.js"></script>
 
@@ -96,6 +103,7 @@
                                   <button type="submit" >
                                     <span class="glyphicon glyphicon-search"></span>
                                   </button>
+                                  <a data-toggle="modal" data-target="#myModal-search">Advanced</a>
                                 </span>
                             </div>
                         </form>
@@ -158,6 +166,45 @@
     <!-- including jquery & bootstrap javascript file  -->
     <script type="text/javascript" src="js/custom/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/custom/bootstrap.min.js"></script>
+
+    <!-- Advanced search modal -->
+    <div id="myModal-search" class="modal fade" ng-controller="advSearchDirectionCtrl">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>This is the advanced Search.</h2>
+                    <h4>Here you can search posts, not only by species, but also kind and filter the posts by type.</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="messageForm" ng-controller="profileCtrl" ng-submit="advancedSearch(species,kind,type)">
+                        <div class="form-group">
+                            <label for="species">Search by Species</label> <br>
+                            <input type="text" class="form-control" name="species" placeholder="Species (e.g. Cat, Dog)" ng-model="species">
+                        </div>
+                        <div class="form-group">
+                            <label for="kind">Search by Kind</label> <br>
+                            <input type="text" class="form-control" name="kind" placeholder="Kind (e.g. Siamese, Labrador)" ng-model="kind">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Filter by Post Type</label> <br>
+                            <input type="radio" name="type" ng-model="type" value="sell"> Sell
+                            <input type="radio" name="type" ng-model="type" value="exchange"> Exchange
+                            <input type="radio" name="type" ng-model="type" value="mate"> Mate
+                            <input type="radio" name="type" ng-model="type" value="lost"> Lost
+                            <input type="radio" name="type" ng-model="type" value="found"> Found
+                            <input type="radio" name="type" ng-model="type" value="shelter"> Shelter
+                        </div>
+                        <button type="submit" class="btn btn-success" id="send-btn">Search</button>
+                        <div ng-if="messageAdvanced" class="alert alert-danger">{{messageAdvanced}}</div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal -->
 
 <style>
     #logout {

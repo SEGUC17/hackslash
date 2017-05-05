@@ -122,7 +122,8 @@
                                                 <div class="alert alert-info" ng-if="postMessage">{{postMessage}}</div>
                                             </form>
 
-                                            <a href="" ng-click="visitProfile(post.username)" id="view-contact-btn" class="btn btn-info btn-block" data-dismiss="modal">View contact profile</a>
+                                            <a href="" ng-click="visitProfile(post.username)" id="view-contact-btn" class="btn btn-info btn-block" data-dismiss="modal">View contact profile</a><br>
+                                            <button type="button" ng-click="openReport()" class="btn btn-danger btn-block">Report</button>
                                         </div>
 
                                         <div class="col-md-9" id="right-col">
@@ -158,14 +159,27 @@
 
                             </div>
                             <!--  End of modal-body -->
-
+                            <div ng-if="report">
+                                <hr>
+                                <div class="modal-body" ng-controller="reportCtrl" id="report-modal">
+                                    <h2 id = "report-header">Write your Report Below</h2>
+                                    <div class="modal-body">
+                                        <form name="messageForm" ng-submit="report(post._id)">
+                                            <textarea name="content" ng-model="reportMessage" placeholder="Write your report here." rows="5" class="form-control"></textarea>
+                                            <button type="submit" class="btn btn-success" id="report-btn">Report</button>
+                                            <div ng-if="reportWarning" class="alert alert-danger">{{reportWarning}}</div>
+                                            <div ng-if="reportSuccess" class="alert alert-info">{{reportSuccess}}</div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of report area -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" ng-click="close()" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
 
                         </div>
                         <!--  End of modal-content -->
-
                     </div>
                     <!-- End of if token -->
 

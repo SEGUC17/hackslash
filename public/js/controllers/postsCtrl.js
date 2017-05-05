@@ -5,9 +5,12 @@ angular.module('pettts')
     $scope.token = $window.sessionStorage.accessToken;
     $scope.loading = true;
     postsService.get($scope).then(function(posts) {
+        $scope.report = false;
         $scope.posts = posts
         if (!$scope.posts) {
             $scope.notFound = true;
+            $scope.loading = false;
+
         } else {
             $scope.notFound = false;
             // Sorting posts according to date descendingly
@@ -20,6 +23,7 @@ angular.module('pettts')
                     post.username = response.data
                 });
             });
+            $scope.loading = false;
 
             $scope.submitVote = function(id, vote) {
                 if (vote != "up" && vote != "down") {
@@ -30,6 +34,14 @@ angular.module('pettts')
                     })
                 }
                 $timeout(function() { $scope.postMessage = undefined }, 4000);
+            };
+
+            $scope.openReport = function() {
+                $scope.report = !$scope.report;
+            };
+
+            $scope.close = function() {
+                $scope.report = false;
             }
 
             //setting page attributes
@@ -37,7 +49,6 @@ angular.module('pettts')
             $scope.currentPage = 1;
             $scope.maxSize = 5;
         }
-        $scope.loading = false;
 
     });
 
