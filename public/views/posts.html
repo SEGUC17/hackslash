@@ -39,8 +39,9 @@
                                 <h4 class="media-heading label label-success">{{ post.type | stringifyType }}</h4>
                                 <!-- display post date -->
                                 <p><small class="date"><em>{{ post.date | date : "MMM d, yyyy h:mm a" }}</em></small></p>
-                                <!-- fixing description length to display by 250 chars -->
-                                <p style="word-break: break-all; hyphens: auto;">{{ post.description.slice(0,250) }}...</p>
+                                <!-- viewing only species and kind of animal -->
+                                <p><strong>Species: </strong>{{post.species}}</p>
+                                <p><strong>Kind: </strong>{{post.kind}}</p>
                                 <!-- link to show post page -->
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ post._id }}">View more</button>
                             </div>
